@@ -7,8 +7,6 @@ const au3 = new AutoIt();
 
 au3.load();
 
-au3.Init();
-
 logger.info('WinActive', au3.WinActive('This PC'));
 logger.info('WinActivate', au3.WinActivate('This PC'));
 logger.info('WinActive', au3.WinActive('This PC'));

@@ -21,9 +21,11 @@ export class AutoIt extends Library {
     const dllPath = resolve(`${__dirname}/lib/AutoItX3${archSuffix}.dll`);
 
     super(AutoIt.name, dllPath);
+
+    this.Init();
   }
 
-  Init(): void {
+  private Init(): void {
     return this.invoke('AU3_Init', DataType.Void, [], []);
   }
 
