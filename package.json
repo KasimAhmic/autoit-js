@@ -1,0 +1,39 @@
+{
+  "name": "@ahmic/autoit-js",
+  "version": "1.0.0",
+  "description": "Node.js bindings for AutoItX3.dll",
+  "main": "index.js",
+  "scripts": {
+    "start": "tsx ./src/main.ts",
+    "test": "vitest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KasimAhmic/autoit-js.git"
+  },
+  "keywords": [
+    "autoit",
+    "node",
+    "windows",
+    "automation",
+    "native"
+  ],
+  "author": "Kasim Ahmic",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/KasimAhmic/autoit-js/issues"
+  },
+  "homepage": "https://github.com/KasimAhmic/autoit-js#readme",
+  "devDependencies": {
+    "@trivago/prettier-plugin-sort-imports": "^4.3.0",
+    "@types/node": "^22.5.5",
+    "@vitest/coverage-v8": "^2.1.1",
+    "prettier": "^3.3.3",
+    "tsx": "^4.19.1",
+    "typescript": "^5.6.2",
+    "vitest": "^2.1.1"
+  },
+  "dependencies": {
+    "ffi-rs": "^1.0.94"
+  }
+}
