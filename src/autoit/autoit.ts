@@ -21,11 +21,19 @@ export class AutoIt extends Library {
     const dllPath = resolve(`${__dirname}/lib/AutoItX3${archSuffix}.dll`);
 
     super(AutoIt.name, dllPath);
+  }
 
+  postLoad(): void {
     this.Init();
   }
 
-  private Init(): void {
+  /**
+   * Calls the `AU3_Init` function from the AutoItX3 library. Note that this function is called automatically
+   * when the library is loaded.
+   *
+   * @returns void
+   */
+  Init(): void {
     return this.invoke('AU3_Init', DataType.Void, [], []);
   }
 
@@ -544,24 +552,29 @@ export class AutoIt extends Library {
     return this.invoke('AU3_WinActiveByHandle', DataType.I32, [DataType.U64], [hWnd]);
   }
 
-  // TODO: Implement
-  WinClose(szTitle: LPCWSTR, /*[in,defaultvalue("")]*/ szText: LPCWSTR): number {
-    throw new Error('Unimplemented');
+  WinClose(szTitle: LPCWSTR, szText: LPCWSTR = ''): number {
+    return this.invoke('AU3_WinClose', DataType.I32, [DataType.WString, DataType.WString], [szTitle, szText]);
   }
 
-  // TODO: Implement
   WinCloseByHandle(hWnd: HWND): number {
-    throw new Error('Unimplemented');
+    return this.invoke('AU3_WinCloseByHandle', DataType.I32, [DataType.U64], [hWnd]);
   }
 
-  // TODO: Implement
-  WinExists(szTitle: LPCWSTR, /*[in,defaultvalue("")]*/ szText: LPCWSTR): number {
-    throw new Error('Unimplemented');
+  WinExists(szTitle: LPCWSTR, szText: LPCWSTR = ''): boolean {
+    const result = this.invoke(
+      'AU3_WinExists',
+      DataType.I32,
+      [DataType.WString, DataType.WString],
+      [szTitle, szText],
+    );
+
+    return result === 1;
   }
 
-  // TODO: Implement
-  WinExistsByHandle(hWnd: HWND): number {
-    throw new Error('Unimplemented');
+  WinExistsByHandle(hWnd: HWND): boolean {
+    const result = this.invoke('AU3_WinExistsByHandle', DataType.I32, [DataType.U64], [hWnd]);
+
+    return result === 1;
   }
 
   // TODO: Implement

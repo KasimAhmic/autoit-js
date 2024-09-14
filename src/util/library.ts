@@ -2,7 +2,7 @@ import { FieldType, FieldTypeToType, ResultWithErrno, ResultWithPromise, close, 
 
 import { Logger } from '../util';
 
-export class Library {
+export abstract class Library {
   private readonly name: string;
   private readonly path: string;
   private readonly logger: Logger;
@@ -15,6 +15,8 @@ export class Library {
     this.logger = new Logger(this.constructor.name);
   }
 
+  abstract postLoad(): void;
+
   load() {
     if (this.loaded) {
       this.logger.warn(`Library ${this.name} is already loaded`);
@@ -22,6 +24,8 @@ export class Library {
       this.logger.debug(`Loading library ${this.name} from ${this.path}`);
 
       open({ library: this.name, path: this.path });
+
+      this.postLoad();
 
       this.loaded = true;
 

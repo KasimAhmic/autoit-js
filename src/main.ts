@@ -21,4 +21,12 @@ logger.info('WinActiveByHandle', au3.WinActiveByHandle(handle));
 logger.info('WinActivateByHandle', au3.WinActivateByHandle(handle));
 logger.info('WinActiveByHandle', au3.WinActiveByHandle(handle));
 
+// logger.info('WinExists', au3.WinExists('This PC'));
+// logger.info('WinClose', au3.WinClose('This PC'));
+// logger.info('WinExists', au3.WinExists('This PC'));
+
+logger.info('WinExists', au3.WinExistsByHandle(handle));
+logger.info('WinClose', au3.WinCloseByHandle(handle));
+logger.info('WinExists', au3.WinExistsByHandle(handle));
+
 au3.unload();
