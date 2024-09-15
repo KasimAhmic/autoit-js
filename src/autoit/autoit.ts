@@ -5,7 +5,7 @@ import koffi, { IKoffiCType, IKoffiLib, KoffiFunction } from 'koffi';
 
 import { LPPOINT, LPWSTR, Logger } from '../util';
 import { DataType, DataTypeToType } from '../util/data-type';
-import { TDWORD, THWND, TLPCWSTR, TLPPOINT, TLPRECT, TLPWSTR } from './types';
+import { TDWORD, THWND, TLPCWSTR, TLPPOINT, TLPRECT, TLPWSTR } from './types/types';
 
 const AU3_INTDEFAULT = -2147483647;
 const SW_SHOWNORMAL = 1;
@@ -89,9 +89,13 @@ export class AutoIt {
     return this.invoke('AU3_Init', DataType.Void, [], []);
   }
 
-  // TODO: Implement
   AutoItSetOption(szOption: TLPCWSTR, nValue: number): number {
-    throw new Error('Unimplemented');
+    return this.invoke(
+      'AU3_AutoItSetOption',
+      DataType.Int32,
+      [DataType.String16, DataType.Int32],
+      [szOption, nValue],
+    );
   }
 
   ClipGet(): string {
