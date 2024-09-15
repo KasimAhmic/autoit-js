@@ -56,6 +56,12 @@ export class AutoIt {
     }
   }
 
+  // TODO: Caching the functions does lead to a "performance improvement", but it's such a small improvement
+  // that it's probably not worth it. It's several orders of magnitude faster to retrieve the functions
+  // from the cache than to recreate them each time, however that difference is between ~60ns and ~14,000 ns
+  // (0.00006ms and 0.014ms). This was mostly done as I don't know if there is any issue with repeatedly
+  // creating the same function over and over again from Koffi's perspective. Leaving it here for now until I
+  // can reach out to the maintainer.
   private invoke<ReturnType extends DataType, const ParameterTypes extends (DataType | IKoffiCType)[]>(
     functionName: string,
     resultType: ReturnType,
@@ -790,9 +796,22 @@ export class AutoIt {
     return this.invoke('AU3_WinGetProcessByHandle', DataType.Int32, [DataType.UInt64], [hWnd]);
   }
 
-  // TODO: Implement
-  WinGetState(szTitle: TLPCWSTR, szText: TLPCWSTR = ''): number {
-    throw new Error('Unimplemented');
+  WinGetState(szTitle: TLPCWSTR, szText: TLPCWSTR = ''): WindowState {
+    const state = this.invoke(
+      'AU3_WinGetState',
+      DataType.Int32,
+      [DataType.String16, DataType.String16],
+      [szTitle, szText],
+    );
+
+    return {
+      exists: (state & WinState.Exists) === WinState.Exists,
+      visible: (state & WinState.Visible) === WinState.Visible,
+      enabled: (state & WinState.Enabled) === WinState.Enabled,
+      active: (state & WinState.Active) === WinState.Active,
+      minimized: (state & WinState.Minimized) === WinState.Minimized,
+      maximized: (state & WinState.Maximized) === WinState.Maximized,
+    };
   }
 
   // TODO: Implement
@@ -1095,7 +1114,7 @@ export type ClientSize = {
   height: number;
 };
 
-export enum WinState {
+export enum WinVisibility {
   Hide,
   ShowNormal,
   ShowMinimized,
@@ -1115,4 +1134,22 @@ export type WinPositon = {
   y: number;
   width: number;
   height: number;
+};
+
+export enum WinState {
+  Exists = 1,
+  Visible = 2,
+  Enabled = 4,
+  Active = 8,
+  Minimized = 16,
+  Maximized = 32,
+}
+
+export type WindowState = {
+  exists: boolean;
+  visible: boolean;
+  enabled: boolean;
+  active: boolean;
+  minimized: boolean;
+  maximized: boolean;
 };

@@ -26,7 +26,6 @@ export enum DataType {
   UnsignedChar = 'unsigned char',
   Char16 = 'char16',
   Char16T = 'char16_t',
-  Char16Pointer = 'char16*',
   Int16 = 'int16',
   Int16T = 'int16_t',
   UInt16 = 'uint16',
