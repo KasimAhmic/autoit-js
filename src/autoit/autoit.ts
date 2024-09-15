@@ -3,7 +3,7 @@ import { resolve } from 'node:path';
 
 import koffi, { IKoffiCType, IKoffiLib, KoffiFunction } from 'koffi';
 
-import { LPPOINT, LPRECT, LPWSTR, LRECT, Logger } from '../util';
+import { LPOINT, LPPOINT, LPRECT, LPWSTR, LRECT, Logger } from '../util';
 import { DataType, DataTypeToType } from '../util/data-type';
 import { TDWORD, THWND, TLPCWSTR, TLPPOINT, TLPRECT, TLPWSTR } from './types/types';
 
@@ -457,7 +457,7 @@ export class AutoIt {
   }
 
   MouseGetPos(): MousePosition {
-    const output = Buffer.alloc(koffi.sizeof(LPPOINT));
+    const output = Buffer.alloc(koffi.sizeof(LPOINT));
 
     this.invoke('AU3_MouseGetPos', DataType.Void, [LPPOINT], [output]);
 
