@@ -957,9 +957,13 @@ export class AutoIt {
     );
   }
 
-  // TODO: Implement
   WinWaitCloseByHandle(hWnd: THWND, nTimeout: number): number {
-    throw new Error('Unimplemented');
+    return this.invoke(
+      'AU3_WinWaitCloseByHandle',
+      DataType.Int32,
+      [DataType.UInt64, DataType.Int32],
+      [hWnd, nTimeout],
+    );
   }
 
   // TODO: Implement

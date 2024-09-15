@@ -80,7 +80,7 @@ async function main() {
 
   logger.info('WinWaitActiveByHandle', au3.WinWaitActiveByHandle(handle, 10));
 
-  logger.info('WinWaitClose', au3.WinWaitClose('This PC', '', 10));
+  logger.info('WinWaitCloseByHandle', au3.WinWaitCloseByHandle(handle, 10));
 
   au3.unload();
 }
