@@ -747,9 +747,17 @@ export class AutoIt {
     );
   }
 
-  // TODO: Implement
-  WinGetHandleAsText(szTitle: TLPCWSTR, szText: TLPCWSTR = '', szRetText: TLPWSTR, nBufSize: number): void {
-    throw new Error('Unimplemented');
+  WinGetHandleAsText(szTitle: TLPCWSTR, szText: TLPCWSTR = ''): string {
+    const outputBuffer = Buffer.alloc(1024);
+
+    this.invoke(
+      'AU3_WinGetHandleAsText',
+      DataType.Void,
+      [DataType.String16, DataType.String16, LPWSTR, DataType.Int32],
+      [szTitle, szText, outputBuffer, outputBuffer.length],
+    );
+
+    return outputBuffer.toString('utf16le');
   }
 
   WinGetPos(szTitle: TLPCWSTR, szText: TLPCWSTR = ''): WinPositon {
