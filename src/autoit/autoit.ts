@@ -948,9 +948,13 @@ export class AutoIt {
     );
   }
 
-  // TODO: Implement
   WinWaitClose(szTitle: TLPCWSTR, szText: TLPCWSTR = '', nTimeout: number = 0): number {
-    throw new Error('Unimplemented');
+    return this.invoke(
+      'AU3_WinWaitClose',
+      DataType.Int32,
+      [DataType.String16, DataType.String16, DataType.Int32],
+      [szTitle, szText, nTimeout],
+    );
   }
 
   // TODO: Implement
