@@ -1,15 +1,22 @@
 import { arch, platform } from 'node:os';
 import { resolve } from 'node:path';
 
-import { Library } from '../util';
-import { DataType, LPWSTR } from '../util/data-type';
+import koffi, { IKoffiCType, IKoffiLib, KoffiFunction } from 'koffi';
+
+import { Logger } from '../util';
+import { DataType, DataTypeToType, LPWSTR } from '../util/data-type';
 import { TDWORD, THWND, TLPCWSTR, TLPPOINT, TLPRECT, TLPWSTR } from './types';
 
 const AU3_INTDEFAULT = -2147483647;
 const SW_SHOWNORMAL = 1;
 
-export class AutoIt extends Library {
-  static readonly name: string = 'AutoItX3';
+export class AutoIt {
+  private readonly path: string;
+  private readonly logger: Logger;
+
+  private lib: IKoffiLib | null = null;
+  private loaded: boolean = false;
+  private functionCache: Record<string, KoffiFunction> = {};
 
   constructor() {
     if (platform() !== 'win32') {
@@ -17,13 +24,60 @@ export class AutoIt extends Library {
     }
 
     const archSuffix = arch() === 'x64' ? '_x64' : '';
-    const dllPath = resolve(`${__dirname}/lib/AutoItX3${archSuffix}.dll`);
 
-    super(AutoIt.name, dllPath);
+    this.path = resolve(`${__dirname}/lib/AutoItX3${archSuffix}.dll`);
+    this.logger = new Logger(this.constructor.name);
   }
 
-  postLoad(): void {
-    this.Init();
+  load() {
+    if (this.lib) {
+      this.logger.warn('AutoIt is already loaded');
+    } else {
+      this.logger.debug(`Loading AutoIt from ${this.path}`);
+
+      this.lib = koffi.load(this.path);
+
+      this.Init();
+
+      this.logger.debug('AutoIt loaded');
+    }
+  }
+
+  unload() {
+    if (this.lib) {
+      this.logger.debug(`Unloading AutoIt from ${this.path}`);
+
+      this.lib.unload();
+
+      this.logger.debug('AutoIt unloaded');
+
+      this.lib = null;
+    } else {
+      this.logger.warn('AutoIt is already unloaded');
+    }
+  }
+
+  private invoke<ReturnType extends DataType, const ParameterTypes extends (DataType | IKoffiCType)[]>(
+    functionName: string,
+    resultType: ReturnType,
+    parameterTypes: ParameterTypes,
+    parameters: { [K in keyof ParameterTypes]: DataTypeToType<ParameterTypes[K]> },
+  ): DataTypeToType<ReturnType> {
+    if (!this.lib) {
+      throw new Error('You must call load() before invoking functions');
+    }
+
+    const cachedFunc = this.functionCache[functionName];
+
+    if (cachedFunc) {
+      return cachedFunc(...parameters);
+    }
+
+    const func = this.lib.func(functionName, resultType, parameterTypes);
+
+    this.functionCache[functionName] = func;
+
+    return func(...parameters);
   }
 
   /**
@@ -33,7 +87,7 @@ export class AutoIt extends Library {
    * @returns void
    */
   Init(): void {
-    return this.call('AU3_Init', DataType.Void, [], []);
+    return this.invoke('AU3_Init', DataType.Void, [], []);
   }
 
   // TODO: Implement
@@ -526,7 +580,7 @@ export class AutoIt extends Library {
   }
 
   WinActivate(szTitle: TLPCWSTR, szText: TLPCWSTR = ''): number {
-    return this.call(
+    return this.invoke(
       'AU3_WinActivate',
       DataType.Int,
       [DataType.String16, DataType.String16],
@@ -535,11 +589,11 @@ export class AutoIt extends Library {
   }
 
   WinActivateByHandle(hWnd: THWND): number {
-    return this.call('AU3_WinActivateByHandle', DataType.Int32, [DataType.UInt64], [hWnd]);
+    return this.invoke('AU3_WinActivateByHandle', DataType.Int32, [DataType.UInt64], [hWnd]);
   }
 
   WinActive(szTitle: TLPCWSTR, szText: TLPCWSTR = ''): number {
-    return this.call(
+    return this.invoke(
       'AU3_WinActive',
       DataType.Int,
       [DataType.String16, DataType.String16],
@@ -548,11 +602,11 @@ export class AutoIt extends Library {
   }
 
   WinActiveByHandle(hWnd: THWND): number {
-    return this.call('AU3_WinActiveByHandle', DataType.Int32, [DataType.UInt64], [hWnd]);
+    return this.invoke('AU3_WinActiveByHandle', DataType.Int32, [DataType.UInt64], [hWnd]);
   }
 
   WinClose(szTitle: TLPCWSTR, szText: TLPCWSTR = ''): number {
-    return this.call(
+    return this.invoke(
       'AU3_WinClose',
       DataType.Int32,
       [DataType.String16, DataType.String16],
@@ -561,11 +615,11 @@ export class AutoIt extends Library {
   }
 
   WinCloseByHandle(hWnd: THWND): number {
-    return this.call('AU3_WinCloseByHandle', DataType.Int32, [DataType.UInt64], [hWnd]);
+    return this.invoke('AU3_WinCloseByHandle', DataType.Int32, [DataType.UInt64], [hWnd]);
   }
 
   WinExists(szTitle: TLPCWSTR, szText: TLPCWSTR = ''): boolean {
-    const result = this.call(
+    const result = this.invoke(
       'AU3_WinExists',
       DataType.Int32,
       [DataType.String16, DataType.String16],
@@ -576,7 +630,7 @@ export class AutoIt extends Library {
   }
 
   WinExistsByHandle(hWnd: THWND): boolean {
-    const result = this.call('AU3_WinExistsByHandle', DataType.Int32, [DataType.UInt64], [hWnd]);
+    const result = this.invoke('AU3_WinExistsByHandle', DataType.Int32, [DataType.UInt64], [hWnd]);
 
     return result === 1;
   }
@@ -589,7 +643,7 @@ export class AutoIt extends Library {
   WinGetClassList(szTitle: TLPCWSTR, szText: TLPCWSTR = ''): string {
     const outputBuffer = Buffer.alloc(1024);
 
-    this.call(
+    this.invoke(
       'AU3_WinGetClassList',
       DataType.Void,
       [DataType.String16, DataType.String16, LPWSTR, DataType.Int32],
@@ -615,7 +669,7 @@ export class AutoIt extends Library {
   }
 
   WinGetHandle(szTitle: TLPCWSTR, szText: TLPCWSTR = ''): THWND {
-    return this.call(
+    return this.invoke(
       'AU3_WinGetHandle',
       DataType.UInt64,
       [DataType.String16, DataType.String16],

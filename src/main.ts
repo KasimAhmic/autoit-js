@@ -24,22 +24,11 @@ async function main() {
   logger.info('WinActivateByHandle', au3.WinActivateByHandle(handle));
   logger.info('WinActiveByHandle', au3.WinActiveByHandle(handle));
 
-  logger.info('initial', au3.WinGetClassList('This PC'));
+  logger.info('WinGetClassList', au3.WinGetClassList('This PC'));
 
   logger.info('WinExists', au3.WinExists('This PC'));
   logger.info('WinClose', au3.WinClose('This PC'));
   logger.info('WinExists', au3.WinExists('This PC'));
-
-  // logger.info('WinExists', au3.WinExistsByHandle(handle));
-  // logger.info('WinClose', au3.WinCloseByHandle(handle));
-  // logger.info('WinExists', au3.WinExistsByHandle(handle));
-
-  // await new Promise((resolve) => setTimeout(resolve, 2500));
-
-  // for (let i = 0; i < 1_000_000; i++) {
-  //   process.stdout.write(`${i}\n`);
-  //   au3.WinGetClassList('This PC');
-  // }
 
   au3.unload();
 }
