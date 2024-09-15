@@ -95,14 +95,16 @@ export class AutoIt {
     throw new Error('Unimplemented');
   }
 
-  // TODO: Implement
-  ClipGet(szClip: TLPWSTR, nBufSize: number): void {
-    throw new Error('Unimplemented');
+  ClipGet(): string {
+    const outputBuffer = Buffer.alloc(1024);
+
+    this.invoke('AU3_ClipGet', DataType.Void, [LPWSTR, DataType.Int32], [outputBuffer, outputBuffer.length]);
+
+    return outputBuffer.toString('utf16le');
   }
 
-  // TODO: Implement
   ClipPut(szClip: TLPCWSTR): void {
-    throw new Error('Unimplemented');
+    this.invoke('AU3_ClipPut', DataType.Void, [DataType.String16], [szClip]);
   }
 
   // TODO: Implement

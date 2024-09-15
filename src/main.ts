@@ -1,5 +1,3 @@
-import os from 'node:os';
-
 import { AutoIt } from './autoit';
 import { Logger } from './util/logger';
 
@@ -29,6 +27,9 @@ async function main() {
   logger.info('WinExists', au3.WinExists('This PC'));
   logger.info('WinClose', au3.WinClose('This PC'));
   logger.info('WinExists', au3.WinExists('This PC'));
+
+  logger.info('ClipPut', au3.ClipPut('Hello World!'));
+  logger.info('ClipGet', au3.ClipGet());
 
   au3.unload();
 }
