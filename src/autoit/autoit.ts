@@ -457,9 +457,8 @@ export class AutoIt {
     this.invoke('AU3_MouseDown', DataType.Void, [DataType.String16], [szButton]);
   }
 
-  // TODO: Implement
   MouseGetCursor(): number {
-    throw new Error('Unimplemented');
+    return this.invoke('AU3_MouseGetCursor', DataType.Int32, [], []);
   }
 
   MouseGetPos(): Position {

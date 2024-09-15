@@ -99,7 +99,7 @@ async function main() {
 
   // au3.Sleep(5000);
 
-  logger.info('PixelGetColor', au3.PixelGetColor(100, 100));
+  logger.info('MouseGetCursor', au3.MouseGetCursor());
 
   au3.unload();
 }
