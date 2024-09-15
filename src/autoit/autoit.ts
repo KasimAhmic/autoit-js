@@ -86,6 +86,13 @@ export class AutoIt {
   }
 
   /**
+   * Calls the `AU3_error` function from the AutoItX3 library. Equivalent to the `@error` macro in AutoIt.
+   */
+  GetError(): number {
+    return this.invoke('AU3_error', DataType.Int32, [], []);
+  }
+
+  /**
    * Calls the `AU3_Init` function from the AutoItX3 library. Note that this function is called automatically
    * when the library is loaded.
    *
