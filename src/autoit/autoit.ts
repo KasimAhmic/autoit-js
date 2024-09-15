@@ -891,9 +891,13 @@ export class AutoIt {
     );
   }
 
-  // TODO: Implement
   WinSetTitleByHandle(hWnd: THWND, szNewTitle: TLPCWSTR): number {
-    throw new Error('Unimplemented');
+    return this.invoke(
+      'AU3_WinSetTitleByHandle',
+      DataType.Int32,
+      [DataType.UInt64, DataType.String16],
+      [hWnd, szNewTitle],
+    );
   }
 
   WinSetTrans(szTitle: TLPCWSTR, szText: TLPCWSTR = '', nTrans: number): number {
