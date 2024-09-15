@@ -882,9 +882,13 @@ export class AutoIt {
     throw new Error('Unimplemented');
   }
 
-  // TODO: Implement
   WinSetTitle(szTitle: TLPCWSTR, szText: TLPCWSTR = '', szNewTitle: TLPCWSTR): number {
-    throw new Error('Unimplemented');
+    return this.invoke(
+      'AU3_WinSetTitle',
+      DataType.Int32,
+      [DataType.String16, DataType.String16, DataType.String16],
+      [szTitle, szText, szNewTitle],
+    );
   }
 
   // TODO: Implement

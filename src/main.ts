@@ -78,9 +78,7 @@ async function main() {
   logger.info('WinGetClientSize', au3.WinGetClientSize('This PC'));
   logger.info('WinGetClientSizeByHandle', au3.WinGetClientSizeByHandle(handle));
 
-  logger.info('WinMinimizeAll', au3.WinMinimizeAll());
-  au3.Sleep(1000);
-  logger.info('WinMinimizeAllUndo', au3.WinMinimizeAllUndo());
+  logger.info('WinSetTitle', au3.WinSetTitle('This PC', '', 'This NEW PC'));
 
   au3.unload();
 }
