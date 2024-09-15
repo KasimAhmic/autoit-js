@@ -99,11 +99,15 @@ async function main() {
 
   // au3.Sleep(5000);
 
-  logger.info('WinGetCaretPos', au3.WinGetCaretPos());
+  au3.Run('notepad.exe');
+  au3.WinWait('Untitled - Notepad');
+  au3.WinActivate('Untitled - Notepad');
 
-  logger.info('ToolTip', au3.ToolTip('Hello World!'));
+  au3.Send('Hello World!');
 
-  au3.Sleep(1000);
+  au3.Send('{ENTER}');
+
+  au3.Sleep(2000);
 
   au3.unload();
 }

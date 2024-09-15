@@ -559,6 +559,7 @@ export class AutoIt {
     );
   }
 
+  // TODO: Implement
   RunAs(
     szUser: TLPCWSTR,
     szDomain: TLPCWSTR,
@@ -584,9 +585,8 @@ export class AutoIt {
     throw new Error('Unimplemented');
   }
 
-  // TODO: Implement
   Send(szSendText: TLPCWSTR, nMode: number = 0): void {
-    throw new Error('Unimplemented');
+    this.invoke('AU3_Send', DataType.Void, [DataType.String16, DataType.Int32], [szSendText, nMode]);
   }
 
   // TODO: Implement
