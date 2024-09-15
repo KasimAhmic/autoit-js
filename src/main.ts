@@ -1,5 +1,8 @@
+// import SegfaultHandler from 'segfault-handler';
 import { AutoIt } from './autoit';
 import { Logger } from './util/logger';
+
+// SegfaultHandler.registerHandler('crash.log');
 
 const logger = new Logger('Main');
 
@@ -32,6 +35,8 @@ async function main() {
   logger.info('ClipGet', au3.ClipGet());
 
   logger.info('IsAdmin', au3.IsAdmin());
+
+  logger.info('MouseGetPos', au3.MouseGetPos());
 
   au3.unload();
 }

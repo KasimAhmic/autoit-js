@@ -3,8 +3,8 @@ import { resolve } from 'node:path';
 
 import koffi, { IKoffiCType, IKoffiLib, KoffiFunction } from 'koffi';
 
-import { Logger } from '../util';
-import { DataType, DataTypeToType, LPWSTR } from '../util/data-type';
+import { LPPOINT, LPWSTR, Logger } from '../util';
+import { DataType, DataTypeToType } from '../util/data-type';
 import { TDWORD, THWND, TLPCWSTR, TLPPOINT, TLPRECT, TLPWSTR } from './types';
 
 const AU3_INTDEFAULT = -2147483647;
@@ -425,9 +425,15 @@ export class AutoIt {
     throw new Error('Unimplemented');
   }
 
-  // TODO: Implement
-  MouseGetPos(lpPoint: TLPPOINT): void {
-    throw new Error('Unimplemented');
+  MouseGetPos(): MousePosition {
+    const output = Buffer.alloc(koffi.sizeof(LPPOINT));
+
+    this.invoke('AU3_MouseGetPos', DataType.Void, [LPPOINT], [output]);
+
+    const x = output.readInt32LE(0);
+    const y = output.readInt32LE(4);
+
+    return { x, y };
   }
 
   // TODO: Implement
@@ -869,3 +875,5 @@ export class AutoIt {
     throw new Error('Unimplemented');
   }
 }
+
+export type MousePosition = { x: number; y: number };
