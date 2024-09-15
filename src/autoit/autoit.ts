@@ -553,7 +553,6 @@ export class AutoIt {
     );
   }
 
-  // TODO: Implement
   RunAs(
     szUser: TLPCWSTR,
     szDomain: TLPCWSTR,
@@ -589,9 +588,8 @@ export class AutoIt {
     throw new Error('Unimplemented');
   }
 
-  // TODO: Implement
   Sleep(nMilliseconds: number): void {
-    throw new Error('Unimplemented');
+    this.invoke('AU3_Sleep', DataType.Void, [DataType.Int32], [nMilliseconds]);
   }
 
   // TODO: Implement
