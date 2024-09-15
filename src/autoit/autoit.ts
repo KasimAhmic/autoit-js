@@ -836,9 +836,13 @@ export class AutoIt {
     return outputBuffer.toString('utf16le');
   }
 
-  // TODO: Implement
   WinKill(szTitle: TLPCWSTR, szText: TLPCWSTR = ''): number {
-    throw new Error('Unimplemented');
+    return this.invoke(
+      'AU3_WinKill',
+      DataType.Int32,
+      [DataType.String16, DataType.String16],
+      [szTitle, szText],
+    );
   }
 
   // TODO: Implement
