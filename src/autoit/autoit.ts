@@ -407,7 +407,6 @@ export class AutoIt {
     );
   }
 
-  // TODO: Implement
   MouseClickDrag(
     szButton: TLPCWSTR,
     nX1: number,
@@ -416,7 +415,12 @@ export class AutoIt {
     nY2: number,
     nSpeed: number = -1,
   ): number {
-    throw new Error('Unimplemented');
+    return this.invoke(
+      'AU3_MouseClickDrag',
+      DataType.Int32,
+      [DataType.String16, DataType.Int32, DataType.Int32, DataType.Int32, DataType.Int32, DataType.Int32],
+      [szButton, nX1, nY1, nX2, nY2, nSpeed],
+    );
   }
 
   MouseDown(szButton: TLPCWSTR = MouseButton.Left): void {
