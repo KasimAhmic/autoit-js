@@ -392,15 +392,19 @@ export class AutoIt {
     return result === 1;
   }
 
-  // TODO: Implement
   MouseClick(
-    /*[in,defaultvalue("LEFT")]*/ szButton: TLPCWSTR,
+    szButton: TLPCWSTR = MouseButton.Left,
     nX: number = AU3_INTDEFAULT,
     nY: number = AU3_INTDEFAULT,
     nClicks: number = 1,
     nSpeed: number = -1,
   ): number {
-    throw new Error('Unimplemented');
+    return this.invoke(
+      'AU3_MouseClick',
+      DataType.Int32,
+      [DataType.String16, DataType.Int32, DataType.Int32, DataType.Int32, DataType.Int32],
+      [szButton, nX, nY, nClicks, nSpeed],
+    );
   }
 
   // TODO: Implement

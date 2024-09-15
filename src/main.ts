@@ -54,6 +54,8 @@ async function main() {
   logger.info('MouseWheel', au3.MouseWheel(MouseWheelDirection.Down, 1));
   logger.info('MouseWheel', au3.MouseWheel(MouseWheelDirection.Down, 10));
   logger.info('MouseWheel', au3.MouseWheel(MouseWheelDirection.Down, 100));
+  logger.info('MouseClick', au3.MouseClick(MouseButton.Right, 2160 / 2, 1440 / 2));
+  logger.info('MouseClick', au3.MouseClick(MouseButton.Left, 2160 / 2 - 20, 1440 / 2 - 20));
 
   au3.unload();
 }
