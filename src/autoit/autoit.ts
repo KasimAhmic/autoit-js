@@ -544,9 +544,13 @@ export class AutoIt {
     );
   }
 
-  // TODO: Implement
   RunWait(szProgram: TLPCWSTR, szDir: TLPCWSTR = '', nShowFlag: number = SW_SHOWNORMAL): number {
-    throw new Error('Unimplemented');
+    return this.invoke(
+      'AU3_RunWait',
+      DataType.Int32,
+      [DataType.String16, DataType.String16, DataType.Int32],
+      [szProgram, szDir, nShowFlag],
+    );
   }
 
   // TODO: Implement
