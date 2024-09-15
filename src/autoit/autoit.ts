@@ -920,9 +920,13 @@ export class AutoIt {
     );
   }
 
-  // TODO: Implement
   WinMoveByHandle(hWnd: THWND, nX: number, nY: number, nWidth: number = -1, nHeight: number = -1): number {
-    throw new Error('Unimplemented');
+    return this.invoke(
+      'AU3_WinMoveByHandle',
+      DataType.Int32,
+      [DataType.UInt64, DataType.Int32, DataType.Int32, DataType.Int32, DataType.Int32],
+      [hWnd, nX, nY, nWidth, nHeight],
+    );
   }
 
   // TODO: Implement

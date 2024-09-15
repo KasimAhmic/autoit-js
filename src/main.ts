@@ -90,6 +90,11 @@ async function main() {
   au3.Sleep(1000);
   logger.info('WinMove', au3.WinMove('This PC', '', 500, 500, 1000, 1000));
 
+  au3.Sleep(1000);
+  logger.info('WinMoveByHandle', au3.WinMoveByHandle(handle, -500, 0, 500, 500));
+  au3.Sleep(1000);
+  logger.info('WinMoveByHandle', au3.WinMoveByHandle(handle, -1000, 500, 700, 400));
+
   au3.unload();
 }
 
