@@ -78,7 +78,7 @@ async function main() {
   logger.info('WinGetClientSize', au3.WinGetClientSize('This PC'));
   logger.info('WinGetClientSizeByHandle', au3.WinGetClientSizeByHandle(handle));
 
-  logger.info('WinWaitActive', au3.WinWaitActive('This PC', '', 10));
+  logger.info('WinWaitActiveByHandle', au3.WinWaitActiveByHandle(handle, 10));
 
   au3.unload();
 }
