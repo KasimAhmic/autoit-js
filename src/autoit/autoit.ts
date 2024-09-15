@@ -110,7 +110,6 @@ export class AutoIt {
     this.invoke('AU3_ClipPut', DataType.Void, [DataType.String16], [szClip]);
   }
 
-  // TODO: Implement
   ControlClick(
     szTitle: TLPCWSTR,
     szText: TLPCWSTR,
@@ -120,7 +119,20 @@ export class AutoIt {
     nX: number = AU3_INTDEFAULT,
     nY: number = AU3_INTDEFAULT,
   ): number {
-    throw new Error('Unimplemented');
+    return this.invoke(
+      'AU3_ControlClick',
+      DataType.Int32,
+      [
+        DataType.String16,
+        DataType.String16,
+        DataType.String16,
+        DataType.String16,
+        DataType.Int32,
+        DataType.Int32,
+        DataType.Int32,
+      ],
+      [szTitle, szText, szControl, szButton, nNumClicks, nX, nY],
+    );
   }
 
   // TODO: Implement
