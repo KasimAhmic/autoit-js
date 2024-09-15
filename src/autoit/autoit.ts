@@ -837,9 +837,8 @@ export class AutoIt {
     throw new Error('Unimplemented');
   }
 
-  // TODO: Implement
   WinMinimizeAll(): void {
-    throw new Error('Unimplemented');
+    this.invoke('AU3_WinMinimizeAll', DataType.Void, [], []);
   }
 
   // TODO: Implement
