@@ -73,8 +73,10 @@ async function main() {
   logger.info('WinExists (false)', au3.WinExists('This PCs'));
   logger.info('AutoItSetOption', au3.AutoItSetOption(AutoItOption.WinTitleMatchMode, 1));
 
+  const handle = au3.WinGetHandle('This PC');
   logger.info('WinExists', au3.WinExists('This PC'));
   logger.info('WinGetClientSize', au3.WinGetClientSize('This PC'));
+  logger.info('WinGetClientSizeByHandle', au3.WinGetClientSizeByHandle(handle));
 
   au3.unload();
 }

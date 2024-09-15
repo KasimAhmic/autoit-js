@@ -716,9 +716,20 @@ export class AutoIt {
     return { width, height };
   }
 
-  // TODO: Implement
-  WinGetClientSizeByHandle(hWnd: THWND, lpRect: TLPRECT): number {
-    throw new Error('Unimplemented');
+  WinGetClientSizeByHandle(hWnd: THWND): ClientSize {
+    const outputBuffer = Buffer.alloc(koffi.sizeof(LRECT));
+
+    this.invoke(
+      'AU3_WinGetClientSizeByHandle',
+      DataType.Void,
+      [DataType.UInt64, LPRECT],
+      [hWnd, outputBuffer],
+    );
+
+    const width = outputBuffer.readInt32LE(8);
+    const height = outputBuffer.readInt32LE(12);
+
+    return { width, height };
   }
 
   WinGetHandle(szTitle: TLPCWSTR, szText: TLPCWSTR = ''): THWND {
