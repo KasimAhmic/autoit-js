@@ -892,20 +892,35 @@ export class AutoIt {
     return this.invoke('AU3_WinKillByHandle', DataType.Int32, [DataType.UInt64], [hWnd]);
   }
 
-  // TODO: Implement
   WinMenuSelectItem(
     szTitle: TLPCWSTR,
     szText: TLPCWSTR = '',
     szItem1: TLPCWSTR,
-    szItem2: TLPCWSTR,
-    szItem3: TLPCWSTR,
-    szItem4: TLPCWSTR,
-    szItem5: TLPCWSTR,
-    szItem6: TLPCWSTR,
-    szItem7: TLPCWSTR,
-    szItem8: TLPCWSTR,
+    szItem2: TLPCWSTR = '',
+    szItem3: TLPCWSTR = '',
+    szItem4: TLPCWSTR = '',
+    szItem5: TLPCWSTR = '',
+    szItem6: TLPCWSTR = '',
+    szItem7: TLPCWSTR = '',
+    szItem8: TLPCWSTR = '',
   ): number {
-    throw new Error('Unimplemented');
+    return this.invoke(
+      'AU3_WinMenuSelectItem',
+      DataType.Int32,
+      [
+        DataType.String16,
+        DataType.String16,
+        DataType.String16,
+        DataType.String16,
+        DataType.String16,
+        DataType.String16,
+        DataType.String16,
+        DataType.String16,
+        DataType.String16,
+        DataType.String16,
+      ],
+      [szTitle, szText, szItem1, szItem2, szItem3, szItem4, szItem5, szItem6, szItem7, szItem8],
+    );
   }
 
   // TODO: Implement

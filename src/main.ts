@@ -1,5 +1,5 @@
 // import SegfaultHandler from 'segfault-handler';
-import { AutoIt, MouseButton, MouseWheelDirection, WinState } from './autoit';
+import { AutoIt, MouseButton, MouseWheelDirection, WinVisibility } from './autoit';
 import { AutoItOption } from './autoit/types/autoit-options';
 import { Logger } from './util/logger';
 
@@ -95,9 +95,18 @@ async function main() {
   // au3.Sleep(1000);
   // logger.info('WinMoveByHandle', au3.WinMoveByHandle(handle, -1000, 500, 700, 400));
 
-  const handle = au3.WinGetHandle('Task Manager');
-  logger.info('WinSetOnTop', au3.WinSetOnTop('Task Manager', '', 1));
-  logger.info('WinSetOnTop', au3.WinSetOnTop('Task Manager', '', 0));
+  au3.Run('notepad.exe');
+
+  au3.WinWait('Untitled - Notepad');
+
+  logger.info(
+    'WinMenuSelectItem',
+    au3.WinMenuSelectItem('Untitled - Notepad', '', '&Help', '&About Notepad'),
+  );
+
+  au3.Sleep(1000);
+
+  au3.WinClose('Untitled - Notepad');
 
   au3.unload();
 }
