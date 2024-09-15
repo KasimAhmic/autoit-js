@@ -549,9 +549,8 @@ export class AutoIt {
     };
   }
 
-  // TODO: Implement
   ProcessClose(szProcess: TLPCWSTR): number {
-    throw new Error('Unimplemented');
+    return this.invoke('AU3_ProcessClose', DataType.Int32, [DataType.String16], [szProcess]);
   }
 
   ProcessExists(szProcess: TLPCWSTR): number {
