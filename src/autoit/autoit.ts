@@ -894,9 +894,13 @@ export class AutoIt {
     throw new Error('Unimplemented');
   }
 
-  // TODO: Implement
   WinSetTrans(szTitle: TLPCWSTR, szText: TLPCWSTR = '', nTrans: number): number {
-    throw new Error('Unimplemented');
+    return this.invoke(
+      'AU3_WinSetTrans',
+      DataType.Int32,
+      [DataType.String16, DataType.String16, DataType.Int32],
+      [szTitle, szText, nTrans],
+    );
   }
 
   // TODO: Implement

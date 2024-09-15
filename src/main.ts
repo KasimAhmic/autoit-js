@@ -78,6 +78,10 @@ async function main() {
   logger.info('WinGetClientSize', au3.WinGetClientSize('This PC'));
   logger.info('WinGetClientSizeByHandle', au3.WinGetClientSizeByHandle(handle));
 
+  logger.info('WinSetTrans', au3.WinSetTrans('This PC', '', 127));
+  au3.Sleep(1000);
+  logger.info('WinSetTrans', au3.WinSetTrans('This PC', '', 255));
+
   au3.unload();
 }
 
