@@ -841,9 +841,8 @@ export class AutoIt {
     this.invoke('AU3_WinMinimizeAll', DataType.Void, [], []);
   }
 
-  // TODO: Implement
   WinMinimizeAllUndo(): void {
-    throw new Error('Unimplemented');
+    this.invoke('AU3_WinMinimizeAllUndo', DataType.Void, [], []);
   }
 
   // TODO: Implement

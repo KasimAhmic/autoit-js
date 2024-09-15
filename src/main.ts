@@ -79,6 +79,8 @@ async function main() {
   logger.info('WinGetClientSizeByHandle', au3.WinGetClientSizeByHandle(handle));
 
   logger.info('WinMinimizeAll', au3.WinMinimizeAll());
+  au3.Sleep(1000);
+  logger.info('WinMinimizeAllUndo', au3.WinMinimizeAllUndo());
 
   au3.unload();
 }
