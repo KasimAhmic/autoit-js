@@ -938,9 +938,13 @@ export class AutoIt {
     );
   }
 
-  // TODO: Implement
   WinSetOnTopByHandle(hWnd: THWND, nFlag: number): number {
-    throw new Error('Unimplemented');
+    return this.invoke(
+      'AU3_WinSetOnTopByHandle',
+      DataType.Int32,
+      [DataType.UInt64, DataType.Int32],
+      [hWnd, nFlag],
+    );
   }
 
   WinSetState(szTitle: TLPCWSTR, szText: TLPCWSTR = '', nFlags: number): number {
