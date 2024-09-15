@@ -506,9 +506,9 @@ export class AutoIt {
     return this.invoke('AU3_PixelChecksum', DataType.Int32, [LPRECT, DataType.Int32], [rectBuffer, nStep]);
   }
 
-  // TODO: Implement
+  // TODO: Allow for returning hex values
   PixelGetColor(nX: number, nY: number): number {
-    throw new Error('Unimplemented');
+    return this.invoke('AU3_PixelGetColor', DataType.Int32, [DataType.Int32, DataType.Int32], [nX, nY]);
   }
 
   // TODO: Implement

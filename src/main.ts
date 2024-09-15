@@ -99,11 +99,7 @@ async function main() {
 
   // au3.Sleep(5000);
 
-  logger.info('PixelChecksum', au3.PixelChecksum(0, 0, 1000, 1000));
-
-  au3.Sleep(1000);
-
-  logger.info('PixelChecksum', au3.PixelChecksum(0, 0, 1000, 1000));
+  logger.info('PixelGetColor', au3.PixelGetColor(100, 100));
 
   au3.unload();
 }
