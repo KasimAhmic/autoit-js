@@ -95,20 +95,11 @@ async function main() {
   // au3.Sleep(1000);
   // logger.info('WinMoveByHandle', au3.WinMoveByHandle(handle, -1000, 500, 700, 400));
 
-  au3.Run('notepad.exe');
+  // au3.Run('notepad.exe');
 
-  const handle = au3.WinWait('Untitled - Notepad');
+  // au3.Sleep(5000);
 
-  logger.info(
-    'WinGetHandle',
-    au3.WinGetHandle('Untitled - Notepad'),
-    typeof au3.WinGetHandle('Untitled - Notepad'),
-  );
-  logger.info(
-    'WinGetHandleAsText',
-    au3.WinGetHandleAsText('Untitled - Notepad'),
-    typeof au3.WinGetHandleAsText('Untitled - Notepad'),
-  );
+  logger.info('WinGetCaretPos', au3.WinGetCaretPos());
 
   au3.WinClose('Untitled - Notepad');
 

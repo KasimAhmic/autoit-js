@@ -462,7 +462,7 @@ export class AutoIt {
     throw new Error('Unimplemented');
   }
 
-  MouseGetPos(): MousePosition {
+  MouseGetPos(): Position {
     const output = Buffer.alloc(koffi.sizeof(LPOINT));
 
     this.invoke('AU3_MouseGetPos', DataType.Void, [LPPOINT], [output]);
@@ -675,9 +675,15 @@ export class AutoIt {
     return result === 1;
   }
 
-  // TODO: Implement
-  WinGetCaretPos(lpPoint: TLPPOINT): number {
-    throw new Error('Unimplemented');
+  WinGetCaretPos(): Position {
+    const outputBuffer = Buffer.alloc(koffi.sizeof(LPOINT));
+
+    this.invoke('AU3_WinGetCaretPos', DataType.Void, [LPPOINT], [outputBuffer]);
+
+    return {
+      x: outputBuffer.readInt32LE(0),
+      y: outputBuffer.readInt32LE(4),
+    };
   }
 
   WinGetClassList(szTitle: TLPCWSTR, szText: TLPCWSTR = ''): string {
@@ -1138,7 +1144,7 @@ export class AutoIt {
   }
 }
 
-export type MousePosition = {
+export type Position = {
   x: number;
   y: number;
 };
