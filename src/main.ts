@@ -62,38 +62,42 @@ async function main() {
   //   au3.MouseClickDrag(MouseButton.Left, 2160 / 2, 1440 / 2, 2160 / 2 + 300, 1440 / 2 + 300),
   // );
 
-  logger.info('AutoItSetOption', au3.AutoItSetOption(AutoItOption.WinTitleMatchMode, 1));
-  logger.info('WinExists (true)', au3.WinExists('This'));
-  logger.info('WinExists (false)', au3.WinExists('is PC'));
-  logger.info('AutoItSetOption', au3.AutoItSetOption(AutoItOption.WinTitleMatchMode, 2));
-  logger.info('WinExists (true)', au3.WinExists('is PC'));
-  logger.info('WinExists (true)', au3.WinExists('This PC'));
-  logger.info('AutoItSetOption', au3.AutoItSetOption(AutoItOption.WinTitleMatchMode, 3));
-  logger.info('WinExists (true)', au3.WinExists('This PC'));
-  logger.info('WinExists (false)', au3.WinExists('This PCs'));
-  logger.info('AutoItSetOption', au3.AutoItSetOption(AutoItOption.WinTitleMatchMode, 1));
+  // logger.info('AutoItSetOption', au3.AutoItSetOption(AutoItOption.WinTitleMatchMode, 1));
+  // logger.info('WinExists (true)', au3.WinExists('This'));
+  // logger.info('WinExists (false)', au3.WinExists('is PC'));
+  // logger.info('AutoItSetOption', au3.AutoItSetOption(AutoItOption.WinTitleMatchMode, 2));
+  // logger.info('WinExists (true)', au3.WinExists('is PC'));
+  // logger.info('WinExists (true)', au3.WinExists('This PC'));
+  // logger.info('AutoItSetOption', au3.AutoItSetOption(AutoItOption.WinTitleMatchMode, 3));
+  // logger.info('WinExists (true)', au3.WinExists('This PC'));
+  // logger.info('WinExists (false)', au3.WinExists('This PCs'));
+  // logger.info('AutoItSetOption', au3.AutoItSetOption(AutoItOption.WinTitleMatchMode, 1));
 
-  const handle = au3.WinGetHandle('This PC');
-  logger.info('WinExists', au3.WinExists('This PC'));
-  logger.info('WinGetClientSize', au3.WinGetClientSize('This PC'));
-  logger.info('WinGetClientSizeByHandle', au3.WinGetClientSizeByHandle(handle));
+  // const handle = au3.WinGetHandle('This PC');
+  // logger.info('WinExists', au3.WinExists('This PC'));
+  // logger.info('WinGetClientSize', au3.WinGetClientSize('This PC'));
+  // logger.info('WinGetClientSizeByHandle', au3.WinGetClientSizeByHandle(handle));
 
-  logger.info('WinGetPos', au3.WinGetPos('This PC'));
-  logger.info('WinGetPosByHandle', au3.WinGetPosByHandle(handle));
-  logger.info('WinGetProcess', au3.WinGetProcess('Untitled - Notepad'));
-  logger.info('WinGetProcessByHandle', au3.WinGetProcessByHandle(au3.WinGetHandle('Untitled - Notepad')));
+  // logger.info('WinGetPos', au3.WinGetPos('This PC'));
+  // logger.info('WinGetPosByHandle', au3.WinGetPosByHandle(handle));
+  // logger.info('WinGetProcess', au3.WinGetProcess('Untitled - Notepad'));
+  // logger.info('WinGetProcessByHandle', au3.WinGetProcessByHandle(au3.WinGetHandle('Untitled - Notepad')));
 
-  logger.info('WinGetTitle', au3.WinGetTitle('This PC'));
-  logger.info('WinGetTitleByHandle', au3.WinGetTitleByHandle(handle));
+  // logger.info('WinGetTitle', au3.WinGetTitle('This PC'));
+  // logger.info('WinGetTitleByHandle', au3.WinGetTitleByHandle(handle));
 
-  logger.info('WinMove', au3.WinMove('This PC', '', 0, 0, 500, 500));
-  au3.Sleep(1000);
-  logger.info('WinMove', au3.WinMove('This PC', '', 500, 500, 1000, 1000));
+  // logger.info('WinMove', au3.WinMove('This PC', '', 0, 0, 500, 500));
+  // au3.Sleep(1000);
+  // logger.info('WinMove', au3.WinMove('This PC', '', 500, 500, 1000, 1000));
 
-  au3.Sleep(1000);
-  logger.info('WinMoveByHandle', au3.WinMoveByHandle(handle, -500, 0, 500, 500));
-  au3.Sleep(1000);
-  logger.info('WinMoveByHandle', au3.WinMoveByHandle(handle, -1000, 500, 700, 400));
+  // au3.Sleep(1000);
+  // logger.info('WinMoveByHandle', au3.WinMoveByHandle(handle, -500, 0, 500, 500));
+  // au3.Sleep(1000);
+  // logger.info('WinMoveByHandle', au3.WinMoveByHandle(handle, -1000, 500, 700, 400));
+
+  const handle = au3.WinGetHandle('Task Manager');
+  logger.info('WinSetOnTop', au3.WinSetOnTop('Task Manager', '', 1));
+  logger.info('WinSetOnTop', au3.WinSetOnTop('Task Manager', '', 0));
 
   au3.unload();
 }

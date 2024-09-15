@@ -929,9 +929,13 @@ export class AutoIt {
     );
   }
 
-  // TODO: Implement
   WinSetOnTop(szTitle: TLPCWSTR, szText: TLPCWSTR = '', nFlag: number): number {
-    throw new Error('Unimplemented');
+    return this.invoke(
+      'AU3_WinSetOnTop',
+      DataType.Int32,
+      [DataType.String16, DataType.String16, DataType.Int32],
+      [szTitle, szText, nFlag],
+    );
   }
 
   // TODO: Implement
