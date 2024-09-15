@@ -135,7 +135,6 @@ export class AutoIt {
     );
   }
 
-  // TODO: Implement
   ControlClickByHandle(
     hWnd: THWND,
     hCtrl: THWND,
@@ -144,7 +143,12 @@ export class AutoIt {
     nX: number = AU3_INTDEFAULT,
     nY: number = AU3_INTDEFAULT,
   ): number {
-    throw new Error('Unimplemented');
+    return this.invoke(
+      'AU3_ControlClickByHandle',
+      DataType.Int32,
+      [DataType.UInt64, DataType.UInt64, DataType.String16, DataType.Int32, DataType.Int32, DataType.Int32],
+      [hWnd, hCtrl, szButton, nNumClicks, nX, nY],
+    );
   }
 
   // TODO: Implement
