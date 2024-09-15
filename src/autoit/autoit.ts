@@ -812,6 +812,7 @@ export class AutoIt {
 
     return outputBuffer.toString('utf16le');
   }
+
   WinGetTextByHandle(hWnd: THWND): string {
     const outputBuffer = Buffer.alloc(1024);
 
@@ -903,7 +904,6 @@ export class AutoIt {
     this.invoke('AU3_WinMinimizeAllUndo', DataType.Void, [], []);
   }
 
-  // TODO: Implement
   WinMove(
     szTitle: TLPCWSTR,
     szText: TLPCWSTR = '',
@@ -912,7 +912,12 @@ export class AutoIt {
     nWidth: number = -1,
     nHeight: number = -1,
   ): number {
-    throw new Error('Unimplemented');
+    return this.invoke(
+      'AU3_WinMove',
+      DataType.Int32,
+      [DataType.String16, DataType.String16, DataType.Int32, DataType.Int32, DataType.Int32, DataType.Int32],
+      [szTitle, szText, nX, nY, nWidth, nHeight],
+    );
   }
 
   // TODO: Implement

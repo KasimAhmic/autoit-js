@@ -86,6 +86,10 @@ async function main() {
   logger.info('WinGetTitle', au3.WinGetTitle('This PC'));
   logger.info('WinGetTitleByHandle', au3.WinGetTitleByHandle(handle));
 
+  logger.info('WinMove', au3.WinMove('This PC', '', 0, 0, 500, 500));
+  au3.Sleep(1000);
+  logger.info('WinMove', au3.WinMove('This PC', '', 500, 500, 1000, 1000));
+
   au3.unload();
 }
 
