@@ -101,7 +101,9 @@ async function main() {
 
   logger.info('WinGetCaretPos', au3.WinGetCaretPos());
 
-  au3.WinClose('Untitled - Notepad');
+  logger.info('ToolTip', au3.ToolTip('Hello World!'));
+
+  au3.Sleep(1000);
 
   au3.unload();
 }

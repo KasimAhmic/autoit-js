@@ -614,9 +614,14 @@ export class AutoIt {
     throw new Error('Unimplemented');
   }
 
-  // TODO: Implement
-  ToolTip(szTip: TLPCWSTR, nX: number = AU3_INTDEFAULT, nY: number = AU3_INTDEFAULT): void {
-    throw new Error('Unimplemented');
+  // TODO: Seemingly non-functional
+  ToolTip(szTip: TLPCWSTR, nX: number = AU3_INTDEFAULT, nY: number = AU3_INTDEFAULT): number {
+    return this.invoke(
+      'AU3_ToolTip',
+      DataType.Int32,
+      [DataType.String16, DataType.Int32, DataType.Int32],
+      [szTip, nX, nY],
+    );
   }
 
   WinActivate(szTitle: TLPCWSTR, szText: TLPCWSTR = ''): number {
