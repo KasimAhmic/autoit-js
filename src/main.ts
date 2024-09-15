@@ -99,15 +99,11 @@ async function main() {
 
   // au3.Sleep(5000);
 
-  au3.Run('notepad.exe');
-  au3.WinWait('Untitled - Notepad');
-  au3.WinActivate('Untitled - Notepad');
+  logger.info('PixelChecksum', au3.PixelChecksum(0, 0, 1000, 1000));
 
-  au3.Send('Hello World!');
+  au3.Sleep(1000);
 
-  au3.Send('{ENTER}');
-
-  au3.Sleep(2000);
+  logger.info('PixelChecksum', au3.PixelChecksum(0, 0, 1000, 1000));
 
   au3.unload();
 }

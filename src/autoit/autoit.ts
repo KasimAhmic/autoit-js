@@ -495,9 +495,15 @@ export class AutoIt {
     throw new Error('Unimplemented');
   }
 
-  // TODO: Implement
-  PixelChecksum(lpRect: TLPRECT, nStep: number = 1): number {
-    throw new Error('Unimplemented');
+  PixelChecksum(left: number, top: number, right: number, bottom: number, nStep: number = 1): number {
+    const rectBuffer = Buffer.alloc(koffi.sizeof(LRECT));
+
+    rectBuffer.writeInt32LE(left, 0);
+    rectBuffer.writeInt32LE(top, 4);
+    rectBuffer.writeInt32LE(right, 8);
+    rectBuffer.writeInt32LE(bottom, 12);
+
+    return this.invoke('AU3_PixelChecksum', DataType.Int32, [LPRECT, DataType.Int32], [rectBuffer, nStep]);
   }
 
   // TODO: Implement
@@ -1208,4 +1214,11 @@ export type WindowState = {
   active: boolean;
   minimized: boolean;
   maximized: boolean;
+};
+
+export type Rect = {
+  left: number;
+  top: number;
+  right: number;
+  bottom: number;
 };
