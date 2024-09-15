@@ -872,9 +872,13 @@ export class AutoIt {
     throw new Error('Unimplemented');
   }
 
-  // TODO: Implement
   WinSetState(szTitle: TLPCWSTR, szText: TLPCWSTR = '', nFlags: number): number {
-    throw new Error('Unimplemented');
+    return this.invoke(
+      'AU3_WinSetState',
+      DataType.Int32,
+      [DataType.String16, DataType.String16, DataType.Int32],
+      [szTitle, szText, nFlags],
+    );
   }
 
   // TODO: Implement
@@ -1011,3 +1015,18 @@ export type ClientSize = {
   width: number;
   height: number;
 };
+
+export enum WinState {
+  Hide,
+  ShowNormal,
+  ShowMinimized,
+  Maximize,
+  ShownNoActivate,
+  Show,
+  Minimize,
+  Enable,
+  Disable,
+  Restore,
+  ShowDefault,
+  ForceMinimize,
+}
