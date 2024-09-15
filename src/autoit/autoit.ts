@@ -845,9 +845,8 @@ export class AutoIt {
     );
   }
 
-  // TODO: Implement
   WinKillByHandle(hWnd: THWND): number {
-    throw new Error('Unimplemented');
+    return this.invoke('AU3_WinKillByHandle', DataType.Int32, [DataType.UInt64], [hWnd]);
   }
 
   // TODO: Implement

@@ -86,7 +86,7 @@ async function main() {
   logger.info('WinGetTitle', au3.WinGetTitle('This PC'));
   logger.info('WinGetTitleByHandle', au3.WinGetTitleByHandle(handle));
 
-  logger.info('WinKill', au3.WinKill('This PC'));
+  logger.info('WinKillByHandle', au3.WinKillByHandle(handle));
 
   au3.unload();
 }
