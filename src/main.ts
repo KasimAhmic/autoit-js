@@ -31,6 +31,8 @@ async function main() {
   logger.info('ClipPut', au3.ClipPut('Hello World!'));
   logger.info('ClipGet', au3.ClipGet());
 
+  logger.info('IsAdmin', au3.IsAdmin());
+
   au3.unload();
 }
 

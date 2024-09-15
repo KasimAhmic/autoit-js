@@ -15,7 +15,6 @@ export class AutoIt {
   private readonly logger: Logger;
 
   private lib: IKoffiLib | null = null;
-  private loaded: boolean = false;
   private functionCache: Record<string, KoffiFunction> = {};
 
   constructor() {
@@ -387,9 +386,10 @@ export class AutoIt {
     throw new Error('Unimplemented');
   }
 
-  // TODO: Implement
-  IsAdmin(): number {
-    throw new Error('Unimplemented');
+  IsAdmin(): boolean {
+    const result = this.invoke('AU3_IsAdmin', DataType.Int32, [], []);
+
+    return result === 1;
   }
 
   // TODO: Implement
