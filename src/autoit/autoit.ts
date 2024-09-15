@@ -786,9 +786,8 @@ export class AutoIt {
     );
   }
 
-  // TODO: Implement
   WinGetProcessByHandle(hWnd: THWND): TDWORD {
-    throw new Error('Unimplemented');
+    return this.invoke('AU3_WinGetProcessByHandle', DataType.Int32, [DataType.UInt64], [hWnd]);
   }
 
   // TODO: Implement
