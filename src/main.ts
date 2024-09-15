@@ -83,6 +83,8 @@ async function main() {
   logger.info('WinGetProcess', au3.WinGetProcess('Untitled - Notepad'));
   logger.info('WinGetProcessByHandle', au3.WinGetProcessByHandle(au3.WinGetHandle('Untitled - Notepad')));
 
+  logger.info('WinGetTitle', au3.WinGetTitle('This PC'));
+
   au3.unload();
 }
 
