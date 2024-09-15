@@ -975,9 +975,13 @@ export class AutoIt {
     );
   }
 
-  // TODO: Implement
   WinWaitNotActiveByHandle(hWnd: THWND, nTimeout: number = 0): number {
-    throw new Error('Unimplemented');
+    return this.invoke(
+      'AU3_WinWaitNotActiveByHandle',
+      DataType.Int32,
+      [DataType.UInt64, DataType.Int32],
+      [hWnd, nTimeout],
+    );
   }
 }
 
