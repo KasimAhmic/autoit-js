@@ -1,10 +1,8 @@
 import { arch, platform } from 'node:os';
 import { resolve } from 'node:path';
 
-import { DataType } from 'ffi-rs';
-
 import { Library } from '../util';
-import { DWORD, HWND, LPCWSTR, LPPOINT, LPRECT, LPWSTR } from './types';
+import { DataType, LPWSTR } from '../util/data-type';
 
 const AU3_INTDEFAULT = -2147483647;
 const SW_SHOWNORMAL = 1;
@@ -34,7 +32,7 @@ export class AutoIt extends Library {
    * @returns void
    */
   Init(): void {
-    return this.invoke('AU3_Init', DataType.Void, [], []);
+    return this.call('AU3_Init', DataType.Void, [], []);
   }
 
   // TODO: Implement
@@ -527,44 +525,49 @@ export class AutoIt extends Library {
   }
 
   WinActivate(szTitle: LPCWSTR, szText: LPCWSTR = ''): number {
-    return this.invoke(
+    return this.call(
       'AU3_WinActivate',
-      DataType.I32,
-      [DataType.WString, DataType.WString],
+      DataType.Int,
+      [DataType.String16, DataType.String16],
       [szTitle, szText],
     );
   }
 
   WinActivateByHandle(hWnd: HWND): number {
-    return this.invoke('AU3_WinActivateByHandle', DataType.I32, [DataType.U64], [hWnd]);
+    return this.call('AU3_WinActivateByHandle', DataType.Int32, [DataType.UInt64], [hWnd]);
   }
 
   WinActive(szTitle: LPCWSTR, szText: LPCWSTR = ''): number {
-    return this.invoke(
+    return this.call(
       'AU3_WinActive',
-      DataType.I32,
-      [DataType.WString, DataType.WString],
+      DataType.Int,
+      [DataType.String16, DataType.String16],
       [szTitle, szText],
     );
   }
 
   WinActiveByHandle(hWnd: HWND): number {
-    return this.invoke('AU3_WinActiveByHandle', DataType.I32, [DataType.U64], [hWnd]);
+    return this.call('AU3_WinActiveByHandle', DataType.Int32, [DataType.UInt64], [hWnd]);
   }
 
   WinClose(szTitle: LPCWSTR, szText: LPCWSTR = ''): number {
-    return this.invoke('AU3_WinClose', DataType.I32, [DataType.WString, DataType.WString], [szTitle, szText]);
+    return this.call(
+      'AU3_WinClose',
+      DataType.Int32,
+      [DataType.String16, DataType.String16],
+      [szTitle, szText],
+    );
   }
 
   WinCloseByHandle(hWnd: HWND): number {
-    return this.invoke('AU3_WinCloseByHandle', DataType.I32, [DataType.U64], [hWnd]);
+    return this.call('AU3_WinCloseByHandle', DataType.Int32, [DataType.UInt64], [hWnd]);
   }
 
   WinExists(szTitle: LPCWSTR, szText: LPCWSTR = ''): boolean {
-    const result = this.invoke(
+    const result = this.call(
       'AU3_WinExists',
-      DataType.I32,
-      [DataType.WString, DataType.WString],
+      DataType.Int32,
+      [DataType.String16, DataType.String16],
       [szTitle, szText],
     );
 
@@ -572,7 +575,7 @@ export class AutoIt extends Library {
   }
 
   WinExistsByHandle(hWnd: HWND): boolean {
-    const result = this.invoke('AU3_WinExistsByHandle', DataType.I32, [DataType.U64], [hWnd]);
+    const result = this.call('AU3_WinExistsByHandle', DataType.Int32, [DataType.UInt64], [hWnd]);
 
     return result === 1;
   }
@@ -582,14 +585,17 @@ export class AutoIt extends Library {
     throw new Error('Unimplemented');
   }
 
-  // TODO: Implement
-  WinGetClassList(
-    szTitle: LPCWSTR,
-    /*[in,defaultvalue("")]*/ szText: LPCWSTR,
-    szRetText: LPWSTR,
-    nBufSize: number,
-  ): void {
-    throw new Error('Unimplemented');
+  WinGetClassList(szTitle: LPCWSTR, szText: LPCWSTR = ''): string {
+    const outputBuffer = Buffer.alloc(1024);
+
+    this.call(
+      'AU3_WinGetClassList',
+      DataType.Void,
+      [DataType.String16, DataType.String16, LPWSTR, DataType.Int32],
+      [szTitle, szText, outputBuffer, outputBuffer.length],
+    );
+
+    return outputBuffer.toString('utf16le');
   }
 
   // TODO: Implement
@@ -608,10 +614,10 @@ export class AutoIt extends Library {
   }
 
   WinGetHandle(szTitle: LPCWSTR, szText: LPCWSTR = ''): HWND {
-    return this.invoke(
+    return this.call(
       'AU3_WinGetHandle',
-      DataType.U64,
-      [DataType.WString, DataType.WString],
+      DataType.UInt64,
+      [DataType.String16, DataType.String16],
       [szTitle, szText],
     );
   }

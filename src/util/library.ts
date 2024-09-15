@@ -1,13 +1,16 @@
-import { FieldType, FieldTypeToType, ResultWithErrno, ResultWithPromise, close, load, open } from 'ffi-rs';
+import koffi, { IKoffiCType, IKoffiLib, KoffiFunction } from 'koffi';
 
 import { Logger } from '../util';
+import { DataType, DataTypeToType } from './data-type';
 
 export abstract class Library {
   private readonly name: string;
   private readonly path: string;
   private readonly logger: Logger;
 
+  private lib: IKoffiLib | null = null;
   private loaded: boolean = false;
+  private functionCache: Record<string, KoffiFunction> = {};
 
   constructor(name: string, path: string) {
     this.name = name;
@@ -23,7 +26,7 @@ export abstract class Library {
     } else {
       this.logger.debug(`Loading library ${this.name} from ${this.path}`);
 
-      open({ library: this.name, path: this.path });
+      this.lib = koffi.load(this.path);
 
       this.postLoad();
 
@@ -37,7 +40,7 @@ export abstract class Library {
     if (this.loaded) {
       this.logger.debug(`Unloading library ${this.name} from ${this.path}`);
 
-      close(this.name);
+      this.lib?.unload();
 
       this.logger.debug(`Library ${this.name} unloaded`);
 
@@ -47,26 +50,23 @@ export abstract class Library {
     }
   }
 
-  invoke<
-    ReturnType extends FieldType,
-    IncludeErrNo extends boolean | undefined = undefined,
-    RunInNewThread extends boolean | undefined = undefined,
-  >(
+  call<ReturnType extends DataType, const ParameterTypes extends (DataType | IKoffiCType)[]>(
     functionName: string,
-    returnType: ReturnType,
-    parameterTypes: FieldType[],
-    parameterValues: unknown[],
-    includeErrNo: IncludeErrNo = false as IncludeErrNo,
-    runInNewThread: RunInNewThread = false as RunInNewThread,
-  ): ResultWithPromise<ResultWithErrno<FieldTypeToType<ReturnType>, IncludeErrNo>, RunInNewThread> {
-    return load({
-      library: this.name,
-      funcName: functionName,
-      retType: returnType,
-      paramsType: parameterTypes,
-      paramsValue: parameterValues,
-      errno: includeErrNo,
-      runInNewThread,
-    });
+    resultType: ReturnType,
+    parameterTypes: ParameterTypes,
+    parameters: { [K in keyof ParameterTypes]: DataTypeToType<ParameterTypes[K]> },
+  ): DataTypeToType<ReturnType> {
+    const cachedFunc = this.functionCache[functionName];
+
+    if (cachedFunc) {
+      return cachedFunc(...parameters);
+    }
+
+    // TODO: null check
+    const func = this.lib!.func(functionName, resultType, parameterTypes);
+
+    this.functionCache[functionName] = func;
+
+    return func(...parameters);
   }
 }
