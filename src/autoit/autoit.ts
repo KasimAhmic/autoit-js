@@ -903,9 +903,13 @@ export class AutoIt {
     );
   }
 
-  // TODO: Implement
   WinSetTransByHandle(hWnd: THWND, nTrans: number): number {
-    throw new Error('Unimplemented');
+    return this.invoke(
+      'AU3_WinSetTransByHandle',
+      DataType.Int32,
+      [DataType.UInt64, DataType.Int32],
+      [hWnd, nTrans],
+    );
   }
 
   // TODO: Implement
