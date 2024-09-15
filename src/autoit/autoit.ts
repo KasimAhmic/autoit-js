@@ -562,9 +562,13 @@ export class AutoIt {
     throw new Error('Unimplemented');
   }
 
-  // TODO: Implement
   ProcessWait(szProcess: TLPCWSTR, nTimeout: number = 0): number {
-    throw new Error('Unimplemented');
+    return this.invoke(
+      'AU3_ProcessWait',
+      DataType.Int32,
+      [DataType.String16, DataType.Int32],
+      [szProcess, nTimeout],
+    );
   }
 
   // TODO: Implement
