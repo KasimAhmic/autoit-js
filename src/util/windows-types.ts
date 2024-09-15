@@ -9,12 +9,12 @@ export const SCARDCONTEXT = koffi.alias('SCARDCONTEXT', 'long *');
 export const SCARDHANDLE = koffi.alias('SCARDHANDLE', 'long *');
 export const LONG = koffi.alias('LONG', 'long');
 
-export const LPOINT = koffi.struct('LPOINT', {
+export const POINT = koffi.struct('POINT', {
   x: LONG,
   y: LONG,
 });
 
-export const LRECT = koffi.struct('LRECT', {
+export const RECT = koffi.struct('RECT', {
   left: LONG,
   top: LONG,
   right: LONG,
@@ -33,5 +33,5 @@ export const LPCVOID = koffi.pointer('LPCVOID', VOID);
 export const LPCBYTE = koffi.pointer('LPCBYTE', 'const unsigned char*');
 export const LPCWSTR = koffi.pointer('LPCWSTR', WCHAR);
 export const LPWSTR = koffi.pointer('LPWSTR', WCHAR);
-export const LPPOINT = koffi.pointer('LPPOINT', LPOINT);
-export const LPRECT = koffi.pointer('LPRECT', LRECT);
+export const LPPOINT = koffi.pointer('LPPOINT', POINT);
+export const LPRECT = koffi.pointer('LPRECT', RECT);

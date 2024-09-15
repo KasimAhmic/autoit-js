@@ -3,7 +3,7 @@ import { resolve } from 'node:path';
 
 import koffi, { IKoffiCType, IKoffiLib, KoffiFunction } from 'koffi';
 
-import { LPOINT, LPPOINT, LPRECT, LPWSTR, LRECT, Logger } from '../util';
+import { LPPOINT, LPRECT, LPWSTR, Logger, POINT, RECT } from '../util';
 import { DataType, DataTypeToType } from '../util/data-type';
 import { TDWORD, THWND, TLPCWSTR, TLPPOINT, TLPRECT, TLPWSTR } from './types/types';
 
@@ -78,7 +78,7 @@ export class AutoIt {
       return cachedFunc(...parameters);
     }
 
-    const func = this.lib.func(functionName, resultType, parameterTypes);
+    const func = this.lib.func('__stdcall', functionName, resultType, parameterTypes);
 
     this.functionCache[functionName] = func;
 
@@ -461,8 +461,8 @@ export class AutoIt {
     return this.invoke('AU3_MouseGetCursor', DataType.Int32, [], []);
   }
 
-  MouseGetPos(): Position {
-    const output = Buffer.alloc(koffi.sizeof(LPOINT));
+  MouseGetPos(): Point {
+    const output = Buffer.alloc(koffi.sizeof(POINT));
 
     this.invoke('AU3_MouseGetPos', DataType.Void, [LPPOINT], [output]);
 
@@ -495,7 +495,7 @@ export class AutoIt {
   }
 
   PixelChecksum(left: number, top: number, right: number, bottom: number, nStep: number = 1): number {
-    const rectBuffer = Buffer.alloc(koffi.sizeof(LRECT));
+    const rectBuffer = Buffer.alloc(koffi.sizeof(RECT));
 
     rectBuffer.writeInt32LE(left, 0);
     rectBuffer.writeInt32LE(top, 4);
@@ -510,15 +510,36 @@ export class AutoIt {
     return this.invoke('AU3_PixelGetColor', DataType.Int32, [DataType.Int32, DataType.Int32], [nX, nY]);
   }
 
-  // TODO: Implement
+  // TODO: Seems to cause crashes when the left and top values are 0 - 2. Needs further investigation
   PixelSearch(
-    lpRect: TLPRECT,
+    left: number,
+    top: number,
+    right: number,
+    bottom: number,
     nCol: number,
-    /*default 0*/ nVar: number,
-    /*default 1*/ nStep: number,
-    pPointResult: TLPPOINT,
-  ): void {
-    throw new Error('Unimplemented');
+    nVar: number = 0,
+    nStep: number = 1,
+  ): Point {
+    const rectBuffer = Buffer.alloc(koffi.sizeof(RECT));
+
+    rectBuffer.writeInt32LE(left, 0);
+    rectBuffer.writeInt32LE(top, 4);
+    rectBuffer.writeInt32LE(right, 8);
+    rectBuffer.writeInt32LE(bottom, 12);
+
+    const outputBuffer = Buffer.alloc(koffi.sizeof(POINT));
+
+    this.invoke(
+      'AU3_PixelSearch',
+      DataType.Void,
+      [LPRECT, DataType.Int32, DataType.Int32, DataType.Int32, LPPOINT],
+      [rectBuffer, nCol, nVar, nStep, outputBuffer],
+    );
+
+    return {
+      x: outputBuffer.readInt32LE(0),
+      y: outputBuffer.readInt32LE(4),
+    };
   }
 
   // TODO: Implement
@@ -685,8 +706,8 @@ export class AutoIt {
     return result === 1;
   }
 
-  WinGetCaretPos(): Position {
-    const outputBuffer = Buffer.alloc(koffi.sizeof(LPOINT));
+  WinGetCaretPos(): Point {
+    const outputBuffer = Buffer.alloc(koffi.sizeof(POINT));
 
     this.invoke('AU3_WinGetCaretPos', DataType.Void, [LPPOINT], [outputBuffer]);
 
@@ -723,7 +744,7 @@ export class AutoIt {
   }
 
   WinGetClientSize(szTitle: TLPCWSTR, szText: TLPCWSTR = ''): ClientSize {
-    const outputBuffer = Buffer.alloc(koffi.sizeof(LRECT));
+    const outputBuffer = Buffer.alloc(koffi.sizeof(RECT));
 
     this.invoke(
       'AU3_WinGetClientSize',
@@ -739,7 +760,7 @@ export class AutoIt {
   }
 
   WinGetClientSizeByHandle(hWnd: THWND): ClientSize {
-    const outputBuffer = Buffer.alloc(koffi.sizeof(LRECT));
+    const outputBuffer = Buffer.alloc(koffi.sizeof(RECT));
 
     this.invoke(
       'AU3_WinGetClientSizeByHandle',
@@ -777,7 +798,7 @@ export class AutoIt {
   }
 
   WinGetPos(szTitle: TLPCWSTR, szText: TLPCWSTR = ''): WinPositon {
-    const outputBuffer = Buffer.alloc(koffi.sizeof(LRECT));
+    const outputBuffer = Buffer.alloc(koffi.sizeof(RECT));
 
     this.invoke(
       'AU3_WinGetPos',
@@ -795,7 +816,7 @@ export class AutoIt {
   }
 
   WinGetPosByHandle(hWnd: THWND): WinPositon {
-    const outputBuffer = Buffer.alloc(koffi.sizeof(LRECT));
+    const outputBuffer = Buffer.alloc(koffi.sizeof(RECT));
 
     this.invoke('AU3_WinGetPosByHandle', DataType.Void, [DataType.UInt64, LPRECT], [hWnd, outputBuffer]);
 
@@ -1154,7 +1175,7 @@ export class AutoIt {
   }
 }
 
-export type Position = {
+export type Point = {
   x: number;
   y: number;
 };
