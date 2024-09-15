@@ -3,7 +3,7 @@ import { resolve } from 'node:path';
 
 import koffi, { IKoffiCType, IKoffiLib, KoffiFunction } from 'koffi';
 
-import { LPPOINT, LPWSTR, Logger } from '../util';
+import { LPPOINT, LPRECT, LPWSTR, LRECT, Logger } from '../util';
 import { DataType, DataTypeToType } from '../util/data-type';
 import { TDWORD, THWND, TLPCWSTR, TLPPOINT, TLPRECT, TLPWSTR } from './types/types';
 
@@ -700,9 +700,20 @@ export class AutoIt {
     return outputBuffer.toString('utf16le');
   }
 
-  // TODO: Implement
-  WinGetClientSize(szTitle: TLPCWSTR, szText: TLPCWSTR = '', lpRect: TLPRECT): number {
-    throw new Error('Unimplemented');
+  WinGetClientSize(szTitle: TLPCWSTR, szText: TLPCWSTR = ''): ClientSize {
+    const outputBuffer = Buffer.alloc(koffi.sizeof(LRECT));
+
+    this.invoke(
+      'AU3_WinGetClientSize',
+      DataType.Void,
+      [DataType.String16, DataType.String16, LPRECT],
+      [szTitle, szText, outputBuffer],
+    );
+
+    const width = outputBuffer.readInt32LE(8);
+    const height = outputBuffer.readInt32LE(12);
+
+    return { width, height };
   }
 
   // TODO: Implement
@@ -938,3 +949,8 @@ export enum MouseWheelDirection {
   Down = 'DOWN',
   Up = 'UP',
 }
+
+export type ClientSize = {
+  width: number;
+  height: number;
+};

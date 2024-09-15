@@ -14,6 +14,13 @@ export const LPOINT = koffi.struct('LPOINT', {
   y: LONG,
 });
 
+export const LRECT = koffi.struct('LRECT', {
+  left: LONG,
+  top: LONG,
+  right: LONG,
+  bottom: LONG,
+});
+
 export const HANDLE = koffi.pointer('HANDLE', koffi.opaque());
 export const LPVOID = koffi.pointer('LPVOID', VOID);
 export const LPHANDLE = koffi.pointer('LPHANDLE', HANDLE);
@@ -27,3 +34,4 @@ export const LPCBYTE = koffi.pointer('LPCBYTE', 'const unsigned char*');
 export const LPCWSTR = koffi.pointer('LPCWSTR', WCHAR);
 export const LPWSTR = koffi.pointer('LPWSTR', WCHAR);
 export const LPPOINT = koffi.pointer('LPPOINT', LPOINT);
+export const LPRECT = koffi.pointer('LPRECT', LRECT);
