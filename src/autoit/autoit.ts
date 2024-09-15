@@ -812,10 +812,17 @@ export class AutoIt {
 
     return outputBuffer.toString('utf16le');
   }
+  WinGetTextByHandle(hWnd: THWND): string {
+    const outputBuffer = Buffer.alloc(1024);
 
-  // TODO: Implement
-  WinGetTextByHandle(hWnd: THWND, szRetText: TLPWSTR, nBufSize: number): void {
-    throw new Error('Unimplemented');
+    this.invoke(
+      'AU3_WinGetTextByHandle',
+      DataType.Void,
+      [DataType.UInt64, LPWSTR, DataType.Int32],
+      [hWnd, outputBuffer, outputBuffer.length],
+    );
+
+    return outputBuffer.toString('utf16le');
   }
 
   WinGetTitle(szTitle: TLPCWSTR, szText: TLPCWSTR = ''): string {
