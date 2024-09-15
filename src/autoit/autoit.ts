@@ -800,9 +800,17 @@ export class AutoIt {
     throw new Error('Unimplemented');
   }
 
-  // TODO: Implement
-  WinGetText(szTitle: TLPCWSTR, szText: TLPCWSTR = '', szRetText: TLPWSTR, nBufSize: number): void {
-    throw new Error('Unimplemented');
+  WinGetText(szTitle: TLPCWSTR, szText: TLPCWSTR = ''): string {
+    const outputBuffer = Buffer.alloc(1024);
+
+    this.invoke(
+      'AU3_WinGetText',
+      DataType.Void,
+      [DataType.String16, DataType.String16, LPWSTR, DataType.Int32],
+      [szTitle, szText, outputBuffer, outputBuffer.length],
+    );
+
+    return outputBuffer.toString('utf16le');
   }
 
   // TODO: Implement
