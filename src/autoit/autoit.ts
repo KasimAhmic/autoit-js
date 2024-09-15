@@ -415,9 +415,8 @@ export class AutoIt {
     throw new Error('Unimplemented');
   }
 
-  // TODO: Implement
-  MouseDown(/*[in,defaultvalue("LEFT")]*/ szButton: TLPCWSTR): void {
-    throw new Error('Unimplemented');
+  MouseDown(szButton: TLPCWSTR = MouseButton.Left): void {
+    this.invoke('AU3_MouseDown', DataType.Void, [DataType.String16], [szButton]);
   }
 
   // TODO: Implement
@@ -445,9 +444,8 @@ export class AutoIt {
     );
   }
 
-  // TODO: Implement
-  MouseUp(/*[in,defaultvalue("LEFT")]*/ szButton: TLPCWSTR): void {
-    throw new Error('Unimplemented');
+  MouseUp(szButton: TLPCWSTR = MouseButton.Left): void {
+    this.invoke('AU3_MouseUp', DataType.Void, [DataType.String16], [szButton]);
   }
 
   // TODO: Implement
@@ -880,4 +878,13 @@ export class AutoIt {
   }
 }
 
-export type MousePosition = { x: number; y: number };
+export type MousePosition = {
+  x: number;
+  y: number;
+};
+
+export enum MouseButton {
+  Left = 'LEFT',
+  Middle = 'MIDDLE',
+  Right = 'RIGHT',
+}

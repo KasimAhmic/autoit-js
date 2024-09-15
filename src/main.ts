@@ -1,5 +1,5 @@
 // import SegfaultHandler from 'segfault-handler';
-import { AutoIt } from './autoit';
+import { AutoIt, MouseButton } from './autoit';
 import { Logger } from './util/logger';
 
 // SegfaultHandler.registerHandler('crash.log');
@@ -39,8 +39,14 @@ async function main() {
   logger.info('MouseGetPos', au3.MouseGetPos());
   logger.info('MouseMove', au3.MouseMove(100, 100));
   logger.info('MouseGetPos', au3.MouseGetPos());
-  logger.info('MouseMove', au3.MouseMove(200, 200));
+  logger.info('MouseMove', au3.MouseMove(400, 400));
   logger.info('MouseGetPos', au3.MouseGetPos());
+  logger.info('MouseDown', au3.MouseDown(MouseButton.Right));
+  logger.info('MouseUp', au3.MouseUp(MouseButton.Right));
+  logger.info('MouseMove', au3.MouseMove(900, 900));
+  logger.info('MouseGetPos', au3.MouseGetPos());
+  logger.info('MouseUp', au3.MouseDown(MouseButton.Left));
+  logger.info('MouseUp', au3.MouseUp(MouseButton.Left));
 
   au3.unload();
 }
