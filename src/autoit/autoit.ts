@@ -687,9 +687,17 @@ export class AutoIt {
     return outputBuffer.toString('utf16le');
   }
 
-  // TODO: Implement
-  WinGetClassListByHandle(hWnd: THWND, szRetText: TLPWSTR, nBufSize: number): void {
-    throw new Error('Unimplemented');
+  WinGetClassListByHandle(hWnd: THWND): string {
+    const outputBuffer = Buffer.alloc(1024);
+
+    this.invoke(
+      'AU3_WinGetClassListByHandle',
+      DataType.Void,
+      [DataType.UInt64, LPWSTR, DataType.Int32],
+      [hWnd, outputBuffer, outputBuffer.length],
+    );
+
+    return outputBuffer.toString('utf16le');
   }
 
   // TODO: Implement
