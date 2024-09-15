@@ -108,6 +108,8 @@ export class Logger {
   private formatValue(value: any): string {
     if (value instanceof Error) {
       return value.stack ?? value.message;
+    } else if (typeof value === 'object' || Array.isArray(value)) {
+      return JSON.stringify(value);
     }
 
     return value;
