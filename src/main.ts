@@ -78,27 +78,7 @@ async function main() {
   logger.info('WinGetClientSize', au3.WinGetClientSize('This PC'));
   logger.info('WinGetClientSizeByHandle', au3.WinGetClientSizeByHandle(handle));
 
-  // logger.info('WinSetState', au3.WinSetState('This PC', '', WinState.Minimize));
-  // au3.Sleep(1000);
-  // logger.info('WinSetState', au3.WinSetState('This PC', '', WinState.Restore));
-  // au3.Sleep(1000);
-  // logger.info('WinSetState', au3.WinSetState('This PC', '', WinState.Maximize));
-  // au3.Sleep(1000);
-  // logger.info('WinSetState', au3.WinSetState('This PC', '', WinState.Hide));
-  // au3.Sleep(1000);
-  // logger.info('WinSetState', au3.WinSetState('This PC', '', WinState.Show));
-
-  // au3.Sleep(1000);
-
-  logger.info('WinSetStateByHandle', au3.WinSetStateByHandle(handle, WinState.Minimize));
-  au3.Sleep(1000);
-  logger.info('WinSetStateByHandle', au3.WinSetStateByHandle(handle, WinState.Restore));
-  au3.Sleep(1000);
-  logger.info('WinSetStateByHandle', au3.WinSetStateByHandle(handle, WinState.Maximize));
-  au3.Sleep(1000);
-  logger.info('WinSetStateByHandle', au3.WinSetStateByHandle(handle, WinState.Hide));
-  au3.Sleep(1000);
-  logger.info('WinSetStateByHandle', au3.WinSetStateByHandle(handle, WinState.Show));
+  logger.info('WinGetPos', au3.WinGetPos('This PC'));
 
   au3.unload();
 }

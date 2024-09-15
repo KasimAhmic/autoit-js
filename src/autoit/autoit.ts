@@ -461,10 +461,10 @@ export class AutoIt {
 
     this.invoke('AU3_MouseGetPos', DataType.Void, [LPPOINT], [output]);
 
-    const x = output.readInt32LE(0);
-    const y = output.readInt32LE(4);
-
-    return { x, y };
+    return {
+      x: output.readInt32LE(0),
+      y: output.readInt32LE(4),
+    };
   }
 
   MouseMove(nX: number, nY: number, nSpeed: number = -1): number {
@@ -710,10 +710,10 @@ export class AutoIt {
       [szTitle, szText, outputBuffer],
     );
 
-    const width = outputBuffer.readInt32LE(8);
-    const height = outputBuffer.readInt32LE(12);
-
-    return { width, height };
+    return {
+      width: outputBuffer.readInt32LE(8),
+      height: outputBuffer.readInt32LE(12),
+    };
   }
 
   WinGetClientSizeByHandle(hWnd: THWND): ClientSize {
@@ -726,10 +726,10 @@ export class AutoIt {
       [hWnd, outputBuffer],
     );
 
-    const width = outputBuffer.readInt32LE(8);
-    const height = outputBuffer.readInt32LE(12);
-
-    return { width, height };
+    return {
+      width: outputBuffer.readInt32LE(8),
+      height: outputBuffer.readInt32LE(12),
+    };
   }
 
   WinGetHandle(szTitle: TLPCWSTR, szText: TLPCWSTR = ''): THWND {
@@ -746,9 +746,22 @@ export class AutoIt {
     throw new Error('Unimplemented');
   }
 
-  // TODO: Implement
-  WinGetPos(szTitle: TLPCWSTR, szText: TLPCWSTR = '', lpRect: TLPRECT): number {
-    throw new Error('Unimplemented');
+  WinGetPos(szTitle: TLPCWSTR, szText: TLPCWSTR = ''): WinPositon {
+    const outputBuffer = Buffer.alloc(koffi.sizeof(LRECT));
+
+    this.invoke(
+      'AU3_WinGetPos',
+      DataType.Void,
+      [DataType.String16, DataType.String16, LPRECT],
+      [szTitle, szText, outputBuffer],
+    );
+
+    return {
+      x: outputBuffer.readInt32LE(0),
+      y: outputBuffer.readInt32LE(4),
+      width: outputBuffer.readInt32LE(8),
+      height: outputBuffer.readInt32LE(12),
+    };
   }
 
   // TODO: Implement
@@ -1034,3 +1047,10 @@ export enum WinState {
   ShowDefault,
   ForceMinimize,
 }
+
+export type WinPositon = {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+};
