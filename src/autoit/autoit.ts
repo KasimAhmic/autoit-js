@@ -923,19 +923,33 @@ export class AutoIt {
     );
   }
 
-  // TODO: Implement
   WinMenuSelectItemByHandle(
     hWnd: THWND,
     szItem1: TLPCWSTR,
-    szItem2: TLPCWSTR,
-    szItem3: TLPCWSTR,
-    szItem4: TLPCWSTR,
-    szItem5: TLPCWSTR,
-    szItem6: TLPCWSTR,
-    szItem7: TLPCWSTR,
-    szItem8: TLPCWSTR,
+    szItem2: TLPCWSTR = '',
+    szItem3: TLPCWSTR = '',
+    szItem4: TLPCWSTR = '',
+    szItem5: TLPCWSTR = '',
+    szItem6: TLPCWSTR = '',
+    szItem7: TLPCWSTR = '',
+    szItem8: TLPCWSTR = '',
   ): number {
-    throw new Error('Unimplemented');
+    return this.invoke(
+      'AU3_WinMenuSelectItemByHandle',
+      DataType.Int32,
+      [
+        DataType.UInt64,
+        DataType.String16,
+        DataType.String16,
+        DataType.String16,
+        DataType.String16,
+        DataType.String16,
+        DataType.String16,
+        DataType.String16,
+        DataType.String16,
+      ],
+      [hWnd, szItem1, szItem2, szItem3, szItem4, szItem5, szItem6, szItem7, szItem8],
+    );
   }
 
   WinMinimizeAll(): void {

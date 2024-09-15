@@ -97,12 +97,9 @@ async function main() {
 
   au3.Run('notepad.exe');
 
-  au3.WinWait('Untitled - Notepad');
+  const handle = au3.WinWait('Untitled - Notepad');
 
-  logger.info(
-    'WinMenuSelectItem',
-    au3.WinMenuSelectItem('Untitled - Notepad', '', '&Help', '&About Notepad'),
-  );
+  logger.info('WinMenuSelectItem', au3.WinMenuSelectItemByHandle(handle, '&Help', '&About Notepad'));
 
   au3.Sleep(1000);
 
