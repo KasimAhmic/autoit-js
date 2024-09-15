@@ -3,6 +3,7 @@ import { resolve } from 'node:path';
 
 import { Library } from '../util';
 import { DataType, LPWSTR } from '../util/data-type';
+import { TDWORD, THWND, TLPCWSTR, TLPPOINT, TLPRECT, TLPWSTR } from './types';
 
 const AU3_INTDEFAULT = -2147483647;
 const SW_SHOWNORMAL = 1;
@@ -36,26 +37,26 @@ export class AutoIt extends Library {
   }
 
   // TODO: Implement
-  AutoItSetOption(szOption: LPCWSTR, nValue: number): number {
+  AutoItSetOption(szOption: TLPCWSTR, nValue: number): number {
     throw new Error('Unimplemented');
   }
 
   // TODO: Implement
-  ClipGet(szClip: LPWSTR, nBufSize: number): void {
+  ClipGet(szClip: TLPWSTR, nBufSize: number): void {
     throw new Error('Unimplemented');
   }
 
   // TODO: Implement
-  ClipPut(szClip: LPCWSTR): void {
+  ClipPut(szClip: TLPCWSTR): void {
     throw new Error('Unimplemented');
   }
 
   // TODO: Implement
   ControlClick(
-    szTitle: LPCWSTR,
-    szText: LPCWSTR,
-    szControl: LPCWSTR,
-    szButton: LPCWSTR,
+    szTitle: TLPCWSTR,
+    szText: TLPCWSTR,
+    szControl: TLPCWSTR,
+    szButton: TLPCWSTR,
     nNumClicks: number,
     nX: number = AU3_INTDEFAULT,
     nY: number = AU3_INTDEFAULT,
@@ -65,9 +66,9 @@ export class AutoIt extends Library {
 
   // TODO: Implement
   ControlClickByHandle(
-    hWnd: HWND,
-    hCtrl: HWND,
-    szButton: LPCWSTR,
+    hWnd: THWND,
+    hCtrl: THWND,
+    szButton: TLPCWSTR,
     nNumClicks: number,
     nX: number = AU3_INTDEFAULT,
     nY: number = AU3_INTDEFAULT,
@@ -77,12 +78,12 @@ export class AutoIt extends Library {
 
   // TODO: Implement
   ControlCommand(
-    szTitle: LPCWSTR,
-    szText: LPCWSTR,
-    szControl: LPCWSTR,
-    szCommand: LPCWSTR,
-    szExtra: LPCWSTR,
-    szResult: LPWSTR,
+    szTitle: TLPCWSTR,
+    szText: TLPCWSTR,
+    szControl: TLPCWSTR,
+    szCommand: TLPCWSTR,
+    szExtra: TLPCWSTR,
+    szResult: TLPWSTR,
     nBufSize: number,
   ): void {
     throw new Error('Unimplemented');
@@ -90,11 +91,11 @@ export class AutoIt extends Library {
 
   // TODO: Implement
   ControlCommandByHandle(
-    hWnd: HWND,
-    hCtrl: HWND,
-    szCommand: LPCWSTR,
-    szExtra: LPCWSTR,
-    szResult: LPWSTR,
+    hWnd: THWND,
+    hCtrl: THWND,
+    szCommand: TLPCWSTR,
+    szExtra: TLPCWSTR,
+    szResult: TLPWSTR,
     nBufSize: number,
   ): void {
     throw new Error('Unimplemented');
@@ -102,13 +103,13 @@ export class AutoIt extends Library {
 
   // TODO: Implement
   ControlListView(
-    szTitle: LPCWSTR,
-    szText: LPCWSTR,
-    szControl: LPCWSTR,
-    szCommand: LPCWSTR,
-    szExtra1: LPCWSTR,
-    szExtra2: LPCWSTR,
-    szResult: LPWSTR,
+    szTitle: TLPCWSTR,
+    szText: TLPCWSTR,
+    szControl: TLPCWSTR,
+    szCommand: TLPCWSTR,
+    szExtra1: TLPCWSTR,
+    szExtra2: TLPCWSTR,
+    szResult: TLPWSTR,
     nBufSize: number,
   ): void {
     throw new Error('Unimplemented');
@@ -116,114 +117,114 @@ export class AutoIt extends Library {
 
   // TODO: Implement
   ControlListViewByHandle(
-    hWnd: HWND,
-    hCtrl: HWND,
-    szCommand: LPCWSTR,
-    szExtra1: LPCWSTR,
-    szExtra2: LPCWSTR,
-    szResult: LPWSTR,
+    hWnd: THWND,
+    hCtrl: THWND,
+    szCommand: TLPCWSTR,
+    szExtra1: TLPCWSTR,
+    szExtra2: TLPCWSTR,
+    szResult: TLPWSTR,
     nBufSize: number,
   ): void {
     throw new Error('Unimplemented');
   }
 
   // TODO: Implement
-  ControlDisable(szTitle: LPCWSTR, szText: LPCWSTR, szControl: LPCWSTR): number {
+  ControlDisable(szTitle: TLPCWSTR, szText: TLPCWSTR, szControl: TLPCWSTR): number {
     throw new Error('Unimplemented');
   }
 
   // TODO: Implement
-  ControlDisableByHandle(hWnd: HWND, hCtrl: HWND): number {
+  ControlDisableByHandle(hWnd: THWND, hCtrl: THWND): number {
     throw new Error('Unimplemented');
   }
 
   // TODO: Implement
-  ControlEnable(szTitle: LPCWSTR, szText: LPCWSTR, szControl: LPCWSTR): number {
+  ControlEnable(szTitle: TLPCWSTR, szText: TLPCWSTR, szControl: TLPCWSTR): number {
     throw new Error('Unimplemented');
   }
 
   // TODO: Implement
-  ControlEnableByHandle(hWnd: HWND, hCtrl: HWND): number {
+  ControlEnableByHandle(hWnd: THWND, hCtrl: THWND): number {
     throw new Error('Unimplemented');
   }
 
   // TODO: Implement
-  ControlFocus(szTitle: LPCWSTR, szText: LPCWSTR, szControl: LPCWSTR): number {
+  ControlFocus(szTitle: TLPCWSTR, szText: TLPCWSTR, szControl: TLPCWSTR): number {
     throw new Error('Unimplemented');
   }
 
   // TODO: Implement
-  ControlFocusByHandle(hWnd: HWND, hCtrl: HWND): number {
+  ControlFocusByHandle(hWnd: THWND, hCtrl: THWND): number {
     throw new Error('Unimplemented');
   }
 
   // TODO: Implement
-  ControlGetFocus(szTitle: LPCWSTR, szText: LPCWSTR, szControlWithFocus: LPWSTR, nBufSize: number): void {
+  ControlGetFocus(szTitle: TLPCWSTR, szText: TLPCWSTR, szControlWithFocus: TLPWSTR, nBufSize: number): void {
     throw new Error('Unimplemented');
   }
 
   // TODO: Implement
-  ControlGetFocusByHandle(hWnd: HWND, szControlWithFocus: LPWSTR, nBufSize: number): void {
+  ControlGetFocusByHandle(hWnd: THWND, szControlWithFocus: TLPWSTR, nBufSize: number): void {
     throw new Error('Unimplemented');
   }
 
   // TODO: Implement
-  ControlGetHandle(hWnd: HWND, szControl: LPCWSTR): HWND {
+  ControlGetHandle(hWnd: THWND, szControl: TLPCWSTR): THWND {
     throw new Error('Unimplemented');
   }
 
   // TODO: Implement
   ControlGetHandleAsText(
-    szTitle: LPCWSTR,
-    /*[in,defaultvalue("")]*/ szText: LPCWSTR,
-    szControl: LPCWSTR,
-    szRetText: LPWSTR,
+    szTitle: TLPCWSTR,
+    /*[in,defaultvalue("")]*/ szText: TLPCWSTR,
+    szControl: TLPCWSTR,
+    szRetText: TLPWSTR,
     nBufSize: number,
   ): void {
     throw new Error('Unimplemented');
   }
 
   // TODO: Implement
-  ControlGetPos(szTitle: LPCWSTR, szText: LPCWSTR, szControl: LPCWSTR, lpRect: LPRECT): number {
+  ControlGetPos(szTitle: TLPCWSTR, szText: TLPCWSTR, szControl: TLPCWSTR, lpRect: TLPRECT): number {
     throw new Error('Unimplemented');
   }
 
   // TODO: Implement
-  ControlGetPosByHandle(hWnd: HWND, hCtrl: HWND, lpRect: LPRECT): number {
+  ControlGetPosByHandle(hWnd: THWND, hCtrl: THWND, lpRect: TLPRECT): number {
     throw new Error('Unimplemented');
   }
 
   // TODO: Implement
   ControlGetText(
-    szTitle: LPCWSTR,
-    szText: LPCWSTR,
-    szControl: LPCWSTR,
-    szControlText: LPWSTR,
+    szTitle: TLPCWSTR,
+    szText: TLPCWSTR,
+    szControl: TLPCWSTR,
+    szControlText: TLPWSTR,
     nBufSize: number,
   ): void {
     throw new Error('Unimplemented');
   }
 
   // TODO: Implement
-  ControlGetTextByHandle(hWnd: HWND, hCtrl: HWND, szControlText: LPWSTR, nBufSize: number): void {
+  ControlGetTextByHandle(hWnd: THWND, hCtrl: THWND, szControlText: TLPWSTR, nBufSize: number): void {
     throw new Error('Unimplemented');
   }
 
   // TODO: Implement
-  ControlHide(szTitle: LPCWSTR, szText: LPCWSTR, szControl: LPCWSTR): number {
+  ControlHide(szTitle: TLPCWSTR, szText: TLPCWSTR, szControl: TLPCWSTR): number {
     throw new Error('Unimplemented');
   }
 
   // TODO: Implement
-  ControlHideByHandle(hWnd: HWND, hCtrl: HWND): number {
+  ControlHideByHandle(hWnd: THWND, hCtrl: THWND): number {
     throw new Error('Unimplemented');
   }
 
   // TODO: Implement
   ControlMove(
-    szTitle: LPCWSTR,
-    szText: LPCWSTR,
-    szControl: LPCWSTR,
+    szTitle: TLPCWSTR,
+    szText: TLPCWSTR,
+    szControl: TLPCWSTR,
     nX: number,
     nY: number,
     nWidth: number = -1,
@@ -234,8 +235,8 @@ export class AutoIt extends Library {
 
   // TODO: Implement
   ControlMoveByHandle(
-    hWnd: HWND,
-    hCtrl: HWND,
+    hWnd: THWND,
+    hCtrl: THWND,
     nX: number,
     nY: number,
     nWidth: number = -1,
@@ -246,49 +247,49 @@ export class AutoIt extends Library {
 
   // TODO: Implement
   ControlSend(
-    szTitle: LPCWSTR,
-    szText: LPCWSTR,
-    szControl: LPCWSTR,
-    szSendText: LPCWSTR,
+    szTitle: TLPCWSTR,
+    szText: TLPCWSTR,
+    szControl: TLPCWSTR,
+    szSendText: TLPCWSTR,
     nMode: number = 0,
   ): number {
     throw new Error('Unimplemented');
   }
 
   // TODO: Implement
-  ControlSendByHandle(hWnd: HWND, hCtrl: HWND, szSendText: LPCWSTR, nMode: number = 0): number {
+  ControlSendByHandle(hWnd: THWND, hCtrl: THWND, szSendText: TLPCWSTR, nMode: number = 0): number {
     throw new Error('Unimplemented');
   }
 
   // TODO: Implement
-  ControlSetText(szTitle: LPCWSTR, szText: LPCWSTR, szControl: LPCWSTR, szControlText: LPCWSTR): number {
+  ControlSetText(szTitle: TLPCWSTR, szText: TLPCWSTR, szControl: TLPCWSTR, szControlText: TLPCWSTR): number {
     throw new Error('Unimplemented');
   }
 
   // TODO: Implement
-  ControlSetTextByHandle(hWnd: HWND, hCtrl: HWND, szControlText: LPCWSTR): number {
+  ControlSetTextByHandle(hWnd: THWND, hCtrl: THWND, szControlText: TLPCWSTR): number {
     throw new Error('Unimplemented');
   }
 
   // TODO: Implement
-  ControlShow(szTitle: LPCWSTR, szText: LPCWSTR, szControl: LPCWSTR): number {
+  ControlShow(szTitle: TLPCWSTR, szText: TLPCWSTR, szControl: TLPCWSTR): number {
     throw new Error('Unimplemented');
   }
 
   // TODO: Implement
-  ControlShowByHandle(hWnd: HWND, hCtrl: HWND): number {
+  ControlShowByHandle(hWnd: THWND, hCtrl: THWND): number {
     throw new Error('Unimplemented');
   }
 
   // TODO: Implement
   ControlTreeView(
-    szTitle: LPCWSTR,
-    szText: LPCWSTR,
-    szControl: LPCWSTR,
-    szCommand: LPCWSTR,
-    szExtra1: LPCWSTR,
-    szExtra2: LPCWSTR,
-    szResult: LPWSTR,
+    szTitle: TLPCWSTR,
+    szText: TLPCWSTR,
+    szControl: TLPCWSTR,
+    szCommand: TLPCWSTR,
+    szExtra1: TLPCWSTR,
+    szExtra2: TLPCWSTR,
+    szResult: TLPWSTR,
     nBufSize: number,
   ): void {
     throw new Error('Unimplemented');
@@ -296,12 +297,12 @@ export class AutoIt extends Library {
 
   // TODO: Implement
   ControlTreeViewByHandle(
-    hWnd: HWND,
-    hCtrl: HWND,
-    szCommand: LPCWSTR,
-    szExtra1: LPCWSTR,
-    szExtra2: LPCWSTR,
-    szResult: LPWSTR,
+    hWnd: THWND,
+    hCtrl: THWND,
+    szCommand: TLPCWSTR,
+    szExtra1: TLPCWSTR,
+    szExtra2: TLPCWSTR,
+    szResult: TLPWSTR,
     nBufSize: number,
   ): void {
     throw new Error('Unimplemented');
@@ -309,24 +310,24 @@ export class AutoIt extends Library {
 
   // TODO: Implement
   DriveMapAdd(
-    szDevice: LPCWSTR,
-    szShare: LPCWSTR,
+    szDevice: TLPCWSTR,
+    szShare: TLPCWSTR,
     nFlags: number,
-    /*[in,defaultvalue("")]*/ szUser: LPCWSTR = '',
-    /*[in,defaultvalue("")]*/ szPwd: LPCWSTR = '',
-    szResult: LPWSTR,
+    /*[in,defaultvalue("")]*/ szUser: TLPCWSTR = '',
+    /*[in,defaultvalue("")]*/ szPwd: TLPCWSTR = '',
+    szResult: TLPWSTR,
     nBufSize: number,
   ): void {
     throw new Error('Unimplemented');
   }
 
   // TODO: Implement
-  DriveMapDel(szDevice: LPCWSTR): number {
+  DriveMapDel(szDevice: TLPCWSTR): number {
     throw new Error('Unimplemented');
   }
 
   // TODO: Implement
-  DriveMapGet(szDevice: LPCWSTR, szMapping: LPWSTR, nBufSize: number): void {
+  DriveMapGet(szDevice: TLPCWSTR, szMapping: TLPWSTR, nBufSize: number): void {
     throw new Error('Unimplemented');
   }
 
@@ -337,7 +338,7 @@ export class AutoIt extends Library {
 
   // TODO: Implement
   MouseClick(
-    /*[in,defaultvalue("LEFT")]*/ szButton: LPCWSTR,
+    /*[in,defaultvalue("LEFT")]*/ szButton: TLPCWSTR,
     nX: number = AU3_INTDEFAULT,
     nY: number = AU3_INTDEFAULT,
     nClicks: number = 1,
@@ -348,7 +349,7 @@ export class AutoIt extends Library {
 
   // TODO: Implement
   MouseClickDrag(
-    szButton: LPCWSTR,
+    szButton: TLPCWSTR,
     nX1: number,
     nY1: number,
     nX2: number,
@@ -359,7 +360,7 @@ export class AutoIt extends Library {
   }
 
   // TODO: Implement
-  MouseDown(/*[in,defaultvalue("LEFT")]*/ szButton: LPCWSTR): void {
+  MouseDown(/*[in,defaultvalue("LEFT")]*/ szButton: TLPCWSTR): void {
     throw new Error('Unimplemented');
   }
 
@@ -369,7 +370,7 @@ export class AutoIt extends Library {
   }
 
   // TODO: Implement
-  MouseGetPos(lpPoint: LPPOINT): void {
+  MouseGetPos(lpPoint: TLPPOINT): void {
     throw new Error('Unimplemented');
   }
 
@@ -379,22 +380,22 @@ export class AutoIt extends Library {
   }
 
   // TODO: Implement
-  MouseUp(/*[in,defaultvalue("LEFT")]*/ szButton: LPCWSTR): void {
+  MouseUp(/*[in,defaultvalue("LEFT")]*/ szButton: TLPCWSTR): void {
     throw new Error('Unimplemented');
   }
 
   // TODO: Implement
-  MouseWheel(szDirection: LPCWSTR, nClicks: number): void {
+  MouseWheel(szDirection: TLPCWSTR, nClicks: number): void {
     throw new Error('Unimplemented');
   }
 
   // TODO: Implement
-  Opt(szOption: LPCWSTR, nValue: number): number {
+  Opt(szOption: TLPCWSTR, nValue: number): number {
     throw new Error('Unimplemented');
   }
 
   // TODO: Implement
-  PixelChecksum(lpRect: LPRECT, nStep: number = 1): number {
+  PixelChecksum(lpRect: TLPRECT, nStep: number = 1): number {
     throw new Error('Unimplemented');
   }
 
@@ -405,44 +406,44 @@ export class AutoIt extends Library {
 
   // TODO: Implement
   PixelSearch(
-    lpRect: LPRECT,
+    lpRect: TLPRECT,
     nCol: number,
     /*default 0*/ nVar: number,
     /*default 1*/ nStep: number,
-    pPointResult: LPPOINT,
+    pPointResult: TLPPOINT,
   ): void {
     throw new Error('Unimplemented');
   }
 
   // TODO: Implement
-  ProcessClose(szProcess: LPCWSTR): number {
+  ProcessClose(szProcess: TLPCWSTR): number {
     throw new Error('Unimplemented');
   }
 
   // TODO: Implement
-  ProcessExists(szProcess: LPCWSTR): number {
+  ProcessExists(szProcess: TLPCWSTR): number {
     throw new Error('Unimplemented');
   }
 
   // TODO: Implement
-  ProcessSetPriority(szProcess: LPCWSTR, nPriority: number): number {
+  ProcessSetPriority(szProcess: TLPCWSTR, nPriority: number): number {
     throw new Error('Unimplemented');
   }
 
   // TODO: Implement
-  ProcessWait(szProcess: LPCWSTR, nTimeout: number = 0): number {
+  ProcessWait(szProcess: TLPCWSTR, nTimeout: number = 0): number {
     throw new Error('Unimplemented');
   }
 
   // TODO: Implement
-  ProcessWaitClose(szProcess: LPCWSTR, nTimeout: number = 0): number {
+  ProcessWaitClose(szProcess: TLPCWSTR, nTimeout: number = 0): number {
     throw new Error('Unimplemented');
   }
 
   // TODO: Implement
   Run(
-    szProgram: LPCWSTR,
-    /*[in,defaultvalue("")]*/ szDir: LPCWSTR,
+    szProgram: TLPCWSTR,
+    /*[in,defaultvalue("")]*/ szDir: TLPCWSTR,
     nShowFlag: number = SW_SHOWNORMAL,
   ): number {
     throw new Error('Unimplemented');
@@ -450,8 +451,8 @@ export class AutoIt extends Library {
 
   // TODO: Implement
   RunWait(
-    szProgram: LPCWSTR,
-    /*[in,defaultvalue("")]*/ szDir: LPCWSTR,
+    szProgram: TLPCWSTR,
+    /*[in,defaultvalue("")]*/ szDir: TLPCWSTR,
     nShowFlag: number = SW_SHOWNORMAL,
   ): number {
     throw new Error('Unimplemented');
@@ -459,12 +460,12 @@ export class AutoIt extends Library {
 
   // TODO: Implement
   RunAs(
-    szUser: LPCWSTR,
-    szDomain: LPCWSTR,
-    szPassword: LPCWSTR,
+    szUser: TLPCWSTR,
+    szDomain: TLPCWSTR,
+    szPassword: TLPCWSTR,
     nLogonFlag: number,
-    szProgram: LPCWSTR,
-    /*[in,defaultvalue("")]*/ szDir: LPCWSTR,
+    szProgram: TLPCWSTR,
+    /*[in,defaultvalue("")]*/ szDir: TLPCWSTR,
     nShowFlag: number = SW_SHOWNORMAL,
   ): number {
     throw new Error('Unimplemented');
@@ -472,19 +473,19 @@ export class AutoIt extends Library {
 
   // TODO: Implement
   RunAsWait(
-    szUser: LPCWSTR,
-    szDomain: LPCWSTR,
-    szPassword: LPCWSTR,
+    szUser: TLPCWSTR,
+    szDomain: TLPCWSTR,
+    szPassword: TLPCWSTR,
     nLogonFlag: number,
-    szProgram: LPCWSTR,
-    /*[in,defaultvalue("")]*/ szDir: LPCWSTR,
+    szProgram: TLPCWSTR,
+    /*[in,defaultvalue("")]*/ szDir: TLPCWSTR,
     nShowFlag: number = SW_SHOWNORMAL,
   ): number {
     throw new Error('Unimplemented');
   }
 
   // TODO: Implement
-  Send(szSendText: LPCWSTR, nMode: number = 0): void {
+  Send(szSendText: TLPCWSTR, nMode: number = 0): void {
     throw new Error('Unimplemented');
   }
 
@@ -500,10 +501,10 @@ export class AutoIt extends Library {
 
   // TODO: Implement
   StatusbarGetText(
-    szTitle: LPCWSTR,
-    /*[in,defaultvalue("")]*/ szText: LPCWSTR,
+    szTitle: TLPCWSTR,
+    /*[in,defaultvalue("")]*/ szText: TLPCWSTR,
     /*[in,defaultvalue(1)]*/ nPart: number,
-    szStatusText: LPWSTR,
+    szStatusText: TLPWSTR,
     nBufSize: number,
   ): number {
     throw new Error('Unimplemented');
@@ -511,20 +512,20 @@ export class AutoIt extends Library {
 
   // TODO: Implement
   StatusbarGetTextByHandle(
-    hWnd: HWND,
+    hWnd: THWND,
     /*[in,defaultvalue(1)]*/ nPart: number,
-    szStatusText: LPWSTR,
+    szStatusText: TLPWSTR,
     nBufSize: number,
   ): number {
     throw new Error('Unimplemented');
   }
 
   // TODO: Implement
-  ToolTip(szTip: LPCWSTR, nX: number = AU3_INTDEFAULT, nY: number = AU3_INTDEFAULT): void {
+  ToolTip(szTip: TLPCWSTR, nX: number = AU3_INTDEFAULT, nY: number = AU3_INTDEFAULT): void {
     throw new Error('Unimplemented');
   }
 
-  WinActivate(szTitle: LPCWSTR, szText: LPCWSTR = ''): number {
+  WinActivate(szTitle: TLPCWSTR, szText: TLPCWSTR = ''): number {
     return this.call(
       'AU3_WinActivate',
       DataType.Int,
@@ -533,11 +534,11 @@ export class AutoIt extends Library {
     );
   }
 
-  WinActivateByHandle(hWnd: HWND): number {
+  WinActivateByHandle(hWnd: THWND): number {
     return this.call('AU3_WinActivateByHandle', DataType.Int32, [DataType.UInt64], [hWnd]);
   }
 
-  WinActive(szTitle: LPCWSTR, szText: LPCWSTR = ''): number {
+  WinActive(szTitle: TLPCWSTR, szText: TLPCWSTR = ''): number {
     return this.call(
       'AU3_WinActive',
       DataType.Int,
@@ -546,11 +547,11 @@ export class AutoIt extends Library {
     );
   }
 
-  WinActiveByHandle(hWnd: HWND): number {
+  WinActiveByHandle(hWnd: THWND): number {
     return this.call('AU3_WinActiveByHandle', DataType.Int32, [DataType.UInt64], [hWnd]);
   }
 
-  WinClose(szTitle: LPCWSTR, szText: LPCWSTR = ''): number {
+  WinClose(szTitle: TLPCWSTR, szText: TLPCWSTR = ''): number {
     return this.call(
       'AU3_WinClose',
       DataType.Int32,
@@ -559,11 +560,11 @@ export class AutoIt extends Library {
     );
   }
 
-  WinCloseByHandle(hWnd: HWND): number {
+  WinCloseByHandle(hWnd: THWND): number {
     return this.call('AU3_WinCloseByHandle', DataType.Int32, [DataType.UInt64], [hWnd]);
   }
 
-  WinExists(szTitle: LPCWSTR, szText: LPCWSTR = ''): boolean {
+  WinExists(szTitle: TLPCWSTR, szText: TLPCWSTR = ''): boolean {
     const result = this.call(
       'AU3_WinExists',
       DataType.Int32,
@@ -574,18 +575,18 @@ export class AutoIt extends Library {
     return result === 1;
   }
 
-  WinExistsByHandle(hWnd: HWND): boolean {
+  WinExistsByHandle(hWnd: THWND): boolean {
     const result = this.call('AU3_WinExistsByHandle', DataType.Int32, [DataType.UInt64], [hWnd]);
 
     return result === 1;
   }
 
   // TODO: Implement
-  WinGetCaretPos(lpPoint: LPPOINT): number {
+  WinGetCaretPos(lpPoint: TLPPOINT): number {
     throw new Error('Unimplemented');
   }
 
-  WinGetClassList(szTitle: LPCWSTR, szText: LPCWSTR = ''): string {
+  WinGetClassList(szTitle: TLPCWSTR, szText: TLPCWSTR = ''): string {
     const outputBuffer = Buffer.alloc(1024);
 
     this.call(
@@ -599,21 +600,21 @@ export class AutoIt extends Library {
   }
 
   // TODO: Implement
-  WinGetClassListByHandle(hWnd: HWND, szRetText: LPWSTR, nBufSize: number): void {
+  WinGetClassListByHandle(hWnd: THWND, szRetText: TLPWSTR, nBufSize: number): void {
     throw new Error('Unimplemented');
   }
 
   // TODO: Implement
-  WinGetClientSize(szTitle: LPCWSTR, /*[in,defaultvalue("")]*/ szText: LPCWSTR, lpRect: LPRECT): number {
+  WinGetClientSize(szTitle: TLPCWSTR, /*[in,defaultvalue("")]*/ szText: TLPCWSTR, lpRect: TLPRECT): number {
     throw new Error('Unimplemented');
   }
 
   // TODO: Implement
-  WinGetClientSizeByHandle(hWnd: HWND, lpRect: LPRECT): number {
+  WinGetClientSizeByHandle(hWnd: THWND, lpRect: TLPRECT): number {
     throw new Error('Unimplemented');
   }
 
-  WinGetHandle(szTitle: LPCWSTR, szText: LPCWSTR = ''): HWND {
+  WinGetHandle(szTitle: TLPCWSTR, szText: TLPCWSTR = ''): THWND {
     return this.call(
       'AU3_WinGetHandle',
       DataType.UInt64,
@@ -624,111 +625,111 @@ export class AutoIt extends Library {
 
   // TODO: Implement
   WinGetHandleAsText(
-    szTitle: LPCWSTR,
-    /*[in,defaultvalue("")]*/ szText: LPCWSTR,
-    szRetText: LPWSTR,
+    szTitle: TLPCWSTR,
+    /*[in,defaultvalue("")]*/ szText: TLPCWSTR,
+    szRetText: TLPWSTR,
     nBufSize: number,
   ): void {
     throw new Error('Unimplemented');
   }
 
   // TODO: Implement
-  WinGetPos(szTitle: LPCWSTR, /*[in,defaultvalue("")]*/ szText: LPCWSTR, lpRect: LPRECT): number {
+  WinGetPos(szTitle: TLPCWSTR, /*[in,defaultvalue("")]*/ szText: TLPCWSTR, lpRect: TLPRECT): number {
     throw new Error('Unimplemented');
   }
 
   // TODO: Implement
-  WinGetPosByHandle(hWnd: HWND, lpRect: LPRECT): number {
+  WinGetPosByHandle(hWnd: THWND, lpRect: TLPRECT): number {
     throw new Error('Unimplemented');
   }
 
   // TODO: Implement
-  WinGetProcess(szTitle: LPCWSTR, /*[in,defaultvalue("")]*/ szText: LPCWSTR): DWORD {
+  WinGetProcess(szTitle: TLPCWSTR, /*[in,defaultvalue("")]*/ szText: TLPCWSTR): TDWORD {
     throw new Error('Unimplemented');
   }
 
   // TODO: Implement
-  WinGetProcessByHandle(hWnd: HWND): DWORD {
+  WinGetProcessByHandle(hWnd: THWND): TDWORD {
     throw new Error('Unimplemented');
   }
 
   // TODO: Implement
-  WinGetState(szTitle: LPCWSTR, /*[in,defaultvalue("")]*/ szText: LPCWSTR): number {
+  WinGetState(szTitle: TLPCWSTR, /*[in,defaultvalue("")]*/ szText: TLPCWSTR): number {
     throw new Error('Unimplemented');
   }
 
   // TODO: Implement
-  WinGetStateByHandle(hWnd: HWND): number {
+  WinGetStateByHandle(hWnd: THWND): number {
     throw new Error('Unimplemented');
   }
 
   // TODO: Implement
   WinGetText(
-    szTitle: LPCWSTR,
-    /*[in,defaultvalue("")]*/ szText: LPCWSTR,
-    szRetText: LPWSTR,
+    szTitle: TLPCWSTR,
+    /*[in,defaultvalue("")]*/ szText: TLPCWSTR,
+    szRetText: TLPWSTR,
     nBufSize: number,
   ): void {
     throw new Error('Unimplemented');
   }
 
   // TODO: Implement
-  WinGetTextByHandle(hWnd: HWND, szRetText: LPWSTR, nBufSize: number): void {
+  WinGetTextByHandle(hWnd: THWND, szRetText: TLPWSTR, nBufSize: number): void {
     throw new Error('Unimplemented');
   }
 
   // TODO: Implement
   WinGetTitle(
-    szTitle: LPCWSTR,
-    /*[in,defaultvalue("")]*/ szText: LPCWSTR,
-    szRetText: LPWSTR,
+    szTitle: TLPCWSTR,
+    /*[in,defaultvalue("")]*/ szText: TLPCWSTR,
+    szRetText: TLPWSTR,
     nBufSize: number,
   ): void {
     throw new Error('Unimplemented');
   }
 
   // TODO: Implement
-  WinGetTitleByHandle(hWnd: HWND, szRetText: LPWSTR, nBufSize: number): void {
+  WinGetTitleByHandle(hWnd: THWND, szRetText: TLPWSTR, nBufSize: number): void {
     throw new Error('Unimplemented');
   }
 
   // TODO: Implement
-  WinKill(szTitle: LPCWSTR, /*[in,defaultvalue("")]*/ szText: LPCWSTR): number {
+  WinKill(szTitle: TLPCWSTR, /*[in,defaultvalue("")]*/ szText: TLPCWSTR): number {
     throw new Error('Unimplemented');
   }
 
   // TODO: Implement
-  WinKillByHandle(hWnd: HWND): number {
+  WinKillByHandle(hWnd: THWND): number {
     throw new Error('Unimplemented');
   }
 
   // TODO: Implement
   WinMenuSelectItem(
-    szTitle: LPCWSTR,
-    /*[in,defaultvalue("")]*/ szText: LPCWSTR,
-    szItem1: LPCWSTR,
-    szItem2: LPCWSTR,
-    szItem3: LPCWSTR,
-    szItem4: LPCWSTR,
-    szItem5: LPCWSTR,
-    szItem6: LPCWSTR,
-    szItem7: LPCWSTR,
-    szItem8: LPCWSTR,
+    szTitle: TLPCWSTR,
+    /*[in,defaultvalue("")]*/ szText: TLPCWSTR,
+    szItem1: TLPCWSTR,
+    szItem2: TLPCWSTR,
+    szItem3: TLPCWSTR,
+    szItem4: TLPCWSTR,
+    szItem5: TLPCWSTR,
+    szItem6: TLPCWSTR,
+    szItem7: TLPCWSTR,
+    szItem8: TLPCWSTR,
   ): number {
     throw new Error('Unimplemented');
   }
 
   // TODO: Implement
   WinMenuSelectItemByHandle(
-    hWnd: HWND,
-    szItem1: LPCWSTR,
-    szItem2: LPCWSTR,
-    szItem3: LPCWSTR,
-    szItem4: LPCWSTR,
-    szItem5: LPCWSTR,
-    szItem6: LPCWSTR,
-    szItem7: LPCWSTR,
-    szItem8: LPCWSTR,
+    hWnd: THWND,
+    szItem1: TLPCWSTR,
+    szItem2: TLPCWSTR,
+    szItem3: TLPCWSTR,
+    szItem4: TLPCWSTR,
+    szItem5: TLPCWSTR,
+    szItem6: TLPCWSTR,
+    szItem7: TLPCWSTR,
+    szItem8: TLPCWSTR,
   ): number {
     throw new Error('Unimplemented');
   }
@@ -745,8 +746,8 @@ export class AutoIt extends Library {
 
   // TODO: Implement
   WinMove(
-    szTitle: LPCWSTR,
-    /*[in,defaultvalue("")]*/ szText: LPCWSTR,
+    szTitle: TLPCWSTR,
+    /*[in,defaultvalue("")]*/ szText: TLPCWSTR,
     nX: number,
     nY: number,
     nWidth: number = -1,
@@ -756,87 +757,87 @@ export class AutoIt extends Library {
   }
 
   // TODO: Implement
-  WinMoveByHandle(hWnd: HWND, nX: number, nY: number, nWidth: number = -1, nHeight: number = -1): number {
+  WinMoveByHandle(hWnd: THWND, nX: number, nY: number, nWidth: number = -1, nHeight: number = -1): number {
     throw new Error('Unimplemented');
   }
 
   // TODO: Implement
-  WinSetOnTop(szTitle: LPCWSTR, /*[in,defaultvalue("")]*/ szText: LPCWSTR, nFlag: number): number {
+  WinSetOnTop(szTitle: TLPCWSTR, /*[in,defaultvalue("")]*/ szText: TLPCWSTR, nFlag: number): number {
     throw new Error('Unimplemented');
   }
 
   // TODO: Implement
-  WinSetOnTopByHandle(hWnd: HWND, nFlag: number): number {
+  WinSetOnTopByHandle(hWnd: THWND, nFlag: number): number {
     throw new Error('Unimplemented');
   }
 
   // TODO: Implement
-  WinSetState(szTitle: LPCWSTR, /*[in,defaultvalue("")]*/ szText: LPCWSTR, nFlags: number): number {
+  WinSetState(szTitle: TLPCWSTR, /*[in,defaultvalue("")]*/ szText: TLPCWSTR, nFlags: number): number {
     throw new Error('Unimplemented');
   }
 
   // TODO: Implement
-  WinSetStateByHandle(hWnd: HWND, nFlags: number): number {
+  WinSetStateByHandle(hWnd: THWND, nFlags: number): number {
     throw new Error('Unimplemented');
   }
 
   // TODO: Implement
-  WinSetTitle(szTitle: LPCWSTR, /*[in,defaultvalue("")]*/ szText: LPCWSTR, szNewTitle: LPCWSTR): number {
+  WinSetTitle(szTitle: TLPCWSTR, /*[in,defaultvalue("")]*/ szText: TLPCWSTR, szNewTitle: TLPCWSTR): number {
     throw new Error('Unimplemented');
   }
 
   // TODO: Implement
-  WinSetTitleByHandle(hWnd: HWND, szNewTitle: LPCWSTR): number {
+  WinSetTitleByHandle(hWnd: THWND, szNewTitle: TLPCWSTR): number {
     throw new Error('Unimplemented');
   }
 
   // TODO: Implement
-  WinSetTrans(szTitle: LPCWSTR, /*[in,defaultvalue("")]*/ szText: LPCWSTR, nTrans: number): number {
+  WinSetTrans(szTitle: TLPCWSTR, /*[in,defaultvalue("")]*/ szText: TLPCWSTR, nTrans: number): number {
     throw new Error('Unimplemented');
   }
 
   // TODO: Implement
-  WinSetTransByHandle(hWnd: HWND, nTrans: number): number {
+  WinSetTransByHandle(hWnd: THWND, nTrans: number): number {
     throw new Error('Unimplemented');
   }
 
   // TODO: Implement
-  WinWait(szTitle: LPCWSTR, /*[in,defaultvalue("")]*/ szText: LPCWSTR, nTimeout: number = 0): number {
+  WinWait(szTitle: TLPCWSTR, /*[in,defaultvalue("")]*/ szText: TLPCWSTR, nTimeout: number = 0): number {
     throw new Error('Unimplemented');
   }
 
   // TODO: Implement
-  WinWaitByHandle(hWnd: HWND, nTimeout: number): number {
+  WinWaitByHandle(hWnd: THWND, nTimeout: number): number {
     throw new Error('Unimplemented');
   }
 
   // TODO: Implement
-  WinWaitActive(szTitle: LPCWSTR, /*[in,defaultvalue("")]*/ szText: LPCWSTR, nTimeout: number = 0): number {
+  WinWaitActive(szTitle: TLPCWSTR, /*[in,defaultvalue("")]*/ szText: TLPCWSTR, nTimeout: number = 0): number {
     throw new Error('Unimplemented');
   }
 
   // TODO: Implement
-  WinWaitActiveByHandle(hWnd: HWND, nTimeout: number): number {
+  WinWaitActiveByHandle(hWnd: THWND, nTimeout: number): number {
     throw new Error('Unimplemented');
   }
 
   // TODO: Implement
-  WinWaitClose(szTitle: LPCWSTR, /*[in,defaultvalue("")]*/ szText: LPCWSTR, nTimeout: number = 0): number {
+  WinWaitClose(szTitle: TLPCWSTR, /*[in,defaultvalue("")]*/ szText: TLPCWSTR, nTimeout: number = 0): number {
     throw new Error('Unimplemented');
   }
 
   // TODO: Implement
-  WinWaitCloseByHandle(hWnd: HWND, nTimeout: number): number {
+  WinWaitCloseByHandle(hWnd: THWND, nTimeout: number): number {
     throw new Error('Unimplemented');
   }
 
   // TODO: Implement
-  WinWaitNotActive(szTitle: LPCWSTR, /*[in,defaultvalue("")]*/ szText: LPCWSTR, nTimeout: number): number {
+  WinWaitNotActive(szTitle: TLPCWSTR, /*[in,defaultvalue("")]*/ szText: TLPCWSTR, nTimeout: number): number {
     throw new Error('Unimplemented');
   }
 
   // TODO: Implement
-  WinWaitNotActiveByHandle(hWnd: HWND, nTimeout: number = 0): number {
+  WinWaitNotActiveByHandle(hWnd: THWND, nTimeout: number = 0): number {
     throw new Error('Unimplemented');
   }
 }
