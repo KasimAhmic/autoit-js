@@ -80,6 +80,7 @@ async function main() {
 
   logger.info('WinGetPos', au3.WinGetPos('This PC'));
   logger.info('WinGetPosByHandle', au3.WinGetPosByHandle(handle));
+  logger.info('WinGetProcess', au3.WinGetProcess('Untitled - Notepad'));
 
   au3.unload();
 }

@@ -777,9 +777,13 @@ export class AutoIt {
     };
   }
 
-  // TODO: Implement
   WinGetProcess(szTitle: TLPCWSTR, szText: TLPCWSTR = ''): TDWORD {
-    throw new Error('Unimplemented');
+    return this.invoke(
+      'AU3_WinGetProcess',
+      DataType.Int32,
+      [DataType.String16, DataType.String16],
+      [szTitle, szText],
+    );
   }
 
   // TODO: Implement
