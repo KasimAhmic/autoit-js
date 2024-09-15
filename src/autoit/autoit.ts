@@ -239,9 +239,13 @@ export class AutoIt {
     throw new Error('Unimplemented');
   }
 
-  // TODO: Implement
   ControlGetHandle(hWnd: THWND, szControl: TLPCWSTR): THWND {
-    throw new Error('Unimplemented');
+    return this.invoke(
+      'AU3_ControlGetHandle',
+      DataType.UInt64,
+      [DataType.UInt64, DataType.String16],
+      [hWnd, szControl],
+    );
   }
 
   // TODO: Implement
