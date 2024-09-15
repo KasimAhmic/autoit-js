@@ -764,9 +764,17 @@ export class AutoIt {
     };
   }
 
-  // TODO: Implement
-  WinGetPosByHandle(hWnd: THWND, lpRect: TLPRECT): number {
-    throw new Error('Unimplemented');
+  WinGetPosByHandle(hWnd: THWND): WinPositon {
+    const outputBuffer = Buffer.alloc(koffi.sizeof(LRECT));
+
+    this.invoke('AU3_WinGetPosByHandle', DataType.Void, [DataType.UInt64, LPRECT], [hWnd, outputBuffer]);
+
+    return {
+      x: outputBuffer.readInt32LE(0),
+      y: outputBuffer.readInt32LE(4),
+      width: outputBuffer.readInt32LE(8),
+      height: outputBuffer.readInt32LE(12),
+    };
   }
 
   // TODO: Implement

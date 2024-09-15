@@ -79,6 +79,7 @@ async function main() {
   logger.info('WinGetClientSizeByHandle', au3.WinGetClientSizeByHandle(handle));
 
   logger.info('WinGetPos', au3.WinGetPos('This PC'));
+  logger.info('WinGetPosByHandle', au3.WinGetPosByHandle(handle));
 
   au3.unload();
 }
