@@ -554,9 +554,8 @@ export class AutoIt {
     throw new Error('Unimplemented');
   }
 
-  // TODO: Implement
   ProcessExists(szProcess: TLPCWSTR): number {
-    throw new Error('Unimplemented');
+    return this.invoke('AU3_ProcessExists', DataType.Int32, [DataType.String16], [szProcess]);
   }
 
   // TODO: Implement
