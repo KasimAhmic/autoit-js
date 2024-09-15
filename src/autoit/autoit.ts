@@ -814,9 +814,17 @@ export class AutoIt {
     };
   }
 
-  // TODO: Implement
-  WinGetStateByHandle(hWnd: THWND): number {
-    throw new Error('Unimplemented');
+  WinGetStateByHandle(hWnd: THWND): WindowState {
+    const state = this.invoke('AU3_WinGetStateByHandle', DataType.Int32, [DataType.UInt64], [hWnd]);
+
+    return {
+      exists: (state & WinState.Exists) === WinState.Exists,
+      visible: (state & WinState.Visible) === WinState.Visible,
+      enabled: (state & WinState.Enabled) === WinState.Enabled,
+      active: (state & WinState.Active) === WinState.Active,
+      minimized: (state & WinState.Minimized) === WinState.Minimized,
+      maximized: (state & WinState.Maximized) === WinState.Maximized,
+    };
   }
 
   WinGetText(szTitle: TLPCWSTR, szText: TLPCWSTR = ''): string {
