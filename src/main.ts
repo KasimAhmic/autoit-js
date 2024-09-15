@@ -37,6 +37,10 @@ async function main() {
   logger.info('IsAdmin', au3.IsAdmin());
 
   logger.info('MouseGetPos', au3.MouseGetPos());
+  logger.info('MouseMove', au3.MouseMove(100, 100));
+  logger.info('MouseGetPos', au3.MouseGetPos());
+  logger.info('MouseMove', au3.MouseMove(200, 200));
+  logger.info('MouseGetPos', au3.MouseGetPos());
 
   au3.unload();
 }

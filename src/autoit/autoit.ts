@@ -436,9 +436,13 @@ export class AutoIt {
     return { x, y };
   }
 
-  // TODO: Implement
   MouseMove(nX: number, nY: number, nSpeed: number = -1): number {
-    throw new Error('Unimplemented');
+    return this.invoke(
+      'AU3_MouseMove',
+      DataType.Int32,
+      [DataType.Int32, DataType.Int32, DataType.Int32],
+      [nX, nY, nSpeed],
+    );
   }
 
   // TODO: Implement
