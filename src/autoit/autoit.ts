@@ -448,9 +448,8 @@ export class AutoIt {
     this.invoke('AU3_MouseUp', DataType.Void, [DataType.String16], [szButton]);
   }
 
-  // TODO: Implement
   MouseWheel(szDirection: TLPCWSTR, nClicks: number): void {
-    throw new Error('Unimplemented');
+    this.invoke('AU3_MouseWheel', DataType.Void, [DataType.String16, DataType.Int32], [szDirection, nClicks]);
   }
 
   // TODO: Implement
@@ -887,4 +886,9 @@ export enum MouseButton {
   Left = 'LEFT',
   Middle = 'MIDDLE',
   Right = 'RIGHT',
+}
+
+export enum MouseWheelDirection {
+  Down = 'DOWN',
+  Up = 'UP',
 }
