@@ -571,9 +571,13 @@ export class AutoIt {
     );
   }
 
-  // TODO: Implement
   ProcessWaitClose(szProcess: TLPCWSTR, nTimeout: number = 0): number {
-    throw new Error('Unimplemented');
+    return this.invoke(
+      'AU3_ProcessWaitClose',
+      DataType.Int32,
+      [DataType.String16, DataType.Int32],
+      [szProcess, nTimeout],
+    );
   }
 
   Run(szProgram: TLPCWSTR, szDir: TLPCWSTR = '', nShowFlag: number = SW_SHOWNORMAL): number {
