@@ -427,7 +427,6 @@ export class AutoIt {
     );
   }
 
-  // TODO: Implement
   ControlMoveByHandle(
     hWnd: THWND,
     hCtrl: THWND,
@@ -436,7 +435,12 @@ export class AutoIt {
     nWidth: number = -1,
     nHeight: number = -1,
   ): number {
-    throw new Error('Unimplemented');
+    return this.invoke(
+      'AU3_ControlMoveByHandle',
+      DataType.Int32,
+      [DataType.UInt64, DataType.UInt64, DataType.Int32, DataType.Int32, DataType.Int32, DataType.Int32],
+      [hWnd, hCtrl, nX, nY, nWidth, nHeight],
+    );
   }
 
   // TODO: Implement
