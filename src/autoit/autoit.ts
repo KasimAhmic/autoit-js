@@ -467,9 +467,13 @@ export class AutoIt {
     );
   }
 
-  // TODO: Implement
   ControlSetText(szTitle: TLPCWSTR, szText: TLPCWSTR, szControl: TLPCWSTR, szControlText: TLPCWSTR): number {
-    throw new Error('Unimplemented');
+    return this.invoke(
+      'AU3_ControlSetText',
+      DataType.Int32,
+      [DataType.String16, DataType.String16, DataType.String16, DataType.String16],
+      [szTitle, szText, szControl, szControlText],
+    );
   }
 
   // TODO: Implement
