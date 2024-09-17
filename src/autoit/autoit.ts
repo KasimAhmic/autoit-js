@@ -371,9 +371,17 @@ export class AutoIt {
     return outputBuffer.toString('utf16le');
   }
 
-  // TODO: Implement
-  ControlGetTextByHandle(hWnd: THWND, hCtrl: THWND, szControlText: TLPWSTR, nBufSize: number): void {
-    throw new Error('Unimplemented');
+  ControlGetTextByHandle(hWnd: THWND, hCtrl: THWND): string {
+    const outputBuffer = Buffer.alloc(1024);
+
+    this.invoke(
+      'AU3_ControlGetTextByHandle',
+      DataType.Void,
+      [DataType.UInt64, DataType.UInt64, LPWSTR, DataType.Int32],
+      [hWnd, hCtrl, outputBuffer, outputBuffer.length],
+    );
+
+    return outputBuffer.toString('utf16le');
   }
 
   // TODO: Implement
