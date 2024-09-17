@@ -503,7 +503,7 @@ export class AutoIt {
     );
   }
 
-  // TODO: Implement
+  // TODO: Implement - Need to find a application that uses this
   ControlTreeView(
     szTitle: TLPCWSTR,
     szText: TLPCWSTR,
@@ -517,7 +517,7 @@ export class AutoIt {
     throw new Error('Unimplemented');
   }
 
-  // TODO: Implement
+  // TODO: Implement - Need to find a application that uses this
   ControlTreeViewByHandle(
     hWnd: THWND,
     hCtrl: THWND,
@@ -687,9 +687,13 @@ export class AutoIt {
     return this.invoke('AU3_ProcessExists', DataType.Int32, [DataType.String16], [szProcess]);
   }
 
-  // TODO: Implement
   ProcessSetPriority(szProcess: TLPCWSTR, nPriority: number): number {
-    throw new Error('Unimplemented');
+    return this.invoke(
+      'AU3_ProcessSetPriority',
+      DataType.Int32,
+      [DataType.String16, DataType.Int32],
+      [szProcess, nPriority],
+    );
   }
 
   ProcessWait(szProcess: TLPCWSTR, nTimeout: number = 0): number {
@@ -767,20 +771,36 @@ export class AutoIt {
     this.invoke('AU3_Sleep', DataType.Void, [DataType.Int32], [nMilliseconds]);
   }
 
-  // TODO: Implement
-  StatusbarGetText(
-    szTitle: TLPCWSTR,
-    szText: TLPCWSTR = '',
-    nPart: number = 1,
-    szStatusText: TLPWSTR,
-    nBufSize: number,
-  ): number {
-    throw new Error('Unimplemented');
+  /**
+   * Untested.
+   */
+  StatusbarGetText(szTitle: TLPCWSTR, szText: TLPCWSTR = '', nPart: number = 1): string {
+    const outputBuffer = Buffer.alloc(1024);
+
+    this.invoke(
+      'AU3_StatusbarGetText',
+      DataType.Void,
+      [DataType.String16, DataType.String16, DataType.Int32, LPWSTR, DataType.Int32],
+      [szTitle, szText, nPart, outputBuffer, outputBuffer.length],
+    );
+
+    return outputBuffer.toString('utf16le');
   }
 
-  // TODO: Implement
-  StatusbarGetTextByHandle(hWnd: THWND, nPart: number = 1, szStatusText: TLPWSTR, nBufSize: number): number {
-    throw new Error('Unimplemented');
+  /**
+   * Untested.
+   */
+  StatusbarGetTextByHandle(hWnd: THWND, nPart: number = 1): string {
+    const outputBuffer = Buffer.alloc(1024);
+
+    this.invoke(
+      'AU3_StatusbarGetTextByHandle',
+      DataType.Void,
+      [DataType.UInt64, DataType.Int32, LPWSTR, DataType.Int32],
+      [hWnd, nPart, outputBuffer, outputBuffer.length],
+    );
+
+    return outputBuffer.toString('utf16le');
   }
 
   // TODO: Seemingly non-functional
@@ -1385,3 +1405,12 @@ export type Rect = {
   right: number;
   bottom: number;
 };
+
+export enum ProcessPriority {
+  Low = 0,
+  BelowNormal = 1,
+  Normal = 2,
+  AboveNormal = 3,
+  High = 4,
+  Realtime = 5,
+}
