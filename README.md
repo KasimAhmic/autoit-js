@@ -4,7 +4,7 @@ Node.js bindings for AutoItX3.dll
 
 ## Project Status
 
-> [!IMPORTANT]
+> [!CAUTION]
 > This project is currently in **active development** and is **not yet ready for production use**. There are quite a few cases where the library will cause the Node process to abruptly exit. You have been warned. You can track function implementation progress in [this issue](https://github.com/KasimAhmic/autoit-js/issues/1).
 
 The goal is provide a 1:1 mapping of the AutoItX3.dll functions to TypeScript. The API will be close to the original however some changes will be made to better reflect common JavaScript practices. For example, a common pattern in C is to provide a buffer or a struct to a function that will in turn be populated with the result of said function. While this is certainly possible in JavaScript, I have instead opted to return the result directly from the function and handle the buffers and structs internally.
