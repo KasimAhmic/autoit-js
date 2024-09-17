@@ -443,7 +443,6 @@ export class AutoIt {
     );
   }
 
-  // TODO: Implement
   ControlSend(
     szTitle: TLPCWSTR,
     szText: TLPCWSTR,
@@ -451,7 +450,12 @@ export class AutoIt {
     szSendText: TLPCWSTR,
     nMode: number = 0,
   ): number {
-    throw new Error('Unimplemented');
+    return this.invoke(
+      'AU3_ControlSend',
+      DataType.Int32,
+      [DataType.String16, DataType.String16, DataType.String16, DataType.String16, DataType.Int32],
+      [szTitle, szText, szControl, szSendText, nMode],
+    );
   }
 
   // TODO: Implement
