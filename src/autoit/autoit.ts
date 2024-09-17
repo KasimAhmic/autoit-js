@@ -476,9 +476,13 @@ export class AutoIt {
     );
   }
 
-  // TODO: Implement
   ControlSetTextByHandle(hWnd: THWND, hCtrl: THWND, szControlText: TLPCWSTR): number {
-    throw new Error('Unimplemented');
+    return this.invoke(
+      'AU3_ControlSetTextByHandle',
+      DataType.Int32,
+      [DataType.UInt64, DataType.UInt64, DataType.String16],
+      [hWnd, hCtrl, szControlText],
+    );
   }
 
   // TODO: Implement
