@@ -283,9 +283,17 @@ export class AutoIt {
     return outputBuffer.toString('utf16le');
   }
 
-  // TODO: Implement
-  ControlGetFocusByHandle(hWnd: THWND, szControlWithFocus: TLPWSTR, nBufSize: number): void {
-    throw new Error('Unimplemented');
+  ControlGetFocusByHandle(hWnd: THWND): string {
+    const outputBuffer = Buffer.alloc(1024);
+
+    this.invoke(
+      'AU3_ControlGetFocusByHandle',
+      DataType.Void,
+      [DataType.UInt64, LPWSTR, DataType.Int32],
+      [hWnd, outputBuffer, outputBuffer.length],
+    );
+
+    return outputBuffer.toString('utf16le');
   }
 
   ControlGetHandle(hWnd: THWND, szControl: TLPCWSTR): THWND {
