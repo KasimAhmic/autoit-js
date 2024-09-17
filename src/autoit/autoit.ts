@@ -358,15 +358,17 @@ export class AutoIt {
     };
   }
 
-  // TODO: Implement
-  ControlGetText(
-    szTitle: TLPCWSTR,
-    szText: TLPCWSTR,
-    szControl: TLPCWSTR,
-    szControlText: TLPWSTR,
-    nBufSize: number,
-  ): void {
-    throw new Error('Unimplemented');
+  ControlGetText(szTitle: TLPCWSTR, szText: TLPCWSTR, szControl: TLPCWSTR): string {
+    const outputBuffer = Buffer.alloc(1024);
+
+    this.invoke(
+      'AU3_ControlGetText',
+      DataType.Void,
+      [DataType.String16, DataType.String16, DataType.String16, LPWSTR, DataType.Int32],
+      [szTitle, szText, szControl, outputBuffer, outputBuffer.length],
+    );
+
+    return outputBuffer.toString('utf16le');
   }
 
   // TODO: Implement
