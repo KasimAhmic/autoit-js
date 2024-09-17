@@ -1503,12 +1503,6 @@ export enum ProcessPriority {
   Realtime = 5,
 }
 
-type Test<T> = T extends string ? string : never;
-
-function isCommand<T>(command: Command, value: unknown): value is Command {
-  return command === value;
-}
-
 export enum Command {
   IsVisible = 'IsVisible',
   IsEnabled = 'IsEnabled',
