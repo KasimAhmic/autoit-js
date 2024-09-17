@@ -393,9 +393,13 @@ export class AutoIt {
     );
   }
 
-  // TODO: Implement
   ControlHideByHandle(hWnd: THWND, hCtrl: THWND): number {
-    throw new Error('Unimplemented');
+    return this.invoke(
+      'AU3_ControlHideByHandle',
+      DataType.Int32,
+      [DataType.UInt64, DataType.UInt64],
+      [hWnd, hCtrl],
+    );
   }
 
   // TODO: Implement
