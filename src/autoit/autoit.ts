@@ -252,9 +252,13 @@ export class AutoIt {
     );
   }
 
-  // TODO: Implement
   ControlFocus(szTitle: TLPCWSTR, szText: TLPCWSTR, szControl: TLPCWSTR): number {
-    throw new Error('Unimplemented');
+    return this.invoke(
+      'AU3_ControlFocus',
+      DataType.Int32,
+      [DataType.String16, DataType.String16, DataType.String16],
+      [szTitle, szText, szControl],
+    );
   }
 
   // TODO: Implement
