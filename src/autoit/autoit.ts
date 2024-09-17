@@ -270,9 +270,17 @@ export class AutoIt {
     );
   }
 
-  // TODO: Implement
-  ControlGetFocus(szTitle: TLPCWSTR, szText: TLPCWSTR, szControlWithFocus: TLPWSTR, nBufSize: number): void {
-    throw new Error('Unimplemented');
+  ControlGetFocus(szTitle: TLPCWSTR, szText: TLPCWSTR): string {
+    const outputBuffer = Buffer.alloc(1024);
+
+    this.invoke(
+      'AU3_ControlGetFocus',
+      DataType.Void,
+      [DataType.String16, DataType.String16, LPWSTR, DataType.Int32],
+      [szTitle, szText, outputBuffer, outputBuffer.length],
+    );
+
+    return outputBuffer.toString('utf16le');
   }
 
   // TODO: Implement
