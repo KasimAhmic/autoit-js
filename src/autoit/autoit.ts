@@ -322,9 +322,22 @@ export class AutoIt {
     return outputBuffer.toString('utf16le');
   }
 
-  // TODO: Implement
-  ControlGetPos(szTitle: TLPCWSTR, szText: TLPCWSTR, szControl: TLPCWSTR, lpRect: TLPRECT): number {
-    throw new Error('Unimplemented');
+  ControlGetPos(szTitle: TLPCWSTR, szText: TLPCWSTR, szControl: TLPCWSTR): Rect {
+    const rectBuffer = Buffer.alloc(koffi.sizeof(RECT));
+
+    this.invoke(
+      'AU3_ControlGetPos',
+      DataType.Void,
+      [DataType.String16, DataType.String16, DataType.String16, LPRECT],
+      [szTitle, szText, szControl, rectBuffer],
+    );
+
+    return {
+      left: rectBuffer.readInt32LE(0),
+      top: rectBuffer.readInt32LE(4),
+      right: rectBuffer.readInt32LE(8),
+      bottom: rectBuffer.readInt32LE(12),
+    };
   }
 
   // TODO: Implement
