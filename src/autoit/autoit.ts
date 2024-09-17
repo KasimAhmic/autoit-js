@@ -281,7 +281,6 @@ export class AutoIt {
     }
   }
 
-  // TODO: Implement
   ControlListView(
     szTitle: TLPCWSTR,
     szText: TLPCWSTR,
@@ -289,23 +288,53 @@ export class AutoIt {
     szCommand: TLPCWSTR,
     szExtra1: TLPCWSTR,
     szExtra2: TLPCWSTR,
-    szResult: TLPWSTR,
-    nBufSize: number,
-  ): void {
-    throw new Error('Unimplemented');
+  ): string {
+    const outputBuffer = Buffer.alloc(1024);
+
+    this.invoke(
+      'AU3_ControlListView',
+      DataType.Void,
+      [
+        DataType.String16,
+        DataType.String16,
+        DataType.String16,
+        DataType.String16,
+        DataType.String16,
+        DataType.String16,
+        LPWSTR,
+        DataType.Int32,
+      ],
+      [szTitle, szText, szControl, szCommand, szExtra1, szExtra2, outputBuffer, outputBuffer.length],
+    );
+
+    return outputBuffer.toString('utf16le');
   }
 
-  // TODO: Implement
   ControlListViewByHandle(
     hWnd: THWND,
     hCtrl: THWND,
     szCommand: TLPCWSTR,
     szExtra1: TLPCWSTR,
     szExtra2: TLPCWSTR,
-    szResult: TLPWSTR,
-    nBufSize: number,
-  ): void {
-    throw new Error('Unimplemented');
+  ): string {
+    const outputBuffer = Buffer.alloc(1024);
+
+    this.invoke(
+      'AU3_ControlListViewByHandle',
+      DataType.Void,
+      [
+        DataType.UInt64,
+        DataType.UInt64,
+        DataType.String16,
+        DataType.String16,
+        DataType.String16,
+        LPWSTR,
+        DataType.Int32,
+      ],
+      [hWnd, hCtrl, szCommand, szExtra1, szExtra2, outputBuffer, outputBuffer.length],
+    );
+
+    return outputBuffer.toString('utf16le');
   }
 
   ControlDisable(szTitle: TLPCWSTR, szText: TLPCWSTR, szControl: TLPCWSTR): number {
@@ -591,7 +620,9 @@ export class AutoIt {
     );
   }
 
-  // TODO: Implement - Need to find a application that uses this
+  /**
+   * Untested. Need to find a application that uses this
+   */
   ControlTreeView(
     szTitle: TLPCWSTR,
     szText: TLPCWSTR,
@@ -599,46 +630,109 @@ export class AutoIt {
     szCommand: TLPCWSTR,
     szExtra1: TLPCWSTR,
     szExtra2: TLPCWSTR,
-    szResult: TLPWSTR,
-    nBufSize: number,
-  ): void {
-    throw new Error('Unimplemented');
+  ): string {
+    const outputBuffer = Buffer.alloc(1024);
+
+    this.invoke(
+      'AU3_ControlTreeView',
+      DataType.Void,
+      [
+        DataType.String16,
+        DataType.String16,
+        DataType.String16,
+        DataType.String16,
+        DataType.String16,
+        DataType.String16,
+        LPWSTR,
+        DataType.Int32,
+      ],
+      [szTitle, szText, szControl, szCommand, szExtra1, szExtra2, outputBuffer, outputBuffer.length],
+    );
+
+    return outputBuffer.toString('utf16le');
   }
 
-  // TODO: Implement - Need to find a application that uses this
+  /**
+   * Untested. Need to find a application that uses this.
+   */
   ControlTreeViewByHandle(
     hWnd: THWND,
     hCtrl: THWND,
     szCommand: TLPCWSTR,
     szExtra1: TLPCWSTR,
     szExtra2: TLPCWSTR,
-    szResult: TLPWSTR,
-    nBufSize: number,
-  ): void {
-    throw new Error('Unimplemented');
+  ): string {
+    const outputBuffer = Buffer.alloc(1024);
+
+    this.invoke(
+      'AU3_ControlTreeViewByHandle',
+      DataType.Void,
+      [
+        DataType.UInt64,
+        DataType.UInt64,
+        DataType.String16,
+        DataType.String16,
+        DataType.String16,
+        LPWSTR,
+        DataType.Int32,
+      ],
+      [hWnd, hCtrl, szCommand, szExtra1, szExtra2, outputBuffer, outputBuffer.length],
+    );
+
+    return outputBuffer.toString('utf16le');
   }
 
-  // TODO: Implement
+  /**
+   * Untested. I think this also should return a number instead.
+   */
   DriveMapAdd(
     szDevice: TLPCWSTR,
     szShare: TLPCWSTR,
     nFlags: number,
     szUser: TLPCWSTR = '',
     szPwd: TLPCWSTR = '',
-    szResult: TLPWSTR,
-    nBufSize: number,
-  ): void {
-    throw new Error('Unimplemented');
+  ): string {
+    const outputBuffer = Buffer.alloc(1024);
+
+    this.invoke(
+      'AU3_DriveMapAdd',
+      DataType.Void,
+      [
+        DataType.String16,
+        DataType.String16,
+        DataType.Int32,
+        DataType.String16,
+        DataType.String16,
+        LPWSTR,
+        DataType.Int32,
+      ],
+      [szDevice, szShare, nFlags, szUser, szPwd, outputBuffer, outputBuffer.length],
+    );
+
+    return outputBuffer.toString('utf16le');
   }
 
-  // TODO: Implement
+  /**
+   * Untested.
+   */
   DriveMapDel(szDevice: TLPCWSTR): number {
-    throw new Error('Unimplemented');
+    return this.invoke('AU3_DriveMapDel', DataType.Int32, [DataType.String16], [szDevice]);
   }
 
-  // TODO: Implement
-  DriveMapGet(szDevice: TLPCWSTR, szMapping: TLPWSTR, nBufSize: number): void {
-    throw new Error('Unimplemented');
+  /**
+   * Untested.
+   */
+  DriveMapGet(szDevice: TLPCWSTR): string {
+    const outputBuffer = Buffer.alloc(1024);
+
+    this.invoke(
+      'AU3_DriveMapGet',
+      DataType.Void,
+      [DataType.String16, LPWSTR, DataType.Int32],
+      [szDevice, outputBuffer, outputBuffer.length],
+    );
+
+    return outputBuffer.toString('utf16le');
   }
 
   IsAdmin(): boolean {
@@ -714,9 +808,11 @@ export class AutoIt {
     this.invoke('AU3_MouseWheel', DataType.Void, [DataType.String16, DataType.Int32], [szDirection, nClicks]);
   }
 
-  // TODO: Implement
+  /**
+   * Untested.
+   */
   Opt(szOption: TLPCWSTR, nValue: number): number {
-    throw new Error('Unimplemented');
+    return this.invoke('AU3_Opt', DataType.Int32, [DataType.String16, DataType.Int32], [szOption, nValue]);
   }
 
   PixelChecksum(left: number, top: number, right: number, bottom: number, nStep: number = 1): number {
@@ -820,7 +916,9 @@ export class AutoIt {
     );
   }
 
-  // TODO: Implement
+  /**
+   * Untested.
+   */
   RunAs(
     szUser: TLPCWSTR,
     szDomain: TLPCWSTR,
@@ -830,10 +928,25 @@ export class AutoIt {
     szDir: TLPCWSTR = '',
     nShowFlag: number = SW_SHOWNORMAL,
   ): number {
-    throw new Error('Unimplemented');
+    return this.invoke(
+      'AU3_RunAs',
+      DataType.Int32,
+      [
+        DataType.String16,
+        DataType.String16,
+        DataType.String16,
+        DataType.Int32,
+        DataType.String16,
+        DataType.String16,
+        DataType.Int32,
+      ],
+      [szUser, szDomain, szPassword, nLogonFlag, szProgram, szDir, nShowFlag],
+    );
   }
 
-  // TODO: Implement
+  /**
+   * Untested.
+   */
   RunAsWait(
     szUser: TLPCWSTR,
     szDomain: TLPCWSTR,
@@ -843,16 +956,28 @@ export class AutoIt {
     szDir: TLPCWSTR = '',
     nShowFlag: number = SW_SHOWNORMAL,
   ): number {
-    throw new Error('Unimplemented');
+    return this.invoke(
+      'AU3_RunAsWait',
+      DataType.Int32,
+      [
+        DataType.String16,
+        DataType.String16,
+        DataType.String16,
+        DataType.Int32,
+        DataType.String16,
+        DataType.String16,
+        DataType.Int32,
+      ],
+      [szUser, szDomain, szPassword, nLogonFlag, szProgram, szDir, nShowFlag],
+    );
   }
 
   Send(szSendText: TLPCWSTR, nMode: number = 0): void {
     this.invoke('AU3_Send', DataType.Void, [DataType.String16, DataType.Int32], [szSendText, nMode]);
   }
 
-  // TODO: Implement
   Shutdown(nFlags: number): number {
-    throw new Error('Unimplemented');
+    return this.invoke('AU3_Shutdown', DataType.Int32, [DataType.Int32], [nFlags]);
   }
 
   Sleep(nMilliseconds: number): void {

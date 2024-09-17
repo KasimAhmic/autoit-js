@@ -26,7 +26,11 @@ describe('AutoIt JS', () => {
 
         report += `- [x] ${method}\n`;
       } catch (error) {
-        report += `- [ ] ${method}\n`;
+        if (error.message === 'Unimplemented') {
+          report += `- [ ] ${method}\n`;
+        } else {
+          report += `- [x] ${method}\n`;
+        }
       }
     }
 
