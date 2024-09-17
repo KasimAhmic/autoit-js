@@ -168,29 +168,117 @@ export class AutoIt {
     );
   }
 
-  // TODO: Implement
-  ControlCommand(
+  /**
+   * @deprecated Currently causes crashes. Needs work.
+   */
+  ControlCommand<T extends Command>(
     szTitle: TLPCWSTR,
     szText: TLPCWSTR,
     szControl: TLPCWSTR,
-    szCommand: TLPCWSTR,
+    szCommand: T,
     szExtra: TLPCWSTR,
-    szResult: TLPWSTR,
-    nBufSize: number,
-  ): void {
-    throw new Error('Unimplemented');
+  ): CommandToReturnType<T> {
+    const outputBuffer = Buffer.alloc(1024);
+
+    this.invoke(
+      'AU3_ControlCommand',
+      DataType.Void,
+      [
+        DataType.String16,
+        DataType.String16,
+        DataType.String16,
+        DataType.String16,
+        DataType.String16,
+        LPWSTR,
+        DataType.Int32,
+      ],
+      [szTitle, szText, szControl, szCommand, szExtra, outputBuffer, outputBuffer.length],
+    );
+
+    switch (szCommand) {
+      case Command.GetCurrentSelection:
+      case Command.GetLine:
+      case Command.GetSelected:
+        return outputBuffer.toString('utf16le') as CommandToReturnType<T>;
+      case Command.IsVisible:
+      case Command.IsEnabled:
+      case Command.IsChecked:
+        return (outputBuffer.readInt32LE() === 1) as CommandToReturnType<T>;
+      case Command.FindString:
+      case Command.GetCount:
+      case Command.GetCurrentLine:
+      case Command.GetCurrentCol:
+      case Command.GetLineCount:
+      case Command.CurrentTab:
+        return outputBuffer.readInt32LE() as CommandToReturnType<T>;
+      case Command.ShowDropDown:
+      case Command.HideDropDown:
+      case Command.AddString:
+      case Command.DelString:
+      case Command.SetCurrentSelection:
+      case Command.SelectString:
+      case Command.Check:
+      case Command.UnCheck:
+      case Command.EditPaste:
+      case Command.TabRight:
+      case Command.TabLeft:
+      case Command.SendCommandId:
+        return undefined as CommandToReturnType<T>;
+      default:
+        throw new Error(`Unknown command: ${szCommand}`);
+    }
   }
 
-  // TODO: Implement
-  ControlCommandByHandle(
+  /**
+   * @deprecated Currently causes crashes. Needs work.
+   */
+  ControlCommandByHandle<T extends Command>(
     hWnd: THWND,
     hCtrl: THWND,
     szCommand: TLPCWSTR,
     szExtra: TLPCWSTR,
-    szResult: TLPWSTR,
-    nBufSize: number,
-  ): void {
-    throw new Error('Unimplemented');
+  ): CommandToReturnType<T> {
+    const outputBuffer = Buffer.alloc(1024);
+
+    this.invoke(
+      'AU3_ControlCommand',
+      DataType.Void,
+      [DataType.UInt64, DataType.UInt64, DataType.String16, DataType.String16, LPWSTR, DataType.Int32],
+      [hWnd, hCtrl, szCommand, szExtra, outputBuffer, outputBuffer.length],
+    );
+
+    switch (szCommand) {
+      case Command.GetCurrentSelection:
+      case Command.GetLine:
+      case Command.GetSelected:
+        return outputBuffer.toString('utf16le') as CommandToReturnType<T>;
+      case Command.IsVisible:
+      case Command.IsEnabled:
+      case Command.IsChecked:
+        return (outputBuffer.readInt32LE() === 1) as CommandToReturnType<T>;
+      case Command.FindString:
+      case Command.GetCount:
+      case Command.GetCurrentLine:
+      case Command.GetCurrentCol:
+      case Command.GetLineCount:
+      case Command.CurrentTab:
+        return outputBuffer.readInt32LE() as CommandToReturnType<T>;
+      case Command.ShowDropDown:
+      case Command.HideDropDown:
+      case Command.AddString:
+      case Command.DelString:
+      case Command.SetCurrentSelection:
+      case Command.SelectString:
+      case Command.Check:
+      case Command.UnCheck:
+      case Command.EditPaste:
+      case Command.TabRight:
+      case Command.TabLeft:
+      case Command.SendCommandId:
+        return undefined as CommandToReturnType<T>;
+      default:
+        throw new Error(`Unknown command: ${szCommand}`);
+    }
   }
 
   // TODO: Implement
@@ -1414,3 +1502,86 @@ export enum ProcessPriority {
   High = 4,
   Realtime = 5,
 }
+
+type Test<T> = T extends string ? string : never;
+
+function isCommand<T>(command: Command, value: unknown): value is Command {
+  return command === value;
+}
+
+export enum Command {
+  IsVisible = 'IsVisible',
+  IsEnabled = 'IsEnabled',
+  ShowDropDown = 'ShowDropDown',
+  HideDropDown = 'HideDropDown',
+  AddString = 'AddString',
+  DelString = 'DelString',
+  FindString = 'FindString',
+  GetCount = 'GetCount',
+  SetCurrentSelection = 'SetCurrentSelection',
+  SelectString = 'SelectString',
+  IsChecked = 'IsChecked',
+  Check = 'Check',
+  UnCheck = 'UnCheck',
+  GetCurrentLine = 'GetCurrentLine',
+  GetCurrentCol = 'GetCurrentCol',
+  GetCurrentSelection = 'GetCurrentSelection',
+  GetLineCount = 'GetLineCount',
+  GetLine = 'GetLine',
+  GetSelected = 'GetSelected',
+  EditPaste = 'EditPaste',
+  CurrentTab = 'CurrentTab',
+  TabRight = 'TabRight',
+  TabLeft = 'TabLeft',
+  SendCommandId = 'SendCommandID',
+}
+
+export type CommandToReturnType<T extends Command> = T extends Command.GetCurrentSelection
+  ? string
+  : T extends Command.GetLine
+    ? string
+    : T extends Command.GetSelected
+      ? string
+      : T extends Command.IsVisible
+        ? boolean
+        : T extends Command.IsEnabled
+          ? boolean
+          : T extends Command.ShowDropDown
+            ? boolean
+            : T extends Command.FindString
+              ? number
+              : T extends Command.GetCount
+                ? number
+                : T extends Command.GetCurrentLine
+                  ? number
+                  : T extends Command.GetCurrentCol
+                    ? number
+                    : T extends Command.GetLineCount
+                      ? number
+                      : T extends Command.CurrentTab
+                        ? number
+                        : T extends Command.Check
+                          ? undefined
+                          : T extends Command.HideDropDown
+                            ? undefined
+                            : T extends Command.AddString
+                              ? undefined
+                              : T extends Command.DelString
+                                ? undefined
+                                : T extends Command.SetCurrentSelection
+                                  ? undefined
+                                  : T extends Command.SelectString
+                                    ? undefined
+                                    : T extends Command.IsChecked
+                                      ? undefined
+                                      : T extends Command.UnCheck
+                                        ? undefined
+                                        : T extends Command.EditPaste
+                                          ? undefined
+                                          : T extends Command.TabRight
+                                            ? undefined
+                                            : T extends Command.TabLeft
+                                              ? undefined
+                                              : T extends Command.SendCommandId
+                                                ? undefined
+                                                : never;
