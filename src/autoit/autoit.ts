@@ -458,9 +458,13 @@ export class AutoIt {
     );
   }
 
-  // TODO: Implement
   ControlSendByHandle(hWnd: THWND, hCtrl: THWND, szSendText: TLPCWSTR, nMode: number = 0): number {
-    throw new Error('Unimplemented');
+    return this.invoke(
+      'AU3_ControlSendByHandle',
+      DataType.Int32,
+      [DataType.UInt64, DataType.UInt64, DataType.String16, DataType.Int32],
+      [hWnd, hCtrl, szSendText, nMode],
+    );
   }
 
   // TODO: Implement
