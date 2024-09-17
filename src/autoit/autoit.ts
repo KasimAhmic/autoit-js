@@ -340,9 +340,22 @@ export class AutoIt {
     };
   }
 
-  // TODO: Implement
-  ControlGetPosByHandle(hWnd: THWND, hCtrl: THWND, lpRect: TLPRECT): number {
-    throw new Error('Unimplemented');
+  ControlGetPosByHandle(hWnd: THWND, hCtrl: THWND): Rect {
+    const rectBuffer = Buffer.alloc(koffi.sizeof(RECT));
+
+    this.invoke(
+      'AU3_ControlGetPosByHandle',
+      DataType.Void,
+      [DataType.UInt64, DataType.UInt64, LPRECT],
+      [hWnd, hCtrl, rectBuffer],
+    );
+
+    return {
+      left: rectBuffer.readInt32LE(0),
+      top: rectBuffer.readInt32LE(4),
+      right: rectBuffer.readInt32LE(8),
+      bottom: rectBuffer.readInt32LE(12),
+    };
   }
 
   // TODO: Implement
