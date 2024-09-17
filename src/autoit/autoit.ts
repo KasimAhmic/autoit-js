@@ -56,6 +56,10 @@ export class AutoIt {
     }
   }
 
+  get isLoaded(): boolean {
+    return this.lib !== null;
+  }
+
   // TODO: Caching the functions does lead to a "performance improvement", but it's such a small improvement
   // that it's probably not worth it. It's several orders of magnitude faster to retrieve the functions
   // from the cache than to recreate them each time, however that difference is between ~60ns and ~14,000 ns
@@ -305,15 +309,17 @@ export class AutoIt {
     );
   }
 
-  // TODO: Implement
-  ControlGetHandleAsText(
-    szTitle: TLPCWSTR,
-    szText: TLPCWSTR = '',
-    szControl: TLPCWSTR,
-    szRetText: TLPWSTR,
-    nBufSize: number,
-  ): void {
-    throw new Error('Unimplemented');
+  ControlGetHandleAsText(szTitle: TLPCWSTR, szText: TLPCWSTR = '', szControl: TLPCWSTR): string {
+    const outputBuffer = Buffer.alloc(1024);
+
+    this.invoke(
+      'AU3_ControlGetHandleAsText',
+      DataType.Void,
+      [DataType.String16, DataType.String16, DataType.String16, LPWSTR, DataType.Int32],
+      [szTitle, szText, szControl, outputBuffer, outputBuffer.length],
+    );
+
+    return outputBuffer.toString('utf16le');
   }
 
   // TODO: Implement
