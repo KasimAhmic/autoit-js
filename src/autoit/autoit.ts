@@ -243,9 +243,13 @@ export class AutoIt {
     );
   }
 
-  // TODO: Implement
   ControlEnableByHandle(hWnd: THWND, hCtrl: THWND): number {
-    throw new Error('Unimplemented');
+    return this.invoke(
+      'AU3_ControlEnableByHandle',
+      DataType.Int32,
+      [DataType.UInt64, DataType.UInt64],
+      [hWnd, hCtrl],
+    );
   }
 
   // TODO: Implement
