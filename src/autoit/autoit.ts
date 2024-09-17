@@ -384,9 +384,13 @@ export class AutoIt {
     return outputBuffer.toString('utf16le');
   }
 
-  // TODO: Implement
   ControlHide(szTitle: TLPCWSTR, szText: TLPCWSTR, szControl: TLPCWSTR): number {
-    throw new Error('Unimplemented');
+    return this.invoke(
+      'AU3_ControlHide',
+      DataType.Int32,
+      [DataType.String16, DataType.String16, DataType.String16],
+      [szTitle, szText, szControl],
+    );
   }
 
   // TODO: Implement
