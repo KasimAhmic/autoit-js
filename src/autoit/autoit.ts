@@ -402,7 +402,6 @@ export class AutoIt {
     );
   }
 
-  // TODO: Implement
   ControlMove(
     szTitle: TLPCWSTR,
     szText: TLPCWSTR,
@@ -412,7 +411,20 @@ export class AutoIt {
     nWidth: number = -1,
     nHeight: number = -1,
   ): number {
-    throw new Error('Unimplemented');
+    return this.invoke(
+      'AU3_ControlMove',
+      DataType.Int32,
+      [
+        DataType.String16,
+        DataType.String16,
+        DataType.String16,
+        DataType.Int32,
+        DataType.Int32,
+        DataType.Int32,
+        DataType.Int32,
+      ],
+      [szTitle, szText, szControl, nX, nY, nWidth, nHeight],
+    );
   }
 
   // TODO: Implement
