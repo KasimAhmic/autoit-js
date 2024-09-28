@@ -2,14 +2,30 @@
   "name": "@ahmic/autoit-js",
   "version": "1.0.0",
   "description": "Node.js bindings for AutoItX3.dll",
-  "main": "index.js",
-  "scripts": {
-    "start": "tsx ./src/main.ts",
-    "test": "vitest"
+  "author": {
+    "name": "Kasim Ahmic",
+    "email": "kasim.ahmic@gmail.com"
   },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/KasimAhmic/autoit-js/issues"
+  },
+  "homepage": "https://github.com/KasimAhmic/autoit-js#readme",
+  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/KasimAhmic/autoit-js.git"
+  },
+  "type": "module",
+  "gypfile": true,
+  "scripts": {
+    "configure": "node-gyp configure",
+    "start": "tsx scripts/scratch-pad.ts",
+    "build": "node-gyp build -j max",
+    "dev": "npm run build && npm run start",
+    "rebuild": "node-gyp rebuild -j max",
+    "start-old": "tsx ./src/main.ts",
+    "test": "vitest"
   },
   "keywords": [
     "autoit",
@@ -18,16 +34,12 @@
     "automation",
     "native"
   ],
-  "author": "Kasim Ahmic",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/KasimAhmic/autoit-js/issues"
-  },
-  "homepage": "https://github.com/KasimAhmic/autoit-js#readme",
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "@types/node": "^22.5.5",
     "@vitest/coverage-v8": "^2.1.1",
+    "node-addon-api": "^8.1.0",
+    "node-api-headers": "^1.3.0",
     "prettier": "^3.3.3",
     "tsx": "^4.19.1",
     "typescript": "^5.6.2",
