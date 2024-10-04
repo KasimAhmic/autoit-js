@@ -6,10 +6,14 @@
 Napi::Object WinWaitNotActiveByHandle(const Napi::CallbackInfo &info) {
     const Napi::Env env = info.Env();
 
-    // TODO: Handle validation
-    if (const auto [success, error] = ValidateArguments(info, 0, {}); !success) {
+    if (const auto [success, error] = ValidateArguments(info, 2, {napi_number, napi_number}); !success) {
         ReturnResult(false, StatusCode::ValidationError, error);
     }
+
+    const double handle = info[0].As<Napi::Number>().DoubleValue();
+    const int timeout = info[1].As<Napi::Number>().Int32Value();
+
+    const auto hwnd = reinterpret_cast<HWND>(static_cast<uintptr_t>(handle));
 
     const auto [WinWaitNotActiveByHandle, errorCode, error] = LoadAutoItFunction(AU3_WinWaitNotActiveByHandle);
 
@@ -17,8 +21,7 @@ Napi::Object WinWaitNotActiveByHandle(const Napi::CallbackInfo &info) {
         ReturnResult(false, errorCode, error);
     }
 
-    // TODO: Call the function
-    // WinWaitNotActiveByHandle();
+    const int code = WinWaitNotActiveByHandle(hwnd, timeout);
 
-    ReturnResult(true, StatusCode::None, env.Null());
+    ReturnResult(code == 1, code, env.Null());
 }
