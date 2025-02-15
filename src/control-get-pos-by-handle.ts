@@ -1,7 +1,7 @@
 import koffi from 'koffi';
 
 import { IRect, LPRECT, Rect } from './@types/rect';
-import { HWND, VOID } from './@types/win32';
+import { HWND, INT } from './@types/win32';
 import { autoit } from './autoit/autoit';
 
 export function ControlGetPosByHandle(windowHandle: number, controlHandle: number): IRect {
@@ -9,7 +9,7 @@ export function ControlGetPosByHandle(windowHandle: number, controlHandle: numbe
 
   autoit.invoke(
     'AU3_ControlGetPosByHandle',
-    VOID,
+    INT,
     [HWND, HWND, koffi.out(LPRECT)],
     [windowHandle, controlHandle, rect],
   );
