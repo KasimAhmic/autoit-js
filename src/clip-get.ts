@@ -7,5 +7,5 @@ export function ClipGet(characterCount: number = 2048): string {
 
   autoit.invoke('AU3_ClipGet', VOID, [LPWSTR, INT], [buffer, length]);
 
-  return unicodeBufferToString(buffer).replaceAll('\0', '');
+  return unicodeBufferToString(buffer);
 }
