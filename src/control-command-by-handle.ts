@@ -5,18 +5,18 @@ import { createUnicodeBuffer, unicodeBufferToString } from './util';
 
 export function ControlCommandByHandle(
   windowHandle: number,
-  control: string,
+  controlHandle: number,
   command: Command,
   option: string = '',
-  characters: number = 1024,
+  characterCount: number = 1024,
 ): string {
-  const [buffer, length] = createUnicodeBuffer(characters);
+  const [buffer, length] = createUnicodeBuffer(characterCount);
 
   autoit.invoke(
     'AU3_ControlCommandByHandle',
     VOID,
-    [HWND, LPCWSTR, LPCWSTR, LPCWSTR, LPWSTR, INT],
-    [windowHandle, control, command, option, buffer, length],
+    [HWND, HWND, LPCWSTR, LPCWSTR, LPWSTR, INT],
+    [windowHandle, controlHandle, command, option, buffer, length],
   );
 
   return unicodeBufferToString(buffer);
