@@ -1,7 +1,7 @@
 import koffi from 'koffi';
 
 import { IRect, LPRECT, Rect } from './@types/rect';
-import { LPCWSTR, VOID } from './@types/win32';
+import { INT, LPCWSTR } from './@types/win32';
 import { autoit } from './autoit/autoit';
 
 export function ControlGetPos(title: string, text: string, control: string): IRect {
@@ -9,7 +9,7 @@ export function ControlGetPos(title: string, text: string, control: string): IRe
 
   autoit.invoke(
     'AU3_ControlGetPos',
-    VOID,
+    INT,
     [LPCWSTR, LPCWSTR, LPCWSTR, koffi.out(LPRECT)],
     [title, text, control, rect],
   );
