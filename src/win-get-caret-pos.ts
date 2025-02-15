@@ -1,7 +1,6 @@
 import koffi from 'koffi';
 
-import { IPoint, LPPOINT, Point } from './@types/point';
-import { INT } from './@types/win32';
+import { INT, IPoint, LPPOINT, Point } from './@types';
 import { autoit } from './autoit/autoit';
 
 export function WinGetCaretPos(): IPoint {

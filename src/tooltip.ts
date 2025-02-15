@@ -1,4 +1,4 @@
-import { AU3_INTDEFAULT, INT, LPCWSTR, VOID } from './@types/win32';
+import { AU3_INTDEFAULT, INT, LPCWSTR, VOID } from './@types';
 import { autoit } from './autoit/autoit';
 
 /**

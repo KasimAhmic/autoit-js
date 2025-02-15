@@ -1,4 +1,4 @@
-import { HWND, INT } from './@types/win32';
+import { HWND, INT } from './@types';
 import { autoit } from './autoit/autoit';
 import { StateFlag } from './win-set-state';
 

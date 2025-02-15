@@ -1,7 +1,6 @@
 import koffi from 'koffi';
 
-import { IRect, LPRECT, Rect } from './@types/rect';
-import { INT, LPCWSTR } from './@types/win32';
+import { INT, IRect, LPCWSTR, LPRECT, Rect } from './@types';
 import { autoit } from './autoit/autoit';
 
 export function WinGetClientSize(windowTitle: string, windowText: string = ''): IRect {

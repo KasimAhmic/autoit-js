@@ -1,4 +1,4 @@
-import { VOID } from './@types/win32';
+import { VOID } from './@types';
 import { autoit } from './autoit/autoit';
 
 export function WinMinimizeAllUndo(): void {

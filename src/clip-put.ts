@@ -1,4 +1,4 @@
-import { LPCWSTR, VOID } from './@types/win32';
+import { LPCWSTR, VOID } from './@types';
 import { autoit } from './autoit/autoit';
 
 export function ClipPut(value: string): void {

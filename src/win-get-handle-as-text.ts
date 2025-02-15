@@ -1,4 +1,4 @@
-import { INT, LPCWSTR, LPWSTR, VOID } from './@types/win32';
+import { INT, LPCWSTR, LPWSTR, VOID } from './@types';
 import { autoit } from './autoit/autoit';
 import { createUnicodeBuffer, unicodeBufferToString } from './util';
 import { HWND_HEX_SIZE } from './util/constants';

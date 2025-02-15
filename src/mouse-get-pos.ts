@@ -1,7 +1,6 @@
 import koffi from 'koffi';
 
-import { IPoint, LPPOINT, Point } from './@types/point';
-import { VOID } from './@types/win32';
+import { IPoint, LPPOINT, Point, VOID } from './@types';
 import { autoit } from './autoit/autoit';
 
 export function MouseGetPos(): IPoint {

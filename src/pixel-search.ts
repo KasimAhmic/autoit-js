@@ -1,8 +1,6 @@
 import koffi from 'koffi';
 
-import { IPoint, LPPOINT, Point } from './@types/point';
-import { LPRECT, Rect } from './@types/rect';
-import { INT, VOID } from './@types/win32';
+import { INT, IPoint, LPPOINT, LPRECT, Point, Rect, VOID } from './@types';
 import { autoit } from './autoit/autoit';
 
 /**

@@ -1,4 +1,4 @@
-import { DWORD, HWND } from './@types/win32';
+import { DWORD, HWND } from './@types';
 import { autoit } from './autoit/autoit';
 
 export function WinGetProcessByHandle(windowHandle: bigint): number {

@@ -1,7 +1,6 @@
 import koffi from 'koffi';
 
-import { IRect, LPRECT, Rect } from './@types/rect';
-import { HWND, INT } from './@types/win32';
+import { HWND, INT, IRect, LPRECT, Rect } from './@types';
 import { autoit } from './autoit/autoit';
 
 export function WinGetPosByHandle(windowHandle: bigint): IRect {

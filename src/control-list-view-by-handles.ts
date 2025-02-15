@@ -1,4 +1,4 @@
-import { HWND, INT, LPCWSTR, LPWSTR, VOID } from './@types/win32';
+import { HWND, INT, LPCWSTR, LPWSTR, VOID } from './@types';
 import { autoit } from './autoit/autoit';
 import { ListViewCommand } from './control-list-view';
 import { createUnicodeBuffer, unicodeBufferToString } from './util';

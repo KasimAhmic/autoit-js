@@ -1,4 +1,4 @@
-import { INT, LPWSTR, VOID } from './@types/win32';
+import { INT, LPWSTR, VOID } from './@types';
 import { autoit } from './autoit/autoit';
 import { createUnicodeBuffer, unicodeBufferToString } from './util/buffer.util';
 

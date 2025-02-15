@@ -1,7 +1,6 @@
 import koffi from 'koffi';
 
-import { LPRECT, Rect } from './@types/rect';
-import { INT, UINT } from './@types/win32';
+import { INT, LPRECT, Rect, UINT } from './@types';
 import { autoit } from './autoit/autoit';
 
 export function PixelChecksum(

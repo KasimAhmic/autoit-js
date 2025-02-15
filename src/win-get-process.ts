@@ -1,4 +1,4 @@
-import { DWORD, LPCWSTR } from './@types/win32';
+import { DWORD, LPCWSTR } from './@types';
 import { autoit } from './autoit/autoit';
 
 export function WinGetProcess(windowTitle: string, windowText: string = ''): number {

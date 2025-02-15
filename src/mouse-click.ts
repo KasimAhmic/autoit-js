@@ -1,4 +1,4 @@
-import { AU3_INTDEFAULT, INT, LPCWSTR } from './@types/win32';
+import { AU3_INTDEFAULT, INT, LPCWSTR } from './@types';
 import { autoit } from './autoit/autoit';
 
 export enum MouseButton {

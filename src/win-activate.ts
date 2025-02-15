@@ -1,4 +1,4 @@
-import { INT, LPCWSTR } from './@types/win32';
+import { INT, LPCWSTR } from './@types';
 import { autoit } from './autoit/autoit';
 
 export function WinActivate(windowTitle: string, windowText: string = ''): number {

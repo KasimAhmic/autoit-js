@@ -1,4 +1,4 @@
-import { INT, VOID } from './@types/win32';
+import { INT, VOID } from './@types';
 import { autoit } from './autoit/autoit';
 
 export function Sleep(milliseconds: number): void {

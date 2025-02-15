@@ -1,4 +1,4 @@
-import { INT } from './@types/win32';
+import { INT } from './@types';
 import { autoit } from './autoit/autoit';
 
 export function MouseMove(x: number, y: number, speed: number = -1): number {

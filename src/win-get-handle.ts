@@ -1,6 +1,6 @@
 import koffi from 'koffi';
 
-import { HWND, LPCWSTR } from './@types/win32';
+import { HWND, LPCWSTR } from './@types';
 import { autoit } from './autoit/autoit';
 
 export function WinGetHandle(windowTitle: string, windowText: string = ''): bigint {

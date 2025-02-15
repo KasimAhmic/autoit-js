@@ -1,4 +1,4 @@
-import { HWND, INT, LPCWSTR, LPWSTR, VOID } from './@types/win32';
+import { HWND, INT, LPCWSTR, LPWSTR, VOID } from './@types';
 import { autoit } from './autoit/autoit';
 import { TreeViewCommand } from './control-tree-view';
 import { createUnicodeBuffer, unicodeBufferToString } from './util';

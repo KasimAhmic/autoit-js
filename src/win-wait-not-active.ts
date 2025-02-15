@@ -1,4 +1,4 @@
-import { INT, LPCWSTR } from './@types/win32';
+import { INT, LPCWSTR } from './@types';
 import { autoit } from './autoit/autoit';
 
 export function WinWaitNotActive(windowTitle: string, windowText: string = '', timeout: number = 0): number {

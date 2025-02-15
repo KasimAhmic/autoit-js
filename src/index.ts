@@ -1,3 +1,5 @@
+export { autoit } from './autoit/autoit';
+
 export * from './auto-it-set-option';
 export * from './clip-get';
 export * from './clip-put';

@@ -1,4 +1,4 @@
-import { HWND, INT, LPWSTR } from './@types/win32';
+import { HWND, INT, LPWSTR } from './@types';
 import { autoit } from './autoit/autoit';
 import { createUnicodeBuffer, unicodeBufferToString } from './util';
 

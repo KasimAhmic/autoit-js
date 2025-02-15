@@ -1,4 +1,4 @@
-import { HWND, INT } from './@types/win32';
+import { HWND, INT } from './@types';
 import { autoit } from './autoit/autoit';
 
 export function WinExistsByHandle(windowHandle: bigint): boolean {

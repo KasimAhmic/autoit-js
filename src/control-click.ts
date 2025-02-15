@@ -1,4 +1,4 @@
-import { INT, LPCWSTR } from './@types/win32';
+import { INT, LPCWSTR } from './@types';
 import { autoit } from './autoit/autoit';
 import { MouseButton } from './mouse-click';
 import { AU3_INTDEFAULT } from './util/constants';

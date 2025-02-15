@@ -1,4 +1,4 @@
-import { HWND, INT, LPCWSTR } from './@types/win32';
+import { HWND, INT, LPCWSTR } from './@types';
 import { autoit } from './autoit/autoit';
 
 export function ControlSetTextByHandle(windowHandle: bigint, controlHandle: bigint, value: string): number {
