@@ -1,6 +1,6 @@
-import { INT, LPCWSTR } from './@types/win32';
+import { HWND, INT, LPCWSTR } from './@types/win32';
 import { autoit } from './autoit/autoit';
 
 export function ControlGetHandle(windowHandle: number, control: string): number {
-  return autoit.invoke('AU3_ControlGetHandle', INT, [INT, LPCWSTR], [windowHandle, control]);
+  return autoit.invoke('AU3_ControlGetHandle', INT, [HWND, LPCWSTR], [windowHandle, control]);
 }
