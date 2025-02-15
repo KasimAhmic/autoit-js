@@ -3,8 +3,8 @@ import { autoit } from './autoit/autoit';
 import { createUnicodeBuffer, unicodeBufferToString } from './util';
 
 export function ControlGetTextByHandle(
-  windowHandle: number,
-  controlHandle: number,
+  windowHandle: bigint,
+  controlHandle: bigint,
   characterCount: number = 1024,
 ): string {
   const [buffer, length] = createUnicodeBuffer(characterCount);

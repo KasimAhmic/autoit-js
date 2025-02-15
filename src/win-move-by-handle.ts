@@ -2,7 +2,7 @@ import { HWND, INT } from './@types/win32';
 import { autoit } from './autoit/autoit';
 
 export function WinMoveByHandle(
-  windowHandle: number,
+  windowHandle: bigint,
   x: number,
   y: number,
   width: number = -1,

@@ -4,8 +4,8 @@ import { TreeViewCommand } from './control-tree-view';
 import { createUnicodeBuffer, unicodeBufferToString } from './util';
 
 export function ControlTreeViewByHandle(
-  windowHandle: number,
-  controlHandle: number,
+  windowHandle: bigint,
+  controlHandle: bigint,
   command: TreeViewCommand,
   extra1: string = '',
   extra2: string = '',

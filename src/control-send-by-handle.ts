@@ -3,8 +3,8 @@ import { autoit } from './autoit/autoit';
 import { SendMode } from './send';
 
 export function ControlSendByHandle(
-  windowHandle: number,
-  controlHandle: number,
+  windowHandle: bigint,
+  controlHandle: bigint,
   value: string,
   mode: SendMode = SendMode.Default,
 ): number {

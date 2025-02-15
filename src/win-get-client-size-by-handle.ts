@@ -4,7 +4,7 @@ import { IRect, LPRECT, Rect } from './@types/rect';
 import { HWND, INT } from './@types/win32';
 import { autoit } from './autoit/autoit';
 
-export function WinGetClientSizeByHandle(windowHandle: number): IRect {
+export function WinGetClientSizeByHandle(windowHandle: bigint): IRect {
   const rect = new Rect();
 
   autoit.invoke('AU3_WinGetClientSizeByHandle', INT, [HWND, koffi.out(LPRECT)], [windowHandle, rect]);

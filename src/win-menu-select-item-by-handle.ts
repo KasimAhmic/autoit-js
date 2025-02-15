@@ -2,7 +2,7 @@ import { HWND, INT, LPCWSTR } from './@types/win32';
 import { autoit } from './autoit/autoit';
 
 export function WinMenuSelectItemByHandle(
-  windowHandle: number,
+  windowHandle: bigint,
   item1: string,
   item2: string = '',
   item3: string = '',

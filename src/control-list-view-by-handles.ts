@@ -4,8 +4,8 @@ import { ListViewCommand } from './control-list-view';
 import { createUnicodeBuffer, unicodeBufferToString } from './util';
 
 export function ControlListViewByHandle(
-  windowHandle: number,
-  controlHandle: number,
+  windowHandle: bigint,
+  controlHandle: bigint,
   command: ListViewCommand,
   option1: string = '',
   option2: string = '',

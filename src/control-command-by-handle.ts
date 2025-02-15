@@ -4,8 +4,8 @@ import { Command } from './control-command';
 import { createUnicodeBuffer, unicodeBufferToString } from './util';
 
 export function ControlCommandByHandle(
-  windowHandle: number,
-  controlHandle: number,
+  windowHandle: bigint,
+  controlHandle: bigint,
   command: Command,
   option: string = '',
   characterCount: number = 1024,

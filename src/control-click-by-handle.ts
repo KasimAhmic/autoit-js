@@ -4,8 +4,8 @@ import { MouseButton } from './mouse-click';
 import { AU3_INTDEFAULT } from './util/constants';
 
 export function ControlClickByHandle(
-  windowHandle: number,
-  controlHandle: number,
+  windowHandle: bigint,
+  controlHandle: bigint,
   button: MouseButton = MouseButton.Left,
   clicks: number = 1,
   x: number = AU3_INTDEFAULT,

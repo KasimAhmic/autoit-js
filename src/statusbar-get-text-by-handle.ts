@@ -3,7 +3,7 @@ import { autoit } from './autoit/autoit';
 import { createUnicodeBuffer, unicodeBufferToString } from './util';
 
 export function StatusbarGetTextByHandle(
-  windowHandle: number,
+  windowHandle: bigint,
   part: number = 1,
   characterCount: number = 1024,
 ): string {

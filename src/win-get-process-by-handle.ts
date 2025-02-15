@@ -1,6 +1,6 @@
 import { DWORD, HWND } from './@types/win32';
 import { autoit } from './autoit/autoit';
 
-export function WinGetProcessByHandle(windowHandle: number): number {
+export function WinGetProcessByHandle(windowHandle: bigint): number {
   return autoit.invoke('AU3_WinGetProcessByHandle', DWORD, [HWND], [windowHandle]);
 }

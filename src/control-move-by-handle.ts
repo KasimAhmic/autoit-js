@@ -2,8 +2,8 @@ import { HWND, INT } from './@types/win32';
 import { autoit } from './autoit/autoit';
 
 export function ControlMoveByHandle(
-  windowHandle: number,
-  controlHandle: number,
+  windowHandle: bigint,
+  controlHandle: bigint,
   x: number,
   y: number,
   width: number = -1,
