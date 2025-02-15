@@ -9,9 +9,9 @@ export function ControlTreeViewByHandle(
   command: TreeViewCommand,
   extra1: string = '',
   extra2: string = '',
-  characters: number = 256,
+  characterCount: number = 1024,
 ): string {
-  const [buffer, length] = createUnicodeBuffer(characters);
+  const [buffer, length] = createUnicodeBuffer(characterCount);
 
   autoit.invoke(
     'AU3_ControlTreeViewByHandle',
