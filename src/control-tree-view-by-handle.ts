@@ -1,0 +1,24 @@
+import { HWND, INT, LPCWSTR, LPWSTR, VOID } from './@types/win32';
+import { autoit } from './autoit/autoit';
+import { TreeViewCommand } from './control-tree-view';
+import { createUnicodeBuffer, unicodeBufferToString } from './util';
+
+export function ControlTreeViewByHandle(
+  windowHandle: number,
+  controlHandle: number,
+  command: TreeViewCommand,
+  extra1: string = '',
+  extra2: string = '',
+  characters: number = 256,
+): string {
+  const [buffer, length] = createUnicodeBuffer(characters);
+
+  autoit.invoke(
+    'AU3_ControlTreeViewByHandle',
+    VOID,
+    [HWND, HWND, LPCWSTR, LPCWSTR, LPCWSTR, LPWSTR, INT],
+    [windowHandle, controlHandle, command, extra1, extra2, buffer, length],
+  );
+
+  return unicodeBufferToString(buffer);
+}

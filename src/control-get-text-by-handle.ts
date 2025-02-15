@@ -1,0 +1,20 @@
+import { HWND, INT, LPWSTR, VOID } from './@types/win32';
+import { autoit } from './autoit/autoit';
+import { createUnicodeBuffer, unicodeBufferToString } from './util';
+
+export function ControlGetTextByHandle(
+  windowHandle: number,
+  controlHandle: number,
+  characters: number = 1024,
+): string {
+  const [buffer, length] = createUnicodeBuffer(characters);
+
+  autoit.invoke(
+    'AU3_ControlGetTextByHandle',
+    VOID,
+    [HWND, HWND, LPWSTR, INT],
+    [windowHandle, controlHandle, buffer, length],
+  );
+
+  return unicodeBufferToString(buffer);
+}
