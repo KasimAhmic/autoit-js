@@ -6,6 +6,6 @@ export enum OnTop {
   No = 1,
 }
 
-export function WinSetOnTop(title: string, text: string = '', flag: OnTop): number {
-  return autoit.invoke('AU3_WinSetOnTop', INT, [LPCWSTR, LPCWSTR, INT], [title, text, flag]);
+export function WinSetOnTop(windowTitle: string, windowText: string = '', flag: OnTop): number {
+  return autoit.invoke('AU3_WinSetOnTop', INT, [LPCWSTR, LPCWSTR, INT], [windowTitle, windowText, flag]);
 }

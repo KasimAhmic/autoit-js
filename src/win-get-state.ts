@@ -19,8 +19,8 @@ export type WindowState = {
   maximized: boolean;
 };
 
-export function WinGetState(title: string, text: string = ''): WindowState {
-  const state = autoit.invoke('AU3_WinGetState', INT, [LPCWSTR, LPCWSTR], [title, text]);
+export function WinGetState(windowTitle: string, windowText: string = ''): WindowState {
+  const state = autoit.invoke('AU3_WinGetState', INT, [LPCWSTR, LPCWSTR], [windowTitle, windowText]);
 
   return {
     exists: (state & WindowProperty.Exists) === WindowProperty.Exists,

@@ -3,8 +3,8 @@ import { autoit } from './autoit/autoit';
 import { createUnicodeBuffer, unicodeBufferToString } from './util';
 
 export function StatusbarGetText(
-  title: string,
-  text: string = '',
+  windowTitle: string,
+  windowText: string = '',
   part: number = 1,
   characterCount: number = 1024,
 ): string {
@@ -14,7 +14,7 @@ export function StatusbarGetText(
     'AU3_StatusbarGetText',
     INT,
     [LPCWSTR, LPCWSTR, INT, LPWSTR, INT],
-    [title, text, part, buffer, length],
+    [windowTitle, windowText, part, buffer, length],
   );
 
   return unicodeBufferToString(buffer);

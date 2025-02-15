@@ -3,8 +3,8 @@ import koffi from 'koffi';
 import { HWND, LPCWSTR } from './@types/win32';
 import { autoit } from './autoit/autoit';
 
-export function WinGetHandle(title: string, text: string = ''): bigint {
-  const handleRef = autoit.invoke('AU3_WinGetHandle', HWND, [LPCWSTR, LPCWSTR], [title, text]);
+export function WinGetHandle(windowTitle: string, windowText: string = ''): bigint {
+  const handleRef = autoit.invoke('AU3_WinGetHandle', HWND, [LPCWSTR, LPCWSTR], [windowTitle, windowText]);
 
   return koffi.address(handleRef);
 }

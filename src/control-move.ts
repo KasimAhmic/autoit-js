@@ -2,8 +2,8 @@ import { INT, LPCWSTR } from './@types/win32';
 import { autoit } from './autoit/autoit';
 
 export function ControlMove(
-  title: string,
-  text: string,
+  windowTitle: string,
+  windowText: string,
   control: string,
   x: number,
   y: number,
@@ -14,6 +14,6 @@ export function ControlMove(
     'AU3_ControlMove',
     INT,
     [LPCWSTR, LPCWSTR, LPCWSTR, INT, INT, INT, INT],
-    [title, text, control, x, y, width, height],
+    [windowTitle, windowText, control, x, y, width, height],
   );
 }

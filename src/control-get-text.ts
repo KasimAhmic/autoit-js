@@ -3,8 +3,8 @@ import { autoit } from './autoit/autoit';
 import { createUnicodeBuffer, unicodeBufferToString } from './util';
 
 export function ControlGetText(
-  title: string,
-  text: string,
+  windowTitle: string,
+  windowText: string,
   control: string,
   characterCount: number = 1024,
 ): string {
@@ -14,7 +14,7 @@ export function ControlGetText(
     'AU3_ControlGetText',
     VOID,
     [LPCWSTR, LPCWSTR, LPCWSTR, LPWSTR, INT],
-    [title, text, control, buffer, length],
+    [windowTitle, windowText, control, buffer, length],
   );
 
   return unicodeBufferToString(buffer);

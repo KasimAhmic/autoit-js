@@ -30,8 +30,8 @@ export enum Command {
 }
 
 export function ControlCommand(
-  title: string,
-  text: string,
+  windowTitle: string,
+  windowText: string,
   control: string,
   command: Command,
   option: string = '',
@@ -43,7 +43,7 @@ export function ControlCommand(
     'AU3_ControlCommand',
     VOID,
     [LPCWSTR, LPCWSTR, LPCWSTR, LPCWSTR, LPCWSTR, LPWSTR, INT],
-    [title, text, control, command, option, buffer, length],
+    [windowTitle, windowText, control, command, option, buffer, length],
   );
 
   return unicodeBufferToString(buffer);

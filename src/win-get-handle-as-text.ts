@@ -3,14 +3,14 @@ import { autoit } from './autoit/autoit';
 import { createUnicodeBuffer, unicodeBufferToString } from './util';
 import { HWND_HEX_SIZE } from './util/constants';
 
-export function WinGetHandleAsText(title: string, text: string = ''): string {
+export function WinGetHandleAsText(windowTitle: string, windowText: string = ''): string {
   const [buffer, length] = createUnicodeBuffer(HWND_HEX_SIZE);
 
   autoit.invoke(
     'AU3_WinGetHandleAsText',
     VOID,
     [LPCWSTR, LPCWSTR, LPWSTR, INT],
-    [title, text, buffer, length],
+    [windowTitle, windowText, buffer, length],
   );
 
   return unicodeBufferToString(buffer);

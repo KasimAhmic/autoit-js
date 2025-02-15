@@ -3,8 +3,8 @@ import { autoit } from './autoit/autoit';
 import { SendMode } from './send';
 
 export function ControlSend(
-  title: string,
-  text: string,
+  windowTitle: string,
+  windowText: string,
   control: string,
   value: string,
   mode: SendMode = SendMode.Default,
@@ -13,6 +13,6 @@ export function ControlSend(
     'AU3_ControlSend',
     INT,
     [LPCWSTR, LPCWSTR, LPCWSTR, LPCWSTR, INT],
-    [title, text, control, value, mode],
+    [windowTitle, windowText, control, value, mode],
   );
 }

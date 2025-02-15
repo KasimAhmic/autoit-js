@@ -11,6 +11,6 @@ export enum StateFlag {
   // Enable = ?, TODO: Find out what this value is
 }
 
-export function WinSetState(title: string, text: string = '', flags: StateFlag): number {
-  return autoit.invoke('AU3_WinSetState', INT, [LPCWSTR, LPCWSTR, INT], [title, text, flags]);
+export function WinSetState(windowTitle: string, windowText: string = '', flags: StateFlag): number {
+  return autoit.invoke('AU3_WinSetState', INT, [LPCWSTR, LPCWSTR, INT], [windowTitle, windowText, flags]);
 }

@@ -2,8 +2,8 @@ import { INT, LPCWSTR } from './@types/win32';
 import { autoit } from './autoit/autoit';
 
 export function WinMenuSelectItem(
-  title: string,
-  text: string = '',
+  windowTitle: string,
+  windowText: string = '',
   item1: string,
   item2: string = '',
   item3: string = '',
@@ -17,6 +17,6 @@ export function WinMenuSelectItem(
     'AU3_WinMenuSelectItem',
     INT,
     [LPCWSTR, LPCWSTR, LPCWSTR, LPCWSTR, LPCWSTR, LPCWSTR, LPCWSTR, LPCWSTR, LPCWSTR, LPCWSTR],
-    [title, text, item1, item2, item3, item4, item5, item6, item7, item8],
+    [windowTitle, windowText, item1, item2, item3, item4, item5, item6, item7, item8],
   );
 }

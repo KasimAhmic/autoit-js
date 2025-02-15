@@ -4,8 +4,8 @@ import { MouseButton } from './mouse-click';
 import { AU3_INTDEFAULT } from './util/constants';
 
 export function ControlClick(
-  title: string,
-  text: string,
+  windowTitle: string,
+  windowText: string,
   control: string,
   button: MouseButton = MouseButton.Left,
   clicks: number = 1,
@@ -16,6 +16,6 @@ export function ControlClick(
     'AU3_ControlClick',
     INT,
     [LPCWSTR, LPCWSTR, LPCWSTR, LPCWSTR, INT, INT, INT],
-    [title, text, control, button, clicks, x, y],
+    [windowTitle, windowText, control, button, clicks, x, y],
   );
 }
