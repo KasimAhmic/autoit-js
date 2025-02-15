@@ -1,7 +1,7 @@
 /**
  * Allocates a new buffer of the given size plus one for the null terminator.
  *
- * @param characters The size in bytes of the buffer to allocate.
+ * @param characters The number of characters to make space for, excluding the null terminator.
  *
  * @returns A tuple containing the buffer and the total number of characters including the null terminator.
  */
