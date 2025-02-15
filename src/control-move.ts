@@ -4,7 +4,7 @@ import { autoit } from './autoit/autoit';
 export function ControlMove(
   windowTitle: string,
   windowText: string,
-  control: string,
+  controlId: string,
   x: number,
   y: number,
   width: number = -1,
@@ -14,6 +14,6 @@ export function ControlMove(
     'AU3_ControlMove',
     INT,
     [LPCWSTR, LPCWSTR, LPCWSTR, INT, INT, INT, INT],
-    [windowTitle, windowText, control, x, y, width, height],
+    [windowTitle, windowText, controlId, x, y, width, height],
   );
 }

@@ -5,7 +5,7 @@ import { createUnicodeBuffer, unicodeBufferToString } from './util';
 export function ControlGetText(
   windowTitle: string,
   windowText: string,
-  control: string,
+  controlId: string,
   characterCount: number = 1024,
 ): string {
   const [buffer, length] = createUnicodeBuffer(characterCount);
@@ -14,7 +14,7 @@ export function ControlGetText(
     'AU3_ControlGetText',
     VOID,
     [LPCWSTR, LPCWSTR, LPCWSTR, LPWSTR, INT],
-    [windowTitle, windowText, control, buffer, length],
+    [windowTitle, windowText, controlId, buffer, length],
   );
 
   return unicodeBufferToString(buffer);

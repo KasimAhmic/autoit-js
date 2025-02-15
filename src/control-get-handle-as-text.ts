@@ -6,7 +6,7 @@ import { HWND_HEX_SIZE } from './util/constants';
 export function ControlGetHandleAsText(
   windowTitle: string,
   windowText: string = '',
-  control: string,
+  controlId: string,
 ): string {
   const [buffer, length] = createUnicodeBuffer(HWND_HEX_SIZE);
 
@@ -14,7 +14,7 @@ export function ControlGetHandleAsText(
     'AU3_ControlGetHandleAsText',
     VOID,
     [LPCWSTR, LPCWSTR, LPCWSTR, LPWSTR, INT],
-    [windowTitle, windowText, control, buffer, length],
+    [windowTitle, windowText, controlId, buffer, length],
   );
 
   return unicodeBufferToString(buffer);

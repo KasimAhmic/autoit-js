@@ -18,7 +18,7 @@ export enum TreeViewCommand {
 export function ControlTreeView(
   windowTitle: string,
   windowText: string,
-  control: string,
+  controlId: string,
   command: TreeViewCommand,
   extra1: string = '',
   extra2: string = '',
@@ -30,7 +30,7 @@ export function ControlTreeView(
     'AU3_ControlTreeView',
     VOID,
     [LPCWSTR, LPCWSTR, LPCWSTR, LPCWSTR, LPCWSTR, LPCWSTR, LPWSTR, INT],
-    [windowTitle, windowText, control, command, extra1, extra2, buffer, length],
+    [windowTitle, windowText, controlId, command, extra1, extra2, buffer, length],
   );
 
   return unicodeBufferToString(buffer);

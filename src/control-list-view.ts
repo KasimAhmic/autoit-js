@@ -21,7 +21,7 @@ export enum ListViewCommand {
 export function ControlListView(
   windowTitle: string,
   windowText: string,
-  control: string,
+  controlId: string,
   command: ListViewCommand,
   option1: string = '',
   option2: string = '',
@@ -33,7 +33,7 @@ export function ControlListView(
     'AU3_ControlListView',
     VOID,
     [LPCWSTR, LPCWSTR, LPCWSTR, LPCWSTR, LPCWSTR, LPCWSTR, LPWSTR, INT],
-    [windowTitle, windowText, control, command, option1, option2, buffer, length],
+    [windowTitle, windowText, controlId, command, option1, option2, buffer, length],
   );
 
   return unicodeBufferToString(buffer);

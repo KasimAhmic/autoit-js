@@ -5,7 +5,7 @@ import { SendMode } from './send';
 export function ControlSend(
   windowTitle: string,
   windowText: string,
-  control: string,
+  controlId: string,
   value: string,
   mode: SendMode = SendMode.Default,
 ): number {
@@ -13,6 +13,6 @@ export function ControlSend(
     'AU3_ControlSend',
     INT,
     [LPCWSTR, LPCWSTR, LPCWSTR, LPCWSTR, INT],
-    [windowTitle, windowText, control, value, mode],
+    [windowTitle, windowText, controlId, value, mode],
   );
 }

@@ -32,7 +32,7 @@ export enum Command {
 export function ControlCommand(
   windowTitle: string,
   windowText: string,
-  control: string,
+  controlId: string,
   command: Command,
   option: string = '',
   characterCount: number = 1024,
@@ -43,7 +43,7 @@ export function ControlCommand(
     'AU3_ControlCommand',
     VOID,
     [LPCWSTR, LPCWSTR, LPCWSTR, LPCWSTR, LPCWSTR, LPWSTR, INT],
-    [windowTitle, windowText, control, command, option, buffer, length],
+    [windowTitle, windowText, controlId, command, option, buffer, length],
   );
 
   return unicodeBufferToString(buffer);

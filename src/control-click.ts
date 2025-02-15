@@ -6,7 +6,7 @@ import { AU3_INTDEFAULT } from './util/constants';
 export function ControlClick(
   windowTitle: string,
   windowText: string,
-  control: string,
+  controlId: string,
   button: MouseButton = MouseButton.Left,
   clicks: number = 1,
   x: number = AU3_INTDEFAULT,
@@ -16,6 +16,6 @@ export function ControlClick(
     'AU3_ControlClick',
     INT,
     [LPCWSTR, LPCWSTR, LPCWSTR, LPCWSTR, INT, INT, INT],
-    [windowTitle, windowText, control, button, clicks, x, y],
+    [windowTitle, windowText, controlId, button, clicks, x, y],
   );
 }
