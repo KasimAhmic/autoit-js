@@ -35,9 +35,9 @@ export function ControlCommand(
   control: string,
   command: Command,
   option: string = '',
-  characters: number = 1024,
+  characterCount: number = 1024,
 ): string {
-  const [buffer, length] = createUnicodeBuffer(characters);
+  const [buffer, length] = createUnicodeBuffer(characterCount);
 
   autoit.invoke(
     'AU3_ControlCommand',
