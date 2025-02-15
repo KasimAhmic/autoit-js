@@ -60,7 +60,7 @@ export class Logger {
     this.pid = process.pid.toString().padEnd(5, ' ');
     this.useColors = process.env.NO_COLOR !== '1';
 
-    const envLogLevel = process.env.AIT_LOG_LEVEL?.padStart(5, ' ')?.toUpperCase() ?? 'DEBUG';
+    const envLogLevel = process.env.AIT_LOG_LEVEL?.padStart(5, ' ')?.toUpperCase() ?? 'INFO';
 
     switch (envLogLevel) {
       case labels[LogLevel.Debug]:
