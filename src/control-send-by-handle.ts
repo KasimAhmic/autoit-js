@@ -1,4 +1,4 @@
-import { HWND, INT, LPCWSTR, VOID } from './@types/win32';
+import { HWND, INT, LPCWSTR } from './@types/win32';
 import { autoit } from './autoit/autoit';
 import { SendMode } from './send';
 
@@ -7,10 +7,10 @@ export function ControlSendByHandle(
   controlHandle: number,
   value: string,
   mode: SendMode = SendMode.Default,
-): void {
+): number {
   return autoit.invoke(
     'AU3_ControlSendByHandle',
-    VOID,
+    INT,
     [HWND, HWND, LPCWSTR, INT],
     [windowHandle, controlHandle, value, mode],
   );
