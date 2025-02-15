@@ -73,5 +73,6 @@ export type LongPointerToConstantString = Nominal<string, 'LPCSTR'>;
 export type LongPointerToWideString = Nominal<string, 'LPWSTR'>;
 export type LongPointerToConstantWideString = Nominal<string, 'LPCWSTR'>;
 
-export type Handle = Nominal<number, 'HANDLE'>;
+// Propbably wrong, but I don't have access to the External type that Koffi returns when accessing handles
+export type Handle = Nominal<IKoffiCType, 'HANDLE'>;
 export type WindowHandle = Nominal<Handle['__jsType'], 'HWND'>;
