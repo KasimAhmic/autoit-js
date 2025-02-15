@@ -5,9 +5,9 @@ import { createUnicodeBuffer, unicodeBufferToString } from './util';
 export function ControlGetTextByHandle(
   windowHandle: number,
   controlHandle: number,
-  characters: number = 1024,
+  characterCount: number = 1024,
 ): string {
-  const [buffer, length] = createUnicodeBuffer(characters);
+  const [buffer, length] = createUnicodeBuffer(characterCount);
 
   autoit.invoke(
     'AU3_ControlGetTextByHandle',
