@@ -21,7 +21,7 @@ export enum DriveMapFlag {
 export function DriveMapAdd(
   device: string,
   share: string,
-  flags: number,
+  flags: DriveMapFlag = DriveMapFlag.Default,
   username: string = '',
   password: string = '',
 ): string {
