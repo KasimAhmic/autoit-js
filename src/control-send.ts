@@ -1,4 +1,4 @@
-import { INT, LPCWSTR, VOID } from './@types/win32';
+import { INT, LPCWSTR } from './@types/win32';
 import { autoit } from './autoit/autoit';
 import { SendMode } from './send';
 
@@ -8,10 +8,10 @@ export function ControlSend(
   control: string,
   value: string,
   mode: SendMode = SendMode.Default,
-): void {
+): number {
   return autoit.invoke(
     'AU3_ControlSend',
-    VOID,
+    INT,
     [LPCWSTR, LPCWSTR, LPCWSTR, LPCWSTR, INT],
     [title, text, control, value, mode],
   );
