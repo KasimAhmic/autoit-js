@@ -1,13 +1,13 @@
 import koffi from 'koffi';
 
 import { IRect, LPRECT, Rect } from './@types/rect';
-import { LPCWSTR, VOID } from './@types/win32';
+import { INT, LPCWSTR } from './@types/win32';
 import { autoit } from './autoit/autoit';
 
-export function WinGetClientSize(szTitle: string, szText: string = ''): IRect {
+export function WinGetClientSize(title: string, text: string = ''): IRect {
   const rect = new Rect();
 
-  autoit.invoke('AU3_WinGetClientSize', VOID, [LPCWSTR, LPCWSTR, koffi.out(LPRECT)], [szTitle, szText, rect]);
+  autoit.invoke('AU3_WinGetClientSize', INT, [LPCWSTR, LPCWSTR, koffi.out(LPRECT)], [title, text, rect]);
 
   return rect;
 }
