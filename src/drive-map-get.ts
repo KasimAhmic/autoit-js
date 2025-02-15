@@ -8,8 +8,8 @@ import { createUnicodeBuffer, unicodeBufferToString } from './util';
  * @param device
  * @returns
  */
-export function DriveMapGet(device: string): string {
-  const [buffer, length] = createUnicodeBuffer(1024);
+export function DriveMapGet(device: string, characterCount: number = 1024): string {
+  const [buffer, length] = createUnicodeBuffer(characterCount);
 
   autoit.invoke('AU3_DriveMapGet', VOID, [LPCWSTR, LPWSTR, INT], [device, buffer, length]);
 
