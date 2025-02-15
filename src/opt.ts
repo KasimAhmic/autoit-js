@@ -40,6 +40,6 @@ export enum AutoItOption {
   WinWaitDelay = 'WinWaitDelay',
 }
 
-export function Opt(option: AutoItOption, param: number): number {
+export function Opt(option: AutoItOption, param: number = -1): number {
   return autoit.invoke('AU3_Opt', INT, [LPCWSTR, INT], [option, param]);
 }
