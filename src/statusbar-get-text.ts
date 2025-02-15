@@ -1,4 +1,4 @@
-import { INT, LPCWSTR, LPWSTR, VOID } from './@types/win32';
+import { INT, LPCWSTR, LPWSTR } from './@types/win32';
 import { autoit } from './autoit/autoit';
 import { createUnicodeBuffer, unicodeBufferToString } from './util';
 
@@ -6,13 +6,13 @@ export function StatusbarGetText(
   title: string,
   text: string = '',
   part: number = 1,
-  characters: number = 1024,
+  characterCount: number = 1024,
 ): string {
-  const [buffer, length] = createUnicodeBuffer(characters);
+  const [buffer, length] = createUnicodeBuffer(characterCount);
 
   autoit.invoke(
     'AU3_StatusbarGetText',
-    VOID,
+    INT,
     [LPCWSTR, LPCWSTR, INT, LPWSTR, INT],
     [title, text, part, buffer, length],
   );
