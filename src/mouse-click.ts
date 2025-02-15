@@ -1,4 +1,4 @@
-import { AU3_INTDEFAULT, INT, LPCWSTR, VOID } from './@types/win32';
+import { AU3_INTDEFAULT, INT, LPCWSTR } from './@types/win32';
 import { autoit } from './autoit/autoit';
 
 export enum MouseButton {
@@ -17,6 +17,6 @@ export function MouseClick(
   y: number = AU3_INTDEFAULT,
   clicks: number = 1,
   speed: number = -1,
-): void {
-  return autoit.invoke('AU3_MouseClick', VOID, [LPCWSTR, INT, INT, INT, INT], [button, x, y, clicks, speed]);
+): number {
+  return autoit.invoke('AU3_MouseClick', INT, [LPCWSTR, INT, INT, INT, INT], [button, x, y, clicks, speed]);
 }
