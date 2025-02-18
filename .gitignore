@@ -128,3 +128,25 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# TestApp
+.vs/
+Debug/
+Release/
+x64/
+x86/
+*.aps
+*.pdb
+*.exe
+*.ilk
+*.obj
+*.log
+*.tmp
+*.ipch
+*.tlog
+*.idb
+
+*.suo
+*.user
+*.VC.db
+*.VC.opendb
