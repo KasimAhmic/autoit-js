@@ -6,6 +6,7 @@
   "scripts": {
     "start": "tsx ./src/main.ts",
     "test": "vitest",
+    "test:ui": "vitest --ui",
     "lint": "eslint src",
     "build": "tsc",
     "postbuild": "cp src/autoit/AutoITX3* dist/autoit && cp src/autoit/LICENSE dist/autoit"
@@ -35,6 +36,7 @@
     "@trivago/prettier-plugin-sort-imports": "^5.2.2",
     "@types/node": "^22.13.4",
     "@vitest/coverage-v8": "^3.0.5",
+    "@vitest/ui": "^3.0.5",
     "eslint": "^9.20.1",
     "prettier": "^3.5.1",
     "segfault-handler": "^1.3.0",
