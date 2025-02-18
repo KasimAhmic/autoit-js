@@ -5,7 +5,7 @@ Node.js bindings for AutoItX3.dll
 ## Project Status
 
 > [!WARNING]
-> This project is currently in **beta** and is **mostly ready** for production use. There may be some unddiscovered bugs hiding out somewhere and there are a few functions that need some additional work.
+> This project is currently in **beta** and is **mostly ready** for production use. There may be some undiscovered bugs hiding out somewhere and there are a few functions that need some additional work.
 
 This library is not yet available on NPM, but it will be soon.
 
