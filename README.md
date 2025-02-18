@@ -22,8 +22,6 @@ AutoIt JS wraps the AutoItX3.dll library using Koffi to provide a simple to use 
 ```typescript
 import { autoit, Init, Run, Send, WinClose, WinWaitActive } from '@ahmic/autoit-js';
 
-const autoit = new AutoIt();
-
 autoit.load();
 
 Init();
