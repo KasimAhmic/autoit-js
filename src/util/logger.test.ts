@@ -5,12 +5,12 @@ describe('Logger', () => {
   let originalEnvNoColor: string | undefined;
 
   beforeAll(() => {
-    originalEnvLogLevel = process.env.LOG_LEVEL;
+    originalEnvLogLevel = process.env.AIT_LOG_LEVEL;
     originalEnvNoColor = process.env.NO_COLOR;
   });
 
   afterEach(() => {
-    process.env.LOG_LEVEL = originalEnvLogLevel;
+    process.env.AIT_LOG_LEVEL = originalEnvLogLevel;
     process.env.NO_COLOR = originalEnvNoColor;
 
     vi.clearAllMocks();
@@ -25,7 +25,7 @@ describe('Logger', () => {
     { logLevel: 'error', debug: false, info: false, warn: false, error: true, fatal: true },
     { logLevel: 'fatal', debug: false, info: false, warn: false, error: false, fatal: true },
   ])(`logs correct levels when the level is $logLevel`, ({ logLevel, debug, info, warn, error, fatal }) => {
-    process.env.LOG_LEVEL = logLevel;
+    process.env.AIT_LOG_LEVEL = logLevel;
 
     const logger = new Logger('TestLogger');
 

@@ -1,3 +1,9 @@
+import { inspect } from 'node:util';
+
+import { IKoffiCType } from 'koffi';
+
+import { Nominal, Win32Type } from '../@types/win32';
+
 enum LogLevel {
   Debug,
   Info,
@@ -20,14 +26,32 @@ const colors = {
   [LogLevel.Warn]: '\x1b[33m',
   [LogLevel.Error]: '\x1b[31m',
   [LogLevel.Fatal]: '\x1b[41m\x1b[37m',
-  RESET: '\x1b[0m',
+  Blue: '\x1b[34m',
+  Green: '\x1b[32m',
+  Yellow: '\x1b[33m',
+  Red: '\x1b[31m',
+  White: '\x1b[41m\x1b[37m',
+  Reset: '\x1b[0m',
 } as const;
 
+type Message =
+  | string
+  | number
+  | boolean
+  | bigint
+  | IKoffiCType
+  | Win32Type<Nominal<unknown, unknown>>
+  | null
+  | undefined
+  | object
+  | Error;
+
 export class Logger {
+  readonly logLevel: LogLevel;
+
   private readonly applicationName: string;
   private readonly pid: string;
   private readonly useColors: boolean;
-  private readonly logLevel: LogLevel;
 
   private readonly name: string;
 
@@ -36,7 +60,7 @@ export class Logger {
     this.pid = process.pid.toString().padEnd(5, ' ');
     this.useColors = process.env.NO_COLOR !== '1';
 
-    const envLogLevel = process.env.LOG_LEVEL?.padStart(5, ' ').toUpperCase();
+    const envLogLevel = process.env.AIT_LOG_LEVEL?.padStart(5, ' ')?.toUpperCase() ?? 'INFO';
 
     switch (envLogLevel) {
       case labels[LogLevel.Debug]:
@@ -66,27 +90,62 @@ export class Logger {
     this.name = name;
   }
 
-  debug(...values: any[]): boolean {
+  debug(...values: Message[]): boolean {
     return this.write(LogLevel.Debug, values);
   }
 
-  info(...values: any[]): boolean {
+  info(...values: Message[]): boolean {
     return this.write(LogLevel.Info, values);
   }
 
-  warn(...values: any[]): boolean {
+  warn(...values: Message[]): boolean {
     return this.write(LogLevel.Warn, values);
   }
 
-  error(...values: any[]): boolean {
+  error(...values: Message[]): boolean {
     return this.write(LogLevel.Error, values);
   }
 
-  fatal(...values: any[]): boolean {
+  fatal(...values: Message[]): boolean {
     return this.write(LogLevel.Fatal, values);
   }
 
-  private write(logLevel: LogLevel, values: any[]): boolean {
+  logFunctionCall(functionName: string, functionArguments: unknown[], functionResult: unknown): void {
+    // Short-circuit to avoid needless work in parsing the argument and result types
+    if (this.logLevel < LogLevel.Debug) {
+      return;
+    }
+
+    const fnName = `${colors.Green}${functionName}${colors.Reset}`;
+    let fnArgs = '';
+    const arrow = `${colors.Yellow}=>${colors.Reset}`;
+    const fnResult = `${colors.Green}${this.parseType(functionResult)}${colors.Reset}`;
+
+    for (let i = 0; i < functionArguments.length; i++) {
+      fnArgs += `${colors.Blue}${this.parseType(functionArguments[i])}${colors.Reset}${i < functionArguments.length - 1 ? ', ' : ''}`;
+    }
+
+    this.debug(`${fnName}(${fnArgs}) ${arrow} ${fnResult}`);
+  }
+
+  private parseType(value: unknown): string {
+    switch (typeof value) {
+      case 'string':
+        return `"${value}"`;
+      case 'number':
+      case 'bigint':
+      case 'boolean':
+        return `${value}`;
+      case 'undefined':
+        return 'undefined';
+      case 'object':
+        return value === null ? 'null' : inspect(value, { depth: 1, compact: true, breakLength: Infinity });
+      default:
+        return typeof value;
+    }
+  }
+
+  private write(logLevel: LogLevel, values: Message[]): boolean {
     if (logLevel < this.logLevel) {
       return false;
     }
@@ -105,14 +164,14 @@ export class Logger {
     return true;
   }
 
-  private formatValue(value: any): string {
+  private formatValue(value: Message): string {
     if (value instanceof Error) {
       return value.stack ?? value.message;
     } else if (typeof value === 'object' || Array.isArray(value)) {
       return JSON.stringify(value);
     }
 
-    return value;
+    return `${value}`;
   }
 
   private colorize(logLevel: LogLevel, message: string): string {
@@ -121,7 +180,7 @@ export class Logger {
     }
 
     const color = colors[logLevel];
-    const reset = colors.RESET;
+    const reset = colors.Reset;
 
     return `${color}${message}${reset}`;
   }
