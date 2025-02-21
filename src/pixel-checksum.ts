@@ -1,7 +1,7 @@
 import koffi from 'koffi';
 
 import { INT, LPRECT, Rect, UINT } from './@types';
-import { autoit } from './autoit/autoit';
+import { autoit } from './lib/autoit';
 
 export function PixelChecksum(
   left: number,

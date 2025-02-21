@@ -1,5 +1,5 @@
 import { INT } from './@types';
-import { autoit } from './autoit/autoit';
+import { autoit } from './lib/autoit';
 
 export enum Cursor {
   Unknown = -1,

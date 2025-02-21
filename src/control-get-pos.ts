@@ -1,7 +1,7 @@
 import koffi from 'koffi';
 
 import { INT, IRect, LPCWSTR, LPRECT, Rect } from './@types';
-import { autoit } from './autoit/autoit';
+import { autoit } from './lib/autoit';
 
 export function ControlGetPos(windowTitle: string, windowText: string, controlId: string): IRect {
   const rect = new Rect();

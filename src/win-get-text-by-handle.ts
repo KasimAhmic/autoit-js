@@ -1,5 +1,5 @@
 import { HWND, INT, LPWSTR, VOID } from './@types';
-import { autoit } from './autoit/autoit';
+import { autoit } from './lib/autoit';
 import { createUnicodeBuffer, unicodeBufferToString } from './util';
 
 export function WinGetTextByHandle(windowHandle: bigint, characterCount: number = 1024): string {

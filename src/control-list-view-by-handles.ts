@@ -1,6 +1,6 @@
 import { HWND, INT, LPCWSTR, LPWSTR, VOID } from './@types';
-import { autoit } from './autoit/autoit';
 import { ListViewCommand } from './control-list-view';
+import { autoit } from './lib/autoit';
 import { createUnicodeBuffer, unicodeBufferToString } from './util';
 
 export function ControlListViewByHandle(

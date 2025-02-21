@@ -1,5 +1,5 @@
 import { INT, LPCWSTR, VOID } from './@types';
-import { autoit } from './autoit/autoit';
+import { autoit } from './lib/autoit';
 
 export enum ScrollDirection {
   Up = 'up',

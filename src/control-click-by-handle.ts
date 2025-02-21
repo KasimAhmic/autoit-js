@@ -1,5 +1,5 @@
 import { HWND, INT, LPCWSTR } from './@types';
-import { autoit } from './autoit/autoit';
+import { autoit } from './lib/autoit';
 import { MouseButton } from './mouse-click';
 import { AU3_INTDEFAULT } from './util/constants';
 

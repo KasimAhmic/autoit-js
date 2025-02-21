@@ -1,5 +1,5 @@
 import { INT, LPCWSTR } from './@types';
-import { autoit } from './autoit/autoit';
+import { autoit } from './lib/autoit';
 
 /**
  * AutoIt options that can be set using the `AutoItSetOption` function.

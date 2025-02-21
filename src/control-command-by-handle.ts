@@ -1,6 +1,6 @@
 import { HWND, INT, LPCWSTR, LPWSTR, VOID } from './@types';
-import { autoit } from './autoit/autoit';
 import { Command } from './control-command';
+import { autoit } from './lib/autoit';
 import { createUnicodeBuffer, unicodeBufferToString } from './util';
 
 export function ControlCommandByHandle(

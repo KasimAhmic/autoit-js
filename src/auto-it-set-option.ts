@@ -1,5 +1,5 @@
 import { INT, LPCWSTR } from './@types';
-import { autoit } from './autoit/autoit';
+import { autoit } from './lib/autoit';
 import { AutoItOption } from './opt';
 
 export function AutoItSetOption(option: AutoItOption, value: number): number {

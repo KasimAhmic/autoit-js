@@ -1,7 +1,7 @@
 import koffi from 'koffi';
 
 import { IPoint, LPPOINT, Point, VOID } from './@types';
-import { autoit } from './autoit/autoit';
+import { autoit } from './lib/autoit';
 
 export function MouseGetPos(): IPoint {
   const point = new Point();

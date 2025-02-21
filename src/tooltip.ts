@@ -1,5 +1,5 @@
 import { AU3_INTDEFAULT, INT, LPCWSTR, VOID } from './@types';
-import { autoit } from './autoit/autoit';
+import { autoit } from './lib/autoit';
 
 /**
  * TODO: Apparently non-functional

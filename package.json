@@ -9,7 +9,7 @@
     "test:ui": "vitest --ui",
     "lint": "eslint src",
     "build": "tsc",
-    "postbuild": "cp src/autoit/AutoITX3* dist/autoit && cp src/autoit/LICENSE dist/autoit"
+    "postbuild": "cp src/lib/AutoITX3* dist/lib && cp src/lib/LICENSE dist/lib"
   },
   "repository": {
     "type": "git",

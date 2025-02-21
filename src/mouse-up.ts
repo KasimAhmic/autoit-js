@@ -1,5 +1,5 @@
 import { LPCWSTR, VOID } from './@types';
-import { autoit } from './autoit/autoit';
+import { autoit } from './lib/autoit';
 import { MouseButton } from './mouse-click';
 
 export function MouseUp(button: MouseButton = MouseButton.Left): void {

@@ -1,7 +1,7 @@
 import koffi from 'koffi';
 
 import { HWND, LPCWSTR } from './@types';
-import { autoit } from './autoit/autoit';
+import { autoit } from './lib/autoit';
 
 export function ControlGetHandle(windowHandle: bigint, controlId: string): bigint {
   const handleRef = autoit.invoke('AU3_ControlGetHandle', HWND, [HWND, LPCWSTR], [windowHandle, controlId]);

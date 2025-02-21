@@ -1,7 +1,6 @@
 import { randomUUID } from 'node:crypto';
 import { join } from 'node:path';
 
-import { autoit } from './autoit/autoit';
 import { ClipGet } from './clip-get';
 import { ClipPut } from './clip-put';
 import { ControlClick } from './control-click';
@@ -29,6 +28,7 @@ import { ControlSetText } from './control-set-text';
 import { ControlSetTextByHandle } from './control-set-text-by-handle';
 import { ControlShow } from './control-show';
 import { ControlShowByHandle } from './control-show-by-handle';
+import { autoit } from './lib/autoit';
 import { PixelGetColor } from './pixel-get-color';
 import { ProcessClose } from './process-close';
 import { Run } from './run';

@@ -1,5 +1,5 @@
 import { HWND, INT } from './@types';
-import { autoit } from './autoit/autoit';
+import { autoit } from './lib/autoit';
 import { OnTop } from './win-set-on-top';
 
 export function WinSetOnTopByHandle(windowHandle: bigint, flag: OnTop): number {

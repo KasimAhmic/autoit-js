@@ -1,7 +1,7 @@
 import koffi from 'koffi';
 
 import { INT, IPoint, LPPOINT, Point } from './@types';
-import { autoit } from './autoit/autoit';
+import { autoit } from './lib/autoit';
 
 export function WinGetCaretPos(): IPoint {
   const point = new Point();

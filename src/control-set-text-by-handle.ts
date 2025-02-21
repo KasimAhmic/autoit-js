@@ -1,5 +1,5 @@
 import { HWND, INT, LPCWSTR } from './@types';
-import { autoit } from './autoit/autoit';
+import { autoit } from './lib/autoit';
 
 export function ControlSetTextByHandle(windowHandle: bigint, controlHandle: bigint, value: string): number {
   return autoit.invoke(

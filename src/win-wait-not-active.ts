@@ -1,5 +1,5 @@
 import { INT, LPCWSTR } from './@types';
-import { autoit } from './autoit/autoit';
+import { autoit } from './lib/autoit';
 
 export function WinWaitNotActive(windowTitle: string, windowText: string = '', timeout: number = 0): number {
   return autoit.invoke(

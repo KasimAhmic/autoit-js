@@ -1,5 +1,5 @@
 import { INT, LPCWSTR } from './@types';
-import { autoit } from './autoit/autoit';
+import { autoit } from './lib/autoit';
 
 export function ControlShow(windowTitle: string, windowText: string, controlId: string): number {
   return autoit.invoke(

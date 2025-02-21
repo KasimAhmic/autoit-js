@@ -1,5 +1,5 @@
 import { INT } from './@types';
-import { autoit } from './autoit/autoit';
+import { autoit } from './lib/autoit';
 
 // TODO: Implement offsets when checking the color of a particular window
 export function PixelGetColor(x: number, y: number): number {

@@ -1,5 +1,5 @@
 import { HWND, INT } from './@types';
-import { autoit } from './autoit/autoit';
+import { autoit } from './lib/autoit';
 import { WindowProperty, WindowState } from './win-get-state';
 
 export function WinGetStateByHandle(windowHandle: bigint): WindowState {

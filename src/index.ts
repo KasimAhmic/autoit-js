@@ -1,4 +1,4 @@
-export { autoit } from './autoit/autoit';
+export { autoit } from './lib/autoit';
 
 export * from './auto-it-set-option';
 export * from './clip-get';

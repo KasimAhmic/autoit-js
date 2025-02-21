@@ -1,5 +1,5 @@
 import { INT, LPCWSTR, LPWSTR } from './@types';
-import { autoit } from './autoit/autoit';
+import { autoit } from './lib/autoit';
 import { createUnicodeBuffer, unicodeBufferToString } from './util';
 
 export function StatusbarGetText(

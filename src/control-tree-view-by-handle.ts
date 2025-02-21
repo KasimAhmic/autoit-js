@@ -1,6 +1,6 @@
 import { HWND, INT, LPCWSTR, LPWSTR, VOID } from './@types';
-import { autoit } from './autoit/autoit';
 import { TreeViewCommand } from './control-tree-view';
+import { autoit } from './lib/autoit';
 import { createUnicodeBuffer, unicodeBufferToString } from './util';
 
 export function ControlTreeViewByHandle(

@@ -1,5 +1,5 @@
 import { INT, LPCWSTR, LPWSTR, VOID } from './@types';
-import { autoit } from './autoit/autoit';
+import { autoit } from './lib/autoit';
 import { createUnicodeBuffer, unicodeBufferToString } from './util';
 import { HWND_HEX_SIZE } from './util/constants';
 

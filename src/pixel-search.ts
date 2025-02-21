@@ -9,8 +9,8 @@ import {
   DeleteObject,
   GetDIBits,
   SelectObject,
-} from './autoit/gdi32';
-import { GetDC, ReleaseDC } from './autoit/user32';
+} from './lib/gdi32';
+import { GetDC, ReleaseDC } from './lib/user32';
 
 const SRCCOPY = 0x00cc0020;
 const CAPTUREBLT = 0x40000000;

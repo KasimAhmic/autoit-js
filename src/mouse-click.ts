@@ -1,5 +1,5 @@
 import { AU3_INTDEFAULT, INT, LPCWSTR } from './@types';
-import { autoit } from './autoit/autoit';
+import { autoit } from './lib/autoit';
 
 export enum MouseButton {
   Left = 'left',
