@@ -29,10 +29,12 @@ import { ControlSetText } from './control-set-text';
 import { ControlSetTextByHandle } from './control-set-text-by-handle';
 import { ControlShow } from './control-show';
 import { ControlShowByHandle } from './control-show-by-handle';
+import { PixelGetColor } from './pixel-get-color';
 import { ProcessClose } from './process-close';
 import { Run } from './run';
 import { StatusbarGetText } from './statusbar-get-text';
 import { StatusbarGetTextByHandle } from './statusbar-get-text-by-handle';
+import { WinActivate } from './win-activate';
 import { WinGetHandle } from './win-get-handle';
 import { WinGetPos } from './win-get-pos';
 import { WinGetPosByHandle } from './win-get-pos-by-handle';
@@ -45,9 +47,12 @@ import { WinMenuSelectItemByHandle } from './win-menu-select-item-by-handle';
 import { WinMove } from './win-move';
 import { WinMoveByHandle } from './win-move-by-handle';
 import { WinSetTitleByHandle } from './win-set-new-title-by-handle';
+import { OnTop, WinSetOnTop } from './win-set-on-top';
 import { StateFlag, WinSetState } from './win-set-state';
 import { WinSetStateByHandle } from './win-set-state-by-handle';
 import { WinSetTitle } from './win-set-title';
+import { WinSetTrans } from './win-set-trans';
+import { WinSetTransByHandle } from './win-set-trans-by-handle';
 import { WinWait } from './win-wait';
 import { WinWaitClose } from './win-wait-close';
 
@@ -73,6 +78,7 @@ describe.sequential('AutoIt JS', () => {
 
     expect(Run(join(__dirname, '..', 'TestApp', 'x64', 'Release', 'TestApp.exe'))).toBeGreaterThan(0);
     expect(WinWait(APP_TITLE, '', 10)).toBeGreaterThan(0);
+    expect(WinSetOnTop(APP_TITLE, '', OnTop.Yes)).toBe(1);
 
     windowHandle = WinGetHandle(APP_TITLE, '');
   });
@@ -80,6 +86,16 @@ describe.sequential('AutoIt JS', () => {
   afterAll(() => {
     ProcessClose('TestApp.exe');
     autoit.unload();
+  });
+
+  it('logs a warning if the library is loaded twice', () => {
+    // @ts-expect-error Testing private member
+    const loggerWarnSpy = vi.spyOn(autoit.logger, 'warn');
+
+    autoit.load();
+
+    expect(loggerWarnSpy).toHaveBeenCalledTimes(1);
+    expect(loggerWarnSpy).toHaveBeenCalledWith('AutoIt is already loaded');
   });
 
   it('hides and shows the first name edit', () => {
@@ -291,5 +307,17 @@ describe.sequential('AutoIt JS', () => {
   it('gets the status bar text', () => {
     expect(StatusbarGetText(APP_TITLE, '', 2)).toBe(' Status 1');
     expect(StatusbarGetTextByHandle(windowHandle, 3)).toBe(' Status 2');
+  });
+
+  it('gets the color of a pixel', () => {
+    expect(WinActivate(APP_TITLE)).toBe(1);
+    const rect = WinGetPos(APP_TITLE);
+
+    expect(PixelGetColor(rect.right - 25, rect.bottom - 45)).toBe(0xfeb800);
+  });
+
+  it('sets the transparency of the window', () => {
+    expect(WinSetTrans(APP_TITLE, '', 127)).toBe(1);
+    expect(WinSetTransByHandle(windowHandle, 255)).toBe(1);
   });
 });
