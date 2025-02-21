@@ -82,24 +82,24 @@ export class AutoIt {
     return output;
   }
 
-  invokeAsync<
-    FunctionReturnType extends Win32Type<Nominal<unknown, unknown>>,
-    const FunctionArgumentTypes extends Win32Type<Nominal<unknown, unknown>>[],
-  >(
-    functionName: string,
-    functionReturnType: FunctionReturnType,
-    functionArgumentTypes: FunctionArgumentTypes,
-    functionArguments: unknown[],
-    callback: (result: NonNullable<FunctionReturnType['__jsType']>) => void,
-  ) {
-    if (!this.lib) {
-      throw new Error('You must call load() before invoking functions');
-    }
+  // invokeAsync<
+  //   FunctionReturnType extends Win32Type<Nominal<unknown, unknown>>,
+  //   const FunctionArgumentTypes extends Win32Type<Nominal<unknown, unknown>>[],
+  // >(
+  //   functionName: string,
+  //   functionReturnType: FunctionReturnType,
+  //   functionArgumentTypes: FunctionArgumentTypes,
+  //   functionArguments: unknown[],
+  //   callback: (result: NonNullable<FunctionReturnType['__jsType']>) => void,
+  // ) {
+  //   if (!this.lib) {
+  //     throw new Error('You must call load() before invoking functions');
+  //   }
 
-    const func = this.lib.func('__stdcall', functionName, functionReturnType, functionArgumentTypes);
+  //   const func = this.lib.func('__stdcall', functionName, functionReturnType, functionArgumentTypes);
 
-    func.async(...functionArguments, callback);
-  }
+  //   func.async(...functionArguments, callback);
+  // }
 }
 
 export const autoit = new AutoIt();

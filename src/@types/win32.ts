@@ -46,6 +46,8 @@ export type Win32Type<T extends Nominal<unknown, unknown> | null> = IKoffiCType 
 export const AU3_INTDEFAULT = -2147483647;
 export const SW_SHOWNORMAL = 1;
 
+export const BOOL: Win32Type<Bool> = koffi.alias('BOOL', 'bool');
+export const BYTE: Win32Type<Byte> = koffi.alias('BYTE', 'unsigned char');
 export const CHAR: Win32Type<Char> = koffi.alias('CHAR', 'char');
 export const DWORD: Win32Type<DoubleWord> = koffi.alias('DWORD', 'unsigned long');
 export const INT: Win32Type<Int> = koffi.alias('INT', 'int');
@@ -53,14 +55,22 @@ export const UINT: Win32Type<UnsignedInt> = koffi.alias('UINT', 'unsigned int');
 export const WCHAR: Win32Type<WideChar> = koffi.alias('WCHAR', 'wchar_t');
 export const LONG: Win32Type<Long> = koffi.alias('LONG', 'long');
 export const VOID: Win32Type<Void> = koffi.alias('VOID', 'void');
+export const WORD: Win32Type<Word> = koffi.alias('WORD', 'unsigned short');
+
+export const PVOID: Win32Type<PointerToVoid> = koffi.alias('PVOID', 'void*');
 
 export const LPCSTR: Win32Type<LongPointerToConstantString> = koffi.pointer('LPCSTR', CHAR);
 export const LPWSTR: Win32Type<LongPointerToWideString> = koffi.pointer('LPWSTR', WCHAR);
 export const LPCWSTR: Win32Type<LongPointerToConstantWideString> = koffi.pointer('LPCWSTR', WCHAR);
+export const LPVOID: Win32Type<LongPointerToVoid> = koffi.pointer('LPVOID', PVOID);
 
 export const HANDLE: Win32Type<Handle> = koffi.pointer('HANDLE', koffi.opaque());
 export const HWND: Win32Type<WindowHandle> = koffi.alias('HWND', HANDLE);
+export const HDC: Win32Type<DeviceContextHandle> = koffi.alias('HDC', HANDLE);
+export const HBITMAP: Win32Type<BitmapHandle> = koffi.alias('HBITMAP', HANDLE);
 
+export type Bool = Nominal<boolean, 'BOOL'>;
+export type Byte = Nominal<number, 'BYTE'>;
 export type Char = Nominal<string, 'CHAR'>;
 export type DoubleWord = Nominal<number, 'DWORD'>;
 export type Int = Nominal<number, 'INT'>;
@@ -68,11 +78,17 @@ export type UnsignedInt = Nominal<number, 'UINT'>;
 export type WideChar = Nominal<string, 'WCHAR'>;
 export type Long = Nominal<number, 'LONG'>;
 export type Void = Nominal<void, 'VOID'>;
+export type Word = Nominal<number, 'WORD'>;
+
+export type PointerToVoid = Nominal<IKoffiCType, 'PVOID'>;
 
 export type LongPointerToConstantString = Nominal<string, 'LPCSTR'>;
 export type LongPointerToWideString = Nominal<string, 'LPWSTR'>;
 export type LongPointerToConstantWideString = Nominal<string, 'LPCWSTR'>;
+export type LongPointerToVoid = Nominal<IKoffiCType, 'LPVOID'>;
 
 // Propbably wrong, but I don't have access to the External type that Koffi returns when accessing handles
 export type Handle = Nominal<IKoffiCType, 'HANDLE'>;
 export type WindowHandle = Nominal<Handle['__jsType'], 'HWND'>;
+export type DeviceContextHandle = Nominal<Handle['__jsType'], 'HDC'>;
+export type BitmapHandle = Nominal<Handle['__jsType'], 'HBITMAP'>;
