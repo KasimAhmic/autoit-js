@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/KasimAhmic/autoit-js/compare/v1.0.0...v1.0.1) (2025-02-23)
+
+
+### Bug Fixes
+
+* Build release artifacts ([9bf7536](https://github.com/KasimAhmic/autoit-js/commit/9bf7536be11be6dab1777899337af200f978e797))
+
 # 1.0.0 (2025-02-23)
 
 
