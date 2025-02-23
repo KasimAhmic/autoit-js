@@ -19,6 +19,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          ssh-key: ${{secrets.YOUR_SECRET_KEY}}
 
       - name: Setup Node
         uses: actions/setup-node@v4
