@@ -14,7 +14,7 @@
     "lint": "eslint src",
     "prebuild": "rimraf dist",
     "build": "tsc -p tsconfig.build.json && rollup -c",
-    "postbuild": "cp src/lib/AutoITX3* dist/lib && cp src/lib/LICENSE dist/lib",
+    "postbuild": "cp src/lib/AutoItX3* dist/lib && cp src/lib/LICENSE dist/lib",
     "reset": "rimraf node_modules dist coverage && npm install"
   },
   "repository": {
