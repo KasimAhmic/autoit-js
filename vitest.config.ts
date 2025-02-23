@@ -9,10 +9,14 @@ export default defineConfig({
       enabled: true,
       provider: 'v8',
       thresholds: {
-        branches: 75,
-        functions: 75,
-        lines: 75,
-        statements: 75,
+        // Until we figure out to get a Windows runner in GitHub Actions, we won't be able to run the full
+        // test suite (which includes test for AutoIt itself) nor will we be able to collect coverage for it.
+        'src/util/*': {
+          branches: 80,
+          functions: 80,
+          lines: 80,
+          statements: 80,
+        },
       },
     },
   },
