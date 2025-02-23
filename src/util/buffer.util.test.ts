@@ -1,6 +1,6 @@
 import { createUnicodeBuffer, unicodeBufferToString } from './buffer.util';
 
-describe('bnuffer.util', () => {
+describe('bnuffer.util @full @quick', () => {
   it('should create a unicode buffer', () => {
     const [buffer, totalCharacters] = createUnicodeBuffer(5);
 

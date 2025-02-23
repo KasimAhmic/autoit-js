@@ -1,6 +1,6 @@
 import { decimalToHex, hexToDecimal } from './color.util';
 
-describe('color.util', () => {
+describe('color.util @full @quick', () => {
   it('converts decimal to hex', () => {
     expect(decimalToHex(16711680)).toBe('FF0000');
   });

@@ -56,7 +56,7 @@ import { WinSetTransByHandle } from './win-set-trans-by-handle';
 import { WinWait } from './win-wait';
 import { WinWaitClose } from './win-wait-close';
 
-describe.sequential('AutoIt JS', () => {
+describe.sequential('AutoIt JS @full', () => {
   let windowHandle: bigint;
 
   const APP_TITLE = 'TestApp';

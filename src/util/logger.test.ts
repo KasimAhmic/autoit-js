@@ -1,6 +1,6 @@
 import { Logger } from './logger';
 
-describe('Logger', () => {
+describe('Logger @full @quick', () => {
   let originalEnvLogLevel: string | undefined;
   let originalEnvNoColor: string | undefined;
 
