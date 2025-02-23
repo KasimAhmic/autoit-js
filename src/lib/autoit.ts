@@ -1,10 +1,14 @@
 import { arch, platform } from 'node:os';
-import { resolve } from 'node:path';
+import { dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 import koffi, { IKoffiLib, KoffiFunction } from 'koffi';
 
 import { Nominal, Win32Type } from '../@types/win32';
 import { Logger } from '../util/logger';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 export class AutoIt {
   private readonly path: string;
