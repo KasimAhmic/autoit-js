@@ -3,7 +3,6 @@
  */
 export default {
   branches: ['main'],
-  dryRun: true,
   plugins: [
     '@semantic-release/commit-analyzer',
     '@semantic-release/release-notes-generator',
