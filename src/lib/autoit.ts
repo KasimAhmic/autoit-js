@@ -23,7 +23,7 @@ export class AutoIt {
     this.path = resolve(`${__dirname}/AutoItX3${archSuffix}.dll`);
     this.logger = new Logger(this.constructor.name);
 
-    if (platform() === 'win32') {
+    if (platform() !== 'win32') {
       this.logger.warn('AutoIt is only supported on Windows. AutoIt JS will not function as expected!');
     }
   }
