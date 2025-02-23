@@ -32,7 +32,7 @@ This Code of Conduct applies in all project spaces—GitHub issues, pull request
 
 ## Enforcement
 
-Violations may be reported to the project maintainers at kasim.ahmic@gmail.com. Reports will be reviewed promptly and handled discreetly.
+Violations may be reported to the project maintainers at kasim.ahmic\[at\]gmail.com. Reports will be reviewed promptly and handled discreetly.
 
 ## Enforcement Guidelines
 
