@@ -18,14 +18,14 @@ export class AutoIt {
   private functionCache: Record<string, KoffiFunction> = {};
 
   constructor() {
-    if (platform() !== 'win32') {
-      throw new Error('AutoIt is only supported on Windows');
-    }
-
     const archSuffix = arch() === 'x64' ? '_x64' : '';
 
     this.path = resolve(`${__dirname}/AutoItX3${archSuffix}.dll`);
     this.logger = new Logger(this.constructor.name);
+
+    if (platform() === 'win32') {
+      this.logger.warn('AutoIt is only supported on Windows. AutoIt JS will not function as expected!');
+    }
   }
 
   load() {
