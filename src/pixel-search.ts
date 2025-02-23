@@ -55,7 +55,7 @@ export function PixelSearch(
 
   const screenDeviceContext = GetDC(null);
   const memoryDeviceContext = CreateCompatibleDC(screenDeviceContext);
-  const bitmap = CreateCompatibleBitmap(screenDeviceContext, right - left, bottom - top);
+  const bitmap = CreateCompatibleBitmap(screenDeviceContext, width, height);
 
   function cleanup() {
     DeleteObject(bitmap);
