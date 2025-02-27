@@ -32,15 +32,15 @@ export const BitBlt: koffi.KoffiFunc<
     y1: Int,
     rop: DoubleWord,
   ) => boolean
-> = gdi32.func('BitBlt', BOOL, [HDC, INT, INT, INT, INT, HDC, INT, INT, DWORD]);
+> = gdi32.func('__stdcall', 'BitBlt', BOOL, [HDC, INT, INT, INT, INT, HDC, INT, INT, DWORD]);
 
 export const CreateCompatibleDC: koffi.KoffiFunc<
   (deviceContextHandle: DeviceContextHandle) => DeviceContextHandle
-> = gdi32.func('CreateCompatibleDC', HDC, [HDC]);
+> = gdi32.func('__stdcall', 'CreateCompatibleDC', HDC, [HDC]);
 
 export const CreateCompatibleBitmap: koffi.KoffiFunc<
   (deviceContextHandle: DeviceContextHandle, width: Int, height: Int) => BitmapHandle
-> = gdi32.func('CreateCompatibleBitmap', HBITMAP, [HDC, INT, INT]);
+> = gdi32.func('__stdcall', 'CreateCompatibleBitmap', HBITMAP, [HDC, INT, INT]);
 
 export const GetDIBits: koffi.KoffiFunc<
   (
@@ -52,7 +52,7 @@ export const GetDIBits: koffi.KoffiFunc<
     lpbi: IBitmapInfo,
     usage: UnsignedInt,
   ) => Int
-> = gdi32.func('GetDIBits', INT, [
+> = gdi32.func('__stdcall', 'GetDIBits', INT, [
   HDC,
   HBITMAP,
   UINT,
@@ -64,15 +64,17 @@ export const GetDIBits: koffi.KoffiFunc<
 
 export const SelectObject: koffi.KoffiFunc<
   (deviceContextHandle: DeviceContextHandle, bitmapHandle: BitmapHandle) => BitmapHandle
-> = gdi32.func('SelectObject', HBITMAP, [HDC, HBITMAP]);
+> = gdi32.func('__stdcall', 'SelectObject', HBITMAP, [HDC, HBITMAP]);
 
 export const DeleteObject: koffi.KoffiFunc<(bitmapHandle: BitmapHandle) => Bool> = gdi32.func(
+  '__stdcall',
   'DeleteObject',
   BOOL,
   [HBITMAP],
 );
 
 export const DeleteDC: koffi.KoffiFunc<(deviceContextHandle: DeviceContextHandle) => Bool> = gdi32.func(
+  '__stdcall',
   'DeleteDC',
   BOOL,
   [HDC],
