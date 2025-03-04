@@ -51,8 +51,6 @@ export function Tooltip(
 
   const toolInfo = koffi.alloc(TOOLINFOW, koffi.sizeof(TOOLINFOW));
 
-  console.log(toolInfo);
-
   koffi.encode(
     toolInfo,
     0,
