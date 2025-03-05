@@ -4,8 +4,12 @@ import { MouseButton } from './mouse-click';
 import { AU3_INTDEFAULT } from './util/constants';
 
 /**
- * Simulates a mouse click on a control. Unlike {@linkcode MouseClick}, `ControlClick` won't move the mouse cursor
- * but is capable of clicking on controls that may be obscured by other windows.
+ * Simulates a mouse click on a control. Searches for the window and control by the title and text content of
+ * each. Unlike {@linkcode MouseClick}, `ControlClick` won't move the mouse cursor but is capable of clicking
+ * on controls that may be obscured by other windows.
+ *
+ * Where possible, you should prefer using {@linkcode ControlClickByHandle} to avoid potential issues with
+ * ambiguous window and control titles.
  *
  * @param windowTitle The title of the window to access.
  * @param windowText The text of the window to access.
@@ -21,7 +25,14 @@ import { AU3_INTDEFAULT } from './util/constants';
  * ```typescript
  * import { ControlClick } from '@ahmic/autoit-js';
  *
- * ControlClick('Untitled - Notepad', '', 'Edit1'); // Clicks the Notepad window's edit control.
+ * // Click the Notepad window's edit control.
+ * ControlClick('Untitled - Notepad', '', 'Edit1');
+ *
+ * // Right click the Notepad window's edit control.
+ * ControlClick('Untitled - Notepad', '', 'Edit1', MouseButton.Right);
+ *
+ * // Double click the Notepad window's edit control.
+ * ControlClick('Untitled - Notepad', '', 'Edit1', MouseButton.Left, 2);
  * ```
  *
  * @see https://www.autoitscript.com/autoit3/docs/functions/ControlClick.htm
