@@ -86,6 +86,7 @@ export class AutoIt {
     return output;
   }
 
+  // TODO: Implement async function invocation
   // invokeAsync<
   //   FunctionReturnType extends Win32Type<Nominal<unknown, unknown>>,
   //   const FunctionArgumentTypes extends Win32Type<Nominal<unknown, unknown>>[],
@@ -106,4 +107,16 @@ export class AutoIt {
   // }
 }
 
+/**
+ * The default AutoIt singleton ready for use anywhere in your code.
+ *
+ * @example
+ * ```typescript
+ * import { autoit, ControlClick } from '@ahmic/autoit-js';
+ *
+ * autoit.load();
+ *
+ * ControlClick('Untitled - Notepad', '', 'Edit1');
+ * ```
+ */
 export const autoit = new AutoIt();

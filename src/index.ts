@@ -1,5 +1,5 @@
 export { autoit } from './lib/autoit';
-export { IPoint, IRect, Point, Rect } from './@types';
+export { IPoint, IRect, Point, Rect, AU3_INTDEFAULT, SW_SHOWNORMAL } from './@types';
 
 export * from './auto-it-set-option';
 export * from './clip-get';
