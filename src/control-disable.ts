@@ -17,6 +17,8 @@ import { autoit } from './lib/autoit';
  * // Disable the Notepad window's edit control.
  * ControlDisable('Untitled - Notepad', 'Edit1');
  * ```
+ *
+ * @see https://www.autoitscript.com/autoit3/docs/functions/ControlDisable.htm
  */
 export function ControlDisable(windowTitle: string, windowText: string, controlId: string): number {
   return autoit.invoke(
