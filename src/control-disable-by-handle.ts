@@ -16,7 +16,6 @@ import { autoit } from './lib/autoit';
  * const windowHandle = WinGetHandle('Untitled - Notepad');
  * const controlHandle = ControlGetHandle(windowHandle, 'Edit1');
  *
- * // Disable the Notepad window's edit control.
  * ControlDisableByHandle(windowHandle, controlHandle);
  * ```
  *

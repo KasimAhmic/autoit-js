@@ -2,19 +2,19 @@ import { INT, LPCWSTR } from './@types';
 import { autoit } from './lib/autoit';
 
 /**
- * Disables a control in a window.
+ * Disables a control in a window. Searches for the control by the title of its window, the text found within
+ * its window, and the ID of the control.
  *
  * @param windowTitle The title of the window to access.
  * @param windowText Text found in the window to access.
  * @param controlId The control to disable.
  *
- * @returns @returns 1 if success, 0 if failure.
+ * @returns 1 if success, 0 if failure.
  *
  * @example
  * ```typescript
  * import { ControlDisable } from '@ahmic/autoit-js';
  *
- * // Disable the Notepad window's edit control.
  * ControlDisable('Untitled - Notepad', 'Edit1');
  * ```
  *
