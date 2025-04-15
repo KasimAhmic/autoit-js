@@ -2,6 +2,26 @@ import { INT, LPCWSTR, LPWSTR, VOID } from './@types';
 import { autoit } from './lib/autoit';
 import { createUnicodeBuffer, unicodeBufferToString } from './util';
 
+/**
+ * Gets the ID of the control that has keyboard focus in a window. Searches for the control by the title of
+ * its window, and the text found within its window.
+ *
+ * @param windowTitle The title of the window to access.
+ * @param windowText Text found in the window to access.
+ *
+ * @returns The ID of the control that has keyboard focus.
+ *
+ * @example
+ * ```typescript
+ * import { ControlGetFocus } from '@ahmic/autoit-js';
+ *
+ * const className = ControlGetFocus('Untitled - Notepad');
+ *
+ * console.log(className); // Output: "Edit1"
+ * ```
+ *
+ * @see https://www.autoitscript.com/autoit3/docs/functions/ControlGetFocus.htm
+ */
 export function ControlGetFocus(windowTitle: string, windowText: string = ''): string {
   const [buffer, length] = createUnicodeBuffer(1024);
 
