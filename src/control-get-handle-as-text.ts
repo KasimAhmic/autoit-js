@@ -4,8 +4,7 @@ import { createUnicodeBuffer, unicodeBufferToString } from './util';
 import { HWND_HEX_SIZE } from './util/constants';
 
 /**
- * Gets the handle of a control in a window as a hexadecimal string. Searches for the control by the title of
- * its window, the text found in the window, and the ID of the control.
+ * Gets the handle of a control in a window as a hexadecimal string.
  *
  * @param windowTitle The title of the window to access.
  * @param windowText Optional text found in the window.

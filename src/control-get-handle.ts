@@ -4,8 +4,7 @@ import { HWND, LPCWSTR } from './@types';
 import { autoit } from './lib/autoit';
 
 /**
- * Gets the handle of a control in a window. Searches for the control by the handle of its window, and the ID
- * of the control.
+ * Gets the handle of a control in a window.
  *
  * @param windowHandle The handle of the window to access.
  * @param controlId The control to get the handle of.
