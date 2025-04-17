@@ -11,7 +11,7 @@ import { autoit } from './lib/autoit';
  * @param windowText Optional text found in the window.
  * @param controlId The control to get the position for.
  *
- * @returns The position of the control as a {@link Rect} object.
+ * @returns The position of the control as a {@linkcode Rect} object.
  *
  * @example
  * ```typescript

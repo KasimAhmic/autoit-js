@@ -10,7 +10,7 @@ import { autoit } from './lib/autoit';
  * @param windowHandle The handle of the window to access.
  * @param controlHandle The handle of the control to get the position for.
  *
- * @returns The position of the control as a {@link Rect} object.
+ * @returns The position of the control as a {@linkcode Rect} object.
  *
  * @example
  * ```typescript
