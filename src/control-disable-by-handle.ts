@@ -2,7 +2,7 @@ import { HWND, INT } from './@types';
 import { autoit } from './lib/autoit';
 
 /**
- * Disables a control in a window. Searches for the window and control by the handle of each.
+ * Disables a control in a window.
  *
  * @param windowHandle The handle of the window to access.
  * @param controlHandle The handle of the control to disable.

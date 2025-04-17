@@ -2,12 +2,11 @@ import { INT, LPCWSTR } from './@types';
 import { autoit } from './lib/autoit';
 
 /**
- * Disables a control in a window. Searches for the control by the title of its window, the text found within
- * its window, and the ID of the control.
+ * Disables a control in a window.
  *
  * @param windowTitle The title of the window to access.
- * @param windowText Text found in the window to access.
- * @param controlId The control to disable.
+ * @param windowText Optional text found in the window.
+ * @param controlId The ID of the control to disable.
  *
  * @returns 1 if success, 0 if failure.
  *
