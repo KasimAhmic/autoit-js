@@ -8,7 +8,7 @@ import { HWND_HEX_SIZE } from './util/constants';
  * its window, the text found in the window, and the ID of the control.
  *
  * @param windowTitle The title of the window to access.
- * @param windowText Text found in the window to access.
+ * @param windowText Optional text found in the window.
  * @param controlId The control to get the handle for.
  *
  * @returns The handle of the control as a hexadecimal string.
