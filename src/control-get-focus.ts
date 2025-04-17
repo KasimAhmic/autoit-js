@@ -3,11 +3,10 @@ import { autoit } from './lib/autoit';
 import { createUnicodeBuffer, unicodeBufferToString } from './util';
 
 /**
- * Gets the ID of the control that has keyboard focus in a window. Searches for the control by the title of
- * its window, and the text found within its window.
+ * Gets the ID of the control that has keyboard focus in a window.
  *
  * @param windowTitle The title of the window to access.
- * @param windowText Text found in the window to access.
+ * @param windowText Optional text found in the window.
  *
  * @returns The ID of the control that has keyboard focus.
  *

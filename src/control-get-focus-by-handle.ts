@@ -3,7 +3,7 @@ import { autoit } from './lib/autoit';
 import { createUnicodeBuffer, unicodeBufferToString } from './util';
 
 /**
- * Gets the ID of the control that has keyboard focus in a window. Searches for the window by its handle.
+ * Gets the ID of the control that has keyboard focus in a window.
  *
  * @param windowHandle The handle of the window to access.
  *
