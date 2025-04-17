@@ -5,7 +5,7 @@ import { autoit } from './lib/autoit';
  * Enables a control in a window.
  *
  * @param windowTitle The title of the window to access.
- * @param windowText Text found in the window to access.
+ * @param windowText Optional text found in the window.
  * @param controlId The control to enable.
  *
  * @returns 1 if success, 0 if failure.
