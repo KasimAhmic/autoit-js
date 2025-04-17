@@ -2,8 +2,7 @@ import { INT, LPCWSTR } from './@types';
 import { autoit } from './lib/autoit';
 
 /**
- * Sets the text of a control in a window. Searches for the control by the title of its window, the text
- * found within its window, and the ID of the control.
+ * Sets the text of a control in a window.
  *
  * @param windowTitle The title of the window to search for.
  * @param windowText Optional text found in the window.

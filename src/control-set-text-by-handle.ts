@@ -2,7 +2,7 @@ import { HWND, INT, LPCWSTR } from './@types';
 import { autoit } from './lib/autoit';
 
 /**
- * Sets the text of a control in a window. Searches for the control by its handle.
+ * Sets the text of a control in a window.
  *
  * @param windowHandle The handle of the window to access.
  * @param controlHandle The handle of the control to set text for.
