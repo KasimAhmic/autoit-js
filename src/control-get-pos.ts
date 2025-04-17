@@ -8,7 +8,7 @@ import { autoit } from './lib/autoit';
  * title of its window, the text found within its window, and the ID of the control.
  *
  * @param windowTitle The title of the window to access.
- * @param windowText Text found in the window to access.
+ * @param windowText Optional text found in the window.
  * @param controlId The control to get the position for.
  *
  * @returns The position of the control as a {@link Rect} object.
