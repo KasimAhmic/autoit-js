@@ -4,8 +4,7 @@ import { INT, LPCWSTR, LPRECT, Rect } from './@types';
 import { autoit } from './lib/autoit';
 
 /**
- * Gets the position of a control in a window, relative to the window itself. Searches for the control by the
- * title of its window, the text found within its window, and the ID of the control.
+ * Gets the position of a control in a window, relative to the window itself.
  *
  * @param windowTitle The title of the window to access.
  * @param windowText Optional text found in the window.
