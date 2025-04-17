@@ -2,11 +2,10 @@ import { INT, LPCWSTR } from './@types';
 import { autoit } from './lib/autoit';
 
 /**
- * Sets the focus to a control in a window. Searches for the control by the title of its window, the text
- * found within its window, and the ID of the control.
+ * Sets the keyboard focus to a control in a window.
  *
  * @param windowTitle The title of the window to access.
- * @param windowText The text found in the window to access.
+ * @param windowText Optional text found in the window.
  * @param controlId The ID of the control to focus.
  *
  * @return 1 if success, 0 if failure.
