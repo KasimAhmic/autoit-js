@@ -3,8 +3,10 @@ import { autoit } from './lib/autoit';
 import { WindowProperty, WindowState } from './win-get-state';
 
 /**
- * Returns the state of a window. Searches for the window by its handle. Though the original AutoIt function
- * returns a bitmask, this function returns an object with boolean properties for each state for ease of use.
+ * Returns the state of a window.
+ *
+ * Though the original AutoIt function returns a bitmask, this function returns an object with boolean
+ * properties for each state for ease of use.
  *
  * @param windowHandle The handle of the window to check.
  *

@@ -43,12 +43,13 @@ export type WindowState = {
 };
 
 /**
- * Returns the state of a window. Searches for the window by its title, and the text found within the window.
+ * Returns the state of a window.
+ *
  * Though the original AutoIt function returns a bitmask, this function returns an object with boolean
  * properties for each state for ease of use.
  *
  * @param windowTitle The title of the window to check.
- * @param windowText The text of the window to check.
+ * @param windowText Optional text found in the window.
  *
  * @returns An object containing the state of the window.
  *
