@@ -31,6 +31,10 @@ import {
 
 const user32 = koffi.load('user32.dll');
 
+export function MAKELPARAM(low: number, high: number): number {
+  return (low & 0xffff) | ((high & 0xffff) << 16);
+}
+
 export const GetDC: koffi.KoffiFunc<(windowHandle: WindowHandle | null) => DeviceContextHandle> = user32.func(
   '__stdcall',
   'GetDC',
