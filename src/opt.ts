@@ -366,6 +366,6 @@ export enum AutoItOption {
  *
  * @see https://www.autoitscript.com/autoit3/docs/functions/Opt.htm
  */
-export function Opt(option: AutoItOption, param: number = -1): number {
-  return autoit.invoke('AU3_Opt', INT, [LPCWSTR, INT], [option, param]);
+export function Opt(option: AutoItOption, value: number = -1): number {
+  return autoit.invoke('AU3_Opt', INT, [LPCWSTR, INT], [option, value]);
 }
