@@ -47,7 +47,7 @@ import { WinMenuSelectItemByHandle } from './win-menu-select-item-by-handle';
 import { WinMove } from './win-move';
 import { WinMoveByHandle } from './win-move-by-handle';
 import { WinSetTitleByHandle } from './win-set-new-title-by-handle';
-import { OnTop, WinSetOnTop } from './win-set-on-top';
+import { WinSetOnTop } from './win-set-on-top';
 import { StateFlag, WinSetState } from './win-set-state';
 import { WinSetStateByHandle } from './win-set-state-by-handle';
 import { WinSetTitle } from './win-set-title';
@@ -78,7 +78,7 @@ describe.sequential('AutoIt JS @full', () => {
 
     expect(Run(join(__dirname, '..', 'TestApp', 'x64', 'Release', 'TestApp.exe'))).toBeGreaterThan(0);
     expect(WinWait(APP_TITLE, '', 10)).toBeGreaterThan(0);
-    expect(WinSetOnTop(APP_TITLE, '', OnTop.Yes)).toBe(1);
+    expect(WinSetOnTop(APP_TITLE, '', true)).toBe(1);
 
     windowHandle = WinGetHandle(APP_TITLE, '');
   });

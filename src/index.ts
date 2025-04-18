@@ -1,4 +1,4 @@
-export { autoit } from './lib/autoit';
+export { autoit, AutoIt } from './lib/autoit';
 export { IPoint, IRect, Point, Rect } from './@types';
 
 export * from './auto-it-set-option';
