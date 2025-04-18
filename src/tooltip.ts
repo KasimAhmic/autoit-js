@@ -23,6 +23,27 @@ const TTM_TRACKACTIVATE = WM_USER + 17;
 const TTM_TRACKPOSITION = WM_USER + 18;
 const TTM_SETMAXTIPWIDTH = WM_USER + 24;
 
+/**
+ * Display a tooltip with the specified value at the specified position.
+ *
+ * The actual `AU3_Tooltip` function from AutoIt appears to be broken so it has been reimplemented here using
+ * the Windows User32 library.
+ *
+ * @param value The text to display in the tooltip.
+ * @param x The x-coordinate of the tooltip position. Default is 0.
+ * @param y The y-coordinate of the tooltip position. Default is 0.
+ * @param characterWidth The maximum width of the tooltip in characters. Default is 200.
+ * @param timeout The duration in milliseconds to display the tooltip. Default is 2000.
+ *
+ * @example
+ * ```typescript
+ * import { Tooltip } from '@ahmic/autoit-js';
+ *
+ * Tooltip('Hello, World!', 100, 200, 50, 3000);
+ * ```
+ *
+ * @see https://www.autoitscript.com/autoit3/docs/functions/ToolTip.htm
+ */
 export function Tooltip(
   value: string,
   x: number = 0,
