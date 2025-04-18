@@ -2,6 +2,9 @@ import { INT, LPCWSTR, LPWSTR, VOID } from './@types';
 import { autoit } from './lib/autoit';
 import { createUnicodeBuffer, unicodeBufferToString } from './util';
 
+/**
+ * Enumeration for drive mapping flags.
+ */
 export enum DriveMapFlag {
   /** Default */
   Default = 0,
