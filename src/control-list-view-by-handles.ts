@@ -8,7 +8,7 @@ import { createUnicodeBuffer, unicodeBufferToString } from './util';
  *
  * @param windowHandle The handle of the window to access.
  * @param controlHandle The handle of the ListView control to interact with.
- * @param command The command to execute on the ListView control. See {@linkcode ListViewCommand} for options.
+ * @param command The command to execute on the ListView control. See {@linkcode ListViewCommand} for details.
  * @param option1 Optional parameter for the command.
  * @param option2 Optional parameter for the command.
  * @param characterCount The maximum number of characters to retrieve. Default is 1024.

@@ -2,6 +2,9 @@ import { INT, LPCWSTR, LPWSTR, VOID } from './@types';
 import { autoit } from './lib/autoit';
 import { createUnicodeBuffer, unicodeBufferToString } from './util';
 
+/**
+ * Enumeration of commands for interacting with a list view control.
+ */
 export enum ListViewCommand {
   /**
    * Deselects one or more items.
@@ -77,7 +80,7 @@ export enum ListViewCommand {
  * @param windowTitle The title of the window to access.
  * @param windowText Optional text found in the window.
  * @param controlId The ID of the ListView control to interact with.
- * @param command The command to execute on the ListView control. See {@linkcode ListViewCommand} for options.
+ * @param command The command to execute on the ListView control. See {@linkcode ListViewCommand} for details.
  * @param option1 Optional parameter for the command.
  * @param option2 Optional parameter for the command.
  * @param characters The maximum number of characters to retrieve. Default is 1024.
