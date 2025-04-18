@@ -9,7 +9,7 @@ import { SendMode } from './send';
  * @param windowText Optional text found in the window.
  * @param controlId The ID of the control to send text to.
  * @param value The string of text to send.
- * @param mode The send mode to use. See {@linkcode SendMode} for options. Default is {@linkcode SendMode.Default}.
+ * @param mode The send mode to use. See {@linkcode SendMode} for details. Default is {@linkcode SendMode.Default}.
  *
  * @returns 1 if successful, 0 otherwise.
  *
