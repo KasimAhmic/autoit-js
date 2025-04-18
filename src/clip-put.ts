@@ -6,15 +6,13 @@ import { autoit } from './lib/autoit';
  *
  * @param value The text to put in the clipboard.
  *
- * @returns The text from the clipboard.
- *
  * @example
  * ```typescript
  * import { ClipPut, ClipGet } from '@ahmic/autoit-js';
  *
  * ClipPut('Hello');
  *
- * console.log(ClipGet()); // Hello
+ * console.log(ClipGet()); // Outputs: Hello
  * ```
  *
  * @see https://www.autoitscript.com/autoit3/docs/functions/ClipPut.htm
