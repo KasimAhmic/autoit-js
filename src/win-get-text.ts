@@ -2,6 +2,26 @@ import { INT, LPCWSTR, LPWSTR, VOID } from './@types';
 import { autoit } from './lib/autoit';
 import { createUnicodeBuffer, unicodeBufferToString } from './util';
 
+/**
+ * Retrieves the text from a window.
+ *
+ * @param windowTitle The title of the window to access.
+ * @param windowText Optional text found in the window.
+ * @param characterCount The maximum number of characters to retrieve. Default is 1024.
+ *
+ * @returns The text of the window as a string.
+ *
+ * @example
+ * ```typescript
+ * import { WinGetText } from '@ahmic/autoit-js';
+ *
+ * const text = WinGetText('Untitled - Notepad');
+ *
+ * console.log(text); // Output: "Example text"
+ * ```
+ *
+ * @see https://www.autoitscript.com/autoit3/docs/functions/WinGetText.htm
+ */
 export function WinGetText(
   windowTitle: string,
   windowText: string = '',
