@@ -2,6 +2,9 @@ import koffi from 'koffi';
 
 import { LONG } from './win32';
 
+/**
+ * Represents a point in a two-dimensional space.
+ */
 export interface IPoint {
   /**
    * The X coordinate of the point.
@@ -14,16 +17,19 @@ export interface IPoint {
   y: number;
 }
 
+/**
+ * Serves as a `POINT` struct compatible object.
+ *
+ * @see https://learn.microsoft.com/en-us/windows/win32/api/windef/ns-windef-point
+ */
 export class Point implements IPoint {
   x: number;
   y: number;
 
   /**
-   * Creates a new Point object with the specified coordinates. Serves as a `POINT` struct compatible object.
+   * Creates a new Point object with the specified coordinates.
    *
    * @param point The coordinates of the point. All properties default to 0.
-   *
-   * @see https://learn.microsoft.com/en-us/windows/win32/api/windef/ns-windef-point
    */
   constructor(point?: IPoint) {
     this.x = point?.x ?? 0;
