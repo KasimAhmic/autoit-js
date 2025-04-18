@@ -34,5 +34,6 @@
   ],
   "cleanOutputDir": true,
   "projectDocuments": ["docs/*.md"],
-  "validation": true
+  "validation": true,
+  "intentionallyNotExported": ["Win32Type"]
 }
