@@ -1,3 +1,12 @@
+# [1.1.0](https://github.com/KasimAhmic/autoit-js/compare/v1.0.1...v1.1.0) (2025-04-18)
+
+
+### Features
+
+* Install and configure typedoc ([a6b35dd](https://github.com/KasimAhmic/autoit-js/commit/a6b35dd45c86be6ebdc7b6a0e021e450608ee1a2))
+* Reimplement Tooltip function ([6d362fa](https://github.com/KasimAhmic/autoit-js/commit/6d362fa63d5840760b7b5dd24742b0d297c17f55))
+* Reimplement Tooltip function ([d7db524](https://github.com/KasimAhmic/autoit-js/commit/d7db524782ff9a389c004d7676455cc818f28013))
+
 ## [1.0.1](https://github.com/KasimAhmic/autoit-js/compare/v1.0.0...v1.0.1) (2025-02-23)
 
 
