@@ -2,10 +2,20 @@ import { INT, LPCWSTR } from './@types';
 import { autoit } from './lib/autoit';
 import { ShowWindowFlag } from './run';
 
+/**
+ * Enumeration of logon flags for the RunAs function.
+ */
 export enum LogonFlag {
+  /** Interactive logon with no profile. */
   NoProfile = 0,
+
+  /** Interactive logon with profile. */
   Profile = 1,
+
+  /** Network credentials only. */
   Network = 2,
+
+  /** Inherit the calling process's environment instead of the user's environment. */
   Inherit = 4,
 }
 
