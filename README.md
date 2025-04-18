@@ -1,26 +1,30 @@
 # AutoIt JS
 
-Node.js bindings for AutoItX3.dll
+Node.js bindings for AutoItX3.dll.
 
-## Project Status
+<div align="center">
 
-> [!WARNING]
-> This project is currently in **beta** and is **mostly ready** for production use. There may be some undiscovered bugs hiding out somewhere and there are a few functions that need some additional work.
+![NPM Version](https://img.shields.io/npm/v/%40ahmic%2Fautoit-js)
+![GitHub License](https://img.shields.io/github/license/KasimAhmic/autoit-js)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/KasimAhmic/autoit-js/build.yml)
+![NPM Downloads](https://img.shields.io/npm/dw/%40ahmic%2Fautoit-js)
+![GitHub Issues](https://img.shields.io/github/issues/KasimAhmic/autoit-js)
+![GitHub Pull Requests](https://img.shields.io/github/issues-pr/KasimAhmic/autoit-js)
 
-This library is not yet available on NPM, but it will be soon.
+</div>
 
 ## What is AutoIt JS?
 
-AutoIt is a Windows automation tool that can be used to automate tasks on Windows. AutoIt provides its own scripting language however, it can be difficult to work with if you need to integrate Winodws automation into an existing test suite.
+AutoIt is a Windows automation tool that can be used to automate tasks on Windows. AutoIt provides its own scripting language however, it can be difficult to work with if you need to integrate Windows automation into an existing test suite.
 
 Enter AutoIt JS.
 
-AutoIt JS wraps the AutoItX3.dll library using Koffi to provide a simple to use interface for AutoIt. It allows you to take your existing JavaScript/TypeScript test suite powered by PlayWright/Cypress/Puppeteer/etc. and automate Windows programs with ease.
+AutoIt JS wraps the AutoItX3.dll library using [Koffi](https://koffi.dev/) to provide a simple to use interface for AutoIt. It allows you to take your existing JavaScript/TypeScript test suite powered by PlayWright/Cypress/Puppeteer/etc. and automate Windows programs with ease.
 
 ## Example Usage
 
 ```typescript
-import { autoit, Init, Run, Send, WinClose, WinWaitActive } from '@ahmic/autoit-js';
+import { Init, Run, Send, WinClose, WinWaitActive, autoit } from '@ahmic/autoit-js';
 
 autoit.load();
 

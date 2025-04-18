@@ -153,3 +153,5 @@ x86/
 *.user
 *.VC.db
 *.VC.opendb
+
+.docs
