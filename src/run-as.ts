@@ -9,6 +9,30 @@ export enum LogonFlag {
   Inherit = 4,
 }
 
+/**
+ * Runs a program under a different user account.
+ *
+ * @param username The username to run the program as.
+ * @param domain The domain of the user account.
+ * @param password The password of the user account.
+ * @param logonFlag The logon flag to control the behavior of the logon.
+ * @param program The name of the program to run.
+ * @param directory Optional working directory for the program.
+ * @param showFlag Optional flag to control how the program's window is shown.
+ *
+ * @returns The PID of the started process if successful, or 0 if failed.
+ *
+ * @example
+ * ```typescript
+ * import { RunAs, LogonFlag } from '@ahmic/autoit-js';
+ *
+ * const pid = RunAs('admin', 'DOMAIN', 'password', LogonFlag.Profile, 'notepad.exe');
+ *
+ * console.log(pid); // Output: 123
+ * ```
+ *
+ * @see https://www.autoitscript.com/autoit3/docs/functions/RunAs.htm
+ */
 export function RunAs(
   username: string,
   domain: string,
