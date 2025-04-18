@@ -2,6 +2,9 @@ import koffi from 'koffi';
 
 import { LONG } from './win32';
 
+/**
+ * Represents a rectangle with coordinates for the left, top, right, and bottom edges.
+ */
 export interface IRect {
   /**
    * The left coordinate of the rectangle. Can be used as the X coordinate of the window/control.
@@ -24,6 +27,11 @@ export interface IRect {
   bottom: number;
 }
 
+/**
+ * Serves as a `RECT` struct compatible object.
+ *
+ * @see https://learn.microsoft.com/en-us/windows/win32/api/windef/ns-windef-rect
+ */
 export class Rect implements IRect {
   left: number;
   top: number;
@@ -31,11 +39,9 @@ export class Rect implements IRect {
   bottom: number;
 
   /**
-   * Creates a new Rect object with the specified coordinates. Serves as a `RECT` struct compatible object.
+   * Creates a new Rect object with the specified coordinates.
    *
    * @param rect The coordinates of the rectangle. All properties default to 0.
-   *
-   * @see https://learn.microsoft.com/en-us/windows/win32/api/windef/ns-windef-rect
    */
   constructor(rect?: Partial<IRect>) {
     this.left = rect?.left ?? 0;
