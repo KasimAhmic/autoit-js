@@ -1,6 +1,9 @@
 import { INT, LPCWSTR } from './@types';
 import { autoit } from './lib/autoit';
 
+/**
+ * Enumeration for window states.
+ */
 export enum StateFlag {
   /**
    * Hides the window.
