@@ -2,7 +2,7 @@ import koffi from 'koffi';
 
 import { WinSleep } from './@types/kernel32';
 import { TOOLINFOW, ToolInfoW } from './@types/tool-info';
-import { CreateWindowExW, DestroyWindow, SendMessageW } from './lib/user32';
+import { CreateWindowExW, DestroyWindow, MAKELPARAM, SendMessageW } from './lib/user32';
 
 const CW_USEDEFAULT = 0x80000000;
 
@@ -22,10 +22,6 @@ const TTM_ADDTOOLW = WM_USER + 50;
 const TTM_TRACKACTIVATE = WM_USER + 17;
 const TTM_TRACKPOSITION = WM_USER + 18;
 const TTM_SETMAXTIPWIDTH = WM_USER + 24;
-
-function MAKELPARAM(low: number, high: number): number {
-  return (low & 0xffff) | ((high & 0xffff) << 16);
-}
 
 export function Tooltip(
   value: string,
@@ -51,15 +47,7 @@ export function Tooltip(
 
   const toolInfo = koffi.alloc(TOOLINFOW, koffi.sizeof(TOOLINFOW));
 
-  koffi.encode(
-    toolInfo,
-    0,
-    TOOLINFOW,
-    new ToolInfoW({
-      uFlags: TTF_TRACK | TTF_ABSOLUTE,
-      lpszText: value,
-    }),
-  );
+  koffi.encode(toolInfo, 0, TOOLINFOW, new ToolInfoW({ uFlags: TTF_TRACK | TTF_ABSOLUTE, lpszText: value }));
 
   const toolInfoPointer = koffi.address(toolInfo);
 
@@ -72,4 +60,6 @@ export function Tooltip(
 
   SendMessageW(tooltipHandle, TTM_TRACKACTIVATE, 0, toolInfoPointer);
   DestroyWindow(tooltipHandle);
+
+  koffi.free(toolInfo);
 }
