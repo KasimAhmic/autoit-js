@@ -16,7 +16,7 @@ import {
   autoit,
 } from '@ahmic/autoit-js';
 
-// An instance of the AutoIt class is created automtically, you need only call load() to initialize it
+// An instance of the AutoIt class is created automatically, you need only call load() to initialize it
 autoit.load();
 
 // Initialize AutoIt
