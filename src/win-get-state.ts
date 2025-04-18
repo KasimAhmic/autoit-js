@@ -1,44 +1,49 @@
 import { INT, LPCWSTR } from './@types';
 import { autoit } from './lib/autoit';
 
+/**
+ * Enumeration for window properties.
+ */
 export enum WindowProperty {
+  /** Indicates if the window exists. */
   Exists = 1,
+
+  /** Indicates if the window is visible. */
   Visible = 2,
+
+  /** Indicates if the window is enabled. */
   Enabled = 4,
+
+  /** Indicates if the window is active. */
   Active = 8,
+
+  /** Indicates if the window is minimized. */
   Minimized = 16,
+
+  /** Indicates if the window is maximized. */
   Maximized = 32,
 }
 
+/**
+ * The decoded state of a window.
+ */
 export type WindowState = {
-  /**
-   * Indicates if the window exists.
-   */
+  /** Indicates if the window exists. */
   exists: boolean;
 
-  /**
-   * Indicates if the window is visible.
-   */
+  /** Indicates if the window is visible. */
   visible: boolean;
 
-  /**
-   * Indicates if the window is enabled.
-   */
+  /** Indicates if the window is enabled. */
   enabled: boolean;
 
-  /**
-   * Indicates if the window is active.
-   */
+  /** Indicates if the window is active. */
   active: boolean;
 
-  /**
-   * Indicates if the window is minimized.
-   */
+  /** Indicates if the window is minimized. */
   minimized: boolean;
 
-  /**
-   * Indicates if the window is maximized.
-   */
+  /** Indicates if the window is maximized. */
   maximized: boolean;
 };
 
