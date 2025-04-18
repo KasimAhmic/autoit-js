@@ -15,6 +15,7 @@ import { createUnicodeBuffer, unicodeBufferToString } from './util';
  * import { WinGetTitle } from '@ahmic/autoit-js';
  *
  * const title = WinGetTitle('Untitled - Notepad');
+ *
  * console.log(title); // Output: "Untitled - Notepad"
  * ```
  *
