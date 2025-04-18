@@ -10,6 +10,10 @@ import { Logger } from '../util/logger';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
+/**
+ * The AutoIt class provides a wrapper around the AutoItX3 DLL, allowing you to call AutoIt functions from
+ * JavaScript.
+ */
 export class AutoIt {
   private readonly path: string;
   private readonly logger: Logger;
@@ -28,6 +32,11 @@ export class AutoIt {
     }
   }
 
+  /**
+   * Loads the AutoItX3 DLL. This method must be called before invoking any AutoIt functions. This is done so
+   * that if you're working in a multi-threaded environment, each thread has its own instance of the AutoItX3
+   * DLL open.
+   */
   load() {
     if (this.lib) {
       this.logger.warn('AutoIt is already loaded');
@@ -40,6 +49,9 @@ export class AutoIt {
     }
   }
 
+  /**
+   * Unloads the AutoItX3 DLL.
+   */
   unload() {
     if (this.lib) {
       this.logger.debug(`Unloading AutoIt from ${this.path}`);
@@ -54,10 +66,23 @@ export class AutoIt {
     }
   }
 
+  /**
+   * Checks if the AutoItX3 DLL is loaded.
+   */
   get isLoaded(): boolean {
     return this.lib !== null;
   }
 
+  /**
+   * Invokes a function from the AutoItX3 DLL.
+   *
+   * @param functionName The name of the function to invoke.
+   * @param functionReturnType The return type of the function.
+   * @param functionArgumentTypes The argument types of the function.
+   * @param functionArguments The arguments to pass to the function.
+   *
+   * @returns The result of the function call.
+   */
   invoke<
     FunctionReturnType extends Win32Type<Nominal<unknown, unknown>>,
     const FunctionArgumentTypes extends Win32Type<Nominal<unknown, unknown>>[],
