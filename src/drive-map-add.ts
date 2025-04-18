@@ -3,20 +3,35 @@ import { autoit } from './lib/autoit';
 import { createUnicodeBuffer, unicodeBufferToString } from './util';
 
 export enum DriveMapFlag {
+  /** Default */
   Default = 0,
+
+  /** Persistant mapping */
   Persistant = 1,
+
+  /** Show authentication dialog if required */
   Authentication = 8,
 }
 
 /**
- * Untested.
+ * Maps a network drive to a local drive letter.
  *
- * @param device
- * @param share
- * @param flags
- * @param username
- * @param password
- * @returns
+ * @param device The local drive letter to map.
+ * @param share The network share to map to.
+ * @param flags Optional flags to control the mapping behavior.
+ * @param username Optional username for authentication.
+ * @param password Optional password for authentication.
+ *
+ * @returns "1" if successful, "0" if failed.
+ *
+ * @example
+ * ```typescript
+ * import { DriveMapAdd, DriveMapFlag } from '@ahmic/autoit-js';
+ *
+ * DriveMapAdd('Z:', '\\server\share', DriveMapFlag.Authentication, 'user', 'password');
+ * ```
+ *
+ * @see https://www.autoitscript.com/autoit3/docs/functions/DriveMapAdd.htm
  */
 export function DriveMapAdd(
   device: string,
