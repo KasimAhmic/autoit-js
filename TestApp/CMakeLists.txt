@@ -9,7 +9,11 @@ set(RESOURCES "src/resources/TestApp.rc")
 
 set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -mwindows -municode")
 
-add_compile_options(-Wall -Wextra -Wpedantic -Werror)
+if (MSVC)
+    add_compile_options(/W4)
+else ()
+    add_compile_options(-Wall -Wextra -Wpedantic -Werror)
+endif ()
 
 add_executable(
         ${PROJECT_NAME} WIN32
@@ -27,3 +31,7 @@ target_link_libraries(
         comctl32
         uxtheme
 )
+
+if (MSVC)
+    target_link_options(${PROJECT_NAME} PRIVATE /MANIFEST:NO)
+endif ()

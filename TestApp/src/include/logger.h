@@ -4,8 +4,7 @@
 #include <utility>
 #include <ctime>
 #include <iomanip>
-#include <iostream>
-#include <unistd.h>
+#include <sstream>
 
 constexpr auto LEVEL_VERBOSE = "VERBOSE";
 constexpr auto LEVEL_DEBUG = "  DEBUG";
@@ -22,7 +21,7 @@ class Logger {
 public:
     explicit Logger(std::string name) {
         this->name = "[" + std::move(name) + "]";
-        this->pid = padRight(std::to_string(getpid()), 6, ' ');
+        this->pid = padRight(std::to_string(GetCurrentProcessId()), 6, ' ');
     }
 
     void verbose(const std::string &message) const {
