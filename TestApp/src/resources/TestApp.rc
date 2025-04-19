@@ -1,0 +1,97 @@
+#include "../include/resource.h"
+#include "../include/targetver.h"
+#include "windows.h"
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+
+LANGUAGE 9, 1
+1 RT_MANIFEST "TestApp.exe.manifest"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+
+IDI_TESTAPP ICON "TestApp.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDC_TESTAPP MENU
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "&New",            IDM_FILE_NEW
+        MENUITEM "E&xit",           IDM_FILE_EXIT
+    END
+
+    POPUP "&Edit"
+    BEGIN
+        MENUITEM "Cu&t",            IDM_EDIT_CUT
+        MENUITEM "&Copy",           IDM_EDIT_COPY
+        MENUITEM "&Paste",          IDM_EDIT_PASTE
+    END
+
+    POPUP "&View"
+    BEGIN
+        MENUITEM "&Word Wrap",      IDM_VIEW_WORD_WRAP
+
+        POPUP "&Zoom"
+        BEGIN
+            MENUITEM "Zoom &In",    IDM_VIEW_ZOOM_IN
+            MENUITEM "Zoom &Out",   IDM_VIEW_ZOOM_OUT
+        END
+    END
+
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&About ...",      IDM_HELP_ABOUT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDC_TESTAPP ACCELERATORS
+BEGIN
+    "?", IDM_HELP_ABOUT, ASCII, ALT
+    "/", IDM_HELP_ABOUT, ASCII, ALT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUT_BOX DIALOGEX 0, 0, 170, 62
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "About TestApp"
+FONT 8, "MS Shell Dlg"
+BEGIN
+    ICON            IDI_TESTAPP,IDC_STATIC,14,14,21,20
+    LTEXT           "TestApp, Version 1.0",IDC_STATIC,42,14,114,8,SS_NOPREFIX
+    LTEXT           "Copyright (c) 2025",IDC_STATIC,42,26,114,8
+    DEFPUSHBUTTON   "OK",IDOK,113,41,50,14,WS_GROUP
+END
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE
+BEGIN
+   IDC_TESTAPP          "TESTAPP"
+   IDS_APP_TITLE        "TestApp"
+END
+
+#endif
