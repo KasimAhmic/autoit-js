@@ -1,0 +1,42 @@
+name: Docs Pipeline
+
+on:
+  push:
+    branches: ['main']
+
+jobs:
+  publish-docs:
+    name: Publish Docs
+    runs-on: ubuntu-latest
+
+    permissions:
+      pages: write
+      id-token: write
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.x'
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build Docs
+        run: npm run docs
+
+      - name: Upload Docs
+        uses: 'actions/upload-pages-artifact@v3'
+        with:
+          path: '.docs/'
+
+      - name: Deploy Docs
+        id: deployment
+        uses: 'actions/deploy-pages@v4'

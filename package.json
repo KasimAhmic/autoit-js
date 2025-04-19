@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Node.js bindings for AutoItX3.dll",
   "type": "module",
+  "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": "./dist/index.js"

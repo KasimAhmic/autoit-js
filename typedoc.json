@@ -35,5 +35,6 @@
   "cleanOutputDir": true,
   "projectDocuments": ["docs/*.md"],
   "validation": true,
-  "intentionallyNotExported": ["Win32Type"]
+  "intentionallyNotExported": ["Win32Type"],
+  "githubPages": true
 }
