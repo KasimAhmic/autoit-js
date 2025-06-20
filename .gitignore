@@ -155,3 +155,4 @@ x86/
 *.VC.opendb
 
 .docs
+build/
