@@ -132,6 +132,11 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
+# Other
+.docs
+build/
+.idea/
+
 # TestApp
 .vs/
 Debug/
@@ -148,11 +153,10 @@ x86/
 *.ipch
 *.tlog
 *.idb
-
 *.suo
 *.user
 *.VC.db
 *.VC.opendb
 
-.docs
-build/
+# Allow TestApp to be in the repo for testing purposes
+!bin/TestApp.exe

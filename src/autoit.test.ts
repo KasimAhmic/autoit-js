@@ -1,4 +1,5 @@
 import { randomUUID } from 'node:crypto';
+import { statSync } from 'node:fs';
 import { join } from 'node:path';
 
 import { ClipGet } from './clip-get';
@@ -76,7 +77,10 @@ describe.sequential('AutoIt JS @full', () => {
     autoit.load();
     ProcessClose('TestApp.exe');
 
-    expect(Run(join(__dirname, '..', 'TestApp', 'x64', 'Release', 'TestApp.exe'))).toBeGreaterThan(0);
+    const testAppPath = join(__dirname, '..', 'bin', 'TestApp.exe');
+    expect(statSync(testAppPath).isFile()).toBe(true);
+
+    expect(Run(testAppPath)).toBeGreaterThan(0);
     expect(WinWait(APP_TITLE, '', 10)).toBeGreaterThan(0);
     expect(WinSetOnTop(APP_TITLE, '', true)).toBe(1);
 
