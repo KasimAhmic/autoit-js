@@ -93,16 +93,16 @@ export enum Command {
  *
  * @example
  * ```typescript
- * import { ControlCommand } from '@ahmic/autoit-js';
+ * import { ControlCommandSync } from '@ahmic/autoit-js';
  *
- * const result = ControlCommand('Untitled - Notepad', '', 'Edit1', 'IsVisible');
+ * const result = ControlCommandSync('Untitled - Notepad', '', 'Edit1', 'IsVisible');
  *
  * console.log(result); // Output: "1" if visible, "0" otherwise
  * ```
  *
  * @see https://www.autoitscript.com/autoit3/docs/functions/ControlCommand.htm
  */
-export function ControlCommand(
+export function ControlCommandSync(
   windowTitle: string,
   windowText: string,
   controlId: string,
@@ -122,6 +122,51 @@ export function ControlCommand(
   return unicodeBufferToString(buffer);
 }
 
+/**
+ * Sends a command to a control in a window.
+ *
+ * @param windowTitle The title of the window to access.
+ * @param windowText Optional text found in the window.
+ * @param controlId The ID of the control to send the command to.
+ * @param command The command to send to the control.
+ * @param option Optional additional parameter for the command.
+ * @param characterCount The size of the buffer to store the result.
+ *
+ * @returns A promise that resolves to the result of the command as a string.
+ *
+ * @example
+ * ```typescript
+ * import { ControlCommand } from '@ahmic/autoit-js';
+ *
+ * const result = await ControlCommand('Untitled - Notepad', '', 'Edit1', 'IsVisible');
+ *
+ * console.log(result); // Output: "1" if visible, "0" otherwise
+ * ```
+ *
+ * @see https://www.autoitscript.com/autoit3/docs/functions/ControlCommand.htm
+ */
+export async function ControlCommand(
+  windowTitle: string,
+  windowText: string,
+  controlId: string,
+  command: Command,
+  option: string = '',
+  characterCount: number = 1024,
+): Promise<string> {
+  const [buffer, length] = createUnicodeBuffer(characterCount);
+
+  await autoit.invokeAsync(
+    'AU3_ControlCommand',
+    VOID,
+    [LPCWSTR, LPCWSTR, LPCWSTR, LPCWSTR, LPCWSTR, LPWSTR, INT],
+    [windowTitle, windowText, controlId, command, option, buffer, length],
+  );
+
+  return unicodeBufferToString(buffer);
+}
+
+// TODO: Don't remember this would've even worked considering the return is a string, but I don't wanna remove
+// it cause it looks cool.
 // TODO: See if we want to improve the return type of ControlCommand and parse the result in a more
 // user-friendly way. For example, for `ControlCommand.IsVisible`, we could return a boolean instead of
 // a number.
