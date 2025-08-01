@@ -24,7 +24,7 @@ import { AU3_INTDEFAULT } from './util/constants';
  * import {
  *   ControlClickByHandleSync,
  *   ControlGetHandleSync,
- *   MouseButtonSync,
+ *   MouseButton,
  *   WinGetHandleSync,
  * } from '@ahmic/autoit-js';
  *
