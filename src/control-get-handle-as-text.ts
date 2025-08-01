@@ -14,16 +14,16 @@ import { HWND_HEX_SIZE } from './util/constants';
  *
  * @example
  * ```typescript
- * import { ControlGetHandleAsText } from '@ahmic/autoit-js';
+ * import { ControlGetHandleAsTextSync } from '@ahmic/autoit-js';
  *
- * const handle = ControlGetHandleAsText('Untitled - Notepad', '', 'Edit1');
+ * const handle = ControlGetHandleAsTextSync('Untitled - Notepad', '', 'Edit1');
  *
  * console.log(handle); // Output: "0x0000000000000001"
  * ```
  *
  * @see https://www.autoitscript.com/autoit3/docs/functions/ControlGetHandle.htm
  */
-export function ControlGetHandleAsText(
+export function ControlGetHandleAsTextSync(
   windowTitle: string,
   windowText: string = '',
   controlId: string,
@@ -31,6 +31,43 @@ export function ControlGetHandleAsText(
   const [buffer, length] = createUnicodeBuffer(HWND_HEX_SIZE);
 
   autoit.invoke(
+    'AU3_ControlGetHandleAsText',
+    VOID,
+    [LPCWSTR, LPCWSTR, LPCWSTR, LPWSTR, INT],
+    [windowTitle, windowText, controlId, buffer, length],
+  );
+
+  return unicodeBufferToString(buffer);
+}
+
+/**
+ * Gets the handle of a control in a window as a hexadecimal string.
+ *
+ * @param windowTitle The title of the window to access.
+ * @param windowText Optional text found in the window.
+ * @param controlId The control to get the handle for.
+ *
+ * @returns A promise that resolves to the handle of the control as a hexadecimal string.
+ *
+ * @example
+ * ```typescript
+ * import { ControlGetHandleAsText } from '@ahmic/autoit-js';
+ *
+ * const handle = await ControlGetHandleAsText('Untitled - Notepad', '', 'Edit1');
+ *
+ * console.log(handle); // Output: "0x0000000000000001"
+ * ```
+ *
+ * @see https://www.autoitscript.com/autoit3/docs/functions/ControlGetHandle.htm
+ */
+export async function ControlGetHandleAsText(
+  windowTitle: string,
+  windowText: string = '',
+  controlId: string,
+): Promise<string> {
+  const [buffer, length] = createUnicodeBuffer(HWND_HEX_SIZE);
+
+  await autoit.invokeAsync(
     'AU3_ControlGetHandleAsText',
     VOID,
     [LPCWSTR, LPCWSTR, LPCWSTR, LPWSTR, INT],
