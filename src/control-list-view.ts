@@ -89,16 +89,21 @@ export enum ListViewCommand {
  *
  * @example
  * ```typescript
- * import { ControlListView, ListViewCommand } from '@ahmic/autoit-js';
+ * import { ControlListViewSync, ListViewCommand } from '@ahmic/autoit-js';
  *
- * const itemCount = ControlListView('Untitled - Notepad', '', 'SysListView32', ListViewCommand.GetItemCount);
+ * const itemCount = ControlListViewSync(
+ *   'Untitled - Notepad',
+ *   '',
+ *   'SysListView32',
+ *   ListViewCommand.GetItemCount,
+ * );
  *
  * console.log(itemCount); // Output: "5"
  * ```
  *
  * @see https://www.autoitscript.com/autoit3/docs/functions/ControlListView.htm
  */
-export function ControlListView(
+export function ControlListViewSync(
   windowTitle: string,
   windowText: string,
   controlId: string,
@@ -110,6 +115,56 @@ export function ControlListView(
   const [buffer, length] = createUnicodeBuffer(characters);
 
   autoit.invoke(
+    'AU3_ControlListView',
+    VOID,
+    [LPCWSTR, LPCWSTR, LPCWSTR, LPCWSTR, LPCWSTR, LPCWSTR, LPWSTR, INT],
+    [windowTitle, windowText, controlId, command, option1, option2, buffer, length],
+  );
+
+  return unicodeBufferToString(buffer);
+}
+
+/**
+ * Interacts with a ListView control in a window.
+ *
+ * @param windowTitle The title of the window to access.
+ * @param windowText Optional text found in the window.
+ * @param controlId The ID of the ListView control to interact with.
+ * @param command The command to execute on the ListView control. See {@linkcode ListViewCommand} for details.
+ * @param option1 Optional parameter for the command.
+ * @param option2 Optional parameter for the command.
+ * @param characters The maximum number of characters to retrieve. Default is 1024.
+ *
+ * @returns A promise that resolves to the result of the command as a string.
+ *
+ * @example
+ * ```typescript
+ * import { ControlListView, ListViewCommand } from '@ahmic/autoit-js';
+ *
+ * const itemCount = await ControlListView(
+ *   'Untitled - Notepad',
+ *   '',
+ *   'SysListView32',
+ *   ListViewCommand.GetItemCount,
+ * );
+ *
+ * console.log(itemCount); // Output: "5"
+ * ```
+ *
+ * @see https://www.autoitscript.com/autoit3/docs/functions/ControlListView.htm
+ */
+export async function ControlListView(
+  windowTitle: string,
+  windowText: string,
+  controlId: string,
+  command: ListViewCommand,
+  option1: string = '',
+  option2: string = '',
+  characters: number = 1024,
+): Promise<string> {
+  const [buffer, length] = createUnicodeBuffer(characters);
+
+  await autoit.invokeAsync(
     'AU3_ControlListView',
     VOID,
     [LPCWSTR, LPCWSTR, LPCWSTR, LPCWSTR, LPCWSTR, LPCWSTR, LPWSTR, INT],
