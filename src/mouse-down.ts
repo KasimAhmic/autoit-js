@@ -9,13 +9,31 @@ import { MouseButton } from './mouse-click';
  *
  * @example
  * ```typescript
- * import { MouseDown } from '@ahmic/autoit-js';
+ * import { MouseDownSync, MouseButton } from '@ahmic/autoit-js';
  *
- * MouseDown('left');
+ * MouseDownSync(MouseButton.Left);
  * ```
  *
  * @see https://www.autoitscript.com/autoit3/docs/functions/MouseDown.htm
  */
-export function MouseDown(button: MouseButton = MouseButton.Left): void {
+export function MouseDownSync(button: MouseButton = MouseButton.Left): void {
   return autoit.invoke('AU3_MouseDown', VOID, [LPCWSTR], [button]);
+}
+
+/**
+ * Simulates holding down a mouse button.
+ *
+ * @param button The mouse button to hold down. See {@linkcode MouseButton} for details.
+ *
+ * @example
+ * ```typescript
+ * import { MouseDown, MouseButton } from '@ahmic/autoit-js';
+ *
+ * await MouseDown(MouseButton.Left);
+ * ```
+ *
+ * @see https://www.autoitscript.com/autoit3/docs/functions/MouseDown.htm
+ */
+export function MouseDown(button: MouseButton = MouseButton.Left): Promise<void> {
+  return autoit.invokeAsync('AU3_MouseDown', VOID, [LPCWSTR], [button]);
 }
