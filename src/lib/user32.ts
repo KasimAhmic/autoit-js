@@ -28,6 +28,7 @@ import {
   WindowHandle,
   WordParam,
 } from '../@types';
+import { typedPromisify } from '../util';
 
 const user32 = koffi.load('user32.dll');
 
@@ -35,14 +36,10 @@ export function MAKELPARAM(low: number, high: number): number {
   return (low & 0xffff) | ((high & 0xffff) << 16);
 }
 
-export const GetDC: koffi.KoffiFunc<(windowHandle: WindowHandle | null) => DeviceContextHandle> = user32.func(
-  '__stdcall',
-  'GetDC',
-  HDC,
-  [HWND],
-);
+export const GetDCSync: koffi.KoffiFunc<(windowHandle: WindowHandle | null) => DeviceContextHandle> =
+  user32.func('__stdcall', 'GetDC', HDC, [HWND]);
 
-export const ReleaseDC: koffi.KoffiFunc<
+export const ReleaseDCSync: koffi.KoffiFunc<
   (windowHandle: WindowHandle | null, deviceContextHandle: DeviceContextHandle) => Int
 > = user32.func('__stdcall', 'ReleaseDC', INT, [HWND, HDC]);
 
@@ -86,3 +83,6 @@ export const DestroyWindow: koffi.KoffiFunc<(windowHandle: WindowHandle) => Bool
   BOOL,
   [HWND],
 );
+
+export const GetDC = typedPromisify(GetDCSync.async);
+export const ReleaseDC = typedPromisify(ReleaseDCSync.async);
