@@ -16,9 +16,9 @@ import { MouseButton } from './mouse-click';
  *
  * @example
  * ```typescript
- * import { MouseClickDragSync } from '@ahmic/autoit-js';
+ * import { MouseClickDragSync, MouseButton } from '@ahmic/autoit-js';
  *
- * MouseClickDragSync('left', 100, 100, 200, 200, 10);
+ * MouseClickDragSync(MouseButton.Left, 100, 100, 200, 200, 10);
  * ```
  *
  * @see https://www.autoitscript.com/autoit3/docs/functions/MouseClickDrag.htm
@@ -53,9 +53,9 @@ export function MouseClickDragSync(
  *
  * @example
  * ```typescript
- * import { MouseClickDrag } from '@ahmic/autoit-js';
+ * import { MouseClickDrag, MouseButton } from '@ahmic/autoit-js';
  *
- * await MouseClickDrag('left', 100, 100, 200, 200, 10);
+ * await MouseClickDrag(MouseButton.Left, 100, 100, 200, 200, 10);
  * ```
  *
  * @see https://www.autoitscript.com/autoit3/docs/functions/MouseClickDrag.htm
