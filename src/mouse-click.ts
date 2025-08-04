@@ -40,9 +40,9 @@ export enum MouseButton {
  *
  * @example
  * ```typescript
- * import { MouseClickSync } from '@ahmic/autoit-js';
+ * import { MouseClickSync, MouseButton } from '@ahmic/autoit-js';
  *
- * MouseClickSync('left', 150, 150, 2, 10);
+ * MouseClickSync(MouseButton.Left, 150, 150, 2, 10);
  * ```
  *
  * @see https://www.autoitscript.com/autoit3/docs/functions/MouseClick.htm
@@ -70,9 +70,9 @@ export function MouseClickSync(
  *
  * @example
  * ```typescript
- * import { MouseClick } from '@ahmic/autoit-js';
+ * import { MouseClick, MouseButton } from '@ahmic/autoit-js';
  *
- * await MouseClick('left', 150, 150, 2, 10);
+ * await MouseClick(MouseButton.Left, 150, 150, 2, 10);
  * ```
  *
  * @see https://www.autoitscript.com/autoit3/docs/functions/MouseClick.htm
