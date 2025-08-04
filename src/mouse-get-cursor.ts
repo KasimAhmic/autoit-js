@@ -93,7 +93,7 @@ export function MouseGetCursorSync(): Cursor {
 /**
  * Retrieves the current mouse cursor ID.
  *
- * @returns The ID of the current mouse cursor.
+ * @returns A promise that resolves to the ID of the current mouse cursor.
  *
  * @example
  * ```typescript
