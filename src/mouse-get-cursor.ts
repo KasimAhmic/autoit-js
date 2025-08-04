@@ -77,15 +77,35 @@ export enum Cursor {
  *
  * @example
  * ```typescript
- * import { MouseGetCursor } from '@ahmic/autoit-js';
+ * import { MouseGetCursorSync } from '@ahmic/autoit-js';
  *
- * const cursorId = MouseGetCursor();
+ * const cursorId = MouseGetCursorSync();
  *
  * console.log(cursorId); // Output: 2
  * ```
  *
  * @see https://www.autoitscript.com/autoit3/docs/functions/MouseGetCursor.htm
  */
-export function MouseGetCursor(): Cursor {
+export function MouseGetCursorSync(): Cursor {
   return autoit.invoke('AU3_MouseGetCursor', INT, [], []);
+}
+
+/**
+ * Retrieves the current mouse cursor ID.
+ *
+ * @returns The ID of the current mouse cursor.
+ *
+ * @example
+ * ```typescript
+ * import { MouseGetCursor } from '@ahmic/autoit-js';
+ *
+ * const cursorId = await MouseGetCursor();
+ *
+ * console.log(cursorId); // Output: 2
+ * ```
+ *
+ * @see https://www.autoitscript.com/autoit3/docs/functions/MouseGetCursor.htm
+ */
+export function MouseGetCursor(): Promise<Cursor> {
+  return autoit.invokeAsync('AU3_MouseGetCursor', INT, [], []);
 }
