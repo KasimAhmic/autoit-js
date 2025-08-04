@@ -12,16 +12,52 @@ import { autoit } from './lib/autoit';
  *
  * @example
  * ```typescript
- * import { ControlSetTextByHandle, ControlGetHandle } from '@ahmic/autoit-js';
+ * import { ControlSetTextByHandleSync, ControlGetHandleSync } from '@ahmic/autoit-js';
  *
- * const controlHandle = ControlGetHandle(windowHandle, 'Edit1');
- * ControlSetTextByHandle(windowHandle, controlHandle, 'Hello, World!');
+ * const controlHandle = ControlGetHandleSync(windowHandle, 'Edit1');
+ * ControlSetTextByHandleSync(windowHandle, controlHandle, 'Hello, World!');
  * ```
  *
  * @see https://www.autoitscript.com/autoit3/docs/functions/ControlSetText.htm
  */
-export function ControlSetTextByHandle(windowHandle: bigint, controlHandle: bigint, value: string): number {
+export function ControlSetTextByHandleSync(
+  windowHandle: bigint,
+  controlHandle: bigint,
+  value: string,
+): number {
   return autoit.invoke(
+    'AU3_ControlSetTextByHandle',
+    INT,
+    [HWND, HWND, LPCWSTR],
+    [windowHandle, controlHandle, value],
+  );
+}
+
+/**
+ * Sets the text of a control in a window.
+ *
+ * @param windowHandle The handle of the window to access.
+ * @param controlHandle The handle of the control to set text for.
+ * @param value The text to set for the control.
+ *
+ * @returns A promise that resolves to 1 if successful, or 0 otherwise.
+ *
+ * @example
+ * ```typescript
+ * import { ControlSetTextByHandle, ControlGetHandle } from '@ahmic/autoit-js';
+ *
+ * const controlHandle = await ControlGetHandle(windowHandle, 'Edit1');
+ * await ControlSetTextByHandle(windowHandle, controlHandle, 'Hello, World!');
+ * ```
+ *
+ * @see https://www.autoitscript.com/autoit3/docs/functions/ControlSetText.htm
+ */
+export function ControlSetTextByHandle(
+  windowHandle: bigint,
+  controlHandle: bigint,
+  value: string,
+): Promise<number> {
+  return autoit.invokeAsync(
     'AU3_ControlSetTextByHandle',
     INT,
     [HWND, HWND, LPCWSTR],
