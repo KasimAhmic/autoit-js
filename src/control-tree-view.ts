@@ -124,7 +124,7 @@ export function ControlTreeViewSync(
  * ```typescript
  * import { ControlTreeView } from '@ahmic/autoit-js';
  *
- * const result = ControlTreeView('Untitled - Notepad', '', 'SysTreeView32', 'GetItemCount');
+ * const result = await ControlTreeView('Untitled - Notepad', '', 'SysTreeView32', 'GetItemCount');
  *
  * console.log(result); // Output: "5"
  * ```
