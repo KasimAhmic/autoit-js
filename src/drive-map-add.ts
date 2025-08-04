@@ -70,7 +70,7 @@ export function DriveMapAddSync(
  * ```typescript
  * import { DriveMapAdd, DriveMapFlag } from '@ahmic/autoit-js';
  *
- * DriveMapAdd('Z:', '\\server\share', DriveMapFlag.Authentication, 'user', 'password');
+ * await DriveMapAdd('Z:', '\\server\share', DriveMapFlag.Authentication, 'user', 'password');
  * ```
  *
  * @see https://www.autoitscript.com/autoit3/docs/functions/DriveMapAdd.htm
