@@ -39,16 +39,39 @@ export enum ShutdownFlag {
  *
  * @example
  * ```typescript
- * import { Shutdown, ShutdownFlag } from '@ahmic/autoit-js';
+ * import { ShutdownSync, ShutdownFlag } from '@ahmic/autoit-js';
  *
- * Shutdown(ShutdownFlag.Reboot);
+ * ShutdownSync(ShutdownFlag.Reboot);
  *
  * // Use bitwise OR to combine flags
- * Shutdown(ShutdownFlag.Shutdown | ShutdownFlag.Force);
+ * ShutdownSync(ShutdownFlag.Shutdown | ShutdownFlag.Force);
  * ```
  *
  * @see https://www.autoitscript.com/autoit3/docs/functions/Shutdown.htm
  */
-export function Shutdown(flags: ShutdownFlag): number {
+export function ShutdownSync(flags: ShutdownFlag): number {
   return autoit.invoke('AU3_Shutdown', INT, [INT], [flags]);
+}
+
+/**
+ * Shuts down or restarts the system based on the specified flags.
+ *
+ * @param flags The shutdown flags to control the behavior (e.g., Shutdown, Reboot, Hibernate).
+ *
+ * @returns A promise that resolves to 1 if successful, or 0 otherwise.
+ *
+ * @example
+ * ```typescript
+ * import { Shutdown, ShutdownFlag } from '@ahmic/autoit-js';
+ *
+ * await Shutdown(ShutdownFlag.Reboot);
+ *
+ * // Use bitwise OR to combine flags
+ * await Shutdown(ShutdownFlag.Shutdown | ShutdownFlag.Force);
+ * ```
+ *
+ * @see https://www.autoitscript.com/autoit3/docs/functions/Shutdown.htm
+ */
+export function Shutdown(flags: ShutdownFlag): Promise<number> {
+  return autoit.invokeAsync('AU3_Shutdown', INT, [INT], [flags]);
 }
