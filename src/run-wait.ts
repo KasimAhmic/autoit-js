@@ -43,7 +43,7 @@ export function RunWaitSync(
  * ```typescript
  * import { RunWait } from '@ahmic/autoit-js';
  *
- * const exitCode = RunWait('notepad.exe');
+ * const exitCode = await RunWait('notepad.exe');
  *
  * console.log(exitCode); // Output: 0
  * ```
