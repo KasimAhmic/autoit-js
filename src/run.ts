@@ -80,9 +80,37 @@ export enum ShowWindowFlag {
  *
  * @example
  * ```typescript
+ * import { RunSync } from '@ahmic/autoit-js';
+ *
+ * const pid = RunSync('notepad.exe');
+ *
+ * console.log(pid); // Output: 1234
+ * ```
+ *
+ * @see https://www.autoitscript.com/autoit3/docs/functions/Run.htm
+ */
+export function RunSync(
+  program: string,
+  workingDir: string = '',
+  showFlag: number = ShowWindowFlag.SHOWNORMAL,
+): number {
+  return autoit.invoke('AU3_Run', INT, [LPCWSTR, LPCWSTR, INT], [program, workingDir, showFlag]);
+}
+
+/**
+ * Runs an external program.
+ *
+ * @param program The path to the program to run.
+ * @param workingDir Optional working directory for the program.
+ * @param showFlag Optional flag to control how the program window is shown. See {@linkcode ShowWindowFlag} for details.
+ *
+ * @returns A promise that resolves to the PID of the process if successful, or 0 if failed.
+ *
+ * @example
+ * ```typescript
  * import { Run } from '@ahmic/autoit-js';
  *
- * const pid = Run('notepad.exe');
+ * const pid = await Run('notepad.exe');
  *
  * console.log(pid); // Output: 1234
  * ```
@@ -93,6 +121,6 @@ export function Run(
   program: string,
   workingDir: string = '',
   showFlag: number = ShowWindowFlag.SHOWNORMAL,
-): number {
-  return autoit.invoke('AU3_Run', INT, [LPCWSTR, LPCWSTR, INT], [program, workingDir, showFlag]);
+): Promise<number> {
+  return autoit.invokeAsync('AU3_Run', INT, [LPCWSTR, LPCWSTR, INT], [program, workingDir, showFlag]);
 }
