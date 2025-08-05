@@ -71,7 +71,7 @@ export function RunAsSync(
  * @param directory Optional working directory for the program.
  * @param showFlag Optional flag to control how the program's window is shown.
  *
- * @returns The PID of the started process if successful, or 0 if failed.
+ * @returns A promise that resolves to the PID of the started process if successful, or 0 if failed.
  *
  * @example
  * ```typescript
