@@ -34,9 +34,50 @@ export enum LogonFlag {
  *
  * @example
  * ```typescript
+ * import { RunAsSync, LogonFlag } from '@ahmic/autoit-js';
+ *
+ * const pid = RunAsSync('admin', 'DOMAIN', 'password', LogonFlag.Profile, 'notepad.exe');
+ *
+ * console.log(pid); // Output: 123
+ * ```
+ *
+ * @see https://www.autoitscript.com/autoit3/docs/functions/RunAs.htm
+ */
+export function RunAsSync(
+  username: string,
+  domain: string,
+  password: string,
+  logonFlag: LogonFlag,
+  program: string,
+  directory: string = '',
+  showFlag: number = ShowWindowFlag.SHOWNORMAL,
+): number {
+  return autoit.invoke(
+    'AU3_RunAs',
+    INT,
+    [LPCWSTR, LPCWSTR, LPCWSTR, INT, LPCWSTR, LPCWSTR, INT],
+    [username, domain, password, logonFlag, program, directory, showFlag],
+  );
+}
+
+/**
+ * Runs a program under a different user account.
+ *
+ * @param username The username to run the program as.
+ * @param domain The domain of the user account.
+ * @param password The password of the user account.
+ * @param logonFlag The logon flag to control the behavior of the logon.
+ * @param program The name of the program to run.
+ * @param directory Optional working directory for the program.
+ * @param showFlag Optional flag to control how the program's window is shown.
+ *
+ * @returns The PID of the started process if successful, or 0 if failed.
+ *
+ * @example
+ * ```typescript
  * import { RunAs, LogonFlag } from '@ahmic/autoit-js';
  *
- * const pid = RunAs('admin', 'DOMAIN', 'password', LogonFlag.Profile, 'notepad.exe');
+ * const pid = await RunAs('admin', 'DOMAIN', 'password', LogonFlag.Profile, 'notepad.exe');
  *
  * console.log(pid); // Output: 123
  * ```
@@ -51,8 +92,8 @@ export function RunAs(
   program: string,
   directory: string = '',
   showFlag: number = ShowWindowFlag.SHOWNORMAL,
-): number {
-  return autoit.invoke(
+): Promise<number> {
+  return autoit.invokeAsync(
     'AU3_RunAs',
     INT,
     [LPCWSTR, LPCWSTR, LPCWSTR, INT, LPCWSTR, LPCWSTR, INT],
