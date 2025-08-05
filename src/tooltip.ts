@@ -1,8 +1,16 @@
 import koffi from 'koffi';
 
-import { WinSleep } from './@types/kernel32';
+import { WinSleep, WinSleepSync } from './@types/kernel32';
 import { TOOLINFOW, ToolInfoW } from './@types/tool-info';
-import { CreateWindowExW, DestroyWindow, MAKELPARAM, SendMessageW } from './lib/user32';
+import {
+  CreateWindowExW,
+  CreateWindowExWSync,
+  DestroyWindow,
+  DestroyWindowSync,
+  MAKELPARAM,
+  SendMessageW,
+  SendMessageWSync,
+} from './lib/user32';
 
 const CW_USEDEFAULT = 0x80000000;
 
@@ -37,21 +45,21 @@ const TTM_SETMAXTIPWIDTH = WM_USER + 24;
  *
  * @example
  * ```typescript
- * import { Tooltip } from '@ahmic/autoit-js';
+ * import { TooltipSync } from '@ahmic/autoit-js';
  *
- * Tooltip('Hello, World!', 100, 200, 50, 3000);
+ * TooltipSync('Hello, World!', 100, 200, 50, 3000);
  * ```
  *
  * @see https://www.autoitscript.com/autoit3/docs/functions/ToolTip.htm
  */
-export function Tooltip(
+export function TooltipSync(
   value: string,
   x: number = 0,
   y: number = 0,
   characterWidth: number = 200,
   timeout: number = 2000,
 ): void {
-  const tooltipHandle = CreateWindowExW(
+  const tooltipHandle = CreateWindowExWSync(
     WS_EX_TOPMOST,
     'tooltips_class32',
     null,
@@ -72,15 +80,77 @@ export function Tooltip(
 
   const toolInfoPointer = koffi.address(toolInfo);
 
-  SendMessageW(tooltipHandle, TTM_ADDTOOLW, 0, toolInfoPointer);
-  SendMessageW(tooltipHandle, TTM_SETMAXTIPWIDTH, 0, characterWidth);
-  SendMessageW(tooltipHandle, TTM_TRACKPOSITION, 0, MAKELPARAM(x, y));
-  SendMessageW(tooltipHandle, TTM_TRACKACTIVATE, 1, toolInfoPointer);
+  SendMessageWSync(tooltipHandle, TTM_ADDTOOLW, 0, toolInfoPointer);
+  SendMessageWSync(tooltipHandle, TTM_SETMAXTIPWIDTH, 0, characterWidth);
+  SendMessageWSync(tooltipHandle, TTM_TRACKPOSITION, 0, MAKELPARAM(x, y));
+  SendMessageWSync(tooltipHandle, TTM_TRACKACTIVATE, 1, toolInfoPointer);
 
-  WinSleep(timeout);
+  WinSleepSync(timeout);
 
-  SendMessageW(tooltipHandle, TTM_TRACKACTIVATE, 0, toolInfoPointer);
-  DestroyWindow(tooltipHandle);
+  SendMessageWSync(tooltipHandle, TTM_TRACKACTIVATE, 0, toolInfoPointer);
+  DestroyWindowSync(tooltipHandle);
+
+  koffi.free(toolInfo);
+}
+
+/**
+ * Display a tooltip with the specified value at the specified position.
+ *
+ * The actual `AU3_Tooltip` function from AutoIt appears to be broken so it has been reimplemented here using
+ * the Windows User32 library.
+ *
+ * @param value The text to display in the tooltip.
+ * @param x The x-coordinate of the tooltip position. Default is 0.
+ * @param y The y-coordinate of the tooltip position. Default is 0.
+ * @param characterWidth The maximum width of the tooltip in characters. Default is 200.
+ * @param timeout The duration in milliseconds to display the tooltip. Default is 2000.
+ *
+ * @example
+ * ```typescript
+ * import { Tooltip } from '@ahmic/autoit-js';
+ *
+ * await Tooltip('Hello, World!', 100, 200, 50, 3000);
+ * ```
+ *
+ * @see https://www.autoitscript.com/autoit3/docs/functions/ToolTip.htm
+ */
+export async function Tooltip(
+  value: string,
+  x: number = 0,
+  y: number = 0,
+  characterWidth: number = 200,
+  timeout: number = 2000,
+): Promise<void> {
+  const tooltipHandle = await CreateWindowExW(
+    WS_EX_TOPMOST,
+    'tooltips_class32',
+    null,
+    WS_POPUP | TTS_NOPREFIX | TTS_ALWAYSTIP | TTS_BALLOON,
+    CW_USEDEFAULT,
+    CW_USEDEFAULT,
+    CW_USEDEFAULT,
+    CW_USEDEFAULT,
+    null,
+    null,
+    null,
+    null,
+  );
+
+  const toolInfo = koffi.alloc(TOOLINFOW, koffi.sizeof(TOOLINFOW));
+
+  koffi.encode(toolInfo, 0, TOOLINFOW, new ToolInfoW({ uFlags: TTF_TRACK | TTF_ABSOLUTE, lpszText: value }));
+
+  const toolInfoPointer = koffi.address(toolInfo);
+
+  await SendMessageW(tooltipHandle, TTM_ADDTOOLW, 0, toolInfoPointer);
+  await SendMessageW(tooltipHandle, TTM_SETMAXTIPWIDTH, 0, characterWidth);
+  await SendMessageW(tooltipHandle, TTM_TRACKPOSITION, 0, MAKELPARAM(x, y));
+  await SendMessageW(tooltipHandle, TTM_TRACKACTIVATE, 1, toolInfoPointer);
+
+  await WinSleep(timeout);
+
+  await SendMessageW(tooltipHandle, TTM_TRACKACTIVATE, 0, toolInfoPointer);
+  await DestroyWindow(tooltipHandle);
 
   koffi.free(toolInfo);
 }

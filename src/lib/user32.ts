@@ -43,7 +43,7 @@ export const ReleaseDCSync: koffi.KoffiFunc<
   (windowHandle: WindowHandle | null, deviceContextHandle: DeviceContextHandle) => Int
 > = user32.func('__stdcall', 'ReleaseDC', INT, [HWND, HDC]);
 
-export const CreateWindowExW: koffi.KoffiFunc<
+export const CreateWindowExWSync: koffi.KoffiFunc<
   (
     extendedWindowStyle: DoubleWord,
     className: LongPointerToConstantWideString | null,
@@ -73,11 +73,11 @@ export const CreateWindowExW: koffi.KoffiFunc<
   LPVOID,
 ]);
 
-export const SendMessageW: koffi.KoffiFunc<
+export const SendMessageWSync: koffi.KoffiFunc<
   (windowHandle: WindowHandle, message: UnsignedInt, wParam: WordParam, lParam: LongParam) => LongResult
 > = user32.func('__stdcall', 'SendMessageW', LRESULT, [HWND, UINT, WPARAM, LPARAM]);
 
-export const DestroyWindow: koffi.KoffiFunc<(windowHandle: WindowHandle) => Bool> = user32.func(
+export const DestroyWindowSync: koffi.KoffiFunc<(windowHandle: WindowHandle) => Bool> = user32.func(
   '__stdcall',
   'DestroyWindow',
   BOOL,
@@ -86,3 +86,6 @@ export const DestroyWindow: koffi.KoffiFunc<(windowHandle: WindowHandle) => Bool
 
 export const GetDC = typedPromisify(GetDCSync.async);
 export const ReleaseDC = typedPromisify(ReleaseDCSync.async);
+export const CreateWindowExW = typedPromisify(CreateWindowExWSync.async);
+export const SendMessageW = typedPromisify(SendMessageWSync.async);
+export const DestroyWindow = typedPromisify(DestroyWindowSync.async);
