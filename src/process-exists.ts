@@ -28,7 +28,7 @@ export function ProcessExistsSync(process: string): boolean {
  *
  * @param process The name of the process to check (e.g., 'notepad.exe').
  *
- * @returns True if the process exists, false otherwise.
+ * @returns A promise that resolves to true if the process exists, false otherwise.
  *
  * @example
  * ```typescript
