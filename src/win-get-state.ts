@@ -56,13 +56,13 @@ export type WindowState = {
  * @param windowTitle The title of the window to check.
  * @param windowText Optional text found in the window.
  *
- * @returns An object containing the state of the window.
+ * @returns A {@linkcode WindowState} object containing the state of the window.
  *
  * @example
  * ```typescript
- * import { WinGetState } from '@ahmic/autoit-js';
+ * import { WinGetStateSync } from '@ahmic/autoit-js';
  *
- * const state = WinGetState('Untitled - Notepad');
+ * const state = WinGetStateSync('Untitled - Notepad');
  *
  * console.log(state.exists); // true if the window exists
  * console.log(state.visible); // true if the window is visible
@@ -70,8 +70,49 @@ export type WindowState = {
  *
  * @see https://www.autoitscript.com/autoit3/docs/func/WinGetState.htm
  */
-export function WinGetState(windowTitle: string, windowText: string = ''): WindowState {
+export function WinGetStateSync(windowTitle: string, windowText: string = ''): WindowState {
   const state = autoit.invoke('AU3_WinGetState', INT, [LPCWSTR, LPCWSTR], [windowTitle, windowText]);
+
+  return {
+    exists: (state & WindowProperty.Exists) === WindowProperty.Exists,
+    visible: (state & WindowProperty.Visible) === WindowProperty.Visible,
+    enabled: (state & WindowProperty.Enabled) === WindowProperty.Enabled,
+    active: (state & WindowProperty.Active) === WindowProperty.Active,
+    minimized: (state & WindowProperty.Minimized) === WindowProperty.Minimized,
+    maximized: (state & WindowProperty.Maximized) === WindowProperty.Maximized,
+  };
+}
+
+/**
+ * Returns the state of a window.
+ *
+ * Though the original AutoIt function returns a bitmask, this function returns an object with boolean
+ * properties for each state for ease of use.
+ *
+ * @param windowTitle The title of the window to check.
+ * @param windowText Optional text found in the window.
+ *
+ * @returns A promise that resolves to a {@linkcode WindowState} object containing the state of the window.
+ *
+ * @example
+ * ```typescript
+ * import { WinGetState } from '@ahmic/autoit-js';
+ *
+ * const state = await WinGetState('Untitled - Notepad');
+ *
+ * console.log(state.exists); // true if the window exists
+ * console.log(state.visible); // true if the window is visible
+ * ```
+ *
+ * @see https://www.autoitscript.com/autoit3/docs/func/WinGetState.htm
+ */
+export async function WinGetState(windowTitle: string, windowText: string = ''): Promise<WindowState> {
+  const state = await autoit.invokeAsync(
+    'AU3_WinGetState',
+    INT,
+    [LPCWSTR, LPCWSTR],
+    [windowTitle, windowText],
+  );
 
   return {
     exists: (state & WindowProperty.Exists) === WindowProperty.Exists,
