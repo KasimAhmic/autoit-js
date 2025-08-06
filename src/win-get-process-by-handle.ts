@@ -10,16 +10,39 @@ import { autoit } from './lib/autoit';
  *
  * @example
  * ```typescript
- * import { WinGetProcessByHandle, WinGetHandle } from '@ahmic/autoit-js';
+ * import { WinGetProcessByHandleSync, WinGetHandleSync } from '@ahmic/autoit-js';
  *
- * const windowHandle = WinGetHandle('Untitled - Notepad');
- * const processId = WinGetProcessByHandle(windowHandle);
+ * const windowHandle = WinGetHandleSync('Untitled - Notepad');
+ * const processId = WinGetProcessByHandleSync(windowHandle);
  *
  * console.log(processId); // Output: 1234
  * ```
  *
  * @see https://www.autoitscript.com/autoit3/docs/functions/WinGetProcess.htm
  */
-export function WinGetProcessByHandle(windowHandle: bigint): number {
+export function WinGetProcessByHandleSync(windowHandle: bigint): number {
   return autoit.invoke('AU3_WinGetProcessByHandle', DWORD, [HWND], [windowHandle]);
+}
+
+/**
+ * Retrieves the process ID associated with a window handle.
+ *
+ * @param windowHandle The handle of the window to access.
+ *
+ * @returns A promise that resolves to the process ID as a number.
+ *
+ * @example
+ * ```typescript
+ * import { WinGetProcessByHandle, WinGetHandle } from '@ahmic/autoit-js';
+ *
+ * const windowHandle = await WinGetHandle('Untitled - Notepad');
+ * const processId = await WinGetProcessByHandle(windowHandle);
+ *
+ * console.log(processId); // Output: 1234
+ * ```
+ *
+ * @see https://www.autoitscript.com/autoit3/docs/functions/WinGetProcess.htm
+ */
+export function WinGetProcessByHandle(windowHandle: bigint): Promise<number> {
+  return autoit.invokeAsync('AU3_WinGetProcessByHandle', DWORD, [HWND], [windowHandle]);
 }
