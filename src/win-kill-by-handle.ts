@@ -33,8 +33,8 @@ export function WinKillByHandleSync(windowHandle: bigint): number {
  * ```typescript
  * import { WinKillByHandle, WinGetHandle } from '@ahmic/autoit-js';
  *
- * const handle = WinGetHandle('Untitled - Notepad');
- * WinKillByHandle(handle);
+ * const handle = await WinGetHandle('Untitled - Notepad');
+ * await WinKillByHandle(handle);
  * ```
  *
  * @see https://www.autoitscript.com/autoit3/docs/functions/WinKill.htm
