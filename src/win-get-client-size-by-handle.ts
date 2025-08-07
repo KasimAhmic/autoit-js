@@ -22,7 +22,7 @@ import { autoit } from './lib/autoit';
  *
  * @see https://www.autoitscript.com/autoit3/docs/functions/WinGetClientSize.htm
  */
-export function WinGetClientSizeByHandleSync(windowHandle: bigint): Rect {
+export function WinGetClientSizeByHandleSync(windowHandle: bigint): IRect {
   const rect = new Rect();
 
   autoit.invoke('AU3_WinGetClientSizeByHandle', INT, [HWND, koffi.out(LPRECT)], [windowHandle, rect]);
