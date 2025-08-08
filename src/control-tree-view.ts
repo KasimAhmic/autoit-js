@@ -34,6 +34,11 @@ export enum TreeViewCommand {
   /**
    * Returns the item reference of the current selection using the text reference of the item (or index
    * reference if UseIndex is set to 1).
+   *
+   * | UseIndex | Result          | Example |
+   * |----------|-----------------|---------|
+   * | `''`     | Text reference  | Child 2 |
+   * | `'1'`    | Index reference | #2      |
    */
   GetSelected = 'GetSelected',
 

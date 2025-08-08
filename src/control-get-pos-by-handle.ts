@@ -1,6 +1,6 @@
 import koffi from 'koffi';
 
-import { HWND, INT, LPRECT, Rect } from './@types';
+import { HWND, INT, IRect, LPRECT, Rect } from './@types';
 import { autoit } from './lib/autoit';
 
 /**
@@ -25,7 +25,7 @@ import { autoit } from './lib/autoit';
  *
  * @see https://www.autoitscript.com/autoit3/docs/functions/ControlGetPos.htm
  */
-export function ControlGetPosByHandleSync(windowHandle: bigint, controlHandle: bigint): Rect {
+export function ControlGetPosByHandleSync(windowHandle: bigint, controlHandle: bigint): IRect {
   const rect = new Rect();
 
   autoit.invoke(
@@ -60,7 +60,7 @@ export function ControlGetPosByHandleSync(windowHandle: bigint, controlHandle: b
  *
  * @see https://www.autoitscript.com/autoit3/docs/functions/ControlGetPos.htm
  */
-export async function ControlGetPosByHandle(windowHandle: bigint, controlHandle: bigint): Promise<Rect> {
+export async function ControlGetPosByHandle(windowHandle: bigint, controlHandle: bigint): Promise<IRect> {
   const rect = new Rect();
 
   await autoit.invokeAsync(

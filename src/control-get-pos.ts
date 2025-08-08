@@ -1,6 +1,6 @@
 import koffi from 'koffi';
 
-import { INT, LPCWSTR, LPRECT, Rect } from './@types';
+import { INT, IRect, LPCWSTR, LPRECT, Rect } from './@types';
 import { autoit } from './lib/autoit';
 
 /**
@@ -23,7 +23,7 @@ import { autoit } from './lib/autoit';
  *
  * @see https://www.autoitscript.com/autoit3/docs/functions/ControlGetPos.htm
  */
-export function ControlGetPosSync(windowTitle: string, windowText: string, controlId: string): Rect {
+export function ControlGetPosSync(windowTitle: string, windowText: string, controlId: string): IRect {
   const rect = new Rect();
 
   autoit.invoke(
@@ -60,7 +60,7 @@ export async function ControlGetPos(
   windowTitle: string,
   windowText: string,
   controlId: string,
-): Promise<Rect> {
+): Promise<IRect> {
   const rect = new Rect();
 
   await autoit.invokeAsync(
