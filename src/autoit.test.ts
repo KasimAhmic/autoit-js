@@ -2,60 +2,60 @@ import { randomUUID } from 'node:crypto';
 import { statSync } from 'node:fs';
 import { join } from 'node:path';
 
-import { ClipGet } from './clip-get';
-import { ClipPut } from './clip-put';
-import { ControlClick } from './control-click';
-import { ControlClickByHandle } from './control-click-by-handle';
-import { ControlDisable } from './control-disable';
-import { ControlDisableByHandle } from './control-disable-by-handle';
-import { ControlEnable } from './control-enable';
-import { ControlEnableByHandle } from './control-enable-by-handle';
-import { ControlFocus } from './control-focus';
-import { ControlFocusByHandle } from './control-focus-by-handle';
-import { ControlGetFocus } from './control-get-focus';
-import { ControlGetFocusByHandle } from './control-get-focus-by-handle';
-import { ControlGetHandle } from './control-get-handle';
-import { ControlGetHandleAsText } from './control-get-handle-as-text';
-import { ControlGetPos } from './control-get-pos';
-import { ControlGetPosByHandle } from './control-get-pos-by-handle';
-import { ControlGetText } from './control-get-text';
-import { ControlGetTextByHandle } from './control-get-text-by-handle';
-import { ControlHide } from './control-hide';
-import { ControlHideByHandle } from './control-hide-by-handle';
-import { ControlListView, ListViewCommand } from './control-list-view';
-import { ControlMove } from './control-move';
-import { ControlMoveByHandle } from './control-move-by-handle';
-import { ControlSetText } from './control-set-text';
-import { ControlSetTextByHandle } from './control-set-text-by-handle';
-import { ControlShow } from './control-show';
-import { ControlShowByHandle } from './control-show-by-handle';
+import { ClipGet, ClipGetSync } from './clip-get';
+import { ClipPut, ClipPutSync } from './clip-put';
+import { ControlClick, ControlClickSync } from './control-click';
+import { ControlClickByHandle, ControlClickByHandleSync } from './control-click-by-handle';
+import { ControlDisable, ControlDisableSync } from './control-disable';
+import { ControlDisableByHandle, ControlDisableByHandleSync } from './control-disable-by-handle';
+import { ControlEnable, ControlEnableSync } from './control-enable';
+import { ControlEnableByHandle, ControlEnableByHandleSync } from './control-enable-by-handle';
+import { ControlFocus, ControlFocusSync } from './control-focus';
+import { ControlFocusByHandle, ControlFocusByHandleSync } from './control-focus-by-handle';
+import { ControlGetFocus, ControlGetFocusSync } from './control-get-focus';
+import { ControlGetFocusByHandle, ControlGetFocusByHandleSync } from './control-get-focus-by-handle';
+import { ControlGetHandle, ControlGetHandleSync } from './control-get-handle';
+import { ControlGetHandleAsText, ControlGetHandleAsTextSync } from './control-get-handle-as-text';
+import { ControlGetPos, ControlGetPosSync } from './control-get-pos';
+import { ControlGetPosByHandle, ControlGetPosByHandleSync } from './control-get-pos-by-handle';
+import { ControlGetText, ControlGetTextSync } from './control-get-text';
+import { ControlGetTextByHandle, ControlGetTextByHandleSync } from './control-get-text-by-handle';
+import { ControlHide, ControlHideSync } from './control-hide';
+import { ControlHideByHandle, ControlHideByHandleSync } from './control-hide-by-handle';
+import { ControlListView, ControlListViewSync, ListViewCommand } from './control-list-view';
+import { ControlMove, ControlMoveSync } from './control-move';
+import { ControlMoveByHandle, ControlMoveByHandleSync } from './control-move-by-handle';
+import { ControlSetText, ControlSetTextSync } from './control-set-text';
+import { ControlSetTextByHandle, ControlSetTextByHandleSync } from './control-set-text-by-handle';
+import { ControlShow, ControlShowSync } from './control-show';
+import { ControlShowByHandle, ControlShowByHandleSync } from './control-show-by-handle';
 import { autoit } from './lib/autoit';
-import { PixelGetColor } from './pixel-get-color';
-import { ProcessClose } from './process-close';
-import { Run } from './run';
-import { StatusbarGetText } from './statusbar-get-text';
-import { StatusbarGetTextByHandle } from './statusbar-get-text-by-handle';
-import { WinActivate } from './win-activate';
-import { WinGetHandle } from './win-get-handle';
-import { WinGetPos } from './win-get-pos';
-import { WinGetPosByHandle } from './win-get-pos-by-handle';
-import { WinGetState } from './win-get-state';
-import { WinGetStateByHandle } from './win-get-state-by-handle';
-import { WinGetTitle } from './win-get-title';
-import { WinGetTitleByHandle } from './win-get-title-by-handle';
-import { WinMenuSelectItem } from './win-menu-select-item';
-import { WinMenuSelectItemByHandle } from './win-menu-select-item-by-handle';
-import { WinMove } from './win-move';
-import { WinMoveByHandle } from './win-move-by-handle';
-import { WinSetOnTop } from './win-set-on-top';
-import { StateFlag, WinSetState } from './win-set-state';
-import { WinSetStateByHandle } from './win-set-state-by-handle';
-import { WinSetTitle } from './win-set-title';
-import { WinSetTitleByHandle } from './win-set-title-by-handle';
-import { WinSetTrans } from './win-set-trans';
-import { WinSetTransByHandle } from './win-set-trans-by-handle';
-import { WinWait } from './win-wait';
-import { WinWaitClose } from './win-wait-close';
+import { PixelGetColor, PixelGetColorSync } from './pixel-get-color';
+import { ProcessClose, ProcessCloseSync } from './process-close';
+import { Run, RunSync } from './run';
+import { StatusbarGetText, StatusbarGetTextSync } from './statusbar-get-text';
+import { StatusbarGetTextByHandle, StatusbarGetTextByHandleSync } from './statusbar-get-text-by-handle';
+import { WinActivate, WinActivateSync } from './win-activate';
+import { WinGetHandle, WinGetHandleSync } from './win-get-handle';
+import { WinGetPos, WinGetPosSync } from './win-get-pos';
+import { WinGetPosByHandle, WinGetPosByHandleSync } from './win-get-pos-by-handle';
+import { WinGetState, WinGetStateSync } from './win-get-state';
+import { WinGetStateByHandle, WinGetStateByHandleSync } from './win-get-state-by-handle';
+import { WinGetTitle, WinGetTitleSync } from './win-get-title';
+import { WinGetTitleByHandle, WinGetTitleByHandleSync } from './win-get-title-by-handle';
+import { WinMenuSelectItem, WinMenuSelectItemSync } from './win-menu-select-item';
+import { WinMenuSelectItemByHandle, WinMenuSelectItemByHandleSync } from './win-menu-select-item-by-handle';
+import { WinMove, WinMoveSync } from './win-move';
+import { WinMoveByHandle, WinMoveByHandleSync } from './win-move-by-handle';
+import { WinSetOnTop, WinSetOnTopSync } from './win-set-on-top';
+import { StateFlag, WinSetState, WinSetStateSync } from './win-set-state';
+import { WinSetStateByHandle, WinSetStateByHandleSync } from './win-set-state-by-handle';
+import { WinSetTitle, WinSetTitleSync } from './win-set-title';
+import { WinSetTitleByHandle, WinSetTitleByHandleSync } from './win-set-title-by-handle';
+import { WinSetTrans, WinSetTransSync } from './win-set-trans';
+import { WinSetTransByHandle, WinSetTransByHandleSync } from './win-set-trans-by-handle';
+import { WinWait, WinWaitSync } from './win-wait';
+import { WinWaitClose, WinWaitCloseSync } from './win-wait-close';
 
 describe.sequential('AutoIt JS @full', () => {
   let windowHandle: bigint;
@@ -75,20 +75,20 @@ describe.sequential('AutoIt JS @full', () => {
 
   beforeAll(() => {
     autoit.load();
-    ProcessClose('TestApp.exe');
+    ProcessCloseSync('TestApp.exe');
 
     const testAppPath = join(__dirname, '..', 'bin', 'TestApp.exe');
     expect(statSync(testAppPath).isFile()).toBe(true);
 
-    expect(Run(testAppPath)).toBeGreaterThan(0);
-    expect(WinWait(APP_TITLE, '', 10)).toBeGreaterThan(0);
-    expect(WinSetOnTop(APP_TITLE, '', true)).toBe(1);
+    expect(RunSync(testAppPath)).toBeGreaterThan(0);
+    expect(WinWaitSync(APP_TITLE, '', 10)).toBeGreaterThan(0);
+    expect(WinSetOnTopSync(APP_TITLE, '', true)).toBe(1);
 
-    windowHandle = WinGetHandle(APP_TITLE, '');
+    windowHandle = WinGetHandleSync(APP_TITLE, '');
   });
 
   afterAll(() => {
-    ProcessClose('TestApp.exe');
+    ProcessCloseSync('TestApp.exe');
     autoit.unload();
   });
 
@@ -103,44 +103,44 @@ describe.sequential('AutoIt JS @full', () => {
   });
 
   it('hides and shows the first name edit', () => {
-    const handle = ControlGetHandle(windowHandle, FIRST_NAME_EDIT);
+    const handle = ControlGetHandleSync(windowHandle, FIRST_NAME_EDIT);
 
-    expect(ControlHide(APP_TITLE, '', FIRST_NAME_EDIT)).toBe(1);
-    expect(WinGetStateByHandle(handle).visible).toBe(false);
+    expect(ControlHideSync(APP_TITLE, '', FIRST_NAME_EDIT)).toBe(1);
+    expect(WinGetStateByHandleSync(handle).visible).toBe(false);
 
-    expect(ControlShow(APP_TITLE, '', FIRST_NAME_EDIT)).toBe(1);
-    expect(WinGetStateByHandle(handle).visible).toBe(true);
+    expect(ControlShowSync(APP_TITLE, '', FIRST_NAME_EDIT)).toBe(1);
+    expect(WinGetStateByHandleSync(handle).visible).toBe(true);
 
-    expect(ControlHideByHandle(windowHandle, handle)).toBe(1);
-    expect(WinGetStateByHandle(handle).visible).toBe(false);
+    expect(ControlHideByHandleSync(windowHandle, handle)).toBe(1);
+    expect(WinGetStateByHandleSync(handle).visible).toBe(false);
 
-    expect(ControlShowByHandle(windowHandle, handle)).toBe(1);
-    expect(WinGetStateByHandle(handle).visible).toBe(true);
+    expect(ControlShowByHandleSync(windowHandle, handle)).toBe(1);
+    expect(WinGetStateByHandleSync(handle).visible).toBe(true);
   });
 
   it('disables and enables the last name edit', () => {
-    const handle = ControlGetHandle(windowHandle, LAST_NAME_EDIT);
+    const handle = ControlGetHandleSync(windowHandle, LAST_NAME_EDIT);
 
-    expect(ControlDisable(APP_TITLE, '', LAST_NAME_EDIT)).toBe(1);
-    expect(WinGetStateByHandle(handle).enabled).toBe(false);
+    expect(ControlDisableSync(APP_TITLE, '', LAST_NAME_EDIT)).toBe(1);
+    expect(WinGetStateByHandleSync(handle).enabled).toBe(false);
 
-    expect(ControlEnable(APP_TITLE, '', LAST_NAME_EDIT)).toBe(1);
-    expect(WinGetStateByHandle(handle).enabled).toBe(true);
+    expect(ControlEnableSync(APP_TITLE, '', LAST_NAME_EDIT)).toBe(1);
+    expect(WinGetStateByHandleSync(handle).enabled).toBe(true);
 
-    expect(ControlDisableByHandle(windowHandle, handle)).toBe(1);
-    expect(WinGetStateByHandle(handle).enabled).toBe(false);
+    expect(ControlDisableByHandleSync(windowHandle, handle)).toBe(1);
+    expect(WinGetStateByHandleSync(handle).enabled).toBe(false);
 
-    expect(ControlEnableByHandle(windowHandle, handle)).toBe(1);
-    expect(WinGetStateByHandle(handle).enabled).toBe(true);
+    expect(ControlEnableByHandleSync(windowHandle, handle)).toBe(1);
+    expect(WinGetStateByHandleSync(handle).enabled).toBe(true);
   });
 
   it('moves and resizes the about edit', () => {
-    const handle = ControlGetHandle(windowHandle, ABOUT_EDIT);
-    const originalPos = ControlGetPos(APP_TITLE, '', ABOUT_EDIT);
+    const handle = ControlGetHandleSync(windowHandle, ABOUT_EDIT);
+    const originalPos = ControlGetPosSync(APP_TITLE, '', ABOUT_EDIT);
 
-    expect(ControlMove(APP_TITLE, '', ABOUT_EDIT, 100, 100, 20, 20)).toBe(1);
+    expect(ControlMoveSync(APP_TITLE, '', ABOUT_EDIT, 100, 100, 20, 20)).toBe(1);
 
-    expect(ControlGetPos(APP_TITLE, '', ABOUT_EDIT)).toEqual({
+    expect(ControlGetPosSync(APP_TITLE, '', ABOUT_EDIT)).toEqual({
       left: 100,
       top: 100,
       right: 120,
@@ -148,7 +148,7 @@ describe.sequential('AutoIt JS @full', () => {
     });
 
     expect(
-      ControlMoveByHandle(
+      ControlMoveByHandleSync(
         windowHandle,
         handle,
         originalPos.left,
@@ -158,7 +158,7 @@ describe.sequential('AutoIt JS @full', () => {
       ),
     ).toBe(1);
 
-    expect(ControlGetPosByHandle(windowHandle, ControlGetHandle(windowHandle, ABOUT_EDIT))).toEqual(
+    expect(ControlGetPosByHandleSync(windowHandle, ControlGetHandleSync(windowHandle, ABOUT_EDIT))).toEqual(
       originalPos,
     );
   });
@@ -166,162 +166,162 @@ describe.sequential('AutoIt JS @full', () => {
   it('reads from and writes to the clipboard', () => {
     const uuid = randomUUID();
 
-    ClipPut(uuid);
+    ClipPutSync(uuid);
 
-    expect(ClipGet()).toBe(uuid);
-    expect(ClipGet(2)).toBe(uuid.slice(0, 2));
+    expect(ClipGetSync()).toBe(uuid);
+    expect(ClipGetSync(2)).toBe(uuid.slice(0, 2));
   });
 
   it('focuses a control', () => {
-    const controlHandle = ControlGetHandle(windowHandle, LAST_NAME_EDIT);
+    const controlHandle = ControlGetHandleSync(windowHandle, LAST_NAME_EDIT);
 
-    expect(ControlFocus(APP_TITLE, '', FIRST_NAME_EDIT)).toBe(1);
-    expect(ControlGetFocus(APP_TITLE)).toBe(FIRST_NAME_EDIT);
-    expect(ControlFocusByHandle(windowHandle, controlHandle)).toBe(1);
-    expect(ControlGetFocusByHandle(windowHandle)).toBe(LAST_NAME_EDIT);
+    expect(ControlFocusSync(APP_TITLE, '', FIRST_NAME_EDIT)).toBe(1);
+    expect(ControlGetFocusSync(APP_TITLE)).toBe(FIRST_NAME_EDIT);
+    expect(ControlFocusByHandleSync(windowHandle, controlHandle)).toBe(1);
+    expect(ControlGetFocusByHandleSync(windowHandle)).toBe(LAST_NAME_EDIT);
   });
 
   it('clicks a button', () => {
-    expect(ControlClick(APP_TITLE, '', OK_BUTTON)).toBe(1);
-    expect(WinWait(OK_TITLE, '', 1)).toBeGreaterThan(0);
+    expect(ControlClickSync(APP_TITLE, '', OK_BUTTON)).toBe(1);
+    expect(WinWaitSync(OK_TITLE, '', 1)).toBeGreaterThan(0);
 
-    expect(ControlClick(OK_TITLE, '', POPUP_BUTTON)).toBe(1);
-    expect(WinWaitClose(OK_TITLE, '', 1)).toBe(1);
+    expect(ControlClickSync(OK_TITLE, '', POPUP_BUTTON)).toBe(1);
+    expect(WinWaitCloseSync(OK_TITLE, '', 1)).toBe(1);
 
-    expect(ControlClickByHandle(windowHandle, ControlGetHandle(windowHandle, CANCEL_BUTTON))).toBe(1);
-    expect(WinWait(CANCEL_TITLE, '', 1)).toBeGreaterThan(0);
+    expect(ControlClickByHandleSync(windowHandle, ControlGetHandleSync(windowHandle, CANCEL_BUTTON))).toBe(1);
+    expect(WinWaitSync(CANCEL_TITLE, '', 1)).toBeGreaterThan(0);
 
-    const cancelPopup = WinGetHandle(CANCEL_TITLE);
+    const cancelPopup = WinGetHandleSync(CANCEL_TITLE);
 
-    expect(ControlClickByHandle(cancelPopup, ControlGetHandle(cancelPopup, POPUP_BUTTON))).toBe(1);
-    expect(WinWaitClose(CANCEL_TITLE, '', 1)).toBe(1);
+    expect(ControlClickByHandleSync(cancelPopup, ControlGetHandleSync(cancelPopup, POPUP_BUTTON))).toBe(1);
+    expect(WinWaitCloseSync(CANCEL_TITLE, '', 1)).toBe(1);
   });
 
   it('changes the window state', () => {
-    WinSetState(APP_TITLE, '', StateFlag.Minimize);
-    expect(WinGetState(APP_TITLE, '').minimized).toBe(true);
+    WinSetStateSync(APP_TITLE, '', StateFlag.Minimize);
+    expect(WinGetStateSync(APP_TITLE, '').minimized).toBe(true);
 
-    WinSetStateByHandle(windowHandle, StateFlag.Restore);
-    expect(WinGetStateByHandle(windowHandle).minimized).toBe(false);
+    WinSetStateByHandleSync(windowHandle, StateFlag.Restore);
+    expect(WinGetStateByHandleSync(windowHandle).minimized).toBe(false);
 
-    WinSetStateByHandle(windowHandle, StateFlag.Hide);
-    expect(WinGetStateByHandle(windowHandle).visible).toBe(false);
+    WinSetStateByHandleSync(windowHandle, StateFlag.Hide);
+    expect(WinGetStateByHandleSync(windowHandle).visible).toBe(false);
 
-    WinSetStateByHandle(windowHandle, StateFlag.Show);
-    expect(WinGetStateByHandle(windowHandle).visible).toBe(true);
+    WinSetStateByHandleSync(windowHandle, StateFlag.Show);
+    expect(WinGetStateByHandleSync(windowHandle).visible).toBe(true);
 
-    WinSetStateByHandle(windowHandle, StateFlag.Maximize);
-    expect(WinGetStateByHandle(windowHandle).maximized).toBe(true);
+    WinSetStateByHandleSync(windowHandle, StateFlag.Maximize);
+    expect(WinGetStateByHandleSync(windowHandle).maximized).toBe(true);
 
-    WinSetStateByHandle(windowHandle, StateFlag.Restore);
-    expect(WinGetStateByHandle(windowHandle).maximized).toBe(false);
+    WinSetStateByHandleSync(windowHandle, StateFlag.Restore);
+    expect(WinGetStateByHandleSync(windowHandle).maximized).toBe(false);
   });
 
   it('gets the handle as text', () => {
-    const handle = ControlGetHandle(windowHandle, TREE_VIEW);
-    const handleText = ControlGetHandleAsText(APP_TITLE, '', TREE_VIEW);
+    const handle = ControlGetHandleSync(windowHandle, TREE_VIEW);
+    const handleText = ControlGetHandleAsTextSync(APP_TITLE, '', TREE_VIEW);
 
     expect(handleText).toBe('0x' + handle.toString(16).padStart(16, '0').toUpperCase());
     expect(parseInt(handleText, 16)).toBe(Number(handle));
   });
 
   it('sets the text of a control', () => {
-    expect(ControlSetText(APP_TITLE, '', STATIC_LABEL, 'Test Label')).toBe(1);
-    expect(ControlGetText(APP_TITLE, '', STATIC_LABEL)).toBe('Test Label');
+    expect(ControlSetTextSync(APP_TITLE, '', STATIC_LABEL, 'Test Label')).toBe(1);
+    expect(ControlGetTextSync(APP_TITLE, '', STATIC_LABEL)).toBe('Test Label');
 
-    const control = ControlGetHandle(windowHandle, STATIC_LABEL);
+    const control = ControlGetHandleSync(windowHandle, STATIC_LABEL);
 
-    expect(ControlSetTextByHandle(windowHandle, control, 'Static Label 1')).toBe(1);
-    expect(ControlGetTextByHandle(windowHandle, control)).toBe('Static Label 1');
+    expect(ControlSetTextByHandleSync(windowHandle, control, 'Static Label 1')).toBe(1);
+    expect(ControlGetTextByHandleSync(windowHandle, control)).toBe('Static Label 1');
   });
 
   it('interacts with a list view', () => {
-    expect(ControlListView(APP_TITLE, '', LIST_VIEW, ListViewCommand.GetItemCount)).toBe('50');
-    expect(ControlListView(APP_TITLE, '', LIST_VIEW, ListViewCommand.GetSubItemCount, '1')).toBe('4');
+    expect(ControlListViewSync(APP_TITLE, '', LIST_VIEW, ListViewCommand.GetItemCount)).toBe('50');
+    expect(ControlListViewSync(APP_TITLE, '', LIST_VIEW, ListViewCommand.GetSubItemCount, '1')).toBe('4');
 
-    expect(ControlListView(APP_TITLE, '', LIST_VIEW, ListViewCommand.SelectAll)).toBe('1');
-    expect(ControlListView(APP_TITLE, '', LIST_VIEW, ListViewCommand.GetSelectedCount)).toBe('50');
+    expect(ControlListViewSync(APP_TITLE, '', LIST_VIEW, ListViewCommand.SelectAll)).toBe('1');
+    expect(ControlListViewSync(APP_TITLE, '', LIST_VIEW, ListViewCommand.GetSelectedCount)).toBe('50');
 
-    expect(ControlListView(APP_TITLE, '', LIST_VIEW, ListViewCommand.SelectClear)).toBe('1');
-    expect(ControlListView(APP_TITLE, '', LIST_VIEW, ListViewCommand.GetSelectedCount)).toBe('0');
+    expect(ControlListViewSync(APP_TITLE, '', LIST_VIEW, ListViewCommand.SelectClear)).toBe('1');
+    expect(ControlListViewSync(APP_TITLE, '', LIST_VIEW, ListViewCommand.GetSelectedCount)).toBe('0');
 
-    expect(ControlListView(APP_TITLE, '', LIST_VIEW, ListViewCommand.Select, '1')).toBe('1');
-    expect(ControlListView(APP_TITLE, '', LIST_VIEW, ListViewCommand.IsSelected, '1')).toBe('1');
-    expect(ControlListView(APP_TITLE, '', LIST_VIEW, ListViewCommand.IsSelected, '2')).toBe('0');
-    expect(ControlListView(APP_TITLE, '', LIST_VIEW, ListViewCommand.SelectInvert)).toBe('1');
-    expect(ControlListView(APP_TITLE, '', LIST_VIEW, ListViewCommand.GetSelectedCount)).toBe('49');
+    expect(ControlListViewSync(APP_TITLE, '', LIST_VIEW, ListViewCommand.Select, '1')).toBe('1');
+    expect(ControlListViewSync(APP_TITLE, '', LIST_VIEW, ListViewCommand.IsSelected, '1')).toBe('1');
+    expect(ControlListViewSync(APP_TITLE, '', LIST_VIEW, ListViewCommand.IsSelected, '2')).toBe('0');
+    expect(ControlListViewSync(APP_TITLE, '', LIST_VIEW, ListViewCommand.SelectInvert)).toBe('1');
+    expect(ControlListViewSync(APP_TITLE, '', LIST_VIEW, ListViewCommand.GetSelectedCount)).toBe('49');
 
-    expect(ControlListView(APP_TITLE, '', LIST_VIEW, ListViewCommand.DeSelect, '0', '50')).toBe('1');
-    expect(ControlListView(APP_TITLE, '', LIST_VIEW, ListViewCommand.GetSelectedCount)).toBe('0');
+    expect(ControlListViewSync(APP_TITLE, '', LIST_VIEW, ListViewCommand.DeSelect, '0', '50')).toBe('1');
+    expect(ControlListViewSync(APP_TITLE, '', LIST_VIEW, ListViewCommand.GetSelectedCount)).toBe('0');
 
-    expect(ControlListView(APP_TITLE, '', LIST_VIEW, ListViewCommand.Select, '1', '20')).toBe('1');
-    expect(ControlListView(APP_TITLE, '', LIST_VIEW, ListViewCommand.GetSelected)).toBe('1');
-    expect(ControlListView(APP_TITLE, '', LIST_VIEW, ListViewCommand.GetSelected, '1')).toBe(
+    expect(ControlListViewSync(APP_TITLE, '', LIST_VIEW, ListViewCommand.Select, '1', '20')).toBe('1');
+    expect(ControlListViewSync(APP_TITLE, '', LIST_VIEW, ListViewCommand.GetSelected)).toBe('1');
+    expect(ControlListViewSync(APP_TITLE, '', LIST_VIEW, ListViewCommand.GetSelected, '1')).toBe(
       new Array(20)
         .fill(0)
         .map((_, i) => i + 1)
         .join('|'),
     );
 
-    expect(ControlListView(APP_TITLE, '', LIST_VIEW, ListViewCommand.FindItem, 'unknown')).toBe('-1');
-    expect(ControlListView(APP_TITLE, '', LIST_VIEW, ListViewCommand.FindItem, 'R10 C1')).toBe('9');
+    expect(ControlListViewSync(APP_TITLE, '', LIST_VIEW, ListViewCommand.FindItem, 'unknown')).toBe('-1');
+    expect(ControlListViewSync(APP_TITLE, '', LIST_VIEW, ListViewCommand.FindItem, 'R10 C1')).toBe('9');
 
     // TODO: Figure out how to validate this
     // expect(ControlListView(APP_TITLE, '', LIST_VIEW, ListViewCommand.ViewChange, 'details')).toBe('1');
   });
 
   it('sets the title', () => {
-    const title = WinGetTitle(APP_TITLE);
+    const title = WinGetTitleSync(APP_TITLE);
 
     expect(title).toBe(APP_TITLE);
-    expect(WinSetTitle(APP_TITLE, '', 'Testing')).toBe(1);
+    expect(WinSetTitleSync(APP_TITLE, '', 'Testing')).toBe(1);
 
-    expect(WinSetTitleByHandle(windowHandle, 'TestApp')).toBe(1);
-    expect(WinGetTitleByHandle(windowHandle)).toBe('TestApp');
+    expect(WinSetTitleByHandleSync(windowHandle, 'TestApp')).toBe(1);
+    expect(WinGetTitleByHandleSync(windowHandle)).toBe('TestApp');
 
-    expect(WinSetTitleByHandle(windowHandle, APP_TITLE)).toBe(1);
+    expect(WinSetTitleByHandleSync(windowHandle, APP_TITLE)).toBe(1);
   });
 
   it('moves the window', () => {
-    expect(WinMove(APP_TITLE, '', 100, 100)).toBe(1);
+    expect(WinMoveSync(APP_TITLE, '', 100, 100)).toBe(1);
 
-    const pos = WinGetPos(APP_TITLE);
+    const pos = WinGetPosSync(APP_TITLE);
 
     expect(pos.left).toBe(100);
     expect(pos.top).toBe(100);
 
-    expect(WinMoveByHandle(windowHandle, 200, 200)).toBe(1);
+    expect(WinMoveByHandleSync(windowHandle, 200, 200)).toBe(1);
 
-    const newPos = WinGetPosByHandle(windowHandle);
+    const newPos = WinGetPosByHandleSync(windowHandle);
 
     expect(newPos.left).toBe(200);
     expect(newPos.top).toBe(200);
   });
 
   it('selects a menu option', () => {
-    expect(WinMenuSelectItem(APP_TITLE, '', '&Help', '&About')).toBe(1);
-    expect(WinWait('About TestApp', '', 1)).toBeGreaterThan(0);
-    expect(ControlClick('About TestApp', '', 'Button1')).toBe(1);
+    expect(WinMenuSelectItemSync(APP_TITLE, '', '&Help', '&About')).toBe(1);
+    expect(WinWaitSync('About TestApp', '', 1)).toBeGreaterThan(0);
+    expect(ControlClickSync('About TestApp', '', 'Button1')).toBe(1);
 
-    expect(WinMenuSelectItemByHandle(windowHandle, '&Help', '&About')).toBe(1);
-    expect(WinWait('About TestApp', '', 1)).toBeGreaterThan(0);
-    expect(ControlClick('About TestApp', '', 'Button1')).toBe(1);
+    expect(WinMenuSelectItemByHandleSync(windowHandle, '&Help', '&About')).toBe(1);
+    expect(WinWaitSync('About TestApp', '', 1)).toBeGreaterThan(0);
+    expect(ControlClickSync('About TestApp', '', 'Button1')).toBe(1);
   });
 
   it('gets the status bar text', () => {
-    expect(StatusbarGetText(APP_TITLE, '', 2)).toBe(' Status 1');
-    expect(StatusbarGetTextByHandle(windowHandle, 3)).toBe(' Status 2');
+    expect(StatusbarGetTextSync(APP_TITLE, '', 2)).toBe(' Status 1');
+    expect(StatusbarGetTextByHandleSync(windowHandle, 3)).toBe(' Status 2');
   });
 
   it('gets the color of a pixel', () => {
-    expect(WinActivate(APP_TITLE)).toBe(1);
-    const rect = WinGetPos(APP_TITLE);
+    expect(WinActivateSync(APP_TITLE)).toBe(1);
+    const rect = WinGetPosSync(APP_TITLE);
 
-    expect(PixelGetColor(rect.right - 25, rect.bottom - 45)).toBe(0xfeb800);
+    expect(PixelGetColorSync(rect.right - 25, rect.bottom - 45)).toBe(0xfeb800);
   });
 
   it('sets the transparency of the window', () => {
-    expect(WinSetTrans(APP_TITLE, '', 127)).toBe(1);
-    expect(WinSetTransByHandle(windowHandle, 255)).toBe(1);
+    expect(WinSetTransSync(APP_TITLE, '', 127)).toBe(1);
+    expect(WinSetTransByHandleSync(windowHandle, 255)).toBe(1);
   });
 });
