@@ -19,7 +19,7 @@ import { WinSetOnTopByHandle, WinSetOnTopByHandleSync } from './win-set-on-top-b
 import { WinWait, WinWaitSync } from './win-wait';
 import { WinWaitCloseByHandle, WinWaitCloseByHandleSync } from './win-wait-close-by-handle';
 
-describe.sequential('AutoIt Open/Close', () => {
+describe.sequential('AutoIt Open/Close @full', () => {
   beforeAll(() => {
     expect(statSync(TEST_APP_PATH).isFile()).toBe(true);
 

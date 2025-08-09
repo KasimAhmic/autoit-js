@@ -100,7 +100,7 @@ import { WinSetTransByHandleSync } from './win-set-trans-by-handle';
 import { WinWaitSync } from './win-wait';
 import { WinWaitCloseSync } from './win-wait-close';
 
-describe.sequential('AutoIt JS @full', () => {
+describe.sequential('AutoIt JS Synchronous API @full', () => {
   let windowHandle: bigint;
 
   beforeAll(() => {
