@@ -4,6 +4,7 @@ export default defineConfig({
   test: {
     api: 9527,
     globals: true,
+    maxWorkers: 1,
     coverage: {
       all: true,
       enabled: true,

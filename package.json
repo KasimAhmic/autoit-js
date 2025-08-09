@@ -11,6 +11,7 @@
   "scripts": {
     "test": "vitest",
     "test:ui": "vitest --ui",
+    "test:debug": "vitest --ui --debug",
     "format": "prettier --write src/",
     "lint": "eslint src",
     "prebuild": "rimraf dist",
@@ -18,7 +19,7 @@
     "postbuild": "cp src/lib/AutoItX3* dist/lib && cp src/lib/LICENSE dist/lib",
     "release": "semantic-release",
     "docs": "typedoc",
-    "reset": "rimraf node_modules dist coverage && npm install",
+    "reset": "rimraf node_modules dist coverage .rollup.cache .docs && npm install",
     "commit": "cz",
     "prepare": "husky",
     "lint-staged": "lint-staged"
