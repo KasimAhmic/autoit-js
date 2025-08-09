@@ -1,7 +1,7 @@
 import koffi from 'koffi';
 
+import { DWORD, DoubleWord, VOID } from '../@types/win32';
 import { typedPromisify } from '../util';
-import { DWORD, DoubleWord, VOID } from './win32';
 
 const kernel32 = koffi.load('kernel32.dll');
 

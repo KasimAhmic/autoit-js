@@ -36,6 +36,13 @@ export function MAKELPARAM(low: number, high: number): number {
   return (low & 0xffff) | ((high & 0xffff) << 16);
 }
 
+export const GetDesktopWindowSync: koffi.KoffiFunc<() => WindowHandle> = user32.func(
+  '__stdcall',
+  'GetDesktopWindow',
+  HWND,
+  [],
+);
+
 export const GetDCSync: koffi.KoffiFunc<(windowHandle: WindowHandle | null) => DeviceContextHandle> =
   user32.func('__stdcall', 'GetDC', HDC, [HWND]);
 
@@ -84,6 +91,7 @@ export const DestroyWindowSync: koffi.KoffiFunc<(windowHandle: WindowHandle) => 
   [HWND],
 );
 
+export const GetDesktopWindow = typedPromisify(GetDesktopWindowSync.async);
 export const GetDC = typedPromisify(GetDCSync.async);
 export const ReleaseDC = typedPromisify(ReleaseDCSync.async);
 export const CreateWindowExW = typedPromisify(CreateWindowExWSync.async);
