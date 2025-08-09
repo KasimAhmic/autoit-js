@@ -7,7 +7,7 @@ import { AU3_INTDEFAULT } from './util/constants';
  * Simulates a mouse click on a control. Unlike {@linkcode MouseClickSync}, `ControlClickSync` won't move the
  * mouse cursor but is capable of clicking on controls that may be obscured by other windows.
  *
- * Where possible, you should prefer using {@linkcode ControlClickByHandleClick} to avoid potential issues
+ * Where possible, you should prefer using {@linkcode ControlClickByHandleSync} to avoid potential issues
  * with ambiguous window and control titles.
  *
  * @param windowTitle The title of the window to access.

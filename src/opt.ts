@@ -350,7 +350,7 @@ export enum AutoItOption {
 
 /**
  * Changes the operation of various AutoIt functions/parameters. This function can be used interchangeably
- * with {@linkcode AutoItSetOption}.
+ * with {@linkcode AutoItSetOptionSync}.
  *
  * @param option The option to change. See {@linkcode AutoItOption} for details.
  * @param value The value to assign to the option. It varies depending on the option being set.
