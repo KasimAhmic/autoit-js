@@ -137,7 +137,7 @@ export function TooltipSync(
  * @param value The text to display in the tooltip.
  * @param x The x-coordinate of the tooltip position. Default is 0.
  * @param y The y-coordinate of the tooltip position. Default is 0.
- * @param width The maximum width of the tooltip in pixels. Default is width.
+ * @param width The maximum width of the tooltip in pixels. Default is 400.
  * @param timeout The duration in milliseconds to display the tooltip. Default is 2000.
  *
  * @example
