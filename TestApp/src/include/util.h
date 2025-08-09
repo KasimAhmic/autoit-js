@@ -1,5 +1,6 @@
 #pragma once
 
+#include <format>
 #include <memory>
 #include <iostream>
 
@@ -250,4 +251,23 @@ inline VOID SetTheme(HWND handle) {
 	if (const HRESULT result = SetWindowTheme(handle, L"Explorer", nullptr); result != S_OK) {
 		logger->warn("Failed to set theme on window. Reason: " + result);
 	}
+}
+
+inline VOID UpdateLastEvent(UINT event, WPARAM wParam) {
+	const std::wstring name = [&] {
+		switch (event) {
+			case WM_MOUSEMOVE: return std::wstring(L"Mouse Move");
+			case WM_LBUTTONDOWN: return std::wstring(L"Mouse Left Click");
+			case WM_RBUTTONDOWN: return std::wstring(L"Mouse Right Click");
+			case WM_LBUTTONDBLCLK: return std::wstring(L"Mouse Left Double Click");
+			case WM_RBUTTONDBLCLK: return std::wstring(L"Mouse Right Double Click");
+			case WM_MOUSEWHEEL: {
+				const wchar_t *dir = GET_WHEEL_DELTA_WPARAM(wParam) < 0 ? L"Down" : L"Up";
+				return std::format(L"Mouse Wheel {}", dir);
+			}
+			default: return std::wstring();
+		}
+	}();
+
+	SetWindowTextW(eventHandle, std::format(L"Last Event: {}", name).c_str());
 }

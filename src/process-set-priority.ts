@@ -36,14 +36,36 @@ export enum Priority {
  *
  * @example
  * ```typescript
- * import { ProcessSetPriority } from '@ahmic/autoit-js';
+ * import { ProcessSetPrioritySync } from '@ahmic/autoit-js';
  *
- * const result = ProcessSetPriority('notepad.exe', 1);
+ * const result = ProcessSetPrioritySync('notepad.exe', 1);
  * console.log(result); // Output: 1 if successful, 0 otherwise
  * ```
  *
  * @see https://www.autoitscript.com/autoit3/docs/functions/ProcessSetPriority.htm
  */
-export function ProcessSetPriority(process: string, priority: Priority): number {
+export function ProcessSetPrioritySync(process: string, priority: Priority): number {
   return autoit.invoke('AU3_ProcessSetPriority', INT, [LPCWSTR, INT], [process, priority]);
+}
+
+/**
+ * Sets the priority of a process.
+ *
+ * @param process The name or PID of the process.
+ * @param priority The priority level to set. See {@linkcode Priority} for details.
+ *
+ * @returns A promise that resolves to 1 if successful, or 0 otherwise.
+ *
+ * @example
+ * ```typescript
+ * import { ProcessSetPriority } from '@ahmic/autoit-js';
+ *
+ * const result = await ProcessSetPriority('notepad.exe', 1);
+ * console.log(result); // Output: 1 if successful, 0 otherwise
+ * ```
+ *
+ * @see https://www.autoitscript.com/autoit3/docs/functions/ProcessSetPriority.htm
+ */
+export function ProcessSetPriority(process: string, priority: Priority): Promise<number> {
+  return autoit.invokeAsync('AU3_ProcessSetPriority', INT, [LPCWSTR, INT], [process, priority]);
 }

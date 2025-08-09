@@ -28,6 +28,7 @@ import {
   WindowHandle,
   WordParam,
 } from '../@types';
+import { typedPromisify } from '../util';
 
 const user32 = koffi.load('user32.dll');
 
@@ -35,18 +36,21 @@ export function MAKELPARAM(low: number, high: number): number {
   return (low & 0xffff) | ((high & 0xffff) << 16);
 }
 
-export const GetDC: koffi.KoffiFunc<(windowHandle: WindowHandle | null) => DeviceContextHandle> = user32.func(
+export const GetDesktopWindowSync: koffi.KoffiFunc<() => WindowHandle> = user32.func(
   '__stdcall',
-  'GetDC',
-  HDC,
-  [HWND],
+  'GetDesktopWindow',
+  HWND,
+  [],
 );
 
-export const ReleaseDC: koffi.KoffiFunc<
+export const GetDCSync: koffi.KoffiFunc<(windowHandle: WindowHandle | null) => DeviceContextHandle> =
+  user32.func('__stdcall', 'GetDC', HDC, [HWND]);
+
+export const ReleaseDCSync: koffi.KoffiFunc<
   (windowHandle: WindowHandle | null, deviceContextHandle: DeviceContextHandle) => Int
 > = user32.func('__stdcall', 'ReleaseDC', INT, [HWND, HDC]);
 
-export const CreateWindowExW: koffi.KoffiFunc<
+export const CreateWindowExWSync: koffi.KoffiFunc<
   (
     extendedWindowStyle: DoubleWord,
     className: LongPointerToConstantWideString | null,
@@ -76,13 +80,20 @@ export const CreateWindowExW: koffi.KoffiFunc<
   LPVOID,
 ]);
 
-export const SendMessageW: koffi.KoffiFunc<
+export const SendMessageWSync: koffi.KoffiFunc<
   (windowHandle: WindowHandle, message: UnsignedInt, wParam: WordParam, lParam: LongParam) => LongResult
 > = user32.func('__stdcall', 'SendMessageW', LRESULT, [HWND, UINT, WPARAM, LPARAM]);
 
-export const DestroyWindow: koffi.KoffiFunc<(windowHandle: WindowHandle) => Bool> = user32.func(
+export const DestroyWindowSync: koffi.KoffiFunc<(windowHandle: WindowHandle) => Bool> = user32.func(
   '__stdcall',
   'DestroyWindow',
   BOOL,
   [HWND],
 );
+
+export const GetDesktopWindow = typedPromisify(GetDesktopWindowSync.async);
+export const GetDC = typedPromisify(GetDCSync.async);
+export const ReleaseDC = typedPromisify(ReleaseDCSync.async);
+export const CreateWindowExW = typedPromisify(CreateWindowExWSync.async);
+export const SendMessageW = typedPromisify(SendMessageWSync.async);
+export const DestroyWindow = typedPromisify(DestroyWindowSync.async);

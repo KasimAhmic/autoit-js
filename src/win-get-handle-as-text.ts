@@ -13,19 +13,51 @@ import { HWND_HEX_SIZE } from './util/constants';
  *
  * @example
  * ```typescript
- * import { WinGetHandleAsText } from '@ahmic/autoit-js';
+ * import { WinGetHandleAsTextSync } from '@ahmic/autoit-js';
  *
- * const handleText = WinGetHandleAsText('Untitled - Notepad');
+ * const handleText = WinGetHandleAsTextSync('Untitled - Notepad');
  *
  * console.log(handleText); // Output: "0x00123456" (example output)
  * ```
  *
  * @see https://www.autoitscript.com/autoit3/docs/functions/WinGetHandle.htm
  */
-export function WinGetHandleAsText(windowTitle: string, windowText: string = ''): string {
+export function WinGetHandleAsTextSync(windowTitle: string, windowText: string = ''): string {
   const [buffer, length] = createUnicodeBuffer(HWND_HEX_SIZE);
 
   autoit.invoke(
+    'AU3_WinGetHandleAsText',
+    VOID,
+    [LPCWSTR, LPCWSTR, LPWSTR, INT],
+    [windowTitle, windowText, buffer, length],
+  );
+
+  return unicodeBufferToString(buffer);
+}
+
+/**
+ * Retrieves the handle of a window as a string.
+ *
+ * @param windowTitle The title of the window to access.
+ * @param windowText Optional text found in the window.
+ *
+ * @returns A promise that resolves to the handle of the window as a string.
+ *
+ * @example
+ * ```typescript
+ * import { WinGetHandleAsText } from '@ahmic/autoit-js';
+ *
+ * const handleText = await WinGetHandleAsText('Untitled - Notepad');
+ *
+ * console.log(handleText); // Output: "0x00123456" (example output)
+ * ```
+ *
+ * @see https://www.autoitscript.com/autoit3/docs/functions/WinGetHandle.htm
+ */
+export async function WinGetHandleAsText(windowTitle: string, windowText: string = ''): Promise<string> {
+  const [buffer, length] = createUnicodeBuffer(HWND_HEX_SIZE);
+
+  await autoit.invokeAsync(
     'AU3_WinGetHandleAsText',
     VOID,
     [LPCWSTR, LPCWSTR, LPWSTR, INT],

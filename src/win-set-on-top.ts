@@ -12,15 +12,42 @@ import { autoit } from './lib/autoit';
  *
  * @example
  * ```typescript
- * import { WinSetOnTop } from '@ahmic/autoit-js';
+ * import { WinSetOnTopSync } from '@ahmic/autoit-js';
  *
- * WinSetOnTop('Untitled - Notepad', '', true);
+ * WinSetOnTopSync('Untitled - Notepad', '', true);
  * ```
  *
  * @see https://www.autoitscript.com/autoit3/docs/functions/WinSetOnTop.htm
  */
-export function WinSetOnTop(windowTitle: string, windowText: string = '', onTop: boolean): number {
+export function WinSetOnTopSync(windowTitle: string, windowText: string = '', onTop: boolean): number {
   return autoit.invoke(
+    'AU3_WinSetOnTop',
+    INT,
+    [LPCWSTR, LPCWSTR, INT],
+    [windowTitle, windowText, onTop ? 1 : 0],
+  );
+}
+
+/**
+ * Sets whether a window is on top of all other windows.
+ *
+ * @param windowTitle The title of the window to set on top.
+ * @param windowText Optional text found in the window.
+ * @param onTop Whether to set the window on top or not.
+ *
+ * @returns A promise that resolves to 1 if the operation was successful, or 0 otherwise.
+ *
+ * @example
+ * ```typescript
+ * import { WinSetOnTop } from '@ahmic/autoit-js';
+ *
+ * await WinSetOnTop('Untitled - Notepad', '', true);
+ * ```
+ *
+ * @see https://www.autoitscript.com/autoit3/docs/functions/WinSetOnTop.htm
+ */
+export function WinSetOnTop(windowTitle: string, windowText: string = '', onTop: boolean): Promise<number> {
+  return autoit.invokeAsync(
     'AU3_WinSetOnTop',
     INT,
     [LPCWSTR, LPCWSTR, INT],

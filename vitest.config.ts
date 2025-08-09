@@ -1,9 +1,13 @@
+import { platform } from 'node:os';
+
 import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
   test: {
     api: 9527,
     globals: true,
+    maxWorkers: 1,
+    exclude: platform() !== 'win32' ? ['**/node_modules/**', '**/autoit-*.test.ts'] : [],
     coverage: {
       all: true,
       enabled: true,

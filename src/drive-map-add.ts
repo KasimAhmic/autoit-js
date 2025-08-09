@@ -29,14 +29,14 @@ export enum DriveMapFlag {
  *
  * @example
  * ```typescript
- * import { DriveMapAdd, DriveMapFlag } from '@ahmic/autoit-js';
+ * import { DriveMapAddSync, DriveMapFlag } from '@ahmic/autoit-js';
  *
- * DriveMapAdd('Z:', '\\server\share', DriveMapFlag.Authentication, 'user', 'password');
+ * DriveMapAddSync('Z:', '\\server\share', DriveMapFlag.Authentication, 'user', 'password');
  * ```
  *
  * @see https://www.autoitscript.com/autoit3/docs/functions/DriveMapAdd.htm
  */
-export function DriveMapAdd(
+export function DriveMapAddSync(
   device: string,
   share: string,
   flags: DriveMapFlag = DriveMapFlag.Default,
@@ -46,6 +46,45 @@ export function DriveMapAdd(
   const [buffer, length] = createUnicodeBuffer(1024);
 
   autoit.invoke(
+    'AU3_DriveMapAdd',
+    VOID,
+    [LPCWSTR, LPCWSTR, INT, LPCWSTR, LPCWSTR, LPWSTR, INT],
+    [device, share, flags, username, password, buffer, length],
+  );
+
+  return unicodeBufferToString(buffer);
+}
+
+/**
+ * Maps a network drive to a local drive letter.
+ *
+ * @param device The local drive letter to map.
+ * @param share The network share to map to.
+ * @param flags Optional flags to control the mapping behavior.
+ * @param username Optional username for authentication.
+ * @param password Optional password for authentication.
+ *
+ * @returns A promise that resolves to "1" if successful, "0" if failed.
+ *
+ * @example
+ * ```typescript
+ * import { DriveMapAdd, DriveMapFlag } from '@ahmic/autoit-js';
+ *
+ * await DriveMapAdd('Z:', '\\server\share', DriveMapFlag.Authentication, 'user', 'password');
+ * ```
+ *
+ * @see https://www.autoitscript.com/autoit3/docs/functions/DriveMapAdd.htm
+ */
+export async function DriveMapAdd(
+  device: string,
+  share: string,
+  flags: DriveMapFlag = DriveMapFlag.Default,
+  username: string = '',
+  password: string = '',
+): Promise<string> {
+  const [buffer, length] = createUnicodeBuffer(1024);
+
+  await autoit.invokeAsync(
     'AU3_DriveMapAdd',
     VOID,
     [LPCWSTR, LPCWSTR, INT, LPCWSTR, LPCWSTR, LPWSTR, INT],

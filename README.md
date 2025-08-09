@@ -1,8 +1,8 @@
 # AutoIt JS
 
-Node.js bindings for AutoItX3.dll.
-
 <div align="center">
+
+Node.js bindings for AutoItX3.dll.
 
 ![NPM Version](https://img.shields.io/npm/v/%40ahmic%2Fautoit-js)
 ![GitHub License](https://img.shields.io/github/license/KasimAhmic/autoit-js)
@@ -15,24 +15,51 @@ Node.js bindings for AutoItX3.dll.
 
 ## What is AutoIt JS?
 
-AutoIt is a Windows automation tool that can be used to automate tasks on Windows. AutoIt provides its own scripting language however, it can be difficult to work with if you need to integrate Windows automation into an existing test suite.
+AutoIt is a Windows automation tool that can be used to automate tasks on Windows. AutoIt provides its own
+scripting language however, it can be difficult to work with if you need to integrate Windows automation into
+an existing test suite.
 
 Enter AutoIt JS.
 
-AutoIt JS wraps the AutoItX3.dll library using [Koffi](https://koffi.dev/) to provide a simple to use interface for AutoIt. It allows you to take your existing JavaScript/TypeScript test suite powered by PlayWright/Cypress/Puppeteer/etc. and automate Windows programs with ease.
+AutoIt JS wraps the AutoItX3.dll library using [Koffi](https://koffi.dev/) to provide a simple to use
+interface for AutoIt. It allows you to take your existing JavaScript/TypeScript test suite powered by
+Playwright/Cypress/Puppeteer/etc. and automate Windows programs with ease.
 
 ## Example Usage
+
+### New Asynchronous API in v2
+
+You can use the new asynchronous API in async contexts like Playwright and Cypress tests to avoid blocking the
+event loop and slowing down your tests.
 
 ```typescript
 import { Init, Run, Send, WinClose, WinWaitActive, autoit } from '@ahmic/autoit-js';
 
 autoit.load();
 
-Init();
-Run('notepad.exe');
-WinWaitActive('[CLASS:Notepad]');
-Send('Hello, World!');
-WinClose('[CLASS:Notepad]');
+await Init();
+await Run('notepad.exe');
+await WinWaitActive('[CLASS:Notepad]');
+await Send('Hello, World!');
+await WinClose('[CLASS:Notepad]');
+
+autoit.unload();
+```
+
+### Synchronous API
+
+For simple scripting tasks, the synchronous API is the preferred way to use AutoIt JS.
+
+```typescript
+import { InitSync, RunSync, SendSync, WinCloseSync, WinWaitActiveSync, autoit } from '@ahmic/autoit-js';
+
+autoit.load();
+
+InitSync();
+RunSync('notepad.exe');
+WinWaitActiveSync('[CLASS:Notepad]');
+SendSync('Hello, World!');
+WinCloseSync('[CLASS:Notepad]');
 
 autoit.unload();
 ```

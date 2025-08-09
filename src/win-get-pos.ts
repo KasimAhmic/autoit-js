@@ -9,23 +9,56 @@ import { autoit } from './lib/autoit';
  * @param windowTitle The title of the window.
  * @param windowText Optional text found in the window.
  *
- * @returns The position and size of the window as a {@linkcode IRect} object.
+ * @returns An {@linkcode IRect} object containing the position and size of the window.
  *
  * @example
  * ```typescript
- * import { WinGetPos } from '@ahmic/autoit-js';
+ * import { WinGetPosSync } from '@ahmic/autoit-js';
  *
- * const rect = WinGetPos('Untitled - Notepad');
+ * const rect = WinGetPosSync('Untitled - Notepad');
  *
  * console.log(rect); // Output: { left: 100, top: 100, right: 200, bottom: 200 }
  * ```
  *
  * @see https://www.autoitscript.com/autoit3/docs/functions/WinGetPos.htm
  */
-export function WinGetPos(windowTitle: string, windowText: string = ''): IRect {
+export function WinGetPosSync(windowTitle: string, windowText: string = ''): IRect {
   const rect = new Rect();
 
   autoit.invoke('AU3_WinGetPos', INT, [LPCWSTR, LPCWSTR, koffi.out(LPRECT)], [windowTitle, windowText, rect]);
+
+  return rect;
+}
+
+/**
+ * Retrieves the position and size of a window.
+ *
+ * @param windowTitle The title of the window.
+ * @param windowText Optional text found in the window.
+ *
+ * @returns A promise that resolves to an {@linkcode IRect} object containing the position and size of the
+ * window.
+ *
+ * @example
+ * ```typescript
+ * import { WinGetPos } from '@ahmic/autoit-js';
+ *
+ * const rect = await WinGetPos('Untitled - Notepad');
+ *
+ * console.log(rect); // Output: { left: 100, top: 100, right: 200, bottom: 200 }
+ * ```
+ *
+ * @see https://www.autoitscript.com/autoit3/docs/functions/WinGetPos.htm
+ */
+export async function WinGetPos(windowTitle: string, windowText: string = ''): Promise<IRect> {
+  const rect = new Rect();
+
+  await autoit.invokeAsync(
+    'AU3_WinGetPos',
+    INT,
+    [LPCWSTR, LPCWSTR, koffi.out(LPRECT)],
+    [windowTitle, windowText, rect],
+  );
 
   return rect;
 }

@@ -11,15 +11,38 @@ import { autoit } from './lib/autoit';
  *
  * @example
  * ```typescript
- * import { WinActive } from '@ahmic/autoit-js';
+ * import { WinActiveSync } from '@ahmic/autoit-js';
  *
- * const isActive = WinActive('Untitled - Notepad');
+ * const isActive = WinActiveSync('Untitled - Notepad');
  *
  * console.log(isActive); // Output: 1
  * ```
  *
  * @see https://www.autoitscript.com/autoit3/docs/functions/WinActive.htm
  */
-export function WinActive(windowTitle: string, windowText: string = ''): number {
+export function WinActiveSync(windowTitle: string, windowText: string = ''): number {
   return autoit.invoke('AU3_WinActive', INT, [LPCWSTR, LPCWSTR], [windowTitle, windowText]);
+}
+
+/**
+ * Checks if a window is currently active.
+ *
+ * @param windowTitle The title of the window to check.
+ * @param windowText Optional text found in the window.
+ *
+ * @returns A promise that resolves to 1 if the window is active, or 0 otherwise.
+ *
+ * @example
+ * ```typescript
+ * import { WinActive } from '@ahmic/autoit-js';
+ *
+ * const isActive = await WinActive('Untitled - Notepad');
+ *
+ * console.log(isActive); // Output: 1
+ * ```
+ *
+ * @see https://www.autoitscript.com/autoit3/docs/functions/WinActive.htm
+ */
+export function WinActive(windowTitle: string, windowText: string = ''): Promise<number> {
+  return autoit.invokeAsync('AU3_WinActive', INT, [LPCWSTR, LPCWSTR], [windowTitle, windowText]);
 }

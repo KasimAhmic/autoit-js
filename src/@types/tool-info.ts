@@ -6,7 +6,6 @@ import {
   HWND,
   InstanceHandle,
   LPARAM,
-  LPVOID,
   LPWSTR,
   LongParam,
   LongPointerToWideString,
@@ -38,11 +37,9 @@ export class ToolInfoW implements IToolInfoW {
   hinst?: InstanceHandle | null;
   lpszText: LongPointerToWideString | null;
   lParam?: LongParam;
-  readonly lpReserved: null;
 
-  constructor(options?: Partial<Omit<IToolInfoW, 'cbSize' | 'lpReserved'>>) {
-    // TODO: This is wrong. TOOLINFOW has a size of 72 bytes but it refuses to work when setting it to 72.
-    this.cbSize = 40;
+  constructor(options?: Partial<Omit<IToolInfoW, 'cbSize'>>) {
+    this.cbSize = koffi.sizeof(TOOLINFOW);
     this.uFlags = options?.uFlags;
     this.hwnd = options?.hwnd;
     this.uId = options?.uId;
@@ -50,11 +47,10 @@ export class ToolInfoW implements IToolInfoW {
     this.hinst = options?.hinst;
     this.lpszText = options?.lpszText ?? '';
     this.lParam = options?.lParam;
-    this.lpReserved = null;
   }
 }
 
-export const TOOLINFOW = koffi.pack('TOOLINFOW', {
+export const TOOLINFOW = koffi.struct('TOOLINFOW', {
   cbSize: UINT,
   uFlags: UINT,
   hwnd: HWND,
@@ -63,7 +59,6 @@ export const TOOLINFOW = koffi.pack('TOOLINFOW', {
   hinst: HINSTANCE,
   lpszText: LPWSTR,
   lParam: LPARAM,
-  lpReserved: LPVOID,
 });
 
 export const LPTOOLINFOW = koffi.pointer('LPTOOLINFOW', TOOLINFOW);

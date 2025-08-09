@@ -11,16 +11,38 @@ import { autoit } from './lib/autoit';
  *
  * @example
  * ```typescript
- * import { PixelGetColor } from '@ahmic/autoit-js';
+ * import { PixelGetColorSync } from '@ahmic/autoit-js';
  *
- * const color = PixelGetColor(50, 50);
+ * const color = PixelGetColorSync(50, 50);
  *
  * console.log(color.toString(16)); // Output: "ff00ff"
  * ```
  *
  * @see https://www.autoitscript.com/autoit3/docs/functions/PixelGetColor.htm
  */
-// TODO: Implement offsets when checking the color of a particular window
-export function PixelGetColor(x: number, y: number): number {
+export function PixelGetColorSync(x: number, y: number): number {
   return autoit.invoke('AU3_PixelGetColor', INT, [INT, INT], [x, y]);
+}
+
+/**
+ * Retrieves the color of a pixel at the specified screen coordinates.
+ *
+ * @param x The X coordinate of the pixel.
+ * @param y The Y coordinate of the pixel.
+ *
+ * @returns A promise that resolves to the color of the pixel as a hexadecimal number.
+ *
+ * @example
+ * ```typescript
+ * import { PixelGetColor } from '@ahmic/autoit-js';
+ *
+ * const color = await PixelGetColor(50, 50);
+ *
+ * console.log(color.toString(16)); // Output: "ff00ff"
+ * ```
+ *
+ * @see https://www.autoitscript.com/autoit3/docs/functions/PixelGetColor.htm
+ */
+export function PixelGetColor(x: number, y: number): Promise<number> {
+  return autoit.invokeAsync('AU3_PixelGetColor', INT, [INT, INT], [x, y]);
 }

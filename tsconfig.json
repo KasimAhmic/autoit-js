@@ -6,7 +6,7 @@
     "target": "ES2023",
     "esModuleInterop": true,
     "declaration": true,
-    "removeComments": true,
+    "removeComments": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "emitDeclarationOnly": true,

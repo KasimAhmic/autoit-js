@@ -74,7 +74,7 @@ export class AutoIt {
   }
 
   /**
-   * Invokes a function from the AutoItX3 DLL.
+   * Invokes a function from the AutoItX3 DLL synchronously.
    *
    * @param functionName The name of the function to invoke.
    * @param functionReturnType The return type of the function.
@@ -92,6 +92,68 @@ export class AutoIt {
     functionArgumentTypes: FunctionArgumentTypes,
     functionArguments: unknown[],
   ): NonNullable<FunctionReturnType['__jsType']> {
+    const func = this.getFunction(functionName, functionReturnType, functionArgumentTypes);
+
+    const output = func(...functionArguments);
+
+    this.logger.logFunctionCall(functionName, functionArguments, output);
+
+    return output;
+  }
+
+  /**
+   * Invokes a function from the AutoItX3 DLL asynchronously.
+   *
+   * @param functionName The name of the function to invoke.
+   * @param functionReturnType The return type of the function.
+   * @param functionArgumentTypes The argument types of the function.
+   * @param functionArguments The arguments to pass to the function.
+   *
+   * @returns A promise that resolves with the result of the function call.
+   */
+  invokeAsync<
+    FunctionReturnType extends Win32Type<Nominal<unknown, unknown>>,
+    const FunctionArgumentTypes extends Win32Type<Nominal<unknown, unknown>>[],
+  >(
+    functionName: string,
+    functionReturnType: FunctionReturnType,
+    functionArgumentTypes: FunctionArgumentTypes,
+    functionArguments: unknown[],
+  ) {
+    return new Promise<NonNullable<FunctionReturnType['__jsType']>>((resolve, reject) => {
+      let func: KoffiFunction;
+
+      try {
+        func = this.getFunction(functionName, functionReturnType, functionArgumentTypes);
+      } catch (error) {
+        reject(error);
+        return;
+      }
+
+      func.async(
+        ...functionArguments,
+        (error: Error, result: NonNullable<FunctionReturnType['__jsType']>) => {
+          if (error) {
+            reject(error);
+            return;
+          }
+
+          this.logger.logFunctionCall(functionName, functionArguments, result);
+
+          resolve(result);
+        },
+      );
+    });
+  }
+
+  private getFunction<
+    FunctionReturnType extends Win32Type<Nominal<unknown, unknown>>,
+    const FunctionArgumentTypes extends Win32Type<Nominal<unknown, unknown>>[],
+  >(
+    functionName: string,
+    functionReturnType: FunctionReturnType,
+    functionArgumentTypes: FunctionArgumentTypes,
+  ): KoffiFunction {
     if (!this.lib) {
       throw new Error('You must call load() before invoking functions');
     }
@@ -104,32 +166,8 @@ export class AutoIt {
       this.functionCache[functionName] = func;
     }
 
-    const output = func(...functionArguments);
-
-    this.logger.logFunctionCall(functionName, functionArguments, output);
-
-    return output;
+    return func;
   }
-
-  // TODO: Implement async function invocation
-  // invokeAsync<
-  //   FunctionReturnType extends Win32Type<Nominal<unknown, unknown>>,
-  //   const FunctionArgumentTypes extends Win32Type<Nominal<unknown, unknown>>[],
-  // >(
-  //   functionName: string,
-  //   functionReturnType: FunctionReturnType,
-  //   functionArgumentTypes: FunctionArgumentTypes,
-  //   functionArguments: unknown[],
-  //   callback: (result: NonNullable<FunctionReturnType['__jsType']>) => void,
-  // ) {
-  //   if (!this.lib) {
-  //     throw new Error('You must call load() before invoking functions');
-  //   }
-
-  //   const func = this.lib.func('__stdcall', functionName, functionReturnType, functionArgumentTypes);
-
-  //   func.async(...functionArguments, callback);
-  // }
 }
 
 /**

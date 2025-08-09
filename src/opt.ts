@@ -350,7 +350,7 @@ export enum AutoItOption {
 
 /**
  * Changes the operation of various AutoIt functions/parameters. This function can be used interchangeably
- * with {@linkcode AutoItSetOption}.
+ * with {@linkcode AutoItSetOptionSync}.
  *
  * @param option The option to change. See {@linkcode AutoItOption} for details.
  * @param value The value to assign to the option. It varies depending on the option being set.
@@ -359,13 +359,35 @@ export enum AutoItOption {
  *
  * @example
  * ```typescript
- * import { Opt, AutoItOption } from '@ahmic/autoit-js';
+ * import { OptSync, AutoItOption } from '@ahmic/autoit-js';
  *
- * Opt(AutoItOption.MouseCoordMode, 1);
+ * OptSync(AutoItOption.MouseCoordMode, 1);
  * ```
  *
  * @see https://www.autoitscript.com/autoit3/docs/functions/Opt.htm
  */
-export function Opt(option: AutoItOption, value: number = -1): number {
+export function OptSync(option: AutoItOption, value: number = -1): number {
   return autoit.invoke('AU3_Opt', INT, [LPCWSTR, INT], [option, value]);
+}
+
+/**
+ * Changes the operation of various AutoIt functions/parameters. This function can be used interchangeably
+ * with {@linkcode AutoItSetOption}.
+ *
+ * @param option The option to change. See {@linkcode AutoItOption} for details.
+ * @param value The value to assign to the option. It varies depending on the option being set.
+ *
+ * @returns A promise that resolves to the previous setting of the option.
+ *
+ * @example
+ * ```typescript
+ * import { Opt, AutoItOption } from '@ahmic/autoit-js';
+ *
+ * await Opt(AutoItOption.MouseCoordMode, 1);
+ * ```
+ *
+ * @see https://www.autoitscript.com/autoit3/docs/functions/Opt.htm
+ */
+export function Opt(option: AutoItOption, value: number = -1): Promise<number> {
+  return autoit.invokeAsync('AU3_Opt', INT, [LPCWSTR, INT], [option, value]);
 }

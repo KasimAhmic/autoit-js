@@ -253,7 +253,7 @@ LRESULT CALLBACK WndProc(HWND windowHandle, const UINT message, const WPARAM wPa
                 FORM_INPUT_WIDTH,
                 30);
 
-            CreateCheckBox(
+            HWND checkBoxThree = CreateCheckBox(
                 windowHandle,
                 L"Check Box 3",
                 PADDING,
@@ -293,6 +293,14 @@ LRESULT CALLBACK WndProc(HWND windowHandle, const UINT message, const WPARAM wPa
                 155,
                 MAX_CLIENT_HEIGHT - GetRectRelativeToParent(listViewHandle, windowHandle).bottom);
 
+            eventHandle = CreateStaticText(
+                windowHandle,
+                L"Last Event: ",
+                GetRectRelativeToParent(checkBoxOne, windowHandle).left,
+                GetRectRelativeToParent(checkBoxThree, windowHandle).bottom + PADDING + 5,
+                300,
+                20);
+
             statusBarHandle = CreateWindowEx(
                 0,
                 STATUSCLASSNAME,
@@ -315,9 +323,9 @@ LRESULT CALLBACK WndProc(HWND windowHandle, const UINT message, const WPARAM wPa
 
             SetTheme(listViewHandle);
             SetTheme(treeListViewHandle);
-        }
 
-        break;
+            break;
+        }
 
         case WM_COMMAND: {
             switch (LOWORD(wParam)) {
@@ -340,8 +348,19 @@ LRESULT CALLBACK WndProc(HWND windowHandle, const UINT message, const WPARAM wPa
                 default:
                     return DefWindowProc(windowHandle, message, wParam, lParam);
             }
+
+            break;
         }
-        break;
+
+        case WM_MOUSEMOVE:
+        case WM_LBUTTONDOWN:
+        case WM_RBUTTONDOWN:
+        case WM_LBUTTONDBLCLK:
+        case WM_RBUTTONDBLCLK:
+        case WM_MOUSEWHEEL: {
+            UpdateLastEvent(message, wParam);
+            break;
+        }
 
         case WM_PAINT: {
             PAINTSTRUCT ps;
@@ -400,12 +419,14 @@ LRESULT CALLBACK WndProc(HWND windowHandle, const UINT message, const WPARAM wPa
             break;
         }
 
-        case WM_DESTROY:
+        case WM_DESTROY: {
             PostQuitMessage(0);
             break;
+        }
 
-        default:
+        default: {
             return DefWindowProc(windowHandle, message, wParam, lParam);
+        }
     }
     return 0;
 }

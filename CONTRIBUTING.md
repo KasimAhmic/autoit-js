@@ -13,9 +13,11 @@ When reporting bugs, please include the following:
 Example bug report:
 
 Title: PixelSearch coordinates are offset by the horizontal resolution
+
 Description: When using PixelSearch, the coordinates are offset by the horizontal resolution of the screen.
 For example, if I search for a blue pixel located at (700, 500), the function returns (2620, 500) on a
 1920x1080 screen.
+
 Code:
 
 ```typescript

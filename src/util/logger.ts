@@ -49,18 +49,16 @@ type Message =
 export class Logger {
   readonly logLevel: LogLevel;
 
-  private readonly applicationName: string;
   private readonly pid: string;
   private readonly useColors: boolean;
 
-  private readonly name: string;
+  private readonly context: string;
 
-  constructor(name: string) {
-    this.applicationName = 'AutoIt JS';
+  constructor(context: string) {
     this.pid = process.pid.toString().padEnd(5, ' ');
     this.useColors = process.env.NO_COLOR !== '1';
 
-    const envLogLevel = process.env.AIT_LOG_LEVEL?.padStart(5, ' ')?.toUpperCase() ?? 'INFO';
+    const envLogLevel = process.env.AIT_LOG_LEVEL?.padStart(5, ' ')?.toUpperCase() ?? labels[LogLevel.Info];
 
     switch (envLogLevel) {
       case labels[LogLevel.Debug]:
@@ -87,7 +85,7 @@ export class Logger {
         this.logLevel = LogLevel.Info;
     }
 
-    this.name = name;
+    this.context = context;
   }
 
   debug(...values: Message[]): boolean {
@@ -150,16 +148,13 @@ export class Logger {
       return false;
     }
 
-    const applicationName = this.colorize(logLevel, `[${this.applicationName}]`);
     const pid = this.colorize(logLevel, this.pid);
     const timestamp = new Date().toLocaleString('en-US');
     const logLevelLabel = this.colorize(logLevel, labels[logLevel]);
-    const loggerName = this.colorize(LogLevel.Warn, `[${this.name}]`);
+    const loggerName = this.colorize(LogLevel.Warn, `[${this.context}]`);
     const messages = this.colorize(logLevel, values.map(this.formatValue).join(' '));
 
-    const logMessage = `${applicationName} ${pid} - ${timestamp} ${logLevelLabel} ${loggerName} ${messages}\n`;
-
-    process.stdout.write(logMessage);
+    process.stdout.write(`${pid} - ${timestamp} ${logLevelLabel} ${loggerName} ${messages}\n`);
 
     return true;
   }

@@ -44,13 +44,40 @@ export enum StateFlag {
  *
  * @example
  * ```typescript
- * import { WinSetState, StateFlag } from '@ahmic/autoit-js';
+ * import { WinSetStateSync, StateFlag } from '@ahmic/autoit-js';
  *
- * WinSetState('Untitled - Notepad', '', StateFlag.Minimize);
+ * WinSetStateSync('Untitled - Notepad', '', StateFlag.Minimize);
  * ```
  *
  * @see https://www.autoitscript.com/autoit3/docs/functions/WinSetState.htm
  */
-export function WinSetState(windowTitle: string, windowText: string = '', flags: StateFlag): number {
+export function WinSetStateSync(windowTitle: string, windowText: string = '', flags: StateFlag): number {
   return autoit.invoke('AU3_WinSetState', INT, [LPCWSTR, LPCWSTR, INT], [windowTitle, windowText, flags]);
+}
+
+/**
+ * Changes the state of a window.
+ *
+ * @param windowTitle The title of the window.
+ * @param windowText Optional text found in the window.
+ * @param flags The state flags to apply. See {@linkcode StateFlag} for details.
+ *
+ * @returns A promise that resolves to 1 if successful, or 0 otherwise.
+ *
+ * @example
+ * ```typescript
+ * import { WinSetState, StateFlag } from '@ahmic/autoit-js';
+ *
+ * await WinSetState('Untitled - Notepad', '', StateFlag.Minimize);
+ * ```
+ *
+ * @see https://www.autoitscript.com/autoit3/docs/functions/WinSetState.htm
+ */
+export function WinSetState(windowTitle: string, windowText: string = '', flags: StateFlag): Promise<number> {
+  return autoit.invokeAsync(
+    'AU3_WinSetState',
+    INT,
+    [LPCWSTR, LPCWSTR, INT],
+    [windowTitle, windowText, flags],
+  );
 }

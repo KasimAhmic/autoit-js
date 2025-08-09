@@ -36,11 +36,43 @@ export enum MouseButton {
  * @param clicks The number of times to click.
  * @param speed The speed of the click (1 is fast, 100 is slow).
  *
+ * @returns 1 if successful, 0 otherwise
+ *
  * @example
  * ```typescript
- * import { MouseClick } from '@ahmic/autoit-js';
+ * import { MouseClickSync, MouseButton } from '@ahmic/autoit-js';
  *
- * MouseClick('left', 150, 150, 2, 10);
+ * MouseClickSync(MouseButton.Left, 150, 150, 2, 10);
+ * ```
+ *
+ * @see https://www.autoitscript.com/autoit3/docs/functions/MouseClick.htm
+ */
+export function MouseClickSync(
+  button: MouseButton = MouseButton.Left,
+  x: number = AU3_INTDEFAULT,
+  y: number = AU3_INTDEFAULT,
+  clicks: number = 1,
+  speed: number = -1,
+): number {
+  return autoit.invoke('AU3_MouseClick', INT, [LPCWSTR, INT, INT, INT, INT], [button, x, y, clicks, speed]);
+}
+
+/**
+ * Simulates a mouse click at the specified coordinates.
+ *
+ * @param button The mouse button to click. See {@linkcode MouseButton} for details.
+ * @param x The X coordinate to click at.
+ * @param y The Y coordinate to click at.
+ * @param clicks The number of times to click.
+ * @param speed The speed of the click (1 is fast, 100 is slow).
+ *
+ * @returns A promise that resolves to 1 if successful, or 0 otherwise.
+ *
+ * @example
+ * ```typescript
+ * import { MouseClick, MouseButton } from '@ahmic/autoit-js';
+ *
+ * await MouseClick(MouseButton.Left, 150, 150, 2, 10);
  * ```
  *
  * @see https://www.autoitscript.com/autoit3/docs/functions/MouseClick.htm
@@ -51,6 +83,11 @@ export function MouseClick(
   y: number = AU3_INTDEFAULT,
   clicks: number = 1,
   speed: number = -1,
-): number {
-  return autoit.invoke('AU3_MouseClick', INT, [LPCWSTR, INT, INT, INT, INT], [button, x, y, clicks, speed]);
+): Promise<number> {
+  return autoit.invokeAsync(
+    'AU3_MouseClick',
+    INT,
+    [LPCWSTR, INT, INT, INT, INT],
+    [button, x, y, clicks, speed],
+  );
 }

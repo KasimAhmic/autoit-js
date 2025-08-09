@@ -1,6 +1,6 @@
 import koffi from 'koffi';
 
-import { HWND, INT, LPRECT, Rect } from './@types';
+import { HWND, INT, IRect, LPRECT, Rect } from './@types';
 import { autoit } from './lib/autoit';
 
 /**
@@ -13,22 +13,57 @@ import { autoit } from './lib/autoit';
  *
  * @example
  * ```typescript
- * import { ControlGetPosByHandle, ControlGetHandle, WinGetHandle } from '@ahmic/autoit-js';
+ * import { ControlGetPosByHandleSync, ControlGetHandleSync, WinGetHandleSync } from '@ahmic/autoit-js';
  *
- * const windowHandle = WinGetHandle('Untitled - Notepad');
- * const controlHandle = ControlGetHandle(windowHandle, 'Edit1');
+ * const windowHandle = WinGetHandleSync('Untitled - Notepad');
+ * const controlHandle = ControlGetHandleSync(windowHandle, 'Edit1');
  *
- * const rect = ControlGetPosByHandle(windowHandle, controlHandle);
+ * const rect = ControlGetPosByHandleSync(windowHandle, controlHandle);
  *
  * console.log(rect); // Output: { left: 10, top: 10, right: 100, bottom: 100 }
  * ```
  *
  * @see https://www.autoitscript.com/autoit3/docs/functions/ControlGetPos.htm
  */
-export function ControlGetPosByHandle(windowHandle: bigint, controlHandle: bigint): Rect {
+export function ControlGetPosByHandleSync(windowHandle: bigint, controlHandle: bigint): IRect {
   const rect = new Rect();
 
   autoit.invoke(
+    'AU3_ControlGetPosByHandle',
+    INT,
+    [HWND, HWND, koffi.out(LPRECT)],
+    [windowHandle, controlHandle, rect],
+  );
+
+  return rect;
+}
+
+/**
+ * Gets the position of a control in a window, relative to the window itself.
+ *
+ * @param windowHandle The handle of the window to access.
+ * @param controlHandle The handle of the control to get the position for.
+ *
+ * @returns A promise that resolves to the position of the control as a {@linkcode Rect} object.
+ *
+ * @example
+ * ```typescript
+ * import { ControlGetPosByHandle, ControlGetHandle, WinGetHandle } from '@ahmic/autoit-js';
+ *
+ * const windowHandle = await WinGetHandle('Untitled - Notepad');
+ * const controlHandle = await ControlGetHandle(windowHandle, 'Edit1');
+ *
+ * const rect = await ControlGetPosByHandle(windowHandle, controlHandle);
+ *
+ * console.log(rect); // Output: { left: 10, top: 10, right: 100, bottom: 100 }
+ * ```
+ *
+ * @see https://www.autoitscript.com/autoit3/docs/functions/ControlGetPos.htm
+ */
+export async function ControlGetPosByHandle(windowHandle: bigint, controlHandle: bigint): Promise<IRect> {
+  const rect = new Rect();
+
+  await autoit.invokeAsync(
     'AU3_ControlGetPosByHandle',
     INT,
     [HWND, HWND, koffi.out(LPRECT)],
