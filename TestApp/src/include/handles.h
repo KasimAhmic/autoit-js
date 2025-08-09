@@ -13,5 +13,6 @@ inline HWND cancelButtonHandle;
 inline HWND treeListViewHandle;
 inline HWND listViewHandle;
 inline HWND statusBarHandle;
+inline HWND eventHandle;
 inline HFONT fontHandle;
 inline HBRUSH brushHandle;
