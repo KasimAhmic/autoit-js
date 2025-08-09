@@ -25,7 +25,7 @@ import { PixelSearch, autoit } from '@ahmic/autoit-js';
 
 autoit.load();
 
-console.log(PixelSearch(600, 400, 800, 600, 0x0000ff)); // Returns { x: 2620, y: 500 }
+console.log(await PixelSearch(600, 400, 800, 600, 0x0000ff)); // Returns { x: 2620, y: 500 }
 
 autoit.unload();
 ```
