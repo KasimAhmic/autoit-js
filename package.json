@@ -41,7 +41,7 @@
   "bugs": {
     "url": "https://github.com/KasimAhmic/autoit-js/issues"
   },
-  "homepage": "https://github.com/KasimAhmic/autoit-js#readme",
+  "homepage": "https://kasimahmic.github.io/autoit-js/",
   "devDependencies": {
     "@commitlint/cz-commitlint": "^19.8.1",
     "@eslint/js": "^9.32.0",
