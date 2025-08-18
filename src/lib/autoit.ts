@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url';
 
 import koffi, { IKoffiLib, KoffiFunction } from 'koffi';
 
-import { Nominal, Win32Type } from '../@types/win32';
+import { JsType, Nominal, Win32Type } from '../@types/win32';
 import { Logger } from '../util/logger';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -91,7 +91,7 @@ export class AutoIt {
     functionReturnType: FunctionReturnType,
     functionArgumentTypes: FunctionArgumentTypes,
     functionArguments: unknown[],
-  ): NonNullable<FunctionReturnType['__jsType']> {
+  ): NonNullable<JsType<FunctionReturnType>> {
     const func = this.getFunction(functionName, functionReturnType, functionArgumentTypes);
 
     const output = func(...functionArguments);
@@ -120,7 +120,7 @@ export class AutoIt {
     functionArgumentTypes: FunctionArgumentTypes,
     functionArguments: unknown[],
   ) {
-    return new Promise<NonNullable<FunctionReturnType['__jsType']>>((resolve, reject) => {
+    return new Promise<NonNullable<JsType<FunctionReturnType>>>((resolve, reject) => {
       let func: KoffiFunction;
 
       try {
@@ -130,19 +130,16 @@ export class AutoIt {
         return;
       }
 
-      func.async(
-        ...functionArguments,
-        (error: Error, result: NonNullable<FunctionReturnType['__jsType']>) => {
-          if (error) {
-            reject(error);
-            return;
-          }
+      func.async(...functionArguments, (error: Error, result: NonNullable<JsType<FunctionReturnType>>) => {
+        if (error) {
+          reject(error);
+          return;
+        }
 
-          this.logger.logFunctionCall(functionName, functionArguments, result);
+        this.logger.logFunctionCall(functionName, functionArguments, result);
 
-          resolve(result);
-        },
-      );
+        resolve(result);
+      });
     });
   }
 

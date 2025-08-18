@@ -38,9 +38,12 @@ import koffi, { IKoffiCType } from 'koffi';
  */
 export type Nominal<T, U> = T & { [Symbol.species]?: U; __jsType?: T };
 
+export type JsType<T extends Nominal<unknown, unknown>> = NonNullable<T['__jsType']>;
+export type CType<T extends Nominal<unknown, unknown>> = NonNullable<T[typeof Symbol.species]>;
+
 export type Win32Type<T extends Nominal<unknown, unknown> | null> = IKoffiCType & {
-  __jsType?: NonNullable<T>['__jsType'];
-  [Symbol.species]?: NonNullable<T>[typeof Symbol.species];
+  __jsType?: JsType<NonNullable<T>>;
+  [Symbol.species]?: CType<NonNullable<T>>;
 };
 
 export const AU3_INTDEFAULT = -2147483647;
@@ -100,8 +103,8 @@ export type LongPointerToConstantWideString = Nominal<string, 'LPCWSTR'>;
 export type LongPointerToVoid = Nominal<IKoffiCType, 'LPVOID'>;
 
 export type Handle = Nominal<bigint, 'HANDLE'>;
-export type BitmapHandle = Nominal<Handle['__jsType'], 'HBITMAP'>;
-export type DeviceContextHandle = Nominal<Handle['__jsType'], 'HDC'>;
-export type InstanceHandle = Nominal<Handle['__jsType'], 'HINSTANCE'>;
-export type MenuHandle = Nominal<Handle['__jsType'], 'HMENU'>;
-export type WindowHandle = Nominal<Handle['__jsType'], 'HWND'>;
+export type BitmapHandle = Nominal<JsType<Handle>, 'HBITMAP'>;
+export type DeviceContextHandle = Nominal<JsType<Handle>, 'HDC'>;
+export type InstanceHandle = Nominal<JsType<Handle>, 'HINSTANCE'>;
+export type MenuHandle = Nominal<JsType<Handle>, 'HMENU'>;
+export type WindowHandle = Nominal<JsType<Handle>, 'HWND'>;
