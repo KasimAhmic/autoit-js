@@ -7,7 +7,7 @@ export default defineConfig({
     api: 9527,
     globals: true,
     maxWorkers: 1,
-    exclude: platform() !== 'win32' ? ['**/node_modules/**', '**/autoit-*.test.ts'] : [],
+    exclude: platform() !== 'win32' ? ['**/node_modules/**', '**/autoit-*.test.ts'] : ['**/node_modules/**'],
     coverage: {
       all: true,
       enabled: true,
