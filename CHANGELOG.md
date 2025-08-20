@@ -1,3 +1,9 @@
+# [2.1.0](https://github.com/KasimAhmic/autoit-js/compare/v2.0.0...v2.1.0) (2025-08-20)
+
+### Features
+
+- Implement async variant of Tooltip ([b420345](https://github.com/KasimAhmic/autoit-js/commit/b4203456db3d0a3c83253f232d7dd4771ec7caed))
+
 # [2.0.0](https://github.com/KasimAhmic/autoit-js/compare/v1.1.0...v2.0.0) (2025-08-09)
 
 ### Bug Fixes
