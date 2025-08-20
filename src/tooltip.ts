@@ -1,7 +1,7 @@
 import koffi from 'koffi';
 
 import { TOOLINFOW, ToolInfoW } from './@types/tool-info';
-import { WinSleepSync } from './lib/kernel32';
+import { WinSleep, WinSleepSync } from './lib/kernel32';
 import {
   CreateWindowExWSync,
   DestroyWindowSync,
@@ -134,6 +134,13 @@ export function TooltipSync(
  * The actual `AU3_Tooltip` function from AutoIt appears to be broken so it has been reimplemented here using
  * the Windows User32 library.
  *
+ * **NOTE**: While this function is primarily asynchronous, it uses the synchronous variants of some of the
+ * Win32 functions as the async variants cause undefined behaviour where the promises never resolve. These
+ * functions are quite fast and tooltips are unlikely to be used extensively so this should not cause any
+ * issues (famous last words...). The Sleep call is still asynchronous, so the tooltip will not block the
+ * event loop while it is displayed, only during creation and destruction of the tooltip window. If you run
+ * into any issues with this, please open an issue!
+ *
  * @param value The text to display in the tooltip.
  * @param x The x-coordinate of the tooltip position. Default is 0.
  * @param y The y-coordinate of the tooltip position. Default is 0.
@@ -149,64 +156,62 @@ export function TooltipSync(
  *
  * @see https://www.autoitscript.com/autoit3/docs/functions/ToolTip.htm
  */
-// TODO: The async variant of Tooltip is broken. It just hangs after the first SendMessageW call. Will look
-// into it later.
-// export async function Tooltip(
-//   value: string,
-//   x: number = 0,
-//   y: number = 0,
-//   width: number = 400,
-//   timeout: number = 2000,
-// ): Promise<boolean> {
-//   const tooltipHandle = await CreateWindowExW(
-//     WS_EX_TOPMOST,
-//     'tooltips_class32',
-//     null,
-//     WS_POPUP | TTS_NOPREFIX | TTS_ALWAYSTIP | TTS_BALLOON,
-//     CW_USEDEFAULT,
-//     CW_USEDEFAULT,
-//     CW_USEDEFAULT,
-//     CW_USEDEFAULT,
-//     null,
-//     null,
-//     null,
-//     null,
-//   );
+export async function Tooltip(
+  value: string,
+  x: number = 0,
+  y: number = 0,
+  width: number = 400,
+  timeout: number = 2000,
+): Promise<boolean> {
+  const tooltipHandle = CreateWindowExWSync(
+    WS_EX_TOPMOST,
+    'tooltips_class32',
+    null,
+    WS_POPUP | TTS_NOPREFIX | TTS_ALWAYSTIP | TTS_BALLOON,
+    CW_USEDEFAULT,
+    CW_USEDEFAULT,
+    CW_USEDEFAULT,
+    CW_USEDEFAULT,
+    null,
+    null,
+    null,
+    null,
+  );
 
-//   const toolInfo = koffi.alloc(TOOLINFOW, koffi.sizeof(TOOLINFOW));
+  const toolInfo = koffi.alloc(TOOLINFOW, koffi.sizeof(TOOLINFOW));
 
-//   koffi.encode(
-//     toolInfo,
-//     0,
-//     TOOLINFOW,
-//     new ToolInfoW({
-//       uId: 1,
-//       hwnd: await GetDesktopWindow(),
-//       uFlags: TTF_TRACK | TTF_ABSOLUTE,
-//       lpszText: value,
-//     }),
-//   );
+  koffi.encode(
+    toolInfo,
+    0,
+    TOOLINFOW,
+    new ToolInfoW({
+      uId: 1,
+      hwnd: GetDesktopWindowSync(),
+      uFlags: TTF_TRACK | TTF_ABSOLUTE,
+      lpszText: value,
+    }),
+  );
 
-//   const toolInfoPointer = koffi.address(toolInfo);
+  const toolInfoPointer = koffi.address(toolInfo);
 
-//   const addToolResult = await SendMessageW(tooltipHandle, TTM_ADDTOOLW, 0, toolInfoPointer);
+  const addToolResult = SendMessageWSync(tooltipHandle, TTM_ADDTOOLW, 0, toolInfoPointer);
 
-//   if (!addToolResult) {
-//     await DestroyWindow(tooltipHandle);
-//     koffi.free(toolInfo);
-//     return false;
-//   }
+  if (!addToolResult) {
+    DestroyWindowSync(tooltipHandle);
+    koffi.free(toolInfo);
+    return false;
+  }
 
-//   await SendMessageW(tooltipHandle, TTM_SETMAXTIPWIDTH, 0, width);
-//   await SendMessageW(tooltipHandle, TTM_TRACKPOSITION, 0, MAKELPARAM(x, y));
-//   await SendMessageW(tooltipHandle, TTM_TRACKACTIVATE, 1, toolInfoPointer);
+  SendMessageWSync(tooltipHandle, TTM_SETMAXTIPWIDTH, 0, width);
+  SendMessageWSync(tooltipHandle, TTM_TRACKPOSITION, 0, MAKELPARAM(x, y));
+  SendMessageWSync(tooltipHandle, TTM_TRACKACTIVATE, 1, toolInfoPointer);
 
-//   await WinSleep(timeout);
+  await WinSleep(timeout);
 
-//   await SendMessageW(tooltipHandle, TTM_TRACKACTIVATE, 0, toolInfoPointer);
-//   const destryoWindowResult = await DestroyWindow(tooltipHandle);
+  SendMessageWSync(tooltipHandle, TTM_TRACKACTIVATE, 0, toolInfoPointer);
+  const destryoWindowResult = DestroyWindowSync(tooltipHandle);
 
-//   koffi.free(toolInfo);
+  koffi.free(toolInfo);
 
-//   return !!destryoWindowResult;
-// }
+  return !!destryoWindowResult;
+}
