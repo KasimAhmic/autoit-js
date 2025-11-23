@@ -19,9 +19,9 @@ Node.js bindings for AutoItX3.dll.
 
 ## What is AutoIt JS?
 
-AutoIt is a Windows automation tool that can be used to automate tasks on Windows. AutoIt provides its own
-scripting language however, it can be difficult to work with if you need to integrate Windows automation into
-an existing test suite.
+[AutoIt](https://www.autoitscript.com/site/) is a Windows automation tool that can be used to automate tasks
+on Windows. AutoIt provides its own scripting language however, it can be difficult to work with if you need
+to integrate Windows automation into an existing test suite.
 
 Enter AutoIt JS.
 
