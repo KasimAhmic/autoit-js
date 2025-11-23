@@ -42,6 +42,30 @@ describe('Logger @full @quick', () => {
     expect(fatalLogged).toBe(fatal);
   });
 
+  it('logs an object message correctly', () => {
+    const logger = new Logger('TestLogger');
+
+    const processStdoutWriteSpy = vi.spyOn(process.stdout, 'write');
+
+    const messageObject = { key: 'value', number: 42 };
+    const infoLogged = logger.info(messageObject);
+
+    expect(infoLogged).toBe(true);
+    expect(processStdoutWriteSpy.mock.calls[0][0]).toContain(`{"key":"value","number":42}`);
+  });
+
+  it('logs messages at the info level by default', () => {
+    process.env.AIT_LOG_LEVEL = undefined;
+
+    const logger = new Logger('TestLogger');
+
+    const debugLogged = logger.debug('Debug message');
+    const infoLogged = logger.info('Info message');
+
+    expect(debugLogged).toBe(false);
+    expect(infoLogged).toBe(true);
+  });
+
   it('logs the stack trace when an error is passed', () => {
     const logger = new Logger('TestLogger');
 
@@ -54,6 +78,19 @@ describe('Logger @full @quick', () => {
     expect(processStdoutWriteSpy.mock.calls[0][0]).toContain(error.stack);
   });
 
+  it('logs the error message if the stack trace is not available', () => {
+    const logger = new Logger('TestLogger');
+
+    const processStdoutWriteSpy = vi.spyOn(process.stdout, 'write');
+
+    const error = new Error('Test error');
+    error.stack = undefined;
+    const errorLogged = logger.error(error);
+
+    expect(errorLogged).toBe(true);
+    expect(processStdoutWriteSpy.mock.calls[0][0]).toContain(error.message);
+  });
+
   it("doesn't use colors when the NO_COLOR environment variable is set", () => {
     process.env.NO_COLOR = '1';
 
@@ -64,5 +101,70 @@ describe('Logger @full @quick', () => {
     logger.error('Test message');
 
     expect(processStdoutWriteSpy.mock.calls[0][0]).not.toContain('\x1b');
+  });
+
+  it('logs a function call with colors', () => {
+    process.env.AIT_LOG_LEVEL = 'debug';
+    process.env.NO_COLOR = '1';
+
+    const logger = new Logger('TestLogger');
+
+    const processStdoutWriteSpy = vi.spyOn(process.stdout, 'write');
+
+    logger.logFunctionCall('myFunction', ['arg1', 42, true], true);
+
+    expect(processStdoutWriteSpy.mock.calls[0][0]).toEqual(
+      expect.stringContaining('myFunction("arg1", 42, true) => true'),
+    );
+  });
+
+  it('logs a function call without colors', () => {
+    process.env.AIT_LOG_LEVEL = 'debug';
+
+    const logger = new Logger('TestLogger');
+
+    const processStdoutWriteSpy = vi.spyOn(process.stdout, 'write');
+
+    logger.logFunctionCall('myFunction', ['arg1', 42, true], true);
+
+    expect(processStdoutWriteSpy.mock.calls[0][0]).toEqual(
+      expect.stringContaining(
+        '[32mmyFunction\u001b[0m(\u001b[34m"arg1"\u001b[0m\u001b[0m, \u001b[0m\u001b[34m42\u001b[0m\u001b[0m, \u001b[0m\u001b[34mtrue\u001b[0m) \u001b[33m=>\u001b[0m \u001b[32mtrue\u001b[0m\u001b[0m',
+      ),
+    );
+  });
+
+  it('does not log a function call at levels above debug', () => {
+    process.env.AIT_LOG_LEVEL = 'info';
+    process.env.NO_COLOR = '1';
+
+    const logger = new Logger('TestLogger');
+
+    const processStdoutWriteSpy = vi.spyOn(process.stdout, 'write');
+
+    logger.logFunctionCall('myFunction', ['arg1', 42, true], true);
+
+    expect(processStdoutWriteSpy).not.toHaveBeenCalled();
+  });
+
+  it('handles complex argument and result types in function call logging', () => {
+    process.env.AIT_LOG_LEVEL = 'debug';
+    process.env.NO_COLOR = '1';
+
+    const logger = new Logger('TestLogger');
+
+    const processStdoutWriteSpy = vi.spyOn(process.stdout, 'write');
+
+    logger.logFunctionCall(
+      'complexFunction',
+      ['string', 123, true, null, undefined, { key: 'value' }, [1, 2, 3], (x: number) => x * 2],
+      { resultKey: 'resultValue' },
+    );
+
+    expect(processStdoutWriteSpy.mock.calls[0][0]).toEqual(
+      expect.stringContaining(
+        `complexFunction("string", 123, true, null, undefined, { key: 'value' }, [ 1, 2, 3 ], function) => { resultKey: 'resultValue' }`,
+      ),
+    );
   });
 });
