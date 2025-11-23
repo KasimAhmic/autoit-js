@@ -9,7 +9,6 @@ export default defineConfig({
     maxWorkers: 1,
     exclude: platform() !== 'win32' ? ['**/node_modules/**', '**/autoit-*.test.ts'] : ['**/node_modules/**'],
     coverage: {
-      all: true,
       enabled: true,
       provider: 'v8',
       thresholds: {

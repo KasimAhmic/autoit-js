@@ -110,17 +110,21 @@ export class Logger {
 
   logFunctionCall(functionName: string, functionArguments: unknown[], functionResult: unknown): void {
     // Short-circuit to avoid needless work in parsing the argument and result types
-    if (this.logLevel < LogLevel.Debug) {
+    if (this.logLevel > LogLevel.Debug) {
       return;
     }
 
-    const fnName = `${colors.Green}${functionName}${colors.Reset}`;
+    const fnName = this.colorizeManual(colors.Green, functionName);
     let fnArgs = '';
-    const arrow = `${colors.Yellow}=>${colors.Reset}`;
-    const fnResult = `${colors.Green}${this.parseType(functionResult)}${colors.Reset}`;
+    const arrow = this.colorizeManual(colors.Yellow, '=>');
+    const fnResult = this.colorizeManual(colors.Green, this.parseType(functionResult));
 
     for (let i = 0; i < functionArguments.length; i++) {
-      fnArgs += `${colors.Blue}${this.parseType(functionArguments[i])}${colors.Reset}${i < functionArguments.length - 1 ? ', ' : ''}`;
+      fnArgs += this.colorizeManual(colors.Blue, this.parseType(functionArguments[i]));
+
+      if (i < functionArguments.length - 1) {
+        fnArgs += this.colorizeManual(colors.Reset, ', ');
+      }
     }
 
     this.debug(`${fnName}(${fnArgs}) ${arrow} ${fnResult}`);
@@ -175,6 +179,16 @@ export class Logger {
     }
 
     const color = colors[logLevel];
+    const reset = colors.Reset;
+
+    return `${color}${message}${reset}`;
+  }
+
+  private colorizeManual(color: (typeof colors)[keyof typeof colors], message: string): string {
+    if (!this.useColors) {
+      return message;
+    }
+
     const reset = colors.Reset;
 
     return `${color}${message}${reset}`;
