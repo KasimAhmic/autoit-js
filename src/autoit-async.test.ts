@@ -35,6 +35,7 @@ import { ControlTreeView, TreeViewCommand } from './control-tree-view';
 import { ControlTreeViewByHandle } from './control-tree-view-by-handle';
 import { autoit } from './lib/autoit';
 import * as gdi32 from './lib/gdi32';
+import * as user32 from './lib/user32';
 import { MouseButton, MouseClick } from './mouse-click';
 import { MouseClickDrag } from './mouse-click-drag';
 import { MouseDown } from './mouse-down';
@@ -50,6 +51,7 @@ import { Priority, ProcessSetPriority } from './process-set-priority';
 import { Run } from './run';
 import { StatusbarGetText } from './statusbar-get-text';
 import { StatusbarGetTextByHandle } from './statusbar-get-text-by-handle';
+import { Tooltip } from './tooltip';
 import { WinActivate } from './win-activate';
 import { WinGetClassList } from './win-get-class-list';
 import { WinGetClassListByHandle } from './win-get-class-list-by-handle';
@@ -528,18 +530,17 @@ describe.sequential('AutoIt JS Asynchronous API @full', () => {
     mockGetDIBits.mockRestore();
   });
 
-  // TODO: Re-enable once async Tooltip is fixed
-  // it('displays a tooltip', async () => {
-  //   expect(await Tooltip('Test Tooltip', 100, 100, 20, 500)).toBe(true);
-  // });
+  it('displays a tooltip', async () => {
+    expect(await Tooltip('Test Tooltip', 100, 100, 20, 500)).toBe(true);
+  });
 
-  // it('handles errors when displaying a tooltip', async () => {
-  //   const mockSendMessageW = vi.spyOn(user32, 'SendMessageW').mockResolvedValueOnce(0);
-  //   expect(await Tooltip('Test Tooltip', 100, 100, 20, 500)).toBe(false);
-  //   mockSendMessageW.mockRestore();
+  it('handles errors when displaying a tooltip', async () => {
+    const mockSendMessageW = vi.spyOn(user32, 'SendMessageWSync').mockReturnValueOnce(0);
+    expect(await Tooltip('Test Tooltip', 100, 100, 20, 500)).toBe(false);
+    mockSendMessageW.mockRestore();
 
-  //   const mockDestroyWindow = vi.spyOn(user32, 'DestroyWindow').mockResolvedValueOnce(false);
-  //   expect(await Tooltip('Test Tooltip', 100, 100, 20, 500)).toBe(false);
-  //   mockDestroyWindow.mockRestore();
-  // });
+    const mockDestroyWindow = vi.spyOn(user32, 'DestroyWindowSync').mockReturnValueOnce(false);
+    expect(await Tooltip('Test Tooltip', 100, 100, 20, 500)).toBe(false);
+    mockDestroyWindow.mockRestore();
+  });
 });
