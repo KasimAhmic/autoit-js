@@ -42,4 +42,5 @@ jobs:
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+          NPM_CONFIG_PROVENANCE: true
         run: npm run release
