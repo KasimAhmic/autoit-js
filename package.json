@@ -61,7 +61,6 @@
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^9.39.1",
     "husky": "^9.1.7",
-    "inquirer": "^13.0.1",
     "lint-staged": "^16.2.7",
     "prettier": "^3.6.2",
     "rimraf": "^6.1.2",

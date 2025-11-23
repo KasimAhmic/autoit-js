@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "types": ["vitest/globals"],
+    "types": ["node", "vitest/globals"],
     "module": "ESNext",
     "moduleResolution": "Node",
     "target": "ES2023",
