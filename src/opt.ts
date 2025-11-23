@@ -241,7 +241,7 @@ export enum AutoItOption {
    * | Value | Description                                                       |
    * |-------|-------------------------------------------------------------------|
    * | 0     | no pause                                                          |
-   * | 1     | (default) pause. If there is no DefaultMenu no pause will occurs. |
+   * | 1     | (default) pause. If there is no DefaultMenu no pause will occur. |
    */
   TrayAutoPause = 'TrayAutoPause',
 
@@ -266,12 +266,12 @@ export enum AutoItOption {
   TrayIconHide = 'TrayIconHide',
 
   /**
-   * Extend the behaviour of the script tray icon/menu. This can be done with a combination (adding) of the
+   * Extend the behavior of the script tray icon/menu. This can be done with a combination (adding) of the
    * following values.
    *
    * | Value | Description                                                                                                                                                                                                                        |
    * |-------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-   * | 0     | (default) default menu items (Script Paused/Exit) are appended to the usercreated menu; items will automatically be checked/unchecked when clicked; double clicking the tray icon returns the controlID of the $TRAY_DEFAULT item. |
+   * | 0     | (default) default menu items (Script Paused/Exit) are appended to the user-created menu; items will automatically be checked/unchecked when clicked; double clicking the tray icon returns the controlID of the $TRAY_DEFAULT item. |
    * | 1     | no default menu                                                                                                                                                                                                                    |
    * | 2     | items will not automatically check/uncheck when clicked                                                                                                                                                                            |
    * | 4     | do not return the $TRAY_DEFAULT item controlID when the tray icon is double clicked                                                                                                                                                |

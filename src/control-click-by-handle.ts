@@ -4,8 +4,8 @@ import { MouseButton } from './mouse-click';
 import { AU3_INTDEFAULT } from './util/constants';
 
 /**
- * Simulates a mouse click on a control. Unlike {@linkcode MouseClickSync}, `ControlClickByHandle` won't move
- * the mouse cursor but is capable of clicking on controls that may be obscured by other windows.
+ * Simulates a mouse click on a control. Unlike {@linkcode MouseClickSync}, `ControlClickByHandleSync` won't
+ * move the mouse cursor but is capable of clicking on controls that may be obscured by other windows.
  *
  * Where possible, you should prefer using this function over {@linkcode ControlClickSync} to avoid potential
  * issues with ambiguous window and control titles.

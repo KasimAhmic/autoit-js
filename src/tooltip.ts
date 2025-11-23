@@ -135,9 +135,9 @@ export function TooltipSync(
  * the Windows User32 library.
  *
  * **NOTE**: While this function is primarily asynchronous, it uses the synchronous variants of some of the
- * Win32 functions as the async variants cause undefined behaviour where the promises never resolve. These
- * functions are quite fast and tooltips are unlikely to be used extensively so this should not cause any
- * issues (famous last words...). The Sleep call is still asynchronous, so the tooltip will not block the
+ * Win32 functions because the async variants cause undefined behavior in which the promises never resolve.
+ * These functions are quite fast and tooltips are unlikely to be used extensively, so this should not cause
+ * any issues (famous last words...). The Sleep call is still asynchronous, so the tooltip will not block the
  * event loop while it is displayed, only during creation and destruction of the tooltip window. If you run
  * into any issues with this, please open an issue!
  *
@@ -209,9 +209,9 @@ export async function Tooltip(
   await WinSleep(timeout);
 
   SendMessageWSync(tooltipHandle, TTM_TRACKACTIVATE, 0, toolInfoPointer);
-  const destryoWindowResult = DestroyWindowSync(tooltipHandle);
+  const destroyWindowResult = DestroyWindowSync(tooltipHandle);
 
   koffi.free(toolInfo);
 
-  return !!destryoWindowResult;
+  return !!destroyWindowResult;
 }
